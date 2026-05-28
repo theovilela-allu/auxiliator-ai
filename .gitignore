@@ -1,0 +1,14 @@
+# Dados pessoais — nunca vão pro GitHub
+memory/
+profile.md
+
+# Estado runtime do Claude Code
+.claude/.ctx-meter
+.claude/.bootstrapped
+.claude/.bootstrap-error
+
+# Cache de IDE/SO
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
