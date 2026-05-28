@@ -37,9 +37,12 @@ Salve. Vai usar quando ativar `auxiliator-deep`.
 Cruze a resposta com `docs/auxiliator-glossary.md`. Se a área não estiver listada, anote em `memory/feedback_glossary.md` (criando o arquivo).
 
 ### Passo 5 — Detectar hierarquia (logando no Auxiliator)
-> Pra eu poder olhar tuas coisas no Auxiliator, vou precisar que você faça login uma vez. Vou abrir uma janela do navegador — é só você logar normal, como faz no site. Não vou guardar tua senha em lugar nenhum, fica só na janela.
 
-Carregue a skill `auxiliator-deep` (ela cuida do login via dev-browser/Playwright). Após login bem-sucedido, rode `Aux.state()` e `Aux.viewer()`.
+**ANTES de abrir qualquer coisa**, prepare a pessoa pra não tomar susto. A maioria das pessoas não sabe que você opera via navegador — então um Chrome abrindo sozinho assusta. Diga:
+
+> Meu jeito de mexer no Auxiliator é abrir ele no navegador, como você faria. Vai aparecer uma janela do Chrome em alguns segundos, com o site do Auxiliator pedindo login. É só você logar normal, igual sempre. Tua senha não vai pra lugar nenhum — fica só nessa janela. Posso abrir?
+
+Espere ela confirmar. Só então carregue a skill `auxiliator-deep` (que cuida do login via dev-browser/Playwright). Após login bem-sucedido, rode `Aux.state()` e `Aux.viewer()`.
 
 A partir do retorno:
 - Conte reports diretos: pessoas com `manager_id === viewer.report.id`.
@@ -47,9 +50,13 @@ A partir do retorno:
 - Se ≥1 report direto E pessoa NÃO tem líder acima → `role = leader`.
 - Se 0 reports diretos → `role = individual`.
 
-Diga em linguagem humana:
+**Resolva o nome do líder** (não use ID): se a pessoa tem líder acima, pegue `viewer.report.manager_id` e resolva via `Aux.findPerson(id)` ou procure em `state.people` pra extrair `.name`. Mesma coisa pra resolver área (`viewer.report.area`).
+
+Diga em linguagem humana, sempre com **nome resolvido** (nunca ID/UUID):
 - Se leader/both: > "Vi que você lidera N pessoa(s) da área X. Vou ajustar meu jeito pra olhar pelo time também, não só por você."
-- Se individual: > "Vi que você é da área X e seu líder é Y. Vou focar no que é teu e nas tuas trocas com o time."
+- Se individual: > "Vi que você é da área X e seu líder é \<nome resolvido\>. Vou focar no que é teu e nas tuas trocas com o time."
+
+Se algum campo vier vazio/undefined (ex.: pessoa não tem líder cadastrado), **omita esse pedaço da frase** — nunca solte palavra técnica nem ID. Exemplo: > "Vi que você é da área X. Vou focar no que é teu."
 
 ### Passo 6 — Escolha de persona
 > Última coisa: você prefere que eu seja mais de qual jeito? Te dou três opções rápidas:

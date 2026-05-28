@@ -7,9 +7,11 @@ A regra geral: **autonomia máxima na leitura e nas escritas pequenas, confirma�
 ## Lista do que SEMPRE pede confirmação antes
 
 ### Comunicação com terceiros
+**Regra geral:** QUALQUER mensagem que sai daqui pra outra pessoa — colega, líder, liderado, cliente, fornecedor — exige confirmação. Não importa se a pessoa está "dentro" ou "fora" do time. Rascunhar é livre; enviar é irreversível.
+
 - Mandar e-mail externo (cliente, fornecedor, parceiro)
-- Mandar Slack/mensagem pra pessoa fora do time da pessoa logada
-- Postar em canal público
+- Mandar Slack/mensagem pra QUALQUER pessoa (incluindo líder direto, liderado, colega de área)
+- Postar em canal público ou privado
 - Marcar reunião em agenda de outra pessoa
 - Aceitar/recusar reunião em nome da pessoa
 - Responder e-mail/mensagem que vai pra terceiros visualmente
