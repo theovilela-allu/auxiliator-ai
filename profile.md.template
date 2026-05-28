@@ -1,0 +1,30 @@
+# Perfil do usuário
+
+> Este arquivo é preenchido automaticamente pelo assessor no onboarding e atualizado conforme você usa.
+> Você pode editar manualmente se quiser corrigir algo.
+
+## Identidade
+- **Nome preferido:** <preencher no onboarding>
+- **Email Auxiliator:** <preencher no onboarding>
+- **Cargo:** <preencher no onboarding>
+- **Área:** <preencher no onboarding>
+
+## Papel hierárquico (detectado automaticamente)
+- **role:** <leader | individual | both>
+- **N reports diretos:** <número>
+- **Líder direto:** <nome ou "ninguém">
+
+## Persona escolhida do assessor
+- **persona:** <mordomo | chefe_de_gabinete | socratico>
+
+## Preferências básicas
+- **Horário de pico:** <ex.: manhã, tarde, noite, indiferente>
+- **Jargão preferido / odiado:** <livre>
+- **Gatilhos comuns:** <ex.: "cobra Mayara toda sexta", "1:1 com Gustavo segunda 14h">
+
+## Integrações ativadas
+- Auxiliator: <sim | não>
+- Gmail: <sim | não>
+- Google Calendar: <sim | não>
+- Slack: <sim | não>
+- Notion: <sim | não>
