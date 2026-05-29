@@ -13,7 +13,7 @@ A pessoa pediu algo que toca o Auxiliator (`auxiliator.vercel.app`). Você vai o
 
 Carregue **`docs/auxiliator-api.md`** ANTES de operar. Esse arquivo tem o manual da `window.Aux` (chamadas, enums, fluxo recomendado). Sem ele você adivinha — e adivinhar quebra.
 
-**Exceção — conexão no boot:** se você abriu esta skill só pra garantir login no início da conversa (sem pedido pra operar), **não carregue `auxiliator-api.md` ainda** — gasta token à toa. Faça só o passo 1 (garantir sessão) e pare. Carregue o manual quando a pessoa de fato pedir uma operação.
+**Exceção — conexão + briefing no boot:** quando você abre esta skill no início da conversa (sem um pedido específico ainda), **não carregue `docs/auxiliator-api.md`** — gasta token e você não vai operar nada complexo. Faça o passo **1** (garantir sessão) e o passo **1.5 (Briefing do dia)** abaixo: puxe `Aux.state()`, monte o panorama do dia e abra a conversa com ele. Carregue o manual completo só quando a pessoa pedir uma operação de fato (criar/mover/editar).
 
 Também carregue, se for o caso:
 - `docs/relevance-filter.md` — se for varrer dados pra extrair tarefas
@@ -32,7 +32,17 @@ Só se a página redirecionar pra login (sessão expirou / primeira vez) é que 
 
 Aguarde o login resolver (URL muda pra `/app.html`, `window.Aux` fica disponível).
 
-> **Conexão no boot:** quando esta skill é aberta no início da conversa só pra garantir login (não há pedido ainda), pare aqui — sessão logada confirmada já basta. Não puxe `Aux.state()` à toa; faça isso quando a pessoa de fato pedir algo (passo 2 em diante).
+> **Boot da conversa:** depois de confirmar a sessão logada, **NÃO pare** — siga pro passo 1.5. O objetivo do boot é abrir a conversa já a par do dia (tarefas da pessoa + do time), não só logar.
+
+### 1.5 Briefing do dia (só no boot da conversa)
+
+Logo após garantir a sessão, puxe `Aux.state()` (ou o cache de ≤15min — passo 2) e monte um panorama **curto**:
+
+- **Tarefas da pessoa:** `state.tasks` com `report_id === viewer.reportId` e status ≠ `concluida` → separe as de **hoje** (`due_date === hoje`), as **vencidas** (`due_date < hoje`) e as **bloqueadas**.
+- **Bloqueios esperando ela:** `state.tasks` com `blocked_on_report_id === viewer.reportId` e `status === 'bloqueada'` (alguém pediu a ajuda dela — destaque, é urgente).
+- **Se a pessoa for líder** (`viewer.isLeader`): inclua o que pega fogo no time — tarefas **vencidas** e **bloqueadas** de quem está em `viewer.visibleIds` (a sub-árvore dela). Carregue `docs/leadership-mode.md` pro tom de liderança.
+
+Abra a conversa com isso em **1-2 frases**, no tom da persona, destacando só o que importa (vencido > bloqueado > hoje). Não liste tudo. Dia limpo → diga que está limpo e pergunte o que ela quer atacar. Detalhes da varredura por trás disso: passo 3.
 
 ### 2. Verificar cache
 
@@ -50,7 +60,7 @@ else:
 
 Use as chamadas documentadas em `docs/auxiliator-api.md`. Padrões mais comuns:
 
-- **"O que tenho hoje?"** → filtrar `state.tasks` por dono = `viewer.reportId` ou (se líder) por dono ∈ `viewer.teamIds`, status ≠ concluida, ordenado por due_date.
+- **"O que tenho hoje?"** → filtrar `state.tasks` por dono = `viewer.reportId` ou (se líder) por dono ∈ `viewer.visibleIds`, status ≠ concluida, ordenado por due_date.
 - **"Cria uma tarefa: X"** → `Aux.tasks.create({ report_id: viewer.reportId, title: 'X', status: 'a_fazer', priority: 'media' })`. Pergunte prazo só se não der pra inferir.
 - **"Move X pra feita"** → `Aux.tasks.update(id, { status: 'concluida' })`. Não confirma (é reversível, é própria).
 - **"Liderado X tá com tarefa Y atrasada?"** → filtrar state.tasks onde `report_id === X.id`, mostrar atrasos.
