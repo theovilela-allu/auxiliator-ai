@@ -1,58 +1,70 @@
-﻿{
-    "env":  {
-                "AUX_AI_CTX_WARN_AT":  "50"
-            },
-    "model":  "claude-sonnet-4-6",
-    "permissions":  {
-                        "allow":  [
-                                      "Read",
-                                      "Write",
-                                      "Edit",
-                                      "Glob",
-                                      "Grep",
-                                      "WebFetch",
-                                      "WebSearch",
-                                      "TaskCreate",
-                                      "TaskUpdate",
-                                      "TaskList",
-                                      "TaskGet",
-                                      "TaskOutput",
-                                      "Agent",
-                                      "Skill",
-                                      "NotebookEdit",
-                                      "mcp__playwright",
-                                      "Bash(git:*)",
-                                      "Bash(gh:*)",
-                                      "Bash(ls:*)",
-                                      "Bash(cat:*)",
-                                      "Bash(mkdir:*)",
-                                      "Bash(cp:*)",
-                                      "Bash(mv:*)",
-                                      "Bash(echo:*)",
-                                      "Bash(pwd)",
-                                      "Bash(npm:*)",
-                                      "Bash(npx:*)",
-                                      "Bash(node:*)",
-                                      "Bash(python:*)",
-                                      "Bash(python3:*)",
-                                      "PowerShell(git*)",
-                                      "PowerShell(gh*)",
-                                      "PowerShell(Get-ChildItem*)",
-                                      "PowerShell(Get-Content*)",
-                                      "PowerShell(Set-Content*)",
-                                      "PowerShell(Out-File*)",
-                                      "PowerShell(New-Item*)",
-                                      "PowerShell(Test-Path*)",
-                                      "PowerShell(Copy-Item*)",
-                                      "PowerShell(Move-Item*)",
-                                      "PowerShell(Remove-Item*)",
-                                      "PowerShell(ConvertFrom-Json*)",
-                                      "PowerShell(ConvertTo-Json*)",
-                                      "PowerShell(Invoke-WebRequest*)",
-                                      "PowerShell(npm*)",
-                                      "PowerShell(npx*)",
-                                      "PowerShell(node*)",
-                                      "PowerShell(python*)"
-                                  ]
-                    }
+{
+  "env": {
+    "AUX_AI_CTX_WARN_AT": "50"
+  },
+  "model": "claude-sonnet-4-6",
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep",
+      "WebFetch",
+      "WebSearch",
+      "TaskCreate",
+      "TaskUpdate",
+      "TaskList",
+      "TaskGet",
+      "TaskOutput",
+      "Agent",
+      "Skill",
+      "NotebookEdit",
+      "mcp__playwright",
+      "Bash(git:*)",
+      "Bash(gh:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(echo:*)",
+      "Bash(pwd)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "PowerShell(git*)",
+      "PowerShell(gh*)",
+      "PowerShell(Get-ChildItem*)",
+      "PowerShell(Get-Content*)",
+      "PowerShell(Set-Content*)",
+      "PowerShell(Out-File*)",
+      "PowerShell(New-Item*)",
+      "PowerShell(Test-Path*)",
+      "PowerShell(Copy-Item*)",
+      "PowerShell(Move-Item*)",
+      "PowerShell(Remove-Item*)",
+      "PowerShell(ConvertFrom-Json*)",
+      "PowerShell(ConvertTo-Json*)",
+      "PowerShell(Invoke-WebRequest*)",
+      "PowerShell(npm*)",
+      "PowerShell(npx*)",
+      "PowerShell(node*)",
+      "PowerShell(python*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git pull --ff-only --quiet"
+          }
+        ]
+      }
+    ]
+  }
 }
