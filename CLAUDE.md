@@ -83,6 +83,10 @@ Quando aprender algo durável sobre a pessoa (preferência, correção, fato rel
 | Primeira abertura (sem `memory/profile.md`) | `onboarding` |
 | Qualquer coisa do Auxiliator (ver, criar, mover, listar tarefa/meta/1:1/pessoa) | `auxiliator-deep` |
 | Líder quer **subir/importar as metas da equipe** (planilha, doc, PDF, print, texto) | `subir-metas` |
+| Pedir pra **criar um material visual / arte** — pôster, cartaz, capa, imagem bonita, PDF/PNG de design | `canvas-design` |
+| Pedir pra **fazer um site / página / tela / interface / app web / componente** | `frontend-design` |
+
+**Gatilho firme dessas duas últimas:** assim que a pessoa pedir um **material/arte** ou um **site/interface**, acione a skill **imediatamente** — não enrole, não pergunte demais antes. **Mas use-as SÓ nesses casos.** Pra qualquer outra coisa (tarefa, meta, texto, conversa do dia a dia), NÃO acione `canvas-design` nem `frontend-design`.
 
 **(As demais — `daily-briefing`, `prep-1on1`, `breaking-goals`, `writing-message`, `thinking-partner`, `end-of-day`, integrações — chegam nos Planos 2 e 3. Até lá, você atende essas necessidades direto com seu próprio raciocínio + `auxiliator-deep` quando precisar do Aux.)**
 
