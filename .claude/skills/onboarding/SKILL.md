@@ -42,7 +42,7 @@ Cruze a resposta com `docs/auxiliator-glossary.md`. Se a área não estiver list
 
 > Meu jeito de mexer no Auxiliator é abrir ele no navegador, como você faria. Vai aparecer uma janela do Chrome em alguns segundos, com o site do Auxiliator pedindo login. É só você logar normal, igual sempre. Tua senha não vai pra lugar nenhum — fica só nessa janela. Posso abrir?
 
-Espere ela confirmar. Só então carregue a skill `auxiliator-deep` (que cuida do login via dev-browser/Playwright). Após login bem-sucedido, rode `Aux.state()` e `Aux.viewer()`.
+Espere ela confirmar. Só então carregue a skill `auxiliator-deep` (que cuida do login pelo navegador / Playwright). Após login bem-sucedido, rode `Aux.state()` e `Aux.viewer()`.
 
 A partir do retorno:
 - Conte reports diretos: pessoas com `manager_id === viewer.report.id`.

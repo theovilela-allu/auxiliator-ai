@@ -6,7 +6,7 @@
 
 # Auxiliator — Navegação por IA (`window.Aux`)
 
-Como uma IA que dirige o navegador (Playwright/dev-browser) opera o Auxiliator de forma
+Como uma IA que dirige o navegador (Playwright) opera o Auxiliator de forma
 **rápida, certeira e sem clique**. A UX humana não muda — isto é uma porta adicional.
 
 ## Princípio

@@ -1,6 +1,6 @@
 ---
 name: auxiliator-deep
-description: Use quando a pessoa pedir qualquer coisa do Auxiliator — ver/criar/mover/listar tarefa, meta, 1:1, ausência, PDI, pessoa. Loga via dev-browser, opera por window.Aux (não por clique). Sempre carregue docs/auxiliator-api.md antes de operar.
+description: Use quando a pessoa pedir qualquer coisa do Auxiliator — ver/criar/mover/listar tarefa, meta, 1:1, ausência, PDI, pessoa — E no início de cada conversa para garantir a sessão logada. Abre o navegador (Playwright), opera por window.Aux (não por clique). Sempre carregue docs/auxiliator-api.md antes de operar.
 ---
 
 # Skill: Auxiliator Deep — Operar o sistema pela pessoa
@@ -13,6 +13,8 @@ A pessoa pediu algo que toca o Auxiliator (`auxiliator.vercel.app`). Você vai o
 
 Carregue **`docs/auxiliator-api.md`** ANTES de operar. Esse arquivo tem o manual da `window.Aux` (chamadas, enums, fluxo recomendado). Sem ele você adivinha — e adivinhar quebra.
 
+**Exceção — conexão no boot:** se você abriu esta skill só pra garantir login no início da conversa (sem pedido pra operar), **não carregue `auxiliator-api.md` ainda** — gasta token à toa. Faça só o passo 1 (garantir sessão) e pare. Carregue o manual quando a pessoa de fato pedir uma operação.
+
 Também carregue, se for o caso:
 - `docs/relevance-filter.md` — se for varrer dados pra extrair tarefas
 - `docs/leadership-mode.md` — se for atuar sobre outras pessoas
@@ -20,13 +22,17 @@ Também carregue, se for o caso:
 
 ## Fluxo
 
-### 1. Garantir sessão logada (dev-browser)
+### 1. Garantir sessão logada (navegador / Playwright)
 
-Use o MCP Playwright. Se não houver browser aberto, abra `auxiliator.vercel.app`. Se a página redirecionar pra login, peça pra pessoa logar:
+Use o MCP Playwright (`mcp__playwright__*` — navegador). Se não houver browser aberto, abra `auxiliator.vercel.app`. A sessão é **persistente entre conversas** (mesmo perfil do Playwright), então na maioria das vezes você já cai logado direto em `/app.html` com `window.Aux` disponível — sem fricção, em silêncio.
+
+Só se a página redirecionar pra login (sessão expirou / primeira vez) é que você precisa da pessoa. Aí prepare ela antes de a janela aparecer e peça pra logar:
 
 > "Vou abrir uma janela do Auxiliator pra você logar uma vez. É só fazer login normal. Não vou guardar tua senha — fica só na sessão do navegador."
 
-Aguarde o login resolver (URL muda pra `/app.html`, `window.Aux` fica disponível). A sessão fica persistente entre conversas (mesmo perfil do Playwright).
+Aguarde o login resolver (URL muda pra `/app.html`, `window.Aux` fica disponível).
+
+> **Conexão no boot:** quando esta skill é aberta no início da conversa só pra garantir login (não há pedido ainda), pare aqui — sessão logada confirmada já basta. Não puxe `Aux.state()` à toa; faça isso quando a pessoa de fato pedir algo (passo 2 em diante).
 
 ### 2. Verificar cache
 
