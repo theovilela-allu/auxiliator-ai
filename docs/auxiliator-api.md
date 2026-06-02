@@ -42,6 +42,11 @@ A navegação por clique continua válida como **fallback** — todo elemento in
 | Atualizar/excluir meta | `Aux.goals.update(id, patch)` · `Aux.goals.remove(id)` |
 | Criar tarefa (vincular meta via `goal_id`) | `await Aux.tasks.create({ report_id, title, description, definition_of_done, goal_id, status, priority, due_date, weight, ... })` — `weight` (int ≥0, em pontos percentuais) é o peso da tarefa no progresso da meta; `0` = não conta |
 | Editar/excluir tarefa | `Aux.tasks.update(id, patch)` · `Aux.tasks.remove(id)` |
+| Criar **Projeto** (agrupador local na aba Tarefas) | `await Aux.tasks.create({ report_id, title, description, due_date, is_project: true })` — Projeto é uma task com `is_project=true`; não vira card de coluna, vira bloco 📊 no topo do Kanban |
+| Vincular tarefa a um Projeto | `parent_task_id: <id do projeto>` no `tasks.create`/`update` — a filha aparece no board com selo do Projeto; progresso do Projeto = Σpeso concluídas/Σpeso (fallback: contagem), calculado no front |
+| Bloquear tarefa com dependência | `Aux.tasks.update(id, { status: 'bloqueada', blocked_reason, blocked_on_report_id, blocked_at: new Date().toISOString() })` — a pessoa apontada vê em vermelho no Início e na coluna Bloqueada. Ao **sair** de bloqueada, limpe: `{ blocked_on_report_id: null, blocked_reason: null, block_response: null, block_resolved_at: null, blocked_at: null }` |
+| Responder a um bloqueio (sou a pessoa requisitada) | `await Aux.tasks.respondToBlock(taskId, 'resposta', resolved)` — RPC security definer; só funciona se EU sou o `blocked_on_report_id` e a task está `bloqueada` |
+| Ler tarefas bloqueadas em mim | `await Aux.tasks.blockedOnMe(viewer.reportId)` — só as atualmente bloqueadas que apontam pra mim |
 | Registrar 1:1 | `await Aux.oneOnOnes.create({ report_id, date, topics: ['t1','t2'], notes, next_topics })` |
 | Criar/excluir ausência | `await Aux.absences.create({ report_id, type, start_date, end_date, notes })` |
 | PDI da pessoa | `await Aux.pdi.upsertByReport(report_id, { strengths, develop, career_plan })` |
@@ -64,6 +69,13 @@ A navegação por clique continua válida como **fallback** — todo elemento in
 - **Nomes de coluna que mudam fácil:** 1:1 usa `date` (não `meeting_at`) e `topics` é
   **array**; ausência usa `notes` (não `reason`); PDI usa `strengths`/`develop`/`career_plan`
   (não `content`). Confira sempre contra uma row real de `state()`.
+- **Projeto × Meta são ortogonais:** uma tarefa pode ter `goal_id` E `parent_task_id` ao
+  mesmo tempo. Projeto NÃO aparece na aba Metas e não tem registro próprio em `goals` —
+  é só uma task agrupadora. Em `state().tasks`, filtre `is_project === true` pra listar
+  Projetos e `parent_task_id === <id>` pra listar as filhas.
+- **Não confundir** `parent_task_id` apontando pra task-comum (checklist antigo de
+  subtarefas, escondido do board) com apontando pra um Projeto (filha visível no board).
+  Pra agrupar com visibilidade, o pai precisa ter `is_project: true`.
 
 ## Exemplo ponta a ponta
 ```js
