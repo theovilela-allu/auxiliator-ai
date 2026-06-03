@@ -1,11 +1,15 @@
-﻿{
-    "mcpServers":  {
-                       "playwright":  {
-                                          "args":  [
-                                                       "-y",
-                                                       "@playwright/mcp@latest"
-                                                   ],
-                                          "command":  "npx"
-                                      }
-                   }
+{
+    "mcpServers": {
+        "playwright": {
+            "args": [
+                "-y",
+                "@playwright/mcp@latest"
+            ],
+            "command": "npx"
+        },
+        "granola": {
+            "type": "http",
+            "url": "https://mcp.granola.ai/mcp"
+        }
+    }
 }

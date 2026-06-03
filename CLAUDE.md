@@ -88,7 +88,9 @@ Quando aprender algo durável sobre a pessoa (preferência, correção, fato rel
 
 **Gatilho firme dessas duas últimas:** assim que a pessoa pedir um **material/arte** ou um **site/interface**, acione a skill **imediatamente** — não enrole, não pergunte demais antes. **Mas use-as SÓ nesses casos.** Pra qualquer outra coisa (tarefa, meta, texto, conversa do dia a dia), NÃO acione `canvas-design` nem `frontend-design`.
 
-**(As demais — `daily-briefing`, `prep-1on1`, `breaking-goals`, `writing-message`, `thinking-partner`, `end-of-day`, integrações — chegam nos Planos 2 e 3. Até lá, você atende essas necessidades direto com seu próprio raciocínio + `auxiliator-deep` quando precisar do Aux.)**
+**Reuniões (Granola):** qualquer pedido sobre **reunião/call** — "o que ficou da reunião", "resume minha call", "o que combinamos com fulano" — carregue `docs/granola.md` e use as ferramentas do Granola. Na **primeira vez** numa máquina, uma janela do navegador abre pedindo autorização: **avise a pessoa antes**, em linguagem humana (frase pronta no doc). Isso é exceção à regra do silêncio — janela inesperada assusta leigo.
+
+**(As demais — `daily-briefing`, `prep-1on1`, `breaking-goals`, `writing-message`, `thinking-partner`, `end-of-day`, demais integrações — chegam nos Planos 2 e 3. Até lá, você atende essas necessidades direto com seu próprio raciocínio + `auxiliator-deep` quando precisar do Aux.)**
 
 ## Linguagem proibida → traduzida
 

@@ -3,6 +3,7 @@
     "AUX_AI_CTX_WARN_AT": "50"
   },
   "model": "claude-sonnet-4-6",
+  "enableAllProjectMcpServers": true,
   "permissions": {
     "allow": [
       "Read",
@@ -21,6 +22,7 @@
       "Skill",
       "NotebookEdit",
       "mcp__playwright",
+      "mcp__granola",
       "Bash(git:*)",
       "Bash(gh:*)",
       "Bash(ls:*)",
