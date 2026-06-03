@@ -1,6 +1,6 @@
 # Granola — reuniões e transcrições
 
-> Carregue este doc quando a pessoa pedir qualquer coisa de **reunião**: "o que ficou da reunião X", "resume minha call", "quais reuniões tive", "o que combinamos com fulano", preparar 1:1 com base na última conversa, extrair tarefas de uma reunião.
+> Carregue este doc quando a pessoa pedir qualquer coisa de **reunião**: "o que ficou da reunião X", "resume minha call", "quais reuniões tive", "o que combinamos com fulano", preparar 1:1 com base na última conversa, extrair tarefas de uma reunião — **e no boot de toda conversa, pro sync automático do calendário (seção abaixo)**.
 
 O Granola é o app de notas de reunião que o time da Allugator usa. Você tem acesso direto às reuniões da pessoa via ferramentas `mcp__granola__*`.
 
@@ -36,6 +36,31 @@ Se a pessoa disser que não tem conta no Granola: explique que o Granola é o ap
 > *"Minha conexão com o teu Granola caiu — acontece de vez em quando. Me ajuda a reconectar? Digita `/mcp` aqui na caixa de mensagem e aperta Enter, escolhe **granola** na lista e depois **Authenticate**. Vai abrir o navegador de novo pra você autorizar — igual da primeira vez."*
 
 Depois que ela reconectar, retome de onde parou sem fazer cerimônia.
+
+## Sync automático: Granola → calendário do Auxiliator (procedimento de boot)
+
+**Em TODA conversa nova, logo após o briefing do dia, EM SILÊNCIO** (sem narrar, sem pedir permissão — é procedimento padrão, decisão do Gustavo):
+
+1. Liste as reuniões da semana no Granola: `list_meetings` com `time_range: 'this_week'`.
+2. Para CADA reunião, publique no Auxiliator via porta IA (navegador já conectado):
+   ```js
+   await window.Aux.meetings.sync({
+     granola_id: '<id da reunião no Granola>',
+     title: '<título>',
+     starts_at: '<data/hora ISO com fuso, ex 2026-06-04T14:00:00-03:00>',
+     emails: ['<emails de TODOS os participantes>'],   // INCLUA o da própria pessoa (viewer.email) — obrigatório
+     external: [{ email, name }]                        // participantes de fora da Allugator
+   })
+   ```
+3. Pronto. A reunião aparece na aba **Calendário → Agenda** de TODOS os participantes internos, automaticamente.
+
+Regras do sync:
+- **Idempotente**: re-sincronizar a mesma reunião (mesmo `granola_id`) só atualiza título/horário — NUNCA duplica. Pode rodar todo boot sem medo, mesmo que o assessor de outro participante já tenha publicado.
+- Participante interno = email que casa com alguém do app (resolução é do servidor — você só manda os emails). Quem não casa entra como externo (só exibição).
+- Reunião sem participantes no convite (Granola mostra só a própria pessoa): sincronize mesmo assim — pelo menos a agenda dela fica completa.
+- Se `sync` der erro de payload, confira se o email da própria pessoa está na lista `emails`.
+- Se o Granola ainda não estiver conectado (primeira vez), siga o fluxo de OAuth da seção acima ANTES — aí o sync passa a rodar em silêncio em todo boot.
+- Falhou o sync (rede, sessão)? Não trave o atendimento — siga a conversa e tente de novo no próximo boot. Não incomode a pessoa com isso.
 
 ## Regras
 
