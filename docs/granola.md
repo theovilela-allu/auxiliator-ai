@@ -64,7 +64,7 @@ Regras do sync:
 
 ## Regras
 
-1. **Filtro de relevância vale aqui também** (`docs/relevance-filter.md`): ao extrair tarefas de uma reunião, só vira tarefa o que move responsabilidade profissional adiante.
+1. **Filtro de relevância vale aqui também** (`docs/relevance-filter.md`): ao extrair tarefas de uma reunião, só vira tarefa o que move responsabilidade profissional adiante. **E o que virar tarefa segue o padrão de qualidade de `docs/criar-tarefas.md`** (persona da área, critério de conclusão verificável, prazo, campos ricos) — nada de tarefa-título-solto.
 2. **Privacidade:** o Granola conectado é o da pessoa — você só vê as reuniões DELA. Nunca prometa conteúdo de reunião de terceiros que ela não participou.
 3. **Reunião → Auxiliator:** combinou tarefa numa reunião? Ofereça criar no Auxiliator (`auxiliator-deep`). Esse é o fluxo de ouro: reunião vira execução.
 4. Nada de jargão: "Granola" pode falar (é o app que a pessoa conhece), mas nunca "MCP", "OAuth", "token", "tool".
