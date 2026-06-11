@@ -6,6 +6,7 @@ profile.md
 .claude/.ctx-meter
 .claude/.bootstrapped
 .claude/.bootstrap-error
+.playwright-mcp/
 
 # Cache de IDE/SO
 .DS_Store
