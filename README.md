@@ -50,7 +50,7 @@ Abre o GitHub Desktop. Aparece "Fetch origin" → clica. Depois "Pull origin" �
 - Detectar se você lidera time ou não, e se adaptar
 - Operar o Auxiliator pra você (ver tuas tarefas/metas, criar, mover, listar pessoas do time)
 - Lembrar o que você falou pra ele entre conversas
-- Adotar o estilo de comunicação que você prefere (mordomo, chefe de gabinete, ou socrático)
+- Adotar o estilo de comunicação que você prefere — mordomo, chefe de gabinete, socrático, ou uma mistura dos três (o mais comum)
 
 ## O que vem em breve
 

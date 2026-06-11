@@ -14,13 +14,13 @@
 - **N reports diretos:** <número>
 - **Líder direto:** <nome ou "ninguém">
 
-## Persona escolhida do assessor
-- **persona:** <mordomo | chefe_de_gabinete | socratico>
+## Estilo do assessor
+> O normal é uma mistura. Anote a dosagem, não uma caixinha única.
+- **estilo:** <híbrido (recomendado) | mordomo | chefe_de_gabinete | socratico | sua mistura, ex.: "hibrido (mordomo + chefe_de_gabinete + socratico)">
 
 ## Preferências básicas
-- **Horário de pico:** <ex.: manhã, tarde, noite, indiferente>
-- **Jargão preferido / odiado:** <livre>
-- **Gatilhos comuns:** <ex.: "cobra Mayara toda sexta", "1:1 com Gustavo segunda 14h">
+- **Jargão preferido / odiado:** <livre, ou em branco>
+- **Gatilhos comuns:** <ex.: "cobra Mayara toda sexta", "1:1 com Gustavo segunda 14h", ou em branco>
 
 ## Integrações ativadas
 - Auxiliator: <sim | não>
