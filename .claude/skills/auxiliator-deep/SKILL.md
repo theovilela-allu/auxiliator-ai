@@ -55,7 +55,9 @@ Toda vez que você conectar ao Auxiliator — no boot **e** quando a pessoa pedi
    Não repita o aviso na mesma conversa. Nunca diga "versão", "git", "repositório", "atualização do código" — só *"uma melhoria minha"*.
 4. **Se for igual** → não faça nada, siga normal.
 
-> **Por quê:** o `git pull` atualiza skills e docs na hora, mas a sua alma (as instruções de base) só recarrega quando a pessoa abre um chat novo. Daí o empurrãozinho pra reiniciar — sem ele, a pessoa segue numa versão velha sem saber.
+**Exceção importante — antes de uma BATERIA DE ALTERAÇÕES, re-confira mesmo que já tenha checado nesta conversa.** Quando você for fazer um **lote** de mudanças no Auxiliator (subir várias metas/tarefas, mover muita coisa, qualquer sequência de escritas), refaça os passos 1-3 **antes de começar a escrever** — aqui NÃO vale o "uma vez por conversa". Por quê: operar um lote em cima de skill/doc velho (ex.: `docs/auxiliator-api.md` desatualizado, enum que mudou, regra de negócio nova) grava errado e em massa. Se a checagem puxar algo (`git pull`), **recarregue `docs/auxiliator-api.md`** na versão nova antes de montar as chamadas; só então escreva.
+
+> **Por quê (do aviso pra reiniciar):** o `git pull` atualiza skills e docs na hora, mas a sua alma (as instruções de base) só recarrega quando a pessoa abre um chat novo. Daí o empurrãozinho pra reiniciar — sem ele, a pessoa segue numa versão velha sem saber.
 
 ### 2. Verificar cache
 
