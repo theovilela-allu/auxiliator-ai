@@ -42,6 +42,8 @@ Chama o Gustavo no Slack que ele te ajuda.
 
 Abre o GitHub Desktop. Aparece "Fetch origin" → clica. Depois "Pull origin" → clica. O assessor atualiza sem perder o que ele já aprendeu sobre você (suas memórias ficam num lugar privado que não é tocado).
 
+Na real você quase nunca precisa fazer isso na mão: o assessor se atualiza sozinho a cada conversa nova e, se perceber que está atrasado, ele mesmo te avisa pra reiniciar o chat.
+
 ---
 
 ## O que ele consegue fazer (MVP — primeira versão)
