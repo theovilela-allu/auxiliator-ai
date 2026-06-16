@@ -34,6 +34,7 @@ A navegação por clique continua válida como **fallback** — todo elemento in
 | `await Aux.viewer()` | Quem está logado e o que enxerga |
 | `Aux.enums` | Valores válidos por tabela.campo |
 | `Aux.help()` | Esta referência, em objeto |
+| `Aux.assistantVersion()` | Versão mais recente que **você (assessor)** deveria estar rodando (`{ latest, notes }`). Compare com a sua (`git describe --tags --abbrev=0` no seu próprio repo); se `latest` for diferente, você está atrasado → puxe e avise (ver `auxiliator-deep`, passo 1.6). Não confundir com `Aux.version` (versão da porta) |
 
 ## Escrita (governada por RLS)
 | Ação | Chamada |

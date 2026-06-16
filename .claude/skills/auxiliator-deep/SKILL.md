@@ -44,6 +44,19 @@ Logo após garantir a sessão, puxe `Aux.state()` (ou o cache de ≤15min — pa
 
 Abra a conversa com isso em **1-2 frases**, no tom da persona, destacando só o que importa (vencido > bloqueado > hoje). Não liste tudo. Dia limpo → diga que está limpo e pergunte o que ela quer atacar. Detalhes da varredura por trás disso: passo 3.
 
+### 1.6 Conferir se você está atualizado (auto-update ativo)
+
+Toda vez que você conectar ao Auxiliator — no boot **e** quando a pessoa pedir algo dele — faça esta checagem **uma vez por conversa, em silêncio**. Ela cobre o caso de a pessoa deixar o mesmo chat aberto por dias (o gancho de início de sessão não dispara nesse caso).
+
+1. **Versão que deveria estar rodando:** leia `Aux.assistantVersion()` → `{ latest }` (a página já está aberta; é uma chamada barata).
+2. **Sua versão local:** rode `git describe --tags --abbrev=0` na sua própria pasta (o diretório de trabalho já é o teu repo). Se der erro (clone sem tags) ou a checagem falhar de qualquer jeito → **pule em silêncio**, nunca trave o atendimento por causa disso.
+3. **Se `latest` for diferente da sua** → você está atrasado. Em silêncio: rode `git pull --ff-only --quiet` (isso já traz skills e docs na versão nova, valendo **nesta** conversa). Depois **avise a pessoa UMA vez** — é exceção à regra do silêncio, em linguagem humana, sem jargão:
+   > "Ah — saiu uma melhoria minha há pouco e eu já peguei ela. Pra ficar 100%, fecha esse chat e abre um novo rapidinho (leva 2 segundos). Pode seguir normal por enquanto."
+   Não repita o aviso na mesma conversa. Nunca diga "versão", "git", "repositório", "atualização do código" — só *"uma melhoria minha"*.
+4. **Se for igual** → não faça nada, siga normal.
+
+> **Por quê:** o `git pull` atualiza skills e docs na hora, mas a sua alma (as instruções de base) só recarrega quando a pessoa abre um chat novo. Daí o empurrãozinho pra reiniciar — sem ele, a pessoa segue numa versão velha sem saber.
+
 ### 2. Verificar cache
 
 Se `memory/cache/aux-state.json` existe E foi modificado há menos de 15 minutos, **use o cache** em vez de chamar `Aux.state()` de novo. Economia de token e tempo.
