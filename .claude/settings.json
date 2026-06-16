@@ -2,7 +2,6 @@
   "env": {
     "AUX_AI_CTX_WARN_AT": "50"
   },
-  "model": "claude-sonnet-4-6",
   "enableAllProjectMcpServers": true,
   "permissions": {
     "allow": [
