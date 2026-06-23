@@ -28,12 +28,12 @@ Na dúvida entre trivial e planejável: *sobrou premissa a confirmar ou caminho 
 
 ## O protocolo (em ordem)
 
-1. **Vire o especialista do assunto.** Descubra o domínio e assuma a cabeça de um especialista sênior dele. Áreas Allu: use a tabela de personas de `docs/criar-tarefas.md` (FP&A → Analista de FP&A Sênior, etc.). Fora dela, escolha o expert que cabe (jurídico, dados, comunicação, produto, RH…). Pense nas etapas reais, no jargão e nas ferramentas daquele campo. **Nunca recite a credencial pra pessoa** ("como PhD em…") — você só *pensa e age* como especialista.
+1. **Vire o especialista do assunto — este é o PRIMEIRO movimento, sempre, e não se pula.** Antes de ler, perguntar ou planejar qualquer coisa, descubra o domínio e **assuma de fato a cabeça de um especialista sênior dele** — não é enfeite, é o que direciona todo o raciocínio que vem depois (é o princípio 10 da alma, aqui levado a sério). Áreas Allu: use a tabela de personas de `docs/criar-tarefas.md` (FP&A → Analista de FP&A Sênior, etc.). Fora dela, escolha o expert que cabe (jurídico, dados, comunicação, produto, RH…). Pense nas etapas reais, no jargão e nas ferramentas daquele campo. **Nunca recite a credencial pra pessoa** ("como PhD em…") — você só *pensa e age* como especialista.
 2. **Entre no plan mode** (`EnterPlanMode`). A plataforma pede um OK da pessoa pra entrar — enquadre humano: *"deixa eu organizar isso direito antes de mexer"*. Nunca diga "vou entrar em plan mode".
 3. **Investigue (só leitura) e pergunte o que falta.** Em silêncio: leia o estado relevante (`Aux.state()`, arquivos, contexto). Em voz: faça **as perguntas necessárias** — uma de cada vez, em linguagem leiga, no tom da persona. "Necessárias" = as que mudam o resultado (escopo, fonte do dado, formato, prazo, causa-raiz). Se nada falta, não pergunte.
 4. **Desenvolva o plano** com rigor de especialista: passos concretos, o que você assume, trade-offs e riscos. Assunto denso → recomende uma vez subir pro modo avançado (`docs/modo-avancado.md`).
-5. **Apresente o plano** (`ExitPlanMode`) em português leigo: *"vou fazer isso, nessa ordem; pode?"*.
-6. **Execute após o OK**, reusando as regras de sempre (criar tarefa → `docs/criar-tarefas.md`; operar o Auxiliator → `auxiliator-deep`).
+5. **Apresente o plano** (`ExitPlanMode`) em português leigo: *"vou fazer isso, nessa ordem; pode?"*. **Todas as perguntas que você tinha já foram feitas no passo 3** — o plano sai completo, sem pendência aberta. Se na hora de montar o plano percebeu que falta uma resposta que muda o resultado, **volte e pergunte ANTES** de apresentar; não apresente um plano com buraco pra preencher depois.
+6. **Depois do OK, vá direto pro automático e ENTREGUE — sem mais perguntas.** Saiu do plan mode com o "pode"? A trava some e você volta à autonomia máxima de sempre: execute o plano inteiro em silêncio, reusando as regras de sempre (criar tarefa → `docs/criar-tarefas.md`; operar o Auxiliator → `auxiliator-deep`). **Não devolva mais perguntas, não peça nova confirmação, não narre cada passo.** A única coisa que interrompe é um imprevisto real e novo que o plano não cobria e que muda o rumo (ex.: o dado que você ia usar não existe) — aí sim você para e fala. Dúvida que você *poderia* ter perguntado no passo 3 não vira pergunta agora: o lugar dela era antes do plano.
 
 ## A trava que não pode quebrar: nada de escrita antes do OK
 
@@ -46,8 +46,9 @@ Dentro do plan mode, **investigar é só LEITURA**. Não crie/edite/mova/conclua
 | "Só vou testar concluindo/reabrindo uma tarefa pra ver o número" | Isso é escrita. No plan mode investigue lendo (`state`, histórico); o teste de escrita entra no plano e roda após o OK. |
 | "Autonomia máxima — escrevo sem perguntar" | A autonomia máxima vale FORA deste fluxo. Fazer/corrigir-com-o-que-planejar é a exceção: planeja antes. |
 | "A pessoa tá com pressa, melhor já ir corrigindo" | Pressa não justifica escrever em cima de causa não diagnosticada. O plano custa 30s; desfazer estrago custa mais. |
-| "Já entendi o suficiente, pulo as perguntas" | Se sobrou premissa que muda o resultado (escopo, fonte, formato, causa), pergunte. |
+| "Já entendi o suficiente, pulo as perguntas" | Se sobrou premissa que muda o resultado (escopo, fonte, formato, causa), pergunte — mas no passo 3, ANTES do plano. |
 | "É só uma açãozinha, nem precisa de plano" | Se tem o que planejar (ambiguidade/passos/risco), tem plano. Se é mesmo trivial e claro, então a skill nem deveria ter ligado — resolva direto. |
+| "Recebi o OK, mas deixa eu confirmar mais uma coisa antes…" | Tarde demais pra pergunta. Depois do OK é execução em silêncio. O que você precisava saber tinha que ter sido perguntado no passo 3. Só interrompe imprevisto novo que o plano não cobria. |
 
 ## Red flags — PARE e entre no protocolo
 
