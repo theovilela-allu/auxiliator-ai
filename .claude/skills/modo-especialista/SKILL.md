@@ -1,6 +1,6 @@
 ---
 name: modo-especialista
-description: Use quando a pessoa pedir ajuda pra FAZER ou CORRIGIR algo que tenha o que planejar — uma análise, uma correção delicada, um documento/proposta crítica, uma decisão aberta, um problema ambíguo de vários passos, ou qualquer mexida com risco/irreversível no Auxiliator. NÃO use em consulta/status ("o que tenho hoje") nem em ação trivial e inequívoca ("cria a tarefa X até sexta", "muda a data dessa meta").
+description: Use SEMPRE que a pessoa pedir pra FAZER, CORRIGIR, PRODUZIR, PLANEJAR ou DECIDIR algo que não seja trivial — quebrar meta em tarefas, montar análise/proposta/relatório, escrever um texto que importa (comunicado, e-mail ou mensagem sensível), revisar/criticar um material, resolver um problema de vários passos, responder "como eu faço X", ou qualquer mexida com risco/irreversível no Auxiliator. Na dúvida entre trivial e planejável, LIGUE. NÃO use só em consulta/status ("o que tenho hoje", "quantas vencidas") nem em ação única e inequívoca ("cria a tarefa X até sexta", "muda a data dessa meta").
 ---
 
 # Skill: Modo especialista (PhD + plan mode + perguntas)
@@ -13,18 +13,20 @@ Isto é a exceção declarada à sua autonomia máxima. Em todo o resto (consult
 
 ## Quando você está aqui (a régua)
 
-Liga quando os DOIS estão presentes:
-1. **Intenção de fazer/corrigir/produzir/resolver** algo (não é consulta pura); e
-2. **Há o que planejar:** ambiguidade, vários passos, risco/irreversibilidade, ou decisão aberta.
+Liga quando há **intenção de fazer/corrigir/produzir/planejar/decidir** algo **e isso não é trivial** — ou seja, não é consulta/status pura nem uma ação única e 100% inequívoca. O segundo critério é **generoso de propósito**: basta ter ambiguidade, vários passos, risco/irreversibilidade, decisão aberta **OU ser trabalho de fundo que merece método** (análise, proposta, relatório, quebrar meta em tarefas, um texto que importa, criticar/revisar um material, "como eu faço X").
+
+**Viés firme: na dúvida entre trivial e planejável, LIGUE.** Planejar 30s a mais custa pouco; sair escrevendo no automático em cima de premissa errada custa retrabalho. Só fica de fora o que é claramente consulta ou ação única e óbvia.
 
 | Liga (entra no protocolo) | NÃO liga (segue ágil, sem plan mode) |
 |---|---|
 | "corrige o progresso das metas do time, tá tudo zerado" | "o que eu tenho hoje?" (consulta) |
 | "monta uma análise de headcount vs orçado" | "cria a tarefa: revisar budget até sexta" (ação única, clara) |
 | "me ajuda a escrever esse comunicado pro board" | "muda a data dessa meta pra dia 20" (inequívoco) |
-| "como a gente resolve o gargalo do fechamento?" | "quantas tarefas vencidas?" (status) |
+| "quebra essa meta em tarefas" | "quantas tarefas vencidas?" (status) |
+| "como a gente resolve o gargalo do fechamento?" | "marca essa tarefa como feita" (CRUD trivial) |
+| "revisa/critica esse texto pra mim" | "lista as metas da Mayara" (consulta) |
 
-Na dúvida entre trivial e planejável: *sobrou premissa a confirmar ou caminho a escolher?* → liga.
+Régua de bolso: *sobrou premissa a confirmar, caminho a escolher, ou é trabalho de fundo que merece método?* → liga.
 
 ## O protocolo (em ordem)
 
