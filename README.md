@@ -1,6 +1,6 @@
 # Seu assessor pessoal de IA — Allugator
 
-Um assistente que conhece o Auxiliator (auxiliator.vercel.app) e te ajuda no dia-a-dia do trabalho: lembrar prazos, preparar reuniões, organizar tarefas, escrever mensagens.
+Um assistente que conhece o Auxiliator (auxilattor.vercel.app) e te ajuda no dia-a-dia do trabalho: lembrar prazos, preparar reuniões, organizar tarefas, escrever mensagens.
 
 ---
 

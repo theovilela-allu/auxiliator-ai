@@ -33,7 +33,7 @@
 - **Goal owner / report_id** — a pessoa principal responsável por uma meta no Auxiliator
 - **Equipe** no Auxiliator — área ∪ hierarquia (todo mundo da minha área + todo mundo que reporta a mim)
 - **Tarefa bloqueada** — tarefa que depende de uma pessoa específica responder/atender
-- **Auxiliator** — o app `auxiliator.vercel.app`, sistema de gestão de pessoas e metas
+- **Auxiliator** — o app `auxilattor.vercel.app`, sistema de gestão de pessoas e metas
 
 ## Cargos comuns (heurísticas pra calibrar expectativa)
 

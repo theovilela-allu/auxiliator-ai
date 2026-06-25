@@ -7,7 +7,7 @@ description: Use quando a pessoa pedir qualquer coisa do Auxiliator — ver/cria
 
 ## Quando você está aqui
 
-A pessoa pediu algo que toca o Auxiliator (`auxiliator.vercel.app`). Você vai operar pelo lado dela: ler estado, criar/editar/mover, sempre via porta programática `window.Aux` — não por clique na tela.
+A pessoa pediu algo que toca o Auxiliator (`auxilattor.vercel.app`). Você vai operar pelo lado dela: ler estado, criar/editar/mover, sempre via porta programática `window.Aux` — não por clique na tela.
 
 ## Pré-requisito sempre
 
@@ -24,7 +24,7 @@ Também carregue, se for o caso:
 
 ### 1. Garantir sessão logada (navegador / Playwright)
 
-Use o MCP Playwright (`mcp__playwright__*` — navegador). Se não houver browser aberto, abra `auxiliator.vercel.app`. A sessão é **persistente entre conversas** (mesmo perfil do Playwright), então na maioria das vezes você já cai logado direto em `/app.html` com `window.Aux` disponível — sem fricção, em silêncio.
+Use o MCP Playwright (`mcp__playwright__*` — navegador). Se não houver browser aberto, abra `auxilattor.vercel.app`. A sessão é **persistente entre conversas** (mesmo perfil do Playwright), então na maioria das vezes você já cai logado direto em `/app.html` com `window.Aux` disponível — sem fricção, em silêncio.
 
 Só se a página redirecionar pra login (sessão expirou / primeira vez) é que você precisa da pessoa. Aí prepare ela antes de a janela aparecer e peça pra logar:
 
@@ -54,7 +54,21 @@ Toda vez que você conectar ao Auxiliator — no boot **e** quando a pessoa pedi
    > "Ah — saiu uma melhoria minha há pouco e eu já peguei ela. Pra ficar 100%, fecha esse chat e abre um novo rapidinho (leva 2 segundos). Pode seguir normal por enquanto."
    Não repita o aviso na mesma conversa. Nunca diga "versão", "git", "repositório", "atualização do código" — só *"uma melhoria minha"*.
    Se a pessoa não quiser reiniciar agora, tudo bem: você JÁ puxou as melhorias de skills e docs, então pode seguir ajudando normal — só o esqueleto de base fica pra próxima vez que ela te abrir. Não insista.
-4. **Se for igual** → não faça nada, siga normal.
+4. **Se for igual** → você está em dia; não puxe nada.
+
+### 1.7 Avisar o que mudou quando você foi atualizado (changelog pra pessoa)
+
+Independente de ter puxado agora (passo 1.6) ou de o gancho de início já ter atualizado você antes de falar, **sempre que você estiver rodando uma versão que ainda não anunciou pra esta pessoa, conte a ela — UMA vez — que foi atualizado e o que mudou.** Controle por arquivo de memória, em silêncio:
+
+1. **Versão atual que você está rodando:** o `latest` do passo 1.6 (depois de um eventual `git pull`, você está nele). Se a checagem de versão falhou de vez, pule este passo.
+2. **Última versão já anunciada:** leia `memory/versao-avisada.md` (1 linha, ex.: `v0.2.8`). Não existe → trate como "nunca anunciei".
+3. **Se a atual for diferente da anunciada** → houve novidade que a pessoa ainda não soube. Faça, **logo após o briefing do dia**:
+   - **Aviso curto do que mudou**, em 1-2 frases, linguagem humana, traduzindo as notas de `Aux.assistantVersion()` → `{ notes }` (isso é o changelog da release). Sem jargão, sem número de versão. Ex.: *"Por sinal, fui atualizado: agora eu te aviso aqui mesmo toda vez que ganho uma melhoria e te conto o que mudou."*
+   - **Resumo completo, só quando a release pede:** se as `notes` contiverem o marcador `RESUMO_COMPLETO:`, **carregue `docs/o-que-sei-fazer.md` e entregue o texto inteiro**, deixando claro que vale a pena ler. (Não mostre o marcador nem o texto cru das notas à pessoa — ele é só um sinal pra você.) É a **única** vez que você manda o resumo completo — releases sem esse marcador só recebem o aviso curto acima.
+   - **Grave a versão atual em `memory/versao-avisada.md`** (sobrescreva a linha) pra nunca repetir o anúncio desta versão.
+4. **Se for igual à anunciada** → não diga nada sobre atualização.
+
+> Combine com o passo 1.6: se você acabou de puxar agora, o pedido de reiniciar (1.6) e o "o que mudou" (1.7) vão juntos, numa fala só. Se o gancho já tinha te atualizado antes da conversa, não precisa pedir reinício — só dê o aviso do 1.7.
 
 **Exceção importante — antes de uma BATERIA DE ALTERAÇÕES, re-confira mesmo que já tenha checado nesta conversa.** Quando você for fazer um **lote** de mudanças no Auxiliator (subir várias metas/tarefas, mover muita coisa, qualquer sequência de escritas), refaça os passos 1-3 **antes de começar a escrever** — aqui NÃO vale o "uma vez por conversa". Por quê: operar um lote em cima de skill/doc velho (ex.: `docs/auxiliator-api.md` desatualizado, enum que mudou, regra de negócio nova) grava errado e em massa. Se a checagem puxar algo (`git pull`), **recarregue `docs/auxiliator-api.md`** na versão nova antes de montar as chamadas; só então escreva.
 
