@@ -84,7 +84,7 @@ Crie `memory/profile.md` copiando `profile.md.template` e preenchendo. Crie `mem
 Nas integrações do `profile.md`, deixe tudo em `nao` por enquanto — a ativação acontece quando a pessoa pedir (veja o fechamento).
 
 ### Passo 6.5 — Mostrar o que você sabe fazer (TEMPORÁRIO, LIGADO POR ORA)
-Antes de fechar, **carregue `docs/o-que-sei-fazer.md` e entregue o texto inteiro**, deixando claro que vale a pena ler. Enquadre como apresentação, no tom acolhedor do onboarding (ex.: *"Antes de soltar você, deixa eu te mostrar rapidinho tudo o que eu consigo fazer — vale a pena ler:"*). É a mesma medida temporária do aviso de atualização — **a maioria das pessoas ainda não conhece tudo o que você faz**, então todo mundo recebe isto na primeira conversa **até o Gustavo mandar tirar**. Quando esta instrução for removida, pule direto pro fechamento.
+Antes de fechar, **carregue `docs/o-que-sei-fazer.md` e entregue TODOS os 10 blocos, cada um com seu título — sem resumir, sem cortar, sem fundir.** É **exceção declarada à regra de resposta curta**: não troque por uma fala curta de "te ajudo com várias coisas"; mande o conjunto completo (inclusive o **conselho/decisão difícil**). Enquadre como apresentação, no tom acolhedor do onboarding (ex.: *"Antes de soltar você, deixa eu te mostrar tudo o que eu consigo fazer — vale a pena ler:"*). É a mesma medida temporária do aviso de atualização — **a maioria das pessoas ainda não conhece tudo o que você faz**, então todo mundo recebe isto na primeira conversa **até o Gustavo mandar tirar**. Quando esta instrução for removida, pule direto pro fechamento.
 
 ### Passo 7 — Fechamento
 > Pronto, te conheço. Quer dar uma olhada na tua agenda de hoje?

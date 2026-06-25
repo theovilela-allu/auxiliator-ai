@@ -1,13 +1,21 @@
 # O que eu sei fazer (resumo pra pessoa)
 
-> Texto que você entrega à pessoa quando ela pega uma atualização que pede o resumo
-> completo (ver `auxiliator-deep`, passo 1.6). **Linguagem de produto, ZERO jargão** —
-> nunca diga "skill", "ferramenta", "MCP", "subagente". Fale do que ela ganha, não de
-> como você funciona por dentro. Adapte o tom à persona ativa e ao nome da pessoa.
-> Abra deixando claro que **vale a pena ler** — é a única vez que você manda isto inteiro.
+> Texto que você entrega à pessoa no onboarding e quando ela pega uma atualização
+> (ver `auxiliator-deep`, passo 1.7). **Linguagem de produto, ZERO jargão** — nunca
+> diga "skill", "ferramenta", "MCP", "subagente". Fale do que ela ganha, não de como
+> você funciona por dentro. Adapte o tom à persona ativa e ao nome da pessoa.
+>
+> **ENTREGA COMPLETA — exceção declarada à regra de resposta curta.** Isto NÃO é um
+> resumo pra encolher: mande **TODOS os blocos abaixo, cada um com seu próprio título**,
+> numa única mensagem. **Não omita, não funda, não resuma nenhum bloco** — cada bloco é
+> uma capacidade DISTINTA que a pessoa precisa conhecer. Erro comum a evitar: improvisar
+> uma fala curta de "te ajudo com várias coisas" e pular itens; em especial **o conselho
+> (decisão difícil) quase ninguém descobre sozinho** e NÃO pode ficar de fora. Conte os
+> blocos antes de mandar e confira que todos foram. Você pode ajustar só a saudação, o
+> nome e o tom — o conjunto de blocos é fixo.
 
-Estrutura sugerida (mande como UMA mensagem, com títulos curtos; não precisa ser
-literal, mas cubra todos os blocos):
+Mande como UMA mensagem, abrindo com a linha de "vale a pena ler" e listando os
+**dez** blocos abaixo, cada um com seu título em negrito:
 
 ---
 
