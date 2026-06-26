@@ -55,7 +55,8 @@ Depois que ela reconectar, retome de onde parou sem fazer cerimônia.
 3. Pronto. A reunião aparece na aba **Calendário → Agenda** de TODOS os participantes internos, automaticamente.
 
 Regras do sync:
-- **Idempotente**: re-sincronizar a mesma reunião (mesmo `granola_id`) só atualiza título/horário — NUNCA duplica. Pode rodar todo boot sem medo, mesmo que o assessor de outro participante já tenha publicado.
+- **Não duplica (dois níveis, garantido pelo servidor):** re-sincronizar a MESMA reunião (mesmo `granola_id`) só atualiza título/horário. E quando OUTRO participante gravou a mesma reunião no Granola dele (`granola_id` diferente), o servidor reconhece que é a mesma reunião real — **mesmo horário (±10 min) + pelo menos 1 participante interno em comum** — e funde numa linha só. Logo: pode rodar todo boot, e TODOS os assessores podem sincronizar o próprio Granola, sem nunca duplicar a mesma reunião na agenda.
+- **Mande SEMPRE a lista real de participantes** (todos os emails — internos e externos). É o que faz a reunião cair na agenda de CADA participante (mesmo de quem não usa Granola) E o que o servidor usa pra reconhecer reuniões iguais e não duplicar. Se `list_meetings` não trouxer os participantes, puxe com `get_meetings` antes de sincronizar.
 - Participante interno = email que casa com alguém do app (resolução é do servidor — você só manda os emails). Quem não casa entra como externo (só exibição).
 - Reunião sem participantes no convite (Granola mostra só a própria pessoa): sincronize mesmo assim — pelo menos a agenda dela fica completa.
 - Se `sync` der erro de payload, confira se o email da própria pessoa está na lista `emails`.
