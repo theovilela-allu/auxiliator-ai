@@ -55,6 +55,9 @@ A riqueza de detalhe mora na TAREFA (a meta fica simples, no formato original �
 | `suggested_owner_role` | perfil ideal ("Analista FP&A Pleno"), não nome de pessoa |
 | `dependencies` | "Depende de: X" (interna) / "Externa: Y" |
 | `weight` | peso % no progresso da meta/Projeto, quando vinculada |
+| `milestone_id` | se a meta tem CRONOGRAMA (entregas — `Aux.milestones.listForGoal(goal_id)`), linke a tarefa à entrega certa; entrega da mesma meta, senão o servidor descarta o vínculo |
+
+**Quebrando meta em tarefas?** Considere propor também o **cronograma** da meta: 2-5 entregas com data (marcos que o líder acompanha), e as tarefas já linkadas a cada uma. Proponha no plano, crie só com o OK. Concluir entrega é sempre decisão da pessoa.
 
 ## Volume e distribuição
 
