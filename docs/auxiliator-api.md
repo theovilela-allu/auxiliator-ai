@@ -20,7 +20,7 @@ A navegação por clique continua válida como **fallback** — todo elemento in
 `goal-title`, `goals-delete-{id}`, e no modal de confirmação `confirm-yes`/`confirm-cancel`).
 
 ## Fluxo recomendado
-1. **LER**: `const st = await window.Aux.state()` → `{ viewer, enums, people, goals, tasks, oneOnOnes, absences }` com ids.
+1. **LER**: `const st = await window.Aux.state()` → `{ viewer, enums, people, goals, tasks, oneOnOnes, absences, weeklys }` com ids.
 2. **RESOLVER**: casar nome→id com `window.Aux.findPerson('Isa')` e título→id varrendo `st.goals`. Checar duplicatas.
 3. **VALIDAR**: usar só valores de `window.Aux.enums` (status, priority, type, absences.type, áreas).
 4. **ESCREVER**: chamar o módulo certo (abaixo).
@@ -53,6 +53,8 @@ A navegação por clique continua válida como **fallback** — todo elemento in
 | Ler tarefas bloqueadas em mim | `await Aux.tasks.blockedOnMe()` — RPC; só as atualmente bloqueadas (não resolvidas) em que sou um dos marcados |
 | Limpar/resolver bloqueio (lado de quem bloqueou) | `await Aux.tasks.clearBlock(taskId, 'em_andamento')` — apaga os marcados + limpa os campos de bloqueio e (opcional) move de coluna. Usado no "x" do bloqueio verde respondido, ou ao tirar a tarefa de Bloqueada |
 | Registrar 1:1 | `await Aux.oneOnOnes.create({ report_id, date, topics: ['t1','t2'], notes, next_topics })` |
+| **Registrar ata de WEEKLY** (ata da área, aba Reuniões) | `await Aux.weeklys.create({ area, date, discussed, decisions, next_topics, granola_id? })` · `update(id, patch)` · `remove(id)` — ata **da ÁREA** (sem `report_id`!), permanente e compartilhada pelo time. `area` = UMA área canônica exata, SEM vírgula (pessoa multi-área participa da weekly de cada área). Ata **única por área+data**: create duplicado falha (23505) → faça `update` na existente, nunca contorne criando outra. `discussed` = o que foi discutido; `decisions` = conclusões (campo próprio); `next_topics` = pauta que pré-preenche a PRÓXIMA ata da área. `granola_id` opcional = reunião do Granola usada de rascunho (idempotência do rascunho). `remove()` só deslinka as tarefas. Rascunho a partir do transcript: `docs/granola.md` |
+| Ações da weekly viram tarefas | `weekly_id: <id da ata>` no `tasks.create`/`saveWithOwners` — a ata mostra essas tarefas com status. `await Aux.weeklys.linkedTasks()` lê todas de uma vez (`[{id,title,status,weekly_id}]`) |
 | Criar/excluir ausência | `await Aux.absences.create({ report_id, type, start_date, end_date, notes })` |
 | PDI da pessoa | `await Aux.pdi.upsertByReport(report_id, { strengths, develop, career_plan })` |
 | Notas privadas / do time | `Aux.privateNotes.upsertMine(report_id, txt)` · `Aux.privateNotes.upsertDefault(report_id, txt)` |
@@ -69,6 +71,11 @@ A navegação por clique continua válida como **fallback** — todo elemento in
 - Leia `state()` **antes** de criar pra não duplicar.
 - Meta **não tem** campo Área — a área vem do dono. Não invente campo.
 - **Cronograma (entregas):** `Aux.milestones` gerencia os marcos de UMA meta. `tasks.milestone_id` só cola se a entrega for da mesma meta do `goal_id` da tarefa. Concluir entrega (`done: true`) é decisão da pessoa — o assessor sugere quando as tarefas zeram, não conclui sozinho.
+- **Weekly é a EXCEÇÃO ao modelo flat:** a ata é vista/editada só pelo time da ÁREA e
+  pelos líderes acima na cadeia (não "todos com todos" como tasks/goals). Se
+  `Aux.weeklys.create`/`update` falhar por RLS, a pessoa não é da área nem líder dela —
+  explique e não insista. Weekly NÃO tem `report_id` (é da área, não de uma pessoa).
+  NUNCA grave uma ata rascunhada de transcript sem mostrar o rascunho pra pessoa antes.
 - **`report_id` é obrigatório** em meta, tarefa, 1:1 e ausência, e por RLS precisa ser
   você mesmo (`viewer.reportId`) ou alguém da sua sub-árvore (`viewer.visibleIds`).
   Omitir `report_id` → o INSERT falha com "row violates row-level security policy"

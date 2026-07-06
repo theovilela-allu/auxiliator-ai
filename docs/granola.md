@@ -63,6 +63,31 @@ Regras do sync:
 - Se o Granola ainda não estiver conectado (primeira vez), siga o fluxo de OAuth da seção acima ANTES — aí o sync passa a rodar em silêncio em todo boot.
 - Falhou o sync (rede, sessão)? Não trave o atendimento — siga a conversa e tente de novo no próximo boot. Não incomode a pessoa com isso.
 
+## Rascunhar ata de WEEKLY a partir do transcript
+
+Quando a pessoa pedir pra registrar a ata da weekly ("registra a ata da weekly de hoje",
+"salva o que ficou da nossa weekly"), o caminho de ouro é rascunhar direto da gravação:
+
+1. **Ache a reunião** no Granola (`list_meetings` / `query_granola_meetings` — a weekly do
+   time, na data certa). Guarde o id dela.
+2. **Puxe o transcript** com `get_meeting_transcript` (se não houver transcript, peça o
+   resumo dos pontos à pessoa e siga com o que ela contar).
+3. **Separe em três blocos**: o que foi **discutido** (assuntos e contexto), as
+   **conclusões/decisões** (o que o grupo fechou — seja seletivo, decisão ≠ conversa) e a
+   **pauta pra próxima** (pendências e temas que ficaram).
+4. **Mostre o rascunho pra pessoa revisar ANTES de gravar** — sempre. Redija como humano
+   (`docs/escrever-como-humano.md`); a ata é um documento que o time inteiro vai ler.
+5. Com o OK, grave: `await Aux.weeklys.create({ area: '<área do time>', date: '<AAAA-MM-DD>',
+   discussed, decisions, next_topics, granola_id: '<id da reunião>' })`. Se falhar por
+   duplicidade (já existe ata dessa área nessa data), faça `update` na existente —
+   confira antes com `state().weeklys` se você mesmo já rascunhou esta reunião
+   (`granola_id` igual = já foi você; não regrave sem a pessoa pedir).
+6. **Ações combinadas viram tarefas**: proponha criar cada uma via
+   `Aux.tasks.saveWithOwners(null, { ..., weekly_id: <id da ata> }, [ownerIds])` — seguem
+   o padrão de `docs/criar-tarefas.md` e aparecem na ata com status.
+
+Detalhes da régua (quem vê a ata, área única, etc.): `docs/auxiliator-api.md`.
+
 ## Regras
 
 1. **Filtro de relevância vale aqui também** (`docs/relevance-filter.md`): ao extrair tarefas de uma reunião, só vira tarefa o que move responsabilidade profissional adiante. **E o que virar tarefa segue o padrão de qualidade de `docs/criar-tarefas.md`** (persona da área, critério de conclusão verificável, prazo, campos ricos) — nada de tarefa-título-solto.

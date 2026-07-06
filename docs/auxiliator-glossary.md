@@ -34,6 +34,7 @@
 - **Equipe** no Auxiliator — área ∪ hierarquia (todo mundo da minha área + todo mundo que reporta a mim)
 - **Tarefa bloqueada** — tarefa que depende de uma pessoa específica responder/atender
 - **Entrega / Cronograma da meta** — marcos de uma meta com data prevista, montados pela pessoa (ou pelo assessor a pedido dela) na linha do tempo que aparece ao abrir a meta na aba Tarefas; tarefas são linkadas às entregas e o progresso (x/y) aparece sozinho, mas concluir a entrega é decisão manual
+- **Weekly / Ata da área** — registro permanente da reunião semanal do time de uma ÁREA, na aba Reuniões (junto das 1:1s): o que foi discutido, as conclusões/decisões, a pauta da próxima (pré-preenche a ata seguinte) e as ações que viram tarefas linkadas. Uma ata por área+data, compartilhada — quem faltou lê depois. Visível só pro time da área e pros líderes acima na cadeia (exceção ao "todos veem tudo" de tarefas/metas)
 - **Auxiliator** — o app `auxiliator.vercel.app`, sistema de gestão de pessoas e metas (endereço antigo `auxilattor.vercel.app` mostra um aviso apontando pro novo)
 
 ## Cargos comuns (heurísticas pra calibrar expectativa)

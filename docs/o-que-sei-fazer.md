@@ -37,6 +37,10 @@ cola o texto — eu crio as metas de todo mundo no sistema, já com os responsá
 
 **Reuniões.** "O que ficou da call?", "resume a reunião com fulano" — eu puxo, resumo e
 transformo no que importa em tarefa. Tuas reuniões também entram sozinhas no calendário.
+E a **weekly do teu time** agora tem ata no sistema: me pede "registra a ata da weekly de
+hoje" que eu escrevo o que foi discutido, as decisões e a pauta da próxima (posso rascunhar
+direto da gravação da reunião), e transformo os combinados em tarefas de verdade. Quem
+faltou lê depois — a ata fica na aba Reuniões, compartilhada com o time da área.
 
 **Decisão difícil — eu te desafio, não te bajulo.** Quando você vai cravar algo grande e
 com custo de errar, eu convoco um conselho que ataca a ideia de todos os lados antes de
