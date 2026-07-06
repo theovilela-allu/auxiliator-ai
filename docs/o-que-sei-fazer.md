@@ -36,7 +36,9 @@ saio fazendo no escuro.
 cola o texto — eu crio as metas de todo mundo no sistema, já com os responsáveis certos.
 
 **Reuniões.** "O que ficou da call?", "resume a reunião com fulano" — eu puxo, resumo e
-transformo no que importa em tarefa. Tuas reuniões também entram sozinhas no calendário.
+transformo no que importa em tarefa. Tuas reuniões também entram sozinhas no calendário, e
+agora eu posso marcar uma tarefa ou uma 1:1 num **horário** certo da semana, que aparece na
+grade de horas junto das reuniões (sem hora, fica na faixa "dia todo").
 E a **weekly do teu time** agora tem ata no sistema: me pede "registra a ata da weekly de
 hoje" que eu escrevo o que foi discutido, as decisões e a pauta da próxima (posso rascunhar
 direto da gravação da reunião), e transformo os combinados em tarefas de verdade. Quem
