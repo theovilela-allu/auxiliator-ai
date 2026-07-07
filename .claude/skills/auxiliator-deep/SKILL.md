@@ -7,7 +7,7 @@ description: Use quando a pessoa pedir qualquer coisa do Auxiliator — ver/cria
 
 ## Quando você está aqui
 
-A pessoa pediu algo que toca o Auxiliator (`auxiliator.vercel.app`). Você vai operar pelo lado dela: ler estado, criar/editar/mover, sempre via porta programática `window.Aux` — não por clique na tela.
+A pessoa pediu algo que toca o Auxiliator (`auxiliator-six.vercel.app`). Você vai operar pelo lado dela: ler estado, criar/editar/mover, sempre via porta programática `window.Aux` — não por clique na tela.
 
 ## Pré-requisito sempre
 
@@ -24,9 +24,9 @@ Também carregue, se for o caso:
 
 ### 1. Garantir sessão logada (navegador / Playwright)
 
-Use o MCP Playwright (`mcp__playwright__*` — navegador). Se não houver browser aberto, abra `auxiliator.vercel.app`. A sessão é **persistente entre conversas** (mesmo perfil do Playwright), então na maioria das vezes você já cai logado direto em `/app.html` com `window.Aux` disponível — sem fricção, em silêncio.
+Use o MCP Playwright (`mcp__playwright__*` — navegador). Se não houver browser aberto, abra `auxiliator-six.vercel.app`. A sessão é **persistente entre conversas** (mesmo perfil do Playwright), então na maioria das vezes você já cai logado direto em `/app.html` com `window.Aux` disponível — sem fricção, em silêncio.
 
-> **Endereço mudou (jul/2026):** a casa agora é `auxiliator.vercel.app`. Se o navegador estiver no antigo `auxilattor.vercel.app` (ou mostrar o aviso de tela cheia "mudou de endereço"), navegue pro endereço novo. A sessão guardada do endereço antigo **não vale** no novo — na primeira vez vai cair na tela de login: clique **"Entrar com Google"** (na maioria das vezes resolve sozinho, sem senha, porque o Google da pessoa já está no perfil do navegador). Só se o Google pedir credencial é que você chama a pessoa, com o roteiro abaixo. Isso acontece UMA vez; depois a sessão do endereço novo fica guardada como sempre.
+> **Endereço mudou (jul/2026):** a casa agora é `auxiliator-six.vercel.app`. Se o navegador estiver num endereço antigo/desativado (`auxilattor.vercel.app` ou `auxiliator.vercel.app`, ou mostrar o aviso de tela cheia "mudou de endereço"), navegue pro endereço novo. A sessão guardada do endereço antigo **não vale** no novo — na primeira vez vai cair na tela de login: clique **"Entrar com Google"** (na maioria das vezes resolve sozinho, sem senha, porque o Google da pessoa já está no perfil do navegador). Só se o Google pedir credencial é que você chama a pessoa, com o roteiro abaixo. Isso acontece UMA vez; depois a sessão do endereço novo fica guardada como sempre.
 
 Só se a página redirecionar pra login (sessão expirou / primeira vez) é que você precisa da pessoa. Aí prepare ela antes de a janela aparecer e peça pra logar:
 
