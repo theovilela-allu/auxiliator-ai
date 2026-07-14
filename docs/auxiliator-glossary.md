@@ -36,7 +36,7 @@
 - **Entrega / Cronograma da meta** — marcos de uma meta com data prevista, montados pela pessoa (ou pelo assessor a pedido dela) na linha do tempo que aparece ao abrir a meta na aba Tarefas; tarefas são linkadas às entregas e o progresso (x/y) aparece sozinho, mas concluir a entrega é decisão manual
 - **Weekly / Ata da área** — registro permanente da reunião semanal do time de uma ÁREA, na aba Reuniões (junto das 1:1s): o que foi discutido, as conclusões/decisões, a pauta da próxima (pré-preenche a ata seguinte) e as ações que viram tarefas linkadas. Uma ata por área+data, compartilhada — quem faltou lê depois. Visível só pro time da área e pros líderes acima na cadeia (exceção ao "todos veem tudo" de tarefas/metas)
 - **Agenda com horário** — tarefa, 1:1 ou weekly podem ter uma hora opcional; com hora aparecem na grade de horas do Calendário (aba Agenda) junto das reuniões, sem hora ficam na faixa "dia todo". Ausência e aniversário são sempre dia-todo. A hora da tarefa (`agenda_time`) só existe junto do dia de agenda (`agenda_date`), que é separado do prazo
-- **Auxiliator** — o app `auxiliator-six.vercel.app`, sistema de gestão de pessoas e metas (endereços antigos `auxilattor.vercel.app` e `auxiliator.vercel.app` mostram um aviso apontando pro novo)
+- **Auxiliator** — o app `auxiliator-six.vercel.app`, sistema de gestão de pessoas e metas (já teve endereços antigos, hoje desativados — a lista deles e o que fazer se cair num deles vivem SÓ na skill `auxiliator-deep`, passo 1)
 
 ## Cargos comuns (heurísticas pra calibrar expectativa)
 

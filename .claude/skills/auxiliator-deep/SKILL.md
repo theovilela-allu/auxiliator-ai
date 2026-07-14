@@ -26,11 +26,17 @@ Também carregue, se for o caso:
 
 Use o MCP Playwright (`mcp__playwright__*` — navegador). Se não houver browser aberto, abra `auxiliator-six.vercel.app`. A sessão é **persistente entre conversas** (mesmo perfil do Playwright), então na maioria das vezes você já cai logado direto em `/app.html` com `window.Aux` disponível — sem fricção, em silêncio.
 
-> **Endereço mudou (jul/2026):** a casa agora é `auxiliator-six.vercel.app`. Se o navegador estiver num endereço antigo/desativado (`auxilattor.vercel.app` ou `auxiliator.vercel.app`, ou mostrar o aviso de tela cheia "mudou de endereço"), navegue pro endereço novo. A sessão guardada do endereço antigo **não vale** no novo — na primeira vez vai cair na tela de login: clique **"Entrar com Google"** (na maioria das vezes resolve sozinho, sem senha, porque o Google da pessoa já está no perfil do navegador). Só se o Google pedir credencial é que você chama a pessoa, com o roteiro abaixo. Isso acontece UMA vez; depois a sessão do endereço novo fica guardada como sempre.
+> **Endereço mudou (jul/2026):** a casa agora é `auxiliator-six.vercel.app`. Se o navegador estiver num endereço antigo/desativado (`auxilattor.vercel.app` ou `auxiliator.vercel.app`, ou mostrar o aviso de tela cheia "mudou de endereço"), navegue pro endereço novo. A sessão guardada do endereço antigo **não vale** no novo — na primeira vez vai cair na tela de login. **Este é o único caso em que você tenta o login sozinho, em silêncio:** clique **"Entrar com Google"** (na maioria das vezes resolve sem senha, porque o Google da pessoa já está no perfil do navegador). Resolveu → siga o boot normal, sem comentar nada. **Só se o Google pedir senha/credencial** é que você envolve a pessoa — e aí use o roteiro de "tela JÁ aberta" (abaixo), nunca o de "vou abrir": a janela já está na frente dela mostrando o login do Google, e a tua fala tem que bater com o que ela está vendo. Isso acontece UMA vez; depois a sessão do endereço novo fica guardada como sempre. Aproveite e confira tua memória: se alguma anotação ainda apontar um endereço antigo como o atual, corrija na hora. (Esta nota é a ÚNICA fonte da lista de endereços antigos — não replique essa lista em outros docs.)
 
-Só se a página redirecionar pra login (sessão expirou / primeira vez) é que você precisa da pessoa. Aí prepare ela antes de a janela aparecer e peça pra logar:
+Fora do caso acima: se a página redirecionar pra login (sessão expirou / primeira vez nesta máquina), não dá pra resolver em silêncio — você precisa da pessoa. Escolha o roteiro pelo momento dela:
+
+- **A janela ainda NÃO abriu** (você vai abrir agora) — prepare antes:
 
 > "Vou abrir uma janela do Auxiliator pra você logar uma vez. É só fazer login normal. Não vou guardar tua senha — fica só na sessão do navegador."
+
+- **A tela JÁ está aberta na frente dela** (ex.: o Google pediu senha no meio de um login que você tentou em silêncio):
+
+> "O Auxiliator mudou de casa e a entrada antiga não vale mais. Já deixei aberta a tela de login do Google — entra com teu Google de sempre que eu sigo daqui. Não vou guardar tua senha."
 
 Aguarde o login resolver (URL muda pra `/app.html`, `window.Aux` fica disponível).
 
