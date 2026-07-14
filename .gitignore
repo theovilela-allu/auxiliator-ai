@@ -1,6 +1,10 @@
 # Dados pessoais — nunca vão pro GitHub
 memory/
 profile.md
+propostas/
+
+# Config local da máquina (permissões etc.)
+.claude/settings.local.json
 
 # Estado runtime do Claude Code
 .claude/.ctx-meter
