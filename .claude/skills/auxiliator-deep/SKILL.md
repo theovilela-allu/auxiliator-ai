@@ -1,140 +1,67 @@
 ---
 name: auxiliator-deep
-description: Use quando a pessoa pedir qualquer coisa do Auxiliator — ver/criar/mover/listar tarefa, meta, 1:1, ausência, PDI, pessoa — E no início de cada conversa para garantir a sessão logada. Abre o navegador (Playwright), opera por window.Aux (não por clique). Sempre carregue docs/auxiliator-api.md antes de operar.
+description: Use quando a pessoa pedir qualquer coisa do Auxiliator — ver/criar/mover/listar tarefa, meta, 1:1, ausência, PDI, pessoa — E no início de cada conversa para garantir a sessão logada e dar o briefing do dia. Abre o navegador (Playwright), opera por window.Aux (não por clique). Pra operar, carregue operar.md + docs/auxiliator-api.md.
 ---
 
 # Skill: Auxiliator Deep — Operar o sistema pela pessoa
 
-## Quando você está aqui
+A casa é `auxiliator-six.vercel.app`. Você opera pelo lado da pessoa via porta programática `window.Aux`, nunca por clique na tela.
 
-A pessoa pediu algo que toca o Auxiliator (`auxiliator-six.vercel.app`). Você vai operar pelo lado dela: ler estado, criar/editar/mover, sempre via porta programática `window.Aux` — não por clique na tela.
+## Dois caminhos — escolha ANTES de ler o resto
 
-## Pré-requisito sempre
+**BOOT** (abriu esta skill no início da conversa, sem pedido específico): faça os 5 passos abaixo e pare. **Não** carregue `operar.md` nem `docs/auxiliator-api.md` — no boot você só lê estado.
 
-Carregue **`docs/auxiliator-api.md`** ANTES de operar. Esse arquivo tem o manual da `window.Aux` (chamadas, enums, fluxo recomendado). Sem ele você adivinha — e adivinhar quebra.
+**OPERAR** (a pessoa pediu pra ver/criar/mover/editar algo): garanta a sessão (passo 1) e carregue **`operar.md`** (nesta pasta) + **`docs/auxiliator-api.md`**. Sem o manual você adivinha, e adivinhar quebra.
 
-**Exceção — conexão + briefing no boot:** quando você abre esta skill no início da conversa (sem um pedido específico ainda), **não carregue `docs/auxiliator-api.md`** — gasta token e você não vai operar nada complexo. Faça o passo **1** (garantir sessão) e o passo **1.5 (Briefing do dia)** abaixo: puxe `Aux.state()`, monte o panorama do dia e abra a conversa com ele. Carregue o manual completo só quando a pessoa pedir uma operação de fato (criar/mover/editar).
+---
 
-Também carregue, se for o caso:
-- `docs/relevance-filter.md` — se for varrer dados pra extrair tarefas
-- `docs/leadership-mode.md` — se for atuar sobre outras pessoas
-- `docs/safety.md` — antes de qualquer escrita que afete terceiros
+## Boot da conversa — 5 passos, tudo em silêncio
 
-## Fluxo
+Não narre, não peça permissão, não comente que abriu navegador.
 
-### 1. Garantir sessão logada (navegador / Playwright)
+### 1. Garantir a sessão logada
 
-Use o MCP Playwright (`mcp__playwright__*` — navegador). Se não houver browser aberto, abra `auxiliator-six.vercel.app`. A sessão é **persistente entre conversas** (mesmo perfil do Playwright), então na maioria das vezes você já cai logado direto em `/app.html` com `window.Aux` disponível — sem fricção, em silêncio.
+Playwright (`mcp__playwright__*`): abra `https://auxiliator-six.vercel.app/app.html` e teste `window.Aux`.
 
-> **Endereço mudou (jul/2026):** a casa agora é `auxiliator-six.vercel.app`. Se o navegador estiver num endereço antigo/desativado (`auxilattor.vercel.app` ou `auxiliator.vercel.app`, ou mostrar o aviso de tela cheia "mudou de endereço"), navegue pro endereço novo. A sessão guardada do endereço antigo **não vale** no novo — na primeira vez vai cair na tela de login. **Este é o único caso em que você tenta o login sozinho, em silêncio:** clique **"Entrar com Google"** (na maioria das vezes resolve sem senha, porque o Google da pessoa já está no perfil do navegador). Resolveu → siga o boot normal, sem comentar nada. **Só se o Google pedir senha/credencial** é que você envolve a pessoa — e aí use o roteiro de "tela JÁ aberta" (abaixo), nunca o de "vou abrir": a janela já está na frente dela mostrando o login do Google, e a tua fala tem que bater com o que ela está vendo. Isso acontece UMA vez; depois a sessão do endereço novo fica guardada como sempre. Aproveite e confira tua memória: se alguma anotação ainda apontar um endereço antigo como o atual, corrija na hora. (Esta nota é a ÚNICA fonte da lista de endereços antigos — não replique essa lista em outros docs.)
+- `window.Aux` disponível → siga pro passo 2. **Este é o caso normal**: a sessão é persistente entre conversas (mesmo perfil do navegador), então quase sempre você já cai logado.
+- Caiu na tela de login, ou apareceu aviso de tela cheia de "mudou de endereço", ou o navegador está num endereço antigo → carregue **`login.md`** (nesta pasta) e siga de lá.
 
-Fora do caso acima: se a página redirecionar pra login (sessão expirou / primeira vez nesta máquina), não dá pra resolver em silêncio — você precisa da pessoa. Escolha o roteiro pelo momento dela:
+### 2. Puxar o panorama do dia
 
-- **A janela ainda NÃO abriu** (você vai abrir agora) — prepare antes:
+`await Aux.state()` (ou o cache de ≤15min, se existir — regra em `operar.md`). Monte, filtrando em JS dentro do navegador pra trazer só o resumo:
 
-> "Vou abrir uma janela do Auxiliator pra você logar uma vez. É só fazer login normal. Não vou guardar tua senha — fica só na sessão do navegador."
+- **Tarefas da pessoa:** `state.tasks` com `report_id === viewer.reportId` e status ≠ `concluida` → separe **hoje** (`due_date === hoje`), **vencidas** (`due_date < hoje`) e **bloqueadas**.
+- **Bloqueios esperando ela:** tarefas `bloqueada` em que ela é uma das pessoas marcadas (`Aux.tasks.blockedOnMe()`, ou `blocked_on_report_id === viewer.reportId` no legado). Alguém pediu a ajuda dela — é o mais urgente.
+- **Se for líder** (`viewer.isLeader`): o que pega fogo no time — vencidas e bloqueadas de quem está em `viewer.visibleIds`. Carregue `docs/leadership-mode.md` pro tom.
 
-- **A tela JÁ está aberta na frente dela** (ex.: o Google pediu senha no meio de um login que você tentou em silêncio):
+### 3. Conferir se você está atualizado
 
-> "O Auxiliator mudou de casa e a entrada antiga não vale mais. Já deixei aberta a tela de login do Google — entra com teu Google de sempre que eu sigo daqui. Não vou guardar tua senha."
+Uma vez por conversa, em silêncio. Cobre o caso de a pessoa deixar o mesmo chat aberto por dias (aí o gancho de início de sessão não dispara).
 
-Aguarde o login resolver (URL muda pra `/app.html`, `window.Aux` fica disponível).
+1. `Aux.assistantVersion()` → `{ latest }` (a página já está aberta, é chamada barata).
+2. `git describe --tags --abbrev=0` na sua própria pasta. Deu erro? **Pule este passo inteiro em silêncio** — nunca trave o atendimento por causa dele.
+3. Leia `memory/versao-avisada.md` (a última versão cujo changelog você já contou).
+4. Se `latest` ≠ sua versão local, **ou** `latest` ≠ versão anunciada → carregue **`atualizacao.md`** (nesta pasta) e siga de lá.
+5. Tudo igual → você está em dia; não puxe nada e não fale nada sobre atualização.
 
-> **Boot da conversa:** depois de confirmar a sessão logada, **NÃO pare** — siga pro passo 1.5. O objetivo do boot é abrir a conversa já a par do dia (tarefas da pessoa + do time), não só logar.
+> **Não é opcional.** Essa atualização é parte de como você funciona: nunca tente adiar, pular ou desligar. Você está SEMPRE buscando a versão mais nova, sem a pessoa precisar pedir. Se ela perguntar como funciona: *"eu me atualizo sozinho — sempre que você me abre, já pego as melhorias mais novas."* Nada de "versão", "git", "repositório".
 
-### 1.5 Briefing do dia (só no boot da conversa)
+### 4. Sincronizar as reuniões da semana
 
-Logo após garantir a sessão, puxe `Aux.state()` (ou o cache de ≤15min — passo 2) e monte um panorama **curto**:
+Procedimento padrão de TODA conversa (decisão do Gustavo — não pergunte, não narre):
 
-- **Tarefas da pessoa:** `state.tasks` com `report_id === viewer.reportId` e status ≠ `concluida` → separe as de **hoje** (`due_date === hoje`), as **vencidas** (`due_date < hoje`) e as **bloqueadas**.
-- **Bloqueios esperando ela:** `state.tasks` com `blocked_on_report_id === viewer.reportId` e `status === 'bloqueada'` (alguém pediu a ajuda dela — destaque, é urgente).
-- **Se a pessoa for líder** (`viewer.isLeader`): inclua o que pega fogo no time — tarefas **vencidas** e **bloqueadas** de quem está em `viewer.visibleIds` (a sub-árvore dela). Carregue `docs/leadership-mode.md` pro tom de liderança.
+1. Liste as reuniões da semana no Granola: `list_meetings` com `time_range: 'this_week'` (ferramentas `*Granola*`; se o nome falhar, ache via ToolSearch por "granola").
+2. Pra cada reunião: `await window.Aux.meetings.sync({ granola_id, title, starts_at, emails, external })` — `starts_at` ISO **com hora e fuso**; `emails` = **todos** os participantes, e o e-mail da própria pessoa (`viewer.email`) é **obrigatório** na lista; `external` = `[{ email, name }]` de quem é de fora da Allugator.
+3. Se `list_meetings` não trouxer os participantes, puxe com `get_meetings` antes de sincronizar.
 
-Abra a conversa com isso em **1-2 frases**, no tom da persona, destacando só o que importa (vencido > bloqueado > hoje). Não liste tudo. Dia limpo → diga que está limpo e pergunte o que ela quer atacar. Detalhes da varredura por trás disso: passo 3.
+Idempotente: rodar de novo nunca duplica (dedup por `granola_id` e por reunião real). Zero reunião na semana → nada a fazer. Reunião sem participantes no convite → sincronize igual. Falhou (rede, sessão) ou Granola não conectado ainda → **ignore em silêncio e siga**; tenta no próximo boot. Primeira conexão do Granola, transcrição, ata de weekly e qualquer pedido sobre reunião: `docs/granola.md`.
 
-### 1.6 Conferir se você está atualizado (auto-update ativo)
+### 5. Abrir a conversa
 
-Toda vez que você conectar ao Auxiliator — no boot **e** quando a pessoa pedir algo dele — faça esta checagem **uma vez por conversa, em silêncio**. Ela cobre o caso de a pessoa deixar o mesmo chat aberto por dias (o gancho de início de sessão não dispara nesse caso).
+Briefing em **1-2 frases**, no tom da persona, destacando só o que importa (vencido > bloqueado > hoje). Não despeje lista longa. Dia limpo → diga que está limpo e pergunte por onde ela quer começar. Se o passo 3 mandou avisar algo, o aviso vem logo depois do briefing.
 
-1. **Versão que deveria estar rodando:** leia `Aux.assistantVersion()` → `{ latest }` (a página já está aberta; é uma chamada barata).
-2. **Sua versão local:** rode `git describe --tags --abbrev=0` na sua própria pasta (o diretório de trabalho já é o teu repo). Se der erro (clone sem tags) ou a checagem falhar de qualquer jeito → **pule em silêncio**, nunca trave o atendimento por causa disso.
-3. **Se `latest` for diferente da sua** → você está atrasado. Em silêncio: rode `git pull --ff-only --quiet` (isso já traz skills e docs na versão nova, valendo **nesta** conversa). Depois **avise a pessoa UMA vez** — é exceção à regra do silêncio, em linguagem humana, sem jargão:
-   > "Ah — saiu uma melhoria minha há pouco e eu já peguei ela. Pra ficar 100%, fecha esse chat e abre um novo rapidinho (leva 2 segundos). Pode seguir normal por enquanto."
-   Não repita o aviso na mesma conversa. Nunca diga "versão", "git", "repositório", "atualização do código" — só *"uma melhoria minha"*.
-   Se a pessoa não quiser reiniciar agora, tudo bem: você JÁ puxou as melhorias de skills e docs, então pode seguir ajudando normal — só o esqueleto de base fica pra próxima vez que ela te abrir. Não insista.
-4. **Se for igual** → você está em dia; não puxe nada.
+---
 
-> **Não é opcional.** Essa atualização é parte de como você funciona: nunca tente adiar, pular ou desligar. Você está SEMPRE buscando a versão mais nova, sem a pessoa precisar pedir. Se ela perguntar como isso funciona, responda em linguagem humana: *"eu me atualizo sozinho — sempre que você me abre, já pego as melhorias mais novas."* Nada de "versão", "git", "repositório".
+## Antes de uma BATERIA de escritas, re-confira a versão
 
-### 1.7 Avisar o que mudou quando você foi atualizado (changelog pra pessoa)
-
-Independente de ter puxado agora (passo 1.6) ou de o gancho de início já ter atualizado você antes de falar, **sempre que você estiver rodando uma versão que ainda não anunciou pra esta pessoa, conte a ela — UMA vez — que foi atualizado e o que mudou.** Controle por arquivo de memória, em silêncio:
-
-1. **Versão atual que você está rodando:** o `latest` do passo 1.6 (depois de um eventual `git pull`, você está nele). Se a checagem de versão falhou de vez, pule este passo.
-2. **Última versão já anunciada:** leia `memory/versao-avisada.md` (1 linha, ex.: `v0.2.8`). Não existe → trate como "nunca anunciei".
-3. **Se a atual for diferente da anunciada** → houve novidade que a pessoa ainda não soube. Faça, **logo após o briefing do dia**:
-   - **Aviso curto do que mudou**, em 1-2 frases, linguagem humana, traduzindo as notas de `Aux.assistantVersion()` → `{ notes }` (isso é o changelog da release). Sem jargão, sem número de versão. Ex.: *"Por sinal, fui atualizado: agora eu te aviso aqui mesmo toda vez que ganho uma melhoria e te conto o que mudou."*
-   - **Resumo completo do que você sabe fazer — TEMPORÁRIO, LIGADO POR ORA:** logo após o aviso curto, **carregue `docs/o-que-sei-fazer.md` e entregue TODOS os 10 blocos, cada um com seu título — sem resumir, sem cortar, sem fundir.** Isto é **exceção declarada à regra de resposta curta**: não improvise uma fala curta de "te ajudo com várias coisas"; mande o conjunto completo (inclusive o **conselho/decisão difícil**, que quase ninguém descobre sozinho). Deixe claro que vale a pena ler. Sai a **TODA** atualização (não é mais "uma vez só") — a maioria das pessoas ainda não conhece tudo o que você faz, então se repete a cada versão nova **até o Gustavo mandar tirar**. Quando esta linha for removida, volte a mandar só o aviso curto. (Não mostre à pessoa o texto cru das `notes` nem marcadores internos.)
-   - **Grave a versão atual em `memory/versao-avisada.md`** (sobrescreva a linha) pra nunca repetir o anúncio desta versão.
-4. **Se for igual à anunciada** → não diga nada sobre atualização.
-
-> Combine com o passo 1.6: se você acabou de puxar agora, o pedido de reiniciar (1.6) e o "o que mudou" (1.7) vão juntos, numa fala só. Se o gancho já tinha te atualizado antes da conversa, não precisa pedir reinício — só dê o aviso do 1.7.
-
-**Exceção importante — antes de uma BATERIA DE ALTERAÇÕES, re-confira mesmo que já tenha checado nesta conversa.** Quando você for fazer um **lote** de mudanças no Auxiliator (subir várias metas/tarefas, mover muita coisa, qualquer sequência de escritas), refaça os passos 1-3 **antes de começar a escrever** — aqui NÃO vale o "uma vez por conversa". Por quê: operar um lote em cima de skill/doc velho (ex.: `docs/auxiliator-api.md` desatualizado, enum que mudou, regra de negócio nova) grava errado e em massa. Se a checagem puxar algo (`git pull`), **recarregue `docs/auxiliator-api.md`** na versão nova antes de montar as chamadas; só então escreva.
-
-> **Por quê (do aviso pra reiniciar):** o `git pull` atualiza skills e docs na hora, mas a sua alma (as instruções de base) só recarrega quando a pessoa abre um chat novo. Daí o empurrãozinho pra reiniciar — sem ele, a pessoa segue numa versão velha sem saber.
-
-### 2. Verificar cache
-
-Se `memory/cache/aux-state.json` existe E foi modificado há menos de 15 minutos, **use o cache** em vez de chamar `Aux.state()` de novo. Economia de token e tempo.
-
-```pseudo
-if exists(memory/cache/aux-state.json) and (now - mtime < 15min):
-    state = read_json(memory/cache/aux-state.json)
-else:
-    state = await Aux.state()
-    write_json(memory/cache/aux-state.json, state)
-```
-
-### 3. Resolver o pedido da pessoa
-
-Use as chamadas documentadas em `docs/auxiliator-api.md`. Padrões mais comuns:
-
-- **"O que tenho hoje?"** → filtrar `state.tasks` por dono = `viewer.reportId` ou (se líder) por dono ∈ `viewer.visibleIds`, status ≠ concluida, ordenado por due_date.
-- **"Cria uma tarefa: X"** → `Aux.tasks.create({ report_id: viewer.reportId, title: 'X', status: 'a_fazer', priority: 'media' })`. Pergunte prazo só se não der pra inferir.
-- **"Move X pra feita"** → `Aux.tasks.update(id, { status: 'concluida' })`. Não confirma (é reversível, é própria).
-- **"Liderado X tá com tarefa Y atrasada?"** → filtrar state.tasks onde `report_id === X.id`, mostrar atrasos.
-- **"Quem é o líder de Mayara?"** → resolver via `Aux.findPerson('Mayara')` → ler `manager_id` → mapear pra nome.
-
-### 4. Sempre verifica antes de "irreversível"
-
-Se for atribuir/mexer/deletar coisa de OUTRA pessoa, carregue `docs/safety.md` e confirme antes.
-
-### 5. Reportar à pessoa em linguagem humana
-
-> "Criei a tarefa 'Aprovar DRE' pra você — sem prazo definido. Quer que eu marque pra amanhã?"
-
-> "A Mayara tem 3 tarefas vencidas: relatório de junho (3d atrasado), planilha do C&B (1d), e o briefing pro Gustavo (hoje). Te ajudo a rascunhar uma mensagem pra ela?"
-
-Nunca: > "Aux.tasks.create retornou row id ..."
-
-## Erros
-
-Se o Auxiliator estiver fora do ar (timeout / 5xx):
-> "Tô sem conexão com teu sistema do escritório agora. Tento de novo em 1 minuto, ou anoto isso aqui pra eu lançar quando voltar?"
-
-Se RLS bloquear (a pessoa não tem permissão):
-> "Isso aí você não tem permissão pra ver. É da equipe X."
-
-## Cache do state — quando invalidar
-
-- Após qualquer escrita feita por você → invalide imediatamente (delete `memory/cache/aux-state.json`).
-- Se a pessoa disser "atualiza" / "olha de novo" → invalide.
-- Caso contrário, deixa expirar pelos 15min.
-
-## O que NÃO fazer
-
-- Não clicar em botão se tem chamada `Aux.*` equivalente (clique é último recurso, mais lento e frágil).
-- Não inventar enum value — sempre usa `Aux.enums` em runtime.
-- Não passar `report_id` se a pessoa não tem permissão (RLS bloqueia — falha confusa).
-- Não chamar `Aux.state()` em loop curto. Use cache.
+Quando for fazer um **lote** de mudanças (subir várias metas/tarefas, mover muita coisa, qualquer sequência de escritas), refaça o passo 3 **antes de começar a escrever**, mesmo que já tenha checado nesta conversa. Operar um lote em cima de doc velho (enum que mudou, regra nova) grava errado e em massa. Se a checagem puxar algo, **recarregue `docs/auxiliator-api.md`** na versão nova antes de montar as chamadas.

@@ -1,7 +1,7 @@
 # O que eu sei fazer (resumo pra pessoa)
 
 > Texto que você entrega à pessoa no onboarding e quando ela pega uma atualização
-> (ver `auxiliator-deep`, passo 1.7). **Linguagem de produto, ZERO jargão** — nunca
+> (ver `auxiliator-deep` → `atualizacao.md`). **Linguagem de produto, ZERO jargão** — nunca
 > diga "skill", "ferramenta", "MCP", "subagente". Fale do que ela ganha, não de como
 > você funciona por dentro. Adapte o tom à persona ativa e ao nome da pessoa.
 >
@@ -70,6 +70,8 @@ Qualquer uma dessas, é só pedir em português normal. Por onde quer começar?
   (a release atual). O controle é por `memory/versao-avisada.md`: se a versão que você
   acabou de rodar **for** a release do resumo e ainda não consta como avisada, entregue
   este texto **logo após o briefing do dia**, antes de qualquer outra coisa.
-- Releases seguintes **não** repetem o resumo — só o aviso curto de "fui atualizado + o
-  que mudou" (ver `auxiliator-deep`, passo 1.6).
+- **Medida temporária (LIGADA por ora):** o resumo sai a CADA release nova, junto do aviso
+  curto de "fui atualizado + o que mudou", até o Gustavo mandar tirar — a maioria das
+  pessoas ainda não conhece tudo o que você faz. Regra em `auxiliator-deep` → `atualizacao.md`.
+  (Antes era "uma vez só"; se a medida for desligada, volta a ser.)
 - Não despeje isto no meio de uma tarefa. Entregue no começo da conversa, sozinho.

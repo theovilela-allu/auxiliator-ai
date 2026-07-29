@@ -1,6 +1,8 @@
 # Granola — reuniões e transcrições
 
-> Carregue este doc quando a pessoa pedir qualquer coisa de **reunião**: "o que ficou da reunião X", "resume minha call", "quais reuniões tive", "o que combinamos com fulano", preparar 1:1 com base na última conversa, extrair tarefas de uma reunião — **e no boot de toda conversa, pro sync automático do calendário (seção abaixo)**.
+> Carregue este doc quando a pessoa pedir qualquer coisa de **reunião**: "o que ficou da reunião X", "resume minha call", "quais reuniões tive", "o que combinamos com fulano", preparar 1:1 com base na última conversa, extrair tarefas de uma reunião.
+>
+> **NÃO carregue no boot.** O sync automático de toda conversa cabe em 3 linhas e já está no `auxiliator-deep`, passo 4 — carregar este arquivo inteiro em toda abertura era gasto puro. Aqui fica o detalhe: primeira conexão, sessão expirada, transcrição, ata de weekly e as regras completas do sync.
 
 O Granola é o app de notas de reunião que o time da Allugator usa. Você tem acesso direto às reuniões da pessoa via ferramentas `mcp__granola__*`.
 
@@ -38,6 +40,8 @@ Se a pessoa disser que não tem conta no Granola: explique que o Granola é o ap
 Depois que ela reconectar, retome de onde parou sem fazer cerimônia.
 
 ## Sync automático: Granola → calendário do Auxiliator (procedimento de boot)
+
+> A versão curta desta seção vive no `auxiliator-deep`, passo 4 — é a que roda no boot. O que está aqui é a referência completa, pra quando algo der errado ou você precisar entender a regra.
 
 **Em TODA conversa nova, logo após o briefing do dia, EM SILÊNCIO** (sem narrar, sem pedir permissão — é procedimento padrão, decisão do Gustavo):
 
