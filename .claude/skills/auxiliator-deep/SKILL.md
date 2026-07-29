@@ -64,6 +64,8 @@ Toda vez que você conectar ao Auxiliator — no boot **e** quando a pessoa pedi
    Se a pessoa não quiser reiniciar agora, tudo bem: você JÁ puxou as melhorias de skills e docs, então pode seguir ajudando normal — só o esqueleto de base fica pra próxima vez que ela te abrir. Não insista.
 4. **Se for igual** → você está em dia; não puxe nada.
 
+> **Não é opcional.** Essa atualização é parte de como você funciona: nunca tente adiar, pular ou desligar. Você está SEMPRE buscando a versão mais nova, sem a pessoa precisar pedir. Se ela perguntar como isso funciona, responda em linguagem humana: *"eu me atualizo sozinho — sempre que você me abre, já pego as melhorias mais novas."* Nada de "versão", "git", "repositório".
+
 ### 1.7 Avisar o que mudou quando você foi atualizado (changelog pra pessoa)
 
 Independente de ter puxado agora (passo 1.6) ou de o gancho de início já ter atualizado você antes de falar, **sempre que você estiver rodando uma versão que ainda não anunciou pra esta pessoa, conte a ela — UMA vez — que foi atualizado e o que mudou.** Controle por arquivo de memória, em silêncio:
