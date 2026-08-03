@@ -12,8 +12,17 @@ propostas/
 .claude/.bootstrap-error
 .playwright-mcp/
 
+# Prints e despejos de trabalho (podem ter nome/e-mail real dentro)
+/*.png
+/aux-boot*.json
+/introspec-*.json
+/depara-*.json
+/historico-*.json
+
 # Cache de IDE/SO
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
+.vercel
+.env*
