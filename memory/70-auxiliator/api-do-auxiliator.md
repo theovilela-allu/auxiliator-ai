@@ -1,6 +1,13 @@
+---
+name: api-do-auxiliator
+type: reference
+description: Manual da porta programatica window.Aux — as chamadas, os enums e as armadilhas
+atualizado: 2026-08-05
+---
+
 > **Quando carregar este arquivo:** quando a skill `auxiliator-deep` for ativada.
 > Não carregar no boot — gasta token. Carrega só quando precisa operar o Auxiliator.
-> Fonte: este arquivo é uma cópia versionada do `docs/ai-navigation.md` do repositório do Auxiliator. Sempre que aquele mudar, este precisa ser atualizado.
+> Fonte: este arquivo é uma cópia versionada do `docs/ai-navigation.md` que vive **no repositório do Auxiliator** (o sistema, não o do assessor). Sempre que aquele mudar, este precisa ser atualizado.
 
 ---
 
@@ -34,7 +41,7 @@ A navegação por clique continua válida como **fallback** — todo elemento in
 | `await Aux.viewer()` | Quem está logado e o que enxerga |
 | `Aux.enums` | Valores válidos por tabela.campo |
 | `Aux.help()` | Esta referência, em objeto |
-| `Aux.assistantVersion()` | Versão mais recente que **você (assessor)** deveria estar rodando (`{ latest, notes }`). Compare com a sua (`git describe --tags --abbrev=0` no seu próprio repo); se `latest` for diferente, você está atrasado → puxe e avise (ver `auxiliator-deep`, boot + `atualizacao.md`). Não confundir com `Aux.version` (versão da porta) |
+| `Aux.assistantVersion()` | Versão mais recente que **você (assessor)** deveria estar rodando (`{ latest, notes }`). Compare com a sua (`git describe --tags --abbrev=0` no seu próprio repo); se `latest` for diferente, você está atrasado → puxe e avise (ver `auxiliator-deep`, boot + [[auxiliator-deep-atualizacao]]). Não confundir com `Aux.version` (versão da porta) |
 
 ## Escrita (governada por RLS)
 | Ação | Chamada |
@@ -53,7 +60,7 @@ A navegação por clique continua válida como **fallback** — todo elemento in
 | Ler tarefas bloqueadas em mim | `await Aux.tasks.blockedOnMe()` — RPC; só as atualmente bloqueadas (não resolvidas) em que sou um dos marcados |
 | Limpar/resolver bloqueio (lado de quem bloqueou) | `await Aux.tasks.clearBlock(taskId, 'em_andamento')` — apaga os marcados + limpa os campos de bloqueio e (opcional) move de coluna. Usado no "x" do bloqueio verde respondido, ou ao tirar a tarefa de Bloqueada |
 | Registrar 1:1 | `await Aux.oneOnOnes.create({ report_id, date, topics: ['t1','t2'], notes, next_topics })` |
-| **Registrar ata de WEEKLY** (ata da área, aba Reuniões) | `await Aux.weeklys.create({ area, date, discussed, decisions, next_topics, granola_id? })` · `update(id, patch)` · `remove(id)` — ata **da ÁREA** (sem `report_id`!), permanente e compartilhada pelo time. `area` = UMA área canônica exata, SEM vírgula (pessoa multi-área participa da weekly de cada área). Ata **única por área+data**: create duplicado falha (23505) → faça `update` na existente, nunca contorne criando outra. `discussed` = o que foi discutido; `decisions` = conclusões (campo próprio); `next_topics` = pauta que pré-preenche a PRÓXIMA ata da área. `granola_id` opcional = reunião do Granola usada de rascunho (idempotência do rascunho). `remove()` só deslinka as tarefas. Rascunho a partir do transcript: `docs/granola.md` |
+| **Registrar ata de WEEKLY** (ata da área, aba Reuniões) | `await Aux.weeklys.create({ area, date, discussed, decisions, next_topics, granola_id? })` · `update(id, patch)` · `remove(id)` — ata **da ÁREA** (sem `report_id`!), permanente e compartilhada pelo time. `area` = UMA área canônica exata, SEM vírgula (pessoa multi-área participa da weekly de cada área). Ata **única por área+data**: create duplicado falha (23505) → faça `update` na existente, nunca contorne criando outra. `discussed` = o que foi discutido; `decisions` = conclusões (campo próprio); `next_topics` = pauta que pré-preenche a PRÓXIMA ata da área. `granola_id` opcional = reunião do Granola usada de rascunho (idempotência do rascunho). `remove()` só deslinka as tarefas. Rascunho a partir do transcript: [[granola-reunioes]] |
 | Ações da weekly viram tarefas | `weekly_id: <id da ata>` no `tasks.create`/`saveWithOwners` — a ata mostra essas tarefas com status. `await Aux.weeklys.linkedTasks()` lê todas de uma vez (`[{id,title,status,weekly_id}]`) |
 | **Colocar na agenda (com horário)** | Tarefa: `agenda_date` (AAAA-MM-DD) põe no Calendário naquele dia (opt-in, DISTINTO de `due_date`/prazo; dá pra agendar num dia diferente do vencimento), e `agenda_time` (HH:MM, opcional) dá a HORA — com hora a tarefa some da faixa "dia todo" e entra na **grade de horas** (8h-21h) junto das reuniões. `agenda_time` só vale junto de `agenda_date` (limpar o dia limpa a hora). 1:1 e weekly: mesma ideia com `start_time` (HH:MM) no `oneOnOnes.create`/`weeklys.create`. Sem hora → faixa "dia todo". Ausência/aniversário/meta são sempre dia-todo |
 | Criar/excluir ausência | `await Aux.absences.create({ report_id, type, start_date, end_date, notes })` |
@@ -61,7 +68,7 @@ A navegação por clique continua válida como **fallback** — todo elemento in
 | Notas privadas / do time | `Aux.privateNotes.upsertMine(report_id, txt)` · `Aux.privateNotes.upsertDefault(report_id, txt)` |
 | Cadastrar pessoa | `await Aux.reports.create({ name, email, role, area, ... })` |
 | Tarefa/Projeto com **vários responsáveis** | `await Aux.tasks.saveWithOwners(idOuNull, payload, [ownerIds])` — espelha o das metas. `ownerIds[0]` = dono principal (o servidor alinha `report_id`); todos os donos no seu escopo. Também: `Aux.tasks.setOwners(task_id, [ids])` e `Aux.tasks.listWithOwners()` (tasks + `owners:[{report_id}]`; sem owners = single-owner legado). A tarefa aparece pra CADA dono e conta **uma vez** no progresso de meta/Projeto |
-| **Publicar reunião do Granola** (calendário de todos os participantes) | `await Aux.meetings.sync({ granola_id, title, starts_at, emails: ['a@allugator.com', ...], external: [{email, name?}] })` — idempotente, dedup global por `granola_id` (vários assessores sincronizam a mesma reunião sem duplicar). `emails` que casam com pessoas do app viram participantes internos (resolução server-side); o resto cai em `external`. **O email da própria pessoa PRECISA estar em `emails`** — pegue de `viewer.email`. `starts_at` ISO **com hora e fuso**. Aparece em Calendário → Agenda como 📅 pra cada participante. Procedimento de boot: `docs/granola.md` |
+| **Publicar reunião do Granola** (calendário de todos os participantes) | `await Aux.meetings.sync({ granola_id, title, starts_at, emails: ['a@allugator.com', ...], external: [{email, name?}] })` — idempotente, dedup global por `granola_id` (vários assessores sincronizam a mesma reunião sem duplicar). `emails` que casam com pessoas do app viram participantes internos (resolução server-side); o resto cai em `external`. **O email da própria pessoa PRECISA estar em `emails`** — pegue de `viewer.email`. `starts_at` ISO **com hora e fuso**. Aparece em Calendário → Agenda como 📅 pra cada participante. Procedimento de boot: [[granola-reunioes]] |
 | Ler reuniões visíveis | `await Aux.meetings.listVisible(fromISO?, toISO?)` — retorna `participant_ids` (uuid[]) + `external_participants` |
 
 ## Regras

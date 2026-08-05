@@ -1,3 +1,10 @@
+---
+name: escrever-como-humano
+type: reference
+description: Checagem obrigatoria antes de redigir texto que sai com o nome do Rei — sem travessao, sem cara de IA
+atualizado: 2026-08-05
+---
+
 > **Quando carregar:** ANTES de redigir qualquer texto que a pessoa vai enviar ou publicar
 > por você — e-mail, mensagem (Slack/WhatsApp), comunicado, post, recado, descrição, doc.
 > Não é pra consulta nem pra sua fala de conversa; é pra texto que sai com o nome dela.

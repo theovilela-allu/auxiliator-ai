@@ -1,3 +1,10 @@
+---
+name: filtro-de-relevancia
+type: reference
+description: O que vira tarefa e o que e descartado ao varrer Slack, e-mail ou conversa
+atualizado: 2026-08-05
+---
+
 > **Quando carregar:** sempre que for varrer Slack, e-mail, Notion ou qualquer conversa pra extrair tarefas, compromissos ou tópicos.
 
 # Filtro de relevância profissional

@@ -1,3 +1,10 @@
+---
+name: glossario-de-areas
+type: reference
+description: Areas e jargao recorrente da Allugator, pra traduzir sigla que aparece no Auxiliator
+atualizado: 2026-08-05
+---
+
 > **Quando carregar:** quando precisar interpretar área/cargo/jargão do Allugator (onboarding, prep-1on1, breaking-goals).
 
 # Glossário Allugator

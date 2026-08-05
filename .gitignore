@@ -1,7 +1,21 @@
-# Dados pessoais — nunca vão pro GitHub
-memory/
+# Dados pessoais — nunca vão pro GitHub.
+# É `memory/**` e não `memory/`: o git não entra em pasta que ele já excluiu, então
+# excluir a pasta inteira mataria as exceções abaixo.
+memory/**
 profile.md
 propostas/
+
+# EXCEÇÃO: o manual de operação e o corpo das skills vivem no cofre desde 05/08/2026
+# e precisam continuar versionados — é deles que sai a atualização que outra máquina puxa.
+# A pasta precisa ser re-incluída ANTES do arquivo, senão o git nem olha dentro dela.
+!memory/00-guia/
+!memory/00-guia/**
+!memory/05-como-eu-opero/
+!memory/05-como-eu-opero/**
+!memory/40-allu/
+!memory/40-allu/glossario-de-areas.md
+!memory/70-auxiliator/
+!memory/70-auxiliator/api-do-auxiliator.md
 
 # Config local da máquina (permissões etc.)
 .claude/settings.local.json

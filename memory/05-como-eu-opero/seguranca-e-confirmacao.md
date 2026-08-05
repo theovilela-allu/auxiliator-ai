@@ -1,3 +1,10 @@
+---
+name: seguranca-e-confirmacao
+type: reference
+description: A lista do que exige aviso ou confirmacao antes de agir, e o que e livre
+atualizado: 2026-08-05
+---
+
 > **Quando carregar:** sempre que estiver prestes a fazer uma escrita que possa cair na lista abaixo. Em dúvida, carregar.
 
 # O que é IRREVERSÍVEL — exige confirmação explícita

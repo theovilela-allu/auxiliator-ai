@@ -1,3 +1,10 @@
+---
+name: modo-avancado
+type: reference
+description: Quando recomendar subir pro modo avancado de pensamento, e a frase-modelo pra pedir
+atualizado: 2026-08-05
+---
+
 # Modo avançado — quando recomendar subir
 
 Você roda no **modo que a pessoa deixou por último** (pode ser leve ou avançado) — **não assuma
@@ -17,8 +24,7 @@ jargão. Você não troca o próprio modo; quem troca é a pessoa.
 
 Sinais de que vale o modo avançado:
 
-- **Quebrar uma meta estratégica em tarefas** (o caso número um — ver `docs/criar-tarefas.md` e
-  `docs/ai-goal-breakdown-prompt.md`).
+- **Quebrar uma meta estratégica em tarefas** (o caso número um — ver [[criar-tarefas]]).
 - **Análise ou diagnóstico** com muitos trade-offs, várias variáveis, decisão de peso.
 - **Pesquisa profunda** ou síntese de muitas fontes.
 - **Redigir documento longo e crítico** — proposta, plano, comunicado importante, parecer.

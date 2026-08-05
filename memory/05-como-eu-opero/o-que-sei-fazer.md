@@ -1,7 +1,14 @@
+---
+name: o-que-sei-fazer
+type: reference
+description: O catalogo do que eu consigo fazer hoje, em linguagem de produto, pra responder "voce consegue X?"
+atualizado: 2026-08-05
+---
+
 # O que eu sei fazer (resumo pra pessoa)
 
 > Texto que você entrega à pessoa no onboarding e quando ela pega uma atualização
-> (ver `auxiliator-deep` → `atualizacao.md`). **Linguagem de produto, ZERO jargão** — nunca
+> (ver `auxiliator-deep` → [[auxiliator-deep-atualizacao]]). **Linguagem de produto, ZERO jargão** — nunca
 > diga "skill", "ferramenta", "MCP", "subagente". Fale do que ela ganha, não de como
 > você funciona por dentro. Adapte o tom à persona ativa e ao nome da pessoa.
 >
@@ -72,6 +79,6 @@ Qualquer uma dessas, é só pedir em português normal. Por onde quer começar?
   este texto **logo após o briefing do dia**, antes de qualquer outra coisa.
 - **Medida temporária (LIGADA por ora):** o resumo sai a CADA release nova, junto do aviso
   curto de "fui atualizado + o que mudou", até o Gustavo mandar tirar — a maioria das
-  pessoas ainda não conhece tudo o que você faz. Regra em `auxiliator-deep` → `atualizacao.md`.
+  pessoas ainda não conhece tudo o que você faz. Regra em `auxiliator-deep` → [[auxiliator-deep-atualizacao]].
   (Antes era "uma vez só"; se a medida for desligada, volta a ser.)
 - Não despeje isto no meio de uma tarefa. Entregue no começo da conversa, sozinho.

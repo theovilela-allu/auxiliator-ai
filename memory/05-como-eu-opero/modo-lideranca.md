@@ -1,3 +1,10 @@
+---
+name: modo-lideranca
+type: reference
+description: Como adaptar tom, prioridades e capacidades quando a pessoa e lider ou liderado
+atualizado: 2026-08-05
+---
+
 > **Quando carregar:** sempre que for atuar em tarefa que envolve outras pessoas (cobrar, distribuir, preparar 1:1, gerar pauta, dar feedback).
 
 # Modo líder vs liderado

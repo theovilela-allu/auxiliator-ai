@@ -1,6 +1,13 @@
+---
+name: auxiliator-deep-operar
+type: reference
+description: SKILL auxiliator-deep, parte de operar — como ler e escrever no Auxiliator por window.Aux
+atualizado: 2026-08-05
+---
+
 # Operar o Auxiliator (só carregue quando for de fato ver/criar/mover/editar)
 
-Sessão já garantida no passo 1 do boot. Carregue **`docs/auxiliator-api.md`** junto deste arquivo — ele é o manual completo e **a fonte de verdade**. O atalho abaixo cobre só o caminho comum; se algo divergir, o manual manda.
+Sessão já garantida no passo 1 do boot. Carregue **[[api-do-auxiliator]]** junto deste arquivo — ele é o manual completo e **a fonte de verdade**. O atalho abaixo cobre só o caminho comum; se algo divergir, o manual manda.
 
 ## Cache do state
 
@@ -22,7 +29,7 @@ Sessão já garantida no passo 1 do boot. Carregue **`docs/auxiliator-api.md`** 
 | Pedido | Chamada |
 |---|---|
 | "o que tenho hoje?" | filtrar `st.tasks` por `report_id === viewer.reportId` (líder: `∈ viewer.visibleIds`), status ≠ `concluida`, ordenar por `due_date` |
-| "cria a tarefa X" | `Aux.tasks.create({ report_id: viewer.reportId, title, status: 'a_fazer', priority: 'media', due_date })` — e **sempre** siga `docs/criar-tarefas.md` (título-ação, critério de conclusão, prazo, campos ricos). Tarefa de uma linha sem critério é proibida |
+| "cria a tarefa X" | `Aux.tasks.create({ report_id: viewer.reportId, title, status: 'a_fazer', priority: 'media', due_date })` — e **sempre** siga [[criar-tarefas]] (título-ação, critério de conclusão, prazo, campos ricos). Tarefa de uma linha sem critério é proibida |
 | "marca como feita" | `Aux.tasks.update(id, { status: 'concluida' })` — não confirma (reversível e é dela) |
 | "tarefa pra várias pessoas" | `Aux.tasks.saveWithOwners(idOuNull, payload, [ownerIds])` — `ownerIds[0]` é o dono principal |
 | "quem é o líder de X?" | `Aux.findPerson('X')` → `manager_id` → mapear pra nome em `st.people` |
@@ -34,9 +41,9 @@ Enums que mais pegam: `tasks.status` ∈ `a_fazer|em_andamento|bloqueada|conclui
 
 ## Antes de mexer em coisa de OUTRA pessoa
 
-Atribuir, editar ou apagar algo de terceiro → carregue `docs/safety.md` e confirme com a pessoa antes. Marcar alguém num bloqueio aparece em vermelho na tela dele: é ação que afeta terceiro.
+Atribuir, editar ou apagar algo de terceiro → carregue [[seguranca-e-confirmacao]] e confirme com a pessoa antes. Marcar alguém num bloqueio aparece em vermelho na tela dele: é ação que afeta terceiro.
 
-Se for varrer conversa/e-mail pra extrair tarefa → `docs/relevance-filter.md`.
+Se for varrer conversa/e-mail pra extrair tarefa → [[filtro-de-relevancia]].
 
 ## Reportar em linguagem humana
 
@@ -46,7 +53,7 @@ Se for varrer conversa/e-mail pra extrair tarefa → `docs/relevance-filter.md`.
 
 Nunca: *"Aux.tasks.create retornou row id ..."*.
 
-Se RLS bloquear (a pessoa não tem permissão): *"Isso aí você não tem permissão pra ver. É da equipe X."* Se o sistema estiver fora do ar, o roteiro está em `login.md`.
+Se RLS bloquear (a pessoa não tem permissão): *"Isso aí você não tem permissão pra ver. É da equipe X."* Se o sistema estiver fora do ar, o roteiro está em [[auxiliator-deep-login]].
 
 ## O que NÃO fazer
 

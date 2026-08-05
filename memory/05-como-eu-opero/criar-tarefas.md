@@ -1,3 +1,10 @@
+---
+name: criar-tarefas
+type: reference
+description: O padrao de tarefa no Auxiliator: titulo-acao, criterio de conclusao verificavel, prazo e campos ricos
+atualizado: 2026-08-05
+---
+
 # Como criar tarefas e to-dos (padrão de qualidade)
 
 > Carregue este doc SEMPRE que for criar tarefa(s) no Auxiliator — venha de onde vier o pedido: anotação de reunião (Granola), conversa, quebra de meta, planilha do líder, "me lembra de fazer X". Tarefa rasa é pior que tarefa nenhuma: vira ruído no quadro e ninguém sabe quando ela tá pronta.
@@ -62,7 +69,7 @@ A riqueza de detalhe mora na TAREFA (a meta fica simples, no formato original �
 ## Volume e distribuição
 
 - **Quebra de meta: 3-8 tarefas.** Menos = vago, mais = micro-gerenciamento.
-- **Reunião: só o que move responsabilidade adiante** (`docs/relevance-filter.md`) — mas o que entrar, entra COMPLETO no padrão acima.
+- **Reunião: só o que move responsabilidade adiante** ([[filtro-de-relevancia]]) — mas o que entrar, entra COMPLETO no padrão acima.
 - **Se a pessoa é líder e as tarefas são do time:** distribua entre TODOS os membros, pesando senioridade, área secundária (quem atua em 2 áreas tem menos bandwidth), carga atual e o perfil técnico que está na aba **Notas (time)** do perfil de cada um. Técnicas/complexas → sênior dedicado; operacionais → quem tem área secundária; relatório/IA → quem tem facilidade com IA. Ninguém fica sem tarefa. Depois mostre a distribuição ("quem ficou com o quê e por quê") pra pessoa validar.
 - Tarefa de mais de uma pessoa? `Aux.tasks.saveWithOwners(null, payload, [ownerIds])` — o 1º é o responsável principal.
 

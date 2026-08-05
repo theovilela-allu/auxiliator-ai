@@ -1,3 +1,10 @@
+---
+name: granola-reunioes
+type: reference
+description: Como usar o Granola: primeira autorizacao, transcricao, ata de weekly e sync das reunioes
+atualizado: 2026-08-05
+---
+
 # Granola — reuniões e transcrições
 
 > Carregue este doc quando a pessoa pedir qualquer coisa de **reunião**: "o que ficou da reunião X", "resume minha call", "quais reuniões tive", "o que combinamos com fulano", preparar 1:1 com base na última conversa, extrair tarefas de uma reunião.
@@ -80,7 +87,7 @@ Quando a pessoa pedir pra registrar a ata da weekly ("registra a ata da weekly d
    **conclusões/decisões** (o que o grupo fechou — seja seletivo, decisão ≠ conversa) e a
    **pauta pra próxima** (pendências e temas que ficaram).
 4. **Mostre o rascunho pra pessoa revisar ANTES de gravar** — sempre. Redija como humano
-   (`docs/escrever-como-humano.md`); a ata é um documento que o time inteiro vai ler.
+   ([[escrever-como-humano]]); a ata é um documento que o time inteiro vai ler.
 5. Com o OK, grave: `await Aux.weeklys.create({ area: '<área do time>', date: '<AAAA-MM-DD>',
    discussed, decisions, next_topics, granola_id: '<id da reunião>' })`. Se falhar por
    duplicidade (já existe ata dessa área nessa data), faça `update` na existente —
@@ -88,13 +95,13 @@ Quando a pessoa pedir pra registrar a ata da weekly ("registra a ata da weekly d
    (`granola_id` igual = já foi você; não regrave sem a pessoa pedir).
 6. **Ações combinadas viram tarefas**: proponha criar cada uma via
    `Aux.tasks.saveWithOwners(null, { ..., weekly_id: <id da ata> }, [ownerIds])` — seguem
-   o padrão de `docs/criar-tarefas.md` e aparecem na ata com status.
+   o padrão de [[criar-tarefas]] e aparecem na ata com status.
 
-Detalhes da régua (quem vê a ata, área única, etc.): `docs/auxiliator-api.md`.
+Detalhes da régua (quem vê a ata, área única, etc.): [[api-do-auxiliator]].
 
 ## Regras
 
-1. **Filtro de relevância vale aqui também** (`docs/relevance-filter.md`): ao extrair tarefas de uma reunião, só vira tarefa o que move responsabilidade profissional adiante. **E o que virar tarefa segue o padrão de qualidade de `docs/criar-tarefas.md`** (persona da área, critério de conclusão verificável, prazo, campos ricos) — nada de tarefa-título-solto.
+1. **Filtro de relevância vale aqui também** ([[filtro-de-relevancia]]): ao extrair tarefas de uma reunião, só vira tarefa o que move responsabilidade profissional adiante. **E o que virar tarefa segue o padrão de qualidade de [[criar-tarefas]]** (persona da área, critério de conclusão verificável, prazo, campos ricos) — nada de tarefa-título-solto.
 2. **Privacidade:** o Granola conectado é o da pessoa — você só vê as reuniões DELA. Nunca prometa conteúdo de reunião de terceiros que ela não participou.
 3. **Reunião → Auxiliator:** combinou tarefa numa reunião? Ofereça criar no Auxiliator (`auxiliator-deep`). Esse é o fluxo de ouro: reunião vira execução.
 4. Nada de jargão: "Granola" pode falar (é o app que a pessoa conhece), mas nunca "MCP", "OAuth", "token", "tool".

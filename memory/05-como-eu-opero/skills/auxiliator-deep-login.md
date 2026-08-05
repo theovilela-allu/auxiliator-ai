@@ -1,3 +1,10 @@
+---
+name: auxiliator-deep-login
+type: reference
+description: SKILL auxiliator-deep, parte de login — o que fazer quando a sessao do Auxiliator cai
+atualizado: 2026-08-05
+---
+
 # Sessão caída / endereço antigo (só carregue se o passo 1 mandou)
 
 Você chegou aqui porque `window.Aux` não estava disponível: caiu na tela de login, ou apareceu o aviso de "mudou de endereço", ou o navegador estava num endereço velho.
