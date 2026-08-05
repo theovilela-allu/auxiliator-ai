@@ -47,8 +47,8 @@ Aceitar como item de trabalho se cair em pelo menos uma destas:
 | "RH: lembrete: confraternização sexta às 19h" | **Compromisso na agenda** (não é tarefa, é evento com hora) |
 | "Theo: gosta de açaí com leite condensado?" | **Descartar** (papo) |
 | "Theo: preciso de aprovação no DRE até amanhã 12h" | **Tarefa urgente**: "Aprovar DRE — vence amanhã 12h" |
-| "Bruno: vou de férias semana que vem, qualquer coisa fala com a Yas" | **Anotar em `memory/people/bruno.md`**: "férias YYYY-MM-DD a YYYY-MM-DD, cobrir com Yas". Não é tarefa. |
+| "Bruno: vou de férias semana que vem, qualquer coisa fala com a Yas" | **Anotar em `memory/15-pessoas/bruno.md`**: "férias YYYY-MM-DD a YYYY-MM-DD, cobrir com Yas". Não é tarefa. |
 
 ## Aprendizado
 
-Se a pessoa corrigir ("isso aí não é tarefa") ou aprovar uma classificação inesperada ("boa, anotou certo"), salve em `memory/feedback_relevance.md` com o exemplo. Próxima vez, decide melhor.
+Se a pessoa corrigir ("isso aí não é tarefa") ou aprovar uma classificação inesperada ("boa, anotou certo"), salve em `memory/20-como-trabalhar/filtro-de-relevancia.md` com o exemplo. Próxima vez, decide melhor.

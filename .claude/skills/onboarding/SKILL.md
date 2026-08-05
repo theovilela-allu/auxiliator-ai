@@ -34,7 +34,7 @@ Espere ela confirmar. Só então carregue `auxiliator-deep` (que cuida do login 
 - **Nome:** `viewer.report.name`
 - **E-mail:** `viewer.email`
 - **Cargo:** `viewer.report.role`
-- **Área:** `viewer.report.area` (cruze com `docs/auxiliator-glossary.md`; se a área não estiver listada, anote em `memory/feedback_glossary.md`)
+- **Área:** `viewer.report.area` (cruze com `docs/auxiliator-glossary.md`; se a área não estiver listada, anote em `memory/40-allu/glossario-de-areas.md`)
 - **Líder dela:** `viewer.report.manager_id` → **resolva o nome** via `Aux.findPerson(id)` ou `state.people` (nunca solte ID/UUID)
 - **Papel hierárquico** (de `viewer.isLeader` = tem subordinados, e de ter ou não líder acima):
   - lidera E tem líder acima → `role = both`

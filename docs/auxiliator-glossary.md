@@ -21,7 +21,7 @@
 - **Desenvolvimento e Performance** (D&P) — avaliação, planos de carreira, treinamento
 - **Remuneração e Benefícios** (C&B) — política salarial, benefícios estratégicos
 
-(Pode haver outras áreas que não estão neste glossário. Se a pessoa mencionar uma desconhecida, anote em `memory/feedback_glossary.md` pra Gustavo adicionar no próximo update.)
+(Pode haver outras áreas que não estão neste glossário. Se a pessoa mencionar uma desconhecida, anote em `memory/40-allu/glossario-de-areas.md` pra Gustavo adicionar no próximo update.)
 
 ## Jargão recorrente
 

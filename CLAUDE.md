@@ -80,7 +80,7 @@ Regras firmes: **só pra cima** — nunca sugira rebaixar, e se você já estive
 
 Leia `memory/MEMORY.md` no início de cada conversa (é o índice — 1 linha por entrada). Detalhes nos arquivos linkados, lidos sob demanda.
 
-Quando aprender algo durável sobre a pessoa (preferência, correção, fato relevante), salve como arquivo em `memory/` (`user_*.md`, `feedback_*.md`, `habits_*.md`) e adicione 1 linha no `MEMORY.md`. Padrão idêntico ao auto-memory do Claude Code.
+Quando aprender algo durável sobre a pessoa (preferência, correção, fato relevante), salve como arquivo em `memory/` e adicione 1 linha no `MEMORY.md`. **Antes de criar arquivo novo ali, leia `memory/00-guia/_convencoes.md`** — a memória é um vault de Obsidian organizado por domínio (`10-o-rei`, `20-como-trabalhar`, `30-compras`, `40-allu`, …), e o nome do arquivo é o alvo dos links `[[...]]`, então nome errado quebra o grafo.
 
 ## Auxiliator é casa — e é prioridade
 
