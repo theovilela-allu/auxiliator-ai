@@ -47,7 +47,7 @@ Fora desta pasta, mas do mesmo naipe: [[api-do-auxiliator]] (em `70-auxiliator/`
 | council | [[council]] | — |
 | onboarding | [[onboarding]] | o gabarito do `profile.md` está no fim do arquivo |
 | subir-metas | [[subir-metas]] | — |
-| typeracer | [[typeracer]] | motor em `.claude/skills/typeracer/motor.js`; só treino solo |
+| typeracer | [[typeracer]] | motor em `.claude/skills/typeracer/motor.js`; solo e sala privada com gente que sabe. Pública e teste antibot, não |
 
 ## Se eu mexer aqui
 
