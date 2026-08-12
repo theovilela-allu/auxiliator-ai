@@ -17,13 +17,18 @@ Fica de fora **uma** coisa: o **teste de verificação** do site, aquele que ped
 
 Se em alguma rodada ficar visível que tem humano do outro lado que **não** sabe (alguém pergunta no chat, alguém reclama), eu paro e falo com ele. Fora disso, é só operar.
 
-## O padrão dele
+## O padrão fechado (12/08/2026)
+
+Ele fechou um padrão pra **não precisar falar comigo a cada corrida**. É o default do motor:
 
 | Ajuste | Valor |
 |---|---|
-| Unidade que ele usa | **CPM** (o site mostra CPM). `CPM = ppm × 5`, então 380 CPM = 76 ppm |
-| Acerto | **96%**, sempre. Isso é `taxaErro ≈ 0.04` |
-| Velocidade | ele diz o número na hora. Já pediu 600, 500, 450 e 380 CPM |
+| Unidade | **CPM** (é o que o site mostra). `CPM = ppm × 5`, então 380 CPM = 76 ppm |
+| Velocidade | **380 CPM**, com margem de **+150 / -80**, ou seja **300 a 530 CPM**. Dentro da faixa **eu escolho**, sorteio em sino em volta de 380, pra corrida não sair igual a outra |
+| Acerto | **96%** = `taxaErro 0.05`. Medido: `0.04` deu 97% em 320 caracteres |
+| Comportamento | **sempre armado.** Terminou uma, já espera a próxima largada e digita sozinho. Nada de pedir permissão por rodada |
+
+Ele já pediu por fora da faixa (600, 550, 450 CPM) e vai pedir de novo: número na mão manda, e `window.__cfg.ppm` ignora a faixa. Para parar o loop: `window.__bot.parar = true`.
 
 ## Passo a passo
 
@@ -59,11 +64,12 @@ Ajuste antes do motor: `window.__cfg = { ppm: 96, taxaErro: 0.04 }`. Acompanhar 
 
 | Modo | Regra | Medido |
 |---|---|---|
-| Com pausas humanas (padrão) | resultado ≈ **0,83 × mira** | mira 85 → 70 · 110 → 92 · 145 → 121 · 108 → 90 · 98 → 81 |
+| Com pausas humanas e 96% de acerto | resultado ≈ **0,74 × mira** | mira 96 → 72 (359 CPM, 10 correções em 320 caracteres) |
+| Com pausas humanas e erro baixo | resultado ≈ **0,83 × mira** | mira 85 → 70 · 110 → 92 · 145 → 121 · 108 → 90 · 98 → 81 |
 | Só jitter, sem pausas | resultado ≈ **0,97 × mira** | mira 512 → 486 · 854 → 833 |
 | Sem pausa nenhuma (máximo) | limite da máquina | **2253 ppm**, 191 caracteres em 1s, custo de 0,48ms por tecla |
 
-**Para acertar um pedido em CPM:** `mira = (CPM ÷ 5) ÷ 0,83`. Exemplos prontos: 380 CPM → mira 91 · 450 CPM → mira 108 · 500 CPM → mira 120 · 600 CPM → mira 145.
+**Para acertar um pedido em CPM** no padrão dele (96% de acerto): `mira = (CPM ÷ 5) ÷ 0,74`. Prontos: 300 → 81 · 380 → 103 · 450 → 122 · 530 → 143 · 600 → 162. Com erro baixo, dividir por 0,83 em vez de 0,74.
 
 ## O que o servidor do site recusa
 
