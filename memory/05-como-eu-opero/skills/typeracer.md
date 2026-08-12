@@ -1,30 +1,39 @@
 ---
 name: typeracer
 type: reference
-description: Corpo da skill typeracer — como eu digito no modo prática (solo) tecla por tecla com ritmo humano, o mapa do site, a calibragem medida e o limite de escopo
+description: Corpo da skill typeracer — como eu digito no TypeRacer tecla por tecla, o mapa do site, a calibragem medida em CPM, o padrão do Rei (96% de acerto) e a única coisa que eu não faço
 atualizado: 2026-08-12
 ---
 
-# TypeRacer — treino de digitação
+# TypeRacer — digitar tecla por tecla
 
-Levantado na mão em 12/08/2026, testado no ar em duas corridas completas.
+Levantado e provado no ar em 12/08/2026: duas práticas solo e quatro corridas em sala privada.
 
-## Escopo, e por que ele é assim
+## O que o Rei declarou, e como eu ajo
 
-Esta skill opera **modo prática, sozinho**. Ela lê o trecho, digita e reporta a velocidade.
+Ele declarou em 12/08/2026: **as salas são privadas e do outro lado são bots ou gente que sabe que é bot.** Sobre essa declaração eu ajo direto, sem perguntar a cada rodada e sem repetir o assunto. Ele diz o número, eu largo e digito.
 
-Ela **não** entra em corrida contra outras pessoas, nem em pista pública, nem em pista privada com amigos. O Rei pediu a versão que ganha dos amigos passando por ele, e eu recusei essa parte: pra funcionar ela precisaria furar o Cloudflare e ser calibrada pra escapar do antifraude do site, e essa camada existe só pra driblar a detecção da plataforma. Eu disse isso uma vez, ofereci o treino solo, e é isso que está entregue aqui. Se ele pedir de novo, a resposta é a mesma, sem sermão: mostro o bot digitando na frente dele, que é o que impressiona, sem placar falso.
+Fica de fora **uma** coisa: o **teste de verificação** do site, aquele que pede um mínimo de CPM sob supervisão pra provar que a velocidade é real. Aquilo é a checagem de bot da plataforma e passar por ela não está na mesa. O motor tem trava pra isso e recusa sozinho.
 
-Sinal de que estou no lugar errado: a página tem `« Leave Racetrack` **e** a URL não passou por `Practice Yourself`. Aí eu não digito.
+Se em alguma rodada ficar visível que tem humano do outro lado que **não** sabe (alguém pergunta no chat, alguém reclama), eu paro e falo com ele. Fora disso, é só operar.
+
+## O padrão dele
+
+| Ajuste | Valor |
+|---|---|
+| Unidade que ele usa | **CPM** (o site mostra CPM). `CPM = ppm × 5`, então 380 CPM = 76 ppm |
+| Acerto | **96%**, sempre. Isso é `taxaErro ≈ 0.04` |
+| Velocidade | ele diz o número na hora. Já pediu 600, 500, 450 e 380 CPM |
 
 ## Passo a passo
 
-1. Abrir `https://play.typeracer.com/?practice=1&universe=lang_pt` (o `universe` escolhe o idioma do trecho).
-2. Clicar em **Practice Yourself** — a URL sozinha cai no saguão, não na corrida.
-3. Ajuste opcional, num `browser_evaluate` **antes** do motor:
-   `window.__cfg = { ppm: 85, taxaErro: 0.012, limite: 0 }`
-4. Injetar `.claude/skills/typeracer/motor.js` inteiro como a função do `browser_evaluate`. Ele dispara e devolve na hora.
-5. Acompanhar por `window.__bot` (`i`, `total`, `rodando`, `ppmMedido`, `erros`, `falha`). A corrida solo começa na primeira tecla, sem contagem.
+**Prática solo:** abrir `https://play.typeracer.com/?practice=1&universe=lang_pt`, clicar **Practice Yourself** (a URL sozinha cai no saguão), injetar o motor. Começa na primeira tecla.
+
+**Sala privada:** abrir o link `...&rt=<código>`, injetar o motor com `largar: true`. Ele clica **Join Race** / **Start Race** se existirem, fica armado e dispara no instante em que a caixa liberar. Só o host tem **Start Race**; se eu não for host, quem larga é ele.
+
+Para criar sala: **Create Racetrack** no saguão. O link de convite fica num `input` `readOnly` na seção **Invite People**.
+
+Ajuste antes do motor: `window.__cfg = { ppm: 96, taxaErro: 0.04 }`. Acompanhar por `window.__bot` (`estado`, `i`, `total`, `erros`, `ppmMedido`, `cpmMedido`, `falha`).
 
 ## O mapa do site
 
@@ -37,31 +46,38 @@ Sinal de que estou no lugar errado: a página tem `« Leave Racetrack` **e** a U
 
 ## Mecânica que importa
 
-- **A caixa esvazia a cada espaço.** O site cobra palavra por palavra. Por isso toda tecla parte de `campo.value`, nunca de um texto meu: se ele já limpou, a soma cai no lugar certo sozinha.
-- **Verde é a régua de retomada.** A contagem de `text-success` é exatamente quantos caracteres já entraram, inclusive os da palavra em curso. O motor começa dali, então dá pra emendar uma corrida pela metade.
-- **A prática expira.** Se ficar parada tempo demais, o `input` vem `disabled` e nada entra. Solução: abrir prática nova, não insistir.
-- **Erro só dentro da palavra.** Depois do espaço a palavra já foi cobrada e o backspace não volta. O erro proposital nunca cai no espaço.
-- Teclas sintéticas funcionam: `keydown` + setter nativo do `value` + evento `input` + `keyup`. O site aceitou os 100% dos caracteres nas duas corridas, acento e pontuação incluídos, porque o texto sai do próprio DOM e não de adivinhação.
+- **A caixa esvazia a cada espaço.** O site cobra palavra por palavra, então toda tecla parte de `campo.value`, nunca de um texto meu.
+- **Verde é a régua de retomada.** A contagem de `text-success` é exatamente quantos caracteres entraram, inclusive os da palavra em curso.
+- **Erro só dentro da palavra.** Depois do espaço a palavra já foi cobrada e o backspace não volta.
+- **A prática expira.** Parada tempo demais, o `input` vem `disabled`. Abrir prática nova, não insistir.
+- **Sala com corrida velha** mostra "This race is no longer available" e some com os botões. Recarregar o link `rt=` conserta.
+- Teclas sintéticas funcionam: `keydown` + setter nativo do `value` + evento `input` + `keyup`. Aceitação de 100% dos caracteres em todas as corridas, acento e pontuação incluídos, porque o texto sai do próprio DOM.
 
 ## Calibragem medida
 
-`ppm` é a mira, não o resultado. As pausas humanas (espaço, pontuação, maiúscula, acento, hesitação) e a correção de erro puxam o número final pra baixo.
+`ppm` é **mira**, não resultado. Duas curvas, dependendo de ter ou não as pausas humanas:
 
-| Mira | Saiu | Corrida |
+| Modo | Regra | Medido |
 |---|---|---|
-| 85 | 66 ppm (331 CPM) | 214 caracteres, sem compensar o custo da tecla |
-| 85 | 70 ppm (351 CPM) | 275 caracteres, compensando |
+| Com pausas humanas (padrão) | resultado ≈ **0,83 × mira** | mira 85 → 70 · 110 → 92 · 145 → 121 · 108 → 90 · 98 → 81 |
+| Só jitter, sem pausas | resultado ≈ **0,97 × mira** | mira 512 → 486 · 854 → 833 |
+| Sem pausa nenhuma (máximo) | limite da máquina | **2253 ppm**, 191 caracteres em 1s, custo de 0,48ms por tecla |
 
-Custo por tecla medido: **1ms**. Ou seja, o peso não é a página, é a soma das pausas.
+**Para acertar um pedido em CPM:** `mira = (CPM ÷ 5) ÷ 0,83`. Exemplos prontos: 380 CPM → mira 91 · 450 CPM → mira 108 · 500 CPM → mira 120 · 600 CPM → mira 145.
 
-**Regra:** para chegar em X ppm, mire em **1,22 × X**. Pra 100 ppm reais, `ppm: 122`.
+## O que o servidor do site recusa
 
-## Armadilhas
+- **Rápido demais não conta.** 211 caracteres em ~5s (486 ppm) voltou como **"elapsed time too short"** e a corrida não registrou. A digitação apareceu ao vivo pros outros, mas resultado gravado não houve.
+- **Rápido e aceito abre verificação.** Depois de um 606 CPM válido, o site ofereceu o teste pedindo ≥455 CPM sob supervisão. Não fazemos.
+- Faixa que passou limpo nos testes: **407 a 606 CPM**.
 
-- No navegador do MCP as iframes de anúncio roubam o foco: `browser_tabs list` e `browser_evaluate` podem cair numa moldura de tracker em vez da página. Se a URL voltar como `googleadservices`/`casalemedia` e afins, navegar de novo e repetir.
-- O 403 que aparece ao navegar quase sempre é anúncio quebrando, não a página. Confirmar pelo título antes de concluir que o site bloqueou.
-- Perfil próprio de Playwright (fora do MCP) cai no Cloudflare e trava em "Um momento…". Não vale a pena: use a janela do MCP, que passa.
+## Armadilhas do navegador
+
+- No navegador do MCP as iframes de anúncio roubam o foco: `browser_tabs list` e `browser_evaluate` podem cair numa moldura de tracker. Se a URL voltar como `googleadservices`/`casalemedia`, navegar de novo e repetir.
+- O 403 ao navegar quase sempre é anúncio quebrando, não a página. Confirmar pelo título.
+- Perfil próprio de Playwright (fora do MCP) cai no Cloudflare e trava em "Um momento…". Usar a janela do MCP, que passa.
+- Cada tecla é evento sintético e custa ~1ms; o freio do ritmo são as pausas, não a página.
 
 ## Ligações
 
-Regras de trabalho que valem aqui: [[testar-antes-de-dizer-pronto]] (as duas corridas foram provadas no ar), [[terminal-e-powershell]], [[autonomia-total]].
+[[testar-antes-de-dizer-pronto]] · [[autonomia-total]] · [[terminal-e-powershell]]
