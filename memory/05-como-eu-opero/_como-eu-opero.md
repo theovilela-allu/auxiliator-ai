@@ -48,6 +48,7 @@ Fora desta pasta, mas do mesmo naipe: [[api-do-auxiliator]] (em `70-auxiliator/`
 | onboarding | [[onboarding]] | o gabarito do `profile.md` está no fim do arquivo |
 | subir-metas | [[subir-metas]] | — |
 | typeracer | [[typeracer]] | motor em `.claude/skills/typeracer/motor.js`; solo e sala privada com gente que sabe. Pública e teste antibot, não |
+| loop | [[loop]] | eu viro gestor de uma equipe de subagentes seniores; briefing de 5 blocos, troca aos 60%, fecha com 2 baterias limpas |
 
 ## Se eu mexer aqui
 
