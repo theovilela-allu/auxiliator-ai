@@ -17,6 +17,35 @@ propostas/
 !memory/70-auxiliator/
 !memory/70-auxiliator/api-do-auxiliator.md
 
+
+# EXCEÇÃO 2 (20/08/2026): o jeito de trabalhar também é manual, não é dado.
+# Régua pra entrar aqui: a nota não cita terceiro, caminho interno da Allu,
+# número da empresa nem cliente. Nota que cita, fica de fora inteira (não se mutila nota).
+!memory/20-como-trabalhar/
+!memory/20-como-trabalhar/area-multi-ri-fpna.md
+!memory/20-como-trabalhar/comando-barrado-para-e-pergunta.md
+!memory/20-como-trabalhar/comportamento-no-codex.md
+!memory/20-como-trabalhar/consultar-o-obsidian-sempre.md
+!memory/20-como-trabalhar/estilo-de-escrita.md
+!memory/20-como-trabalhar/manter-auxiliator-em-dia.md
+!memory/20-como-trabalhar/memoria-e-o-obsidian-e-so-ele.md
+!memory/20-como-trabalhar/pedir-o-insumo-que-falta.md
+!memory/20-como-trabalhar/terminal-e-powershell.md
+!memory/20-como-trabalhar/testar-antes-de-dizer-pronto.md
+!memory/20-como-trabalhar/travar-em-60-de-contexto.md
+!memory/60-visual/
+!memory/60-visual/numeros-em-uma-linha.md
+!memory/60-visual/previa-fiel-reset-de-fonte.md
+!memory/60-visual/verificar-layout-dos-slides.md
+!memory/70-auxiliator/
+!memory/70-auxiliator/dominio-novo.md
+!memory/70-auxiliator/inicio-do-auxiliator.md
+!memory/80-ferramentas/
+!memory/80-ferramentas/codex-cli.md
+!memory/80-ferramentas/vscode-terminal-e-atalhos.md
+!memory/99-arquivo/
+!memory/99-arquivo/design-modo-especialista-2026-06-16.md
+
 # Config local da máquina (permissões etc.)
 .claude/settings.local.json
 
