@@ -1,7 +1,4 @@
 {
-  "env": {
-    "AUX_AI_CTX_WARN_AT": "50"
-  },
   "enableAllProjectMcpServers": true,
   "permissions": {
     "allow": [
