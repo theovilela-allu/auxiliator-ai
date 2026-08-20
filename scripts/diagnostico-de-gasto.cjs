@@ -26,11 +26,12 @@ if (!fs.existsSync(dir)) { console.error("pasta de transcripts nao achada: " + d
 
 const imgExt = /\.(png|jpe?g|gif|webp|bmp|pdf)$/i;
 const sessoes = []; const imagens = [];
-let T = { cr: 0, cw: 0, out: 0, turnos: 0 };
+let T = { cr: 0, cw: 0, out: 0, turnos: 0 }; const TS = { cr: 0, cw: 0, out: 0, turnos: 0 };
 
 for (const f of fs.readdirSync(dir).filter((f) => f.endsWith(".jsonl"))) {
   const st = fs.statSync(path.join(dir, f));
   if (st.mtime < desde) continue;
+  const sub = { cr: 0, cw: 0, out: 0, turnos: 0 };
   let s = { id: f.slice(0, 8), dia: st.mtime.toISOString().slice(0, 10), turnos: 0, cr: 0, cw: 0, out: 0, pico: 0 };
   const id2img = {};
   for (const l of fs.readFileSync(path.join(dir, f), "utf8").split("\n")) {
@@ -52,7 +53,21 @@ for (const f of fs.readdirSync(dir).filter((f) => f.endsWith(".jsonl"))) {
       }
     }
   }
+  // subagentes da sessao (agent-*.jsonl na subpasta) — o gasto deles conta tambem
+  const subdir = path.join(dir, f.slice(0, -6), "subagents");
+  if (fs.existsSync(subdir)) {
+    for (const g of fs.readdirSync(subdir).filter((g) => g.startsWith("agent-") && g.endsWith(".jsonl"))) {
+      for (const l of fs.readFileSync(path.join(subdir, g), "utf8").split(String.fromCharCode(10))) {
+        if (!l.trim()) continue;
+        let j; try { j = JSON.parse(l); } catch (e) { continue; }
+        const u = j.message && j.message.usage; if (!u) continue;
+        sub.turnos++; sub.cr += u.cache_read_input_tokens || 0; sub.cw += u.cache_creation_input_tokens || 0; sub.out += u.output_tokens || 0;
+      }
+    }
+    s.cr += sub.cr; s.cw += sub.cw; s.out += sub.out;
+  }
   if (s.turnos > 0) { sessoes.push(s); T.cr += s.cr; T.cw += s.cw; T.out += s.out; T.turnos += s.turnos; }
+  TS.cr += sub.cr; TS.cw += sub.cw; TS.out += sub.out; TS.turnos += sub.turnos;
 }
 
 const custo = (x) => (x.cr / 1e6) * pcr + (x.cw / 1e6) * pcw + (x.out / 1e6) * pout;
@@ -62,6 +77,7 @@ sessoes.sort((a, b) => custo(b) - custo(a));
 console.log("=== GASTO desde " + desde.toISOString().slice(0, 10) + " (precos " + modelo + ") ===");
 console.log("sessoes=" + sessoes.length + "  turnos=" + T.turnos + "  releitura=" + (T.cr / 1e9).toFixed(2) + "B  escrita_cache=" + k(T.cw) + "  saida=" + k(T.out));
 console.log("CUSTO ESTIMADO: US$ " + Math.round(custo(T)) + "  |  contexto medio/turno: " + (T.turnos ? k(T.cr / T.turnos) : "-"));
+console.log("dos quais subagentes: US$ " + Math.round(custo(TS)) + " em " + TS.turnos + " turnos (" + (custo(T) ? Math.round(100 * custo(TS) / custo(T)) : 0) + "% do total)");
 console.log("\n-- top 8 sessoes por custo --");
 console.log("dia        | sessao   | turnos | pico ctx | custo");
 for (const s of sessoes.slice(0, 8))

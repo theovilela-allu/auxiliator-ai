@@ -12,5 +12,5 @@ memory/05-como-eu-opero/skills/loop.md
 ```
 
 Ele traz os dois papéis (eu gerencio, eles executam), o briefing obrigatório de 5 blocos
-que todo sub recebe, a troca aos 60% de contexto, a trava do navegador único, a regra de
+que todo sub recebe, a troca por tamanho absoluto do sub (não porcentagem), a trava do navegador único, a regra de
 teste em produção e o critério de encerramento (duas baterias limpas seguidas).

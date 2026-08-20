@@ -90,18 +90,37 @@ defeito de verdade e **mando um sub corrigir com o rumo certo**. Eu mesmo não m
 gerir é gerir. Sub que sai consertando por conta própria, sem eu mandar, em cima de sistema
 no ar é risco, não produtividade.
 
-## Troca por contexto cheio (a regra dos 60%)
+## Troca por contexto cheio (número ABSOLUTO, não 60%)
 
-Sub que chega a **60% de contexto** é encerrado e substituído. Como sub não enxerga a
-própria porcentagem, o briefing manda ele mesmo puxar o freio:
+Sub que enche o contexto é encerrado e substituído. O gatilho é **número absoluto, não
+porcentagem** — o diagnóstico de 20/08/2026 mostrou por quê: nas duas baterias, 48 dos 82
+subs passaram de 150 mil tokens e 6 passaram de 300 mil, e o custo de um sub cresce com o
+**quadrado** do tamanho dele. O "60%" da versão antiga não segurava nada numa janela grande
+(60% de 1M = 600k). A equipe foi **52% de todo o gasto de agosto** — é aqui que mora o dinheiro.
 
-> "Quando você julgar que já consumiu uns 60% do seu espaço de trabalho, **pare onde está**
-> e me devolva um **HANDOFF**: o que cobri, o que achei (com evidência), o que ficou pela
-> metade, o que eu faria a seguir e as armadilhas que encontrei. Não comece frente nova
-> depois disso."
+Como sub não enxerga o próprio tamanho, o briefing manda ele puxar o freio cedo:
+
+> "Quando você tiver produzido em torno de **umas 6 a 8 respostas de trabalho**, ou sentir
+> que já cobriu bastante, **pare onde está** e me devolva um **HANDOFF**: o que cobri, o que
+> achei (com evidência), o que ficou pela metade, o que eu faria a seguir e as armadilhas.
+> Não comece frente nova depois disso. Handoff enxuto é melhor que frente inteira jogada fora."
 
 Recebi o handoff: encerro aquele sub, abro um novo **com os 5 blocos** e o bloco 5
-preenchido com o handoff. O trabalho continua de onde parou, não do zero.
+preenchido com o handoff. O trabalho continua de onde parou, não do zero. **Frente estreita
+por sub** (um recorte pequeno, não "audite o sistema todo") é o que mantém cada sub curto.
+
+## Modelo do sub: leve por padrão, pesado só onde pensa
+
+O sub herda o modo de pensamento que estiver ativo — e nas baterias de agosto eles rodaram
+todos no modo avançado (caro), inclusive os que só liam código e clicavam tela. **Isso é
+desperdício:** trabalho mecânico (ler arquivo e listar o que viu, reproduzir um passo,
+rodar um teste) rende igual no modo leve, que é ~10x mais barato por token de saída.
+
+Regra: **o sub de execução mecânica vai no modo leve; o modo avançado fica pro sub que
+precisa raciocinar** — achar o furo de lógica, montar o ataque, julgar se um achado é real.
+Eu (gestor) permaneço no modo em que o CEO me deixou; quem eu poupo é a tropa. Se a
+plataforma me deixar escolher o modelo por sub, escolho o leve pra execução; se não, monto
+frentes mecânicas mais estreitas pra elas fecharem em poucas respostas.
 
 ## Paralelismo, e a trava do navegador
 
