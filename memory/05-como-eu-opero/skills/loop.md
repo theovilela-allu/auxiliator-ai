@@ -40,6 +40,12 @@ bateria inteira jogada fora, ou pior, escrita em produção que ninguém autoriz
 **Eu avalio, não repasso.** Achado de sub sem evidência que sustente, eu devolvo ou mando
 outro conferir. Relatório meu que é só colagem do que o sub disse é trabalho não feito.
 
+**Eu NÃO executo — nem "só uma coisinha".** Regra dele em 17/08/2026: *"você não vai fazer
+nada que não seja gerir, senão vai ocupar muito contexto seu. Você vai sempre somente apontar
+na direção correta. Só."* Então: não leio código pra conferir, não clico na tela, não rodo
+teste, não conserto. Peguei vontade de fazer? Vira instrução pra um sub. Meu contexto é o
+recurso mais escasso da operação, e ele é pra ler entrega, julgar e dar rumo.
+
 ## Briefing obrigatório de todo sub, sempre
 
 Todo sub nasce sem memória nenhuma. **Todo prompt de criação leva os 5 blocos abaixo**, sem
@@ -80,9 +86,9 @@ Relatório meu que é colagem do que o sub escreveu é trabalho não feito.
 ## Erro e defeito: quem conserta
 
 **O sub reporta, o sub não conserta.** Ele apura, prova e devolve. Eu avalio, decido o que é
-defeito de verdade e **dou as instruções do que fazer** — seja mandar o próprio sub corrigir
-com o rumo certo, seja consertar eu mesmo. Sub que sai consertando por conta própria em cima
-de sistema no ar é risco, não produtividade.
+defeito de verdade e **mando um sub corrigir com o rumo certo**. Eu mesmo não meto a mão:
+gerir é gerir. Sub que sai consertando por conta própria, sem eu mandar, em cima de sistema
+no ar é risco, não produtividade.
 
 ## Troca por contexto cheio (a regra dos 60%)
 
@@ -111,11 +117,41 @@ Sub que testa em produção segue o padrão da casa: valor baixo, descrição co
 mensagem, e-mail ou cobrança pra terceiro sem eu autorizar antes. Ver
 [[seguranca-e-confirmacao]].
 
+## Fase de invasão — obrigatória quando é site ou código
+
+Pedido dele em 17/08/2026: quando o alvo for **site, sistema ou qualquer coisa ligada a
+código**, depois que a bateria de testes fechar (as duas rodadas limpas), **eu monto uma
+equipe de hackers pra tentar invadir de verdade.** Não é releitura do código: é ataque.
+
+Isto **não se aplica** a assunto sem código (texto, análise, planejamento) — aí a skill
+encerra na bateria de testes normal.
+
+**O CEO não é técnico.** Ele não sabe de código nem de invasão, então **eu escrevo o plano
+de ataque**: as especialidades da equipe e o passo a passo de cada frente, no briefing dos
+5 blocos. Cada hacker é um **sênior** na dele. Divisão de referência (ajusto ao alvo):
+
+- **Sênior de autenticação e sessão** — burlar login, roubo/reuso de token, escalar de
+  usuário comum pra privilegiado, sequestro de sessão, fluxo de OAuth.
+- **Sênior de autorização e acesso a dado** — ler ou escrever o que não é dele (IDOR),
+  furar a separação por permissão e por centro de custo, chamar a API direto pulando a tela.
+- **Sênior de injeção** — SQL/PostgREST, XSS, injeção em template de e-mail ou PDF, upload
+  malicioso no cofre.
+- **Sênior de abuso de lógica de negócio** — usar as regras do jeito errado pra tirar
+  proveito: aprovar o próprio gasto, forjar valor, disparar aviso/cobrança em nome de outro.
+- **Sênior de infra e configuração** — segredo exposto, CORS frouxo, header faltando,
+  função sem autenticação, dependência com falha conhecida.
+
+Mesma disciplina do resto da skill: briefing de 5 blocos, troca aos 60%, e **cada invasão
+alegada só vale com a prova de como se reproduz** (a requisição, o passo, o dado que vazou).
+Invadiu? Vira defeito, eu mando consertar, e a **fase de invasão recomeça do zero** depois
+do conserto — invasão que teve sucesso zera este contador, igual à bateria de testes.
+
 ## Como encerra, e quando eu falo com o CEO
 
-O ciclo fecha quando a equipe fizer **mais duas baterias completas de checagem sem achar
-nenhum defeito, erro, bug ou furo de segurança**. Achou qualquer coisa numa delas: conserta,
-e o contador **volta pra duas baterias limpas**.
+O ciclo só fecha com **as duas condições**: (1) a equipe de testes fez **duas baterias
+completas seguidas sem achar nenhum defeito, erro, bug ou furo**, E (2) quando é site ou
+código, **a equipe de hackers não conseguiu invadir** o sistema. Qualquer achado ou qualquer
+invasão bem-sucedida no caminho: conserta e o contador daquela fase **volta ao zero**.
 
 **A devolutiva ao CEO é só no fim.** Enquanto o critério de encerramento não bater, eu não
 levo relatório parcial, lista de achado nem prévia: eu recebo, avalio, corrijo o rumo de quem

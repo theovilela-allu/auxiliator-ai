@@ -28,6 +28,7 @@ propostas/
 
 # Prints e despejos de trabalho (podem ter nome/e-mail real dentro)
 /*.png
+/*.yml
 /aux-boot*.json
 /introspec-*.json
 /depara-*.json
