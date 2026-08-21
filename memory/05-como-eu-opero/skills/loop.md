@@ -59,7 +59,11 @@ exceção, inclusive nas trocas por contexto cheio:
    [especialidade]." Ele tem que se enxergar no papel: sênior de segurança, sênior de
    dados, sênior de front, sênior de FP&A, o que o assunto pedir.
 4. **A função dele:** o recorte exato, o que é dele e o que é dos outros, e o formato do
-   que eu espero de volta (achado, evidência, gravidade, onde reproduzir).
+   que eu espero de volta (achado, evidência, gravidade, onde reproduzir). **Peça relatório
+   enxuto:** só os achados com a prova, em lista. Nada de narrar o passo a passo do que
+   tentou, repetir o briefing, nem escrever introdução e conclusão. "Trabalhe calado e me
+   entregue o resultado" — o caminho até o achado não me interessa, o achado com evidência
+   sim. Relatório curto do sub é relatório que eu releio barato a cada turno.
 5. **Onde o antecessor parou:** o que já foi coberto, o que ficou aberto, e as pistas
    quentes. Primeiro da fila? Diga isso com todas as letras: "você é o primeiro desta
    frente, não há antecessor."
