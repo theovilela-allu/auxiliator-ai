@@ -126,6 +126,19 @@ Eu (gestor) permaneço no modo em que o CEO me deixou; quem eu poupo é a tropa.
 plataforma me deixar escolher o modelo por sub, escolho o leve pra execução; se não, monto
 frentes mecânicas mais estreitas pra elas fecharem em poucas respostas.
 
+## Disciplina de leitura e comando do sub — o filler de verdade
+
+O diagnóstico de 20/08/2026 mostrou onde o contexto do sub incha: **95% é o que ele lê**
+(Bash 49%, Read 46%). Tudo que um sub lê, ele **relê a cada turno até morrer** — então
+resultado gordo cobrado uma vez vira cobrança repetida dezenas de vezes. O briefing manda o
+sub segurar isso:
+
+> "Todo comando e toda leitura sua fica no seu espaço de trabalho e é relido a cada passo, então **mantenha cada saída pequena**: filtre a saída de teste/log com `grep`/`head`/`tail` ou jogue num arquivo em vez de despejar tudo; leia o **trecho** do arquivo que interessa (linhas X a Y), não o arquivo inteiro; **nunca** abra imagem, PDF ou dump gigante inteiro só pra dar uma olhada. Um comando certo vale dez tentativas jogadas na tela."
+
+Frente estreita ajuda aqui também: sub com recorte pequeno lê pouco. E o `--fix` de bateria
+grande em cima de log verboso é o pior ofensor: peça o resumo do teste (contagem, os que
+falharam), não a corrida inteira.
+
 ## Paralelismo, e a trava do navegador
 
 Frentes independentes rodam **em paralelo**, uma chamada só com vários subs. Mas o
