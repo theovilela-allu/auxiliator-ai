@@ -1,7 +1,7 @@
 ---
 name: loop
 type: reference
-description: SKILL loop — eu viro GESTOR de uma equipe de subagentes seniores no assunto pedido; como briefar, qual o ESCOPO da bateria (proporcional ao que mudou, nunca o projeto inteiro), quando trocar (tamanho absoluto) e quando encerrar (2 baterias limpas do escopo)
+description: SKILL loop — eu viro GESTOR de uma equipe de subagentes seniores no assunto pedido; como briefar, qual o ESCOPO da bateria (proporcional ao que mudou, nunca o projeto inteiro), quando trocar (tamanho absoluto), quando encerrar (2 baterias limpas do escopo) e por que a invasão só roda em marco de projeto
 atualizado: 2026-08-28
 ---
 
@@ -42,9 +42,14 @@ padrão virou varrer o sistema todo, duas vezes, mais invasão completa, pra qua
 
 | Nível | Quando | O alvo |
 |---|---|---|
-| **Alvo** (padrão) | mexida localizada | a parte mexida + quem depende dela + o smoke fixo. **2 a 4 frentes** |
+| **Alvo** (padrão) | qualquer pedido do dia a dia | **o que foi implementado por último** + o que encosta nele + o smoke fixo. **2 a 4 frentes** |
 | **Ampla** | a mexida é transversal: login/sessão, permissão/alçada, migração ou função de banco, componente compartilhado, regra de valor/rateio, disparo de mensagem | todos os fluxos que passam pela peça mexida |
 | **Total** | ele pediu, ou é véspera de subir pacote grande | o sistema |
+
+**A régua, na palavra dele (28/08):** *"testes somente no que foi implementado por último e no que
+tange o que foi implementado."* O alvo é **o último pacote de mudança e a vizinhança dele**. Código
+que ninguém tocou não entra na bateria, mesmo estando ali do lado. O smoke fixo é a única exceção,
+e é curto de propósito.
 
 **Eu monto o raio antes de briefar** — é leitura minha, três comandos, não vale abrir sub pra isso:
 
@@ -204,11 +209,16 @@ Sub que testa em produção segue o padrão da casa: valor baixo, descrição co
 mensagem, e-mail ou cobrança pra terceiro sem eu autorizar antes. Ver
 [[seguranca-e-confirmacao]].
 
-## Fase de invasão — obrigatória quando é site ou código
+## Fase de invasão — só em marco de projeto
 
-Pedido dele em 17/08/2026: quando o alvo for **site, sistema ou qualquer coisa ligada a
-código**, depois que a bateria de testes fechar (as duas rodadas limpas), **eu monto uma
-equipe de hackers pra tentar invadir de verdade.** Não é releitura do código: é ataque.
+Quando o alvo é **site, sistema ou qualquer coisa ligada a código**, em algum momento **eu monto
+uma equipe de hackers pra tentar invadir de verdade.** Não é releitura do código: é ataque.
+
+**Quando ela roda (revisão de 28/08/2026):** só em **marco** — fim de projeto ou de frente grande,
+véspera de commit/pacote grande, véspera de atualização grande, ou quando ele pedir. Entra depois
+de a bateria daquele marco fechar limpa. **Não roda em pedido do dia a dia:** na versão antiga era
+obrigatória em tudo que fosse código, e montar cinco frentes de ataque por causa de um ajuste de
+tela era o item mais caro do ciclo, sem retorno nenhum.
 
 Isto **não se aplica** a assunto sem código (texto, análise, planejamento) — aí a skill
 encerra na bateria de testes normal.
@@ -228,12 +238,10 @@ de ataque**: as especialidades da equipe e o passo a passo de cada frente, no br
 - **Sênior de infra e configuração** — segredo exposto, CORS frouxo, header faltando,
   função sem autenticação, dependência com falha conhecida.
 
-**O escopo vale aqui também.** A fase continua obrigatória, mas o alvo é a **superfície mexida**:
-das cinco especialidades eu convoco **só as que a mudança encosta** (mexeu em permissão →
-autorização; formulário ou upload → injeção; valor ou alçada → abuso de lógica; login ou sessão →
-autenticação; segredo, header ou dependência → infra). As cinco frentes juntas, em cima do sistema
-todo, só no nível **Total**. Ataque de cinco frentes por causa de um texto de tela é onde o tempo
-dele foi embora.
+**No marco vão as cinco frentes**, em cima do que o projeto expõe. Se ele pedir invasão **fora**
+de marco, em cima de uma mudança pontual, eu convoco **só as frentes que a mudança encosta**
+(permissão → autorização; formulário ou upload → injeção; valor ou alçada → abuso de lógica;
+login ou sessão → autenticação; segredo, header ou dependência → infra).
 
 Mesma disciplina do resto da skill: briefing de 5 blocos, troca por tamanho absoluto, e **cada invasão
 alegada só vale com a prova de como se reproduz** (a requisição, o passo, o dado que vazou).
@@ -242,10 +250,11 @@ do conserto — invasão que teve sucesso zera este contador, igual à bateria d
 
 ## Como encerra, e quando eu falo com o CEO
 
-O ciclo só fecha com **as duas condições**: (1) a equipe de testes fez **duas baterias
-completas seguidas sem achar nenhum defeito, erro, bug ou furo**, E (2) quando é site ou
-código, **a equipe de hackers não conseguiu invadir** o sistema. Qualquer achado ou qualquer
-invasão bem-sucedida no caminho: conserta e o contador daquela fase **volta ao zero**.
+**No pedido do dia a dia** o ciclo fecha com uma condição: a equipe de testes fez **duas baterias
+completas seguidas sem achar nenhum defeito, erro, bug ou furo**. **No marco** (fim de projeto,
+commit ou atualização grande) entra a segunda condição: **a equipe de hackers não conseguiu
+invadir**. Qualquer achado ou qualquer invasão bem-sucedida no caminho: conserta e o contador
+daquela fase **volta ao zero**.
 
 **"Completa" é o escopo declarado coberto de ponta a ponta**, com a lista do que foi coberto na
 mão — não é o sistema inteiro. E a **segunda rodada é uma passada nova no mesmo escopo, com as
