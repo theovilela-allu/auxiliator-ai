@@ -139,6 +139,12 @@ Frente estreita ajuda aqui também: sub com recorte pequeno lê pouco. E o `--fi
 grande em cima de log verboso é o pior ofensor: peça o resumo do teste (contagem, os que
 falharam), não a corrida inteira.
 
+## Uma worktree por frente (lição de 27/08)
+
+Na bateria do racional invertido rodei **seis consertos ao mesmo tempo na mesma worktree**, separando por arquivo no briefing. Funcionou, mas por sorte: um sub commitou por baixo do outro, dois carregaram no commit deles mudanças de um terceiro, e a integração final teve que conciliar tudo. **Da próxima: worktree por frente** (`git worktree add -b <frente> ../compras-allu-<frente> <base>`), ou fila, quando as frentes tocam o mesmo arquivo. Vale principalmente pro que mexe em banco: migração nova por frente, com timestamp separado, e uma frente de INTEGRAÇÃO no fim pra rodar a cadeia em ordem e resolver colisão.
+
+**A armadilha que travou dois subs naquele dia:** patch de corpo vivo por `pg_get_functiondef` com **âncora de várias linhas não casa**, porque o repo está em CRLF. Só âncora de uma linha funciona. Ponha isso no briefing de quem for remendar função.
+
 ## Paralelismo, e a trava do navegador
 
 Frentes independentes rodam **em paralelo**, uma chamada só com vários subs. Mas o
