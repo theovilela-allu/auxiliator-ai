@@ -220,6 +220,11 @@ de a bateria daquele marco fechar limpa. **Não roda em pedido do dia a dia:** n
 obrigatória em tudo que fosse código, e montar cinco frentes de ataque por causa de um ajuste de
 tela era o item mais caro do ciclo, sem retorno nenhum.
 
+**A contrapartida, e como eu cubro:** furo de segurança que entra numa mudança do dia a dia fica
+sem ataque até o próximo marco. Então, quando o que foi implementado **encosta em login, permissão,
+alçada ou dado de terceiro**, eu aviso em uma linha e ofereço a invasão pontual ali mesmo. Ele
+decide; sem o "pode", segue pro marco.
+
 Isto **não se aplica** a assunto sem código (texto, análise, planejamento) — aí a skill
 encerra na bateria de testes normal.
 
