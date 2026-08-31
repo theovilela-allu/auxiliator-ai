@@ -76,7 +76,7 @@ o tempo que ela merece.
 ## Depois do conserto: no dia a dia, acabou; na entrega final, reteste o conserto
 
 **No dia a dia não há bateria seguinte.** Achou defeito, eu mando consertar, o conserto vem com
-teste permanente e os verdes, e o ciclo fecha ali — ver [[uma-rodada-limpa-basta]].
+teste permanente e os verdes, e o ciclo fecha ali — ver [[uma-bateria-conserta-e-segue]].
 
 **Na entrega final**, aí sim a bateria seguinte cobre **o conserto + o que o defeito encostou + o
 smoke**. O contador de rodadas limpas volta a zero, mas o que ele conta é o **escopo declarado**
@@ -291,7 +291,7 @@ conserto como primeiro alvo da seguinte, achado zerando o contador, e a **fase d
 **O critério, na dúvida: vai pro ar agora? Entrega final, repete até limpar. Fica na bancada? Uma
 rodada e segue.** Regra dele em 31/08/2026 — *"o procedimento padrão é fazer uma nas novas mudanças.
 Corrigir o que achou e ir pro próximo. Testes infinitos somente na entrega final."* Detalhe e o
-porquê em [[uma-rodada-limpa-basta]].
+porquê em [[uma-bateria-conserta-e-segue]].
 
 **"Completa" é o escopo declarado coberto de ponta a ponta**, com a lista do que foi coberto na
 mão — não é o sistema inteiro. E quando houver segunda rodada (só na entrega final), ela é **uma
