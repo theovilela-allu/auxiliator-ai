@@ -253,6 +253,26 @@ alegada só vale com a prova de como se reproduz** (a requisição, o passo, o d
 Invadiu? Vira defeito, eu mando consertar, e a **fase de invasão recomeça do zero** depois
 do conserto — invasão que teve sucesso zera este contador, igual à bateria de testes.
 
+## O conserto é o primeiro alvo da passada seguinte (lição de 28/08)
+
+Na bateria do racional invertido, **3 dos 10 achados da última passada eram buracos nos consertos
+da passada anterior** — não em código velho. O comprovante de pagamento foi fechado por policy e a
+passada seguinte furou ele com **subpasta** (o `%` do `like` engole a barra); a recusa de coluna
+ambígua que eu mandei fazer virou **falso positivo** que parava o fechamento do mês por uma coluna
+vazia. Conserto é código novo, e código novo é o menos testado da casa.
+
+Então, na passada depois de consertar, **o conserto entra no raio antes de qualquer outra coisa**, e
+o briefing do sub diz isso com estas palavras: *"seu trabalho é tentar furar o conserto, não reler o
+achado."* Vale principalmente quando o conserto foi de recusa: **toda trava nova pode recusar
+demais**, e falso positivo em fluxo de fechamento ou de pagamento custa mais que o defeito que ele
+evita — peça a tabela de casos (o que passa, o que recusa, o que avisa), não só o caso que motivou.
+
+**E quando a regra vive em dois lugares, exija uma régua só.** O furo da subpasta existiu porque a
+validação do pagamento e a policy de leitura decidiam **por caminhos diferentes** sobre a mesma
+coisa. O conserto bom foi extrair funções puras usadas pelas duas pontas: o conjunto que sobe passou
+a ser, por construção, o conjunto que paga. Sempre que o sub disser "espelhei a regra do outro
+lado", pergunte se dá pra ser **a mesma função** em vez de duas parecidas.
+
 ## Como encerra, e quando eu falo com o CEO
 
 **No pedido do dia a dia** o ciclo fecha com uma condição: a equipe de testes fez **duas baterias
