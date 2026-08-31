@@ -1,8 +1,8 @@
 ---
 name: loop
 type: reference
-description: SKILL loop — eu viro GESTOR de uma equipe de subagentes seniores no assunto pedido; como briefar, qual o ESCOPO da bateria (proporcional ao que mudou, nunca o projeto inteiro), quando trocar (tamanho absoluto), quando encerrar (2 baterias limpas do escopo) e por que a invasão só roda em marco de projeto
-atualizado: 2026-08-28
+description: SKILL loop — eu viro GESTOR de uma equipe de subagentes seniores no assunto pedido; como briefar, qual o ESCOPO da bateria (proporcional ao que mudou, nunca o projeto inteiro), quando trocar (tamanho absoluto), quando encerrar (UMA rodada no dia a dia, repetir ate limpar so na entrega final) e por que a invasão só roda em marco de projeto
+atualizado: 2026-08-31
 ---
 
 # Skill: Loop — eu gerencio, a equipe executa
@@ -73,12 +73,15 @@ tarefa pra depois e **não zera** o contador desta bateria.
 proporcional é o que faz um ajuste de tela fechar em minutos e uma mexida em alçada seguir levando
 o tempo que ela merece.
 
-## Depois do conserto, reteste o conserto — não o projeto
+## Depois do conserto: no dia a dia, acabou; na entrega final, reteste o conserto
 
-Achou defeito e eu mandei consertar: a bateria seguinte cobre **o conserto + o que o defeito
-encostou + o smoke**. O contador de rodadas limpas volta a zero, mas o que ele conta é o **escopo
-declarado** desta bateria, nunca o sistema inteiro. Ler "o contador zerou" como "roda tudo de novo"
-foi exatamente o que deixou o ciclo lento.
+**No dia a dia não há bateria seguinte.** Achou defeito, eu mando consertar, o conserto vem com
+teste permanente e os verdes, e o ciclo fecha ali — ver [[uma-rodada-limpa-basta]].
+
+**Na entrega final**, aí sim a bateria seguinte cobre **o conserto + o que o defeito encostou + o
+smoke**. O contador de rodadas limpas volta a zero, mas o que ele conta é o **escopo declarado**
+desta bateria, nunca o sistema inteiro. Ler "o contador zerou" como "roda tudo de novo" foi
+exatamente o que deixou o ciclo lento.
 
 ## Os dois papéis, e a linha que não se cruza
 
@@ -261,7 +264,7 @@ passada seguinte furou ele com **subpasta** (o `%` do `like` engole a barra); a 
 ambígua que eu mandei fazer virou **falso positivo** que parava o fechamento do mês por uma coluna
 vazia. Conserto é código novo, e código novo é o menos testado da casa.
 
-Então, na passada depois de consertar, **o conserto entra no raio antes de qualquer outra coisa**, e
+Então, **na entrega final**, na passada depois de consertar, **o conserto entra no raio antes de qualquer outra coisa**, e
 o briefing do sub diz isso com estas palavras: *"seu trabalho é tentar furar o conserto, não reler o
 achado."* Vale principalmente quando o conserto foi de recusa: **toda trava nova pode recusar
 demais**, e falso positivo em fluxo de fechamento ou de pagamento custa mais que o defeito que ele
@@ -275,16 +278,26 @@ lado", pergunte se dá pra ser **a mesma função** em vez de duas parecidas.
 
 ## Como encerra, e quando eu falo com o CEO
 
-**No pedido do dia a dia** o ciclo fecha com uma condição: a equipe de testes fez **duas baterias
-completas seguidas sem achar nenhum defeito, erro, bug ou furo**. **No marco** (fim de projeto,
-commit ou atualização grande) entra a segunda condição: **a equipe de hackers não conseguiu
-invadir**. Qualquer achado ou qualquer invasão bem-sucedida no caminho: conserta e o contador
-daquela fase **volta ao zero**.
+**No pedido do dia a dia: UMA rodada, conserta e segue.** Declaro o escopo do que mudou agora, solto
+**uma** bateria, avalio, mando consertar o que é defeito de verdade, e **acabou** — vou pro próximo
+assunto. **Não existe passada de verificação depois do conserto:** não zero contador, não solto
+frente pra reconferir, não repito o roteiro com outro ângulo. O conserto carrega a prova dele (teste
+permanente e os verdes), e isso basta.
+
+**Na entrega final** — o pacote que vai pro ar, fim de projeto ou de frente grande, marco, dia da
+virada — vale a régua inteira: **rodadas até sair limpa**, frentes redistribuídas a cada passada, o
+conserto como primeiro alvo da seguinte, achado zerando o contador, e a **fase de invasão** no fim.
+
+**O critério, na dúvida: vai pro ar agora? Entrega final, repete até limpar. Fica na bancada? Uma
+rodada e segue.** Regra dele em 31/08/2026 — *"o procedimento padrão é fazer uma nas novas mudanças.
+Corrigir o que achou e ir pro próximo. Testes infinitos somente na entrega final."* Detalhe e o
+porquê em [[uma-rodada-limpa-basta]].
 
 **"Completa" é o escopo declarado coberto de ponta a ponta**, com a lista do que foi coberto na
-mão — não é o sistema inteiro. E a **segunda rodada é uma passada nova no mesmo escopo, com as
-frentes redistribuídas** (outro sub, outro ângulo), nunca o mesmo roteiro repetido pelo mesmo sub:
-segunda rodada em cópia carbono não prova nada, só cobra o dobro.
+mão — não é o sistema inteiro. E quando houver segunda rodada (só na entrega final), ela é **uma
+passada nova no mesmo escopo, com as frentes redistribuídas** (outro sub, outro ângulo), nunca o
+mesmo roteiro repetido pelo mesmo sub: segunda rodada em cópia carbono não prova nada, só cobra o
+dobro.
 
 **A devolutiva ao CEO é só no fim.** Enquanto o critério de encerramento não bater, eu não
 levo relatório parcial, lista de achado nem prévia: eu recebo, avalio, corrijo o rumo de quem
