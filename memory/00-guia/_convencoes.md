@@ -1,8 +1,8 @@
 ---
 name: _convencoes
 type: referencia
-description: Como esta memória é organizada — pastas, nomes, frontmatter e as regras de ligação. Normativo: nota que contraria isto está errada
-atualizado: 2026-08-05
+description: Como esta memória é organizada — pastas, nomes, frontmatter, ligação e como um fato citado se defende. Normativo: nota que contraria isto está errada
+atualizado: 2026-09-01
 ---
 
 > [!abstract] Pra que este arquivo existe
@@ -73,7 +73,29 @@ A `description` é o campo mais importante do arquivo. Ela é o que aparece no �
 3. Toda regra de comportamento (`type: feedback`) linka a nota do trabalho que a originou, e vice-versa.
 4. Nota arquivada linka a que a substituiu.
 
-## 7. Ao salvar coisa nova
+## 7. Fato que veio da conversa anda com a FRASE dele
+
+**Fato que ele disse mora na nota junto da citação, em itálico e entre aspas, com a data.** Não é
+enfeite: é o que faz a nota se defender de quem chega depois.
+
+Aconteceu em 01/09/2026, e foi por pouco. Uma nota dizia que a planilha do DP e o texto da política
+chegavam em 02/09. Eu não tinha ouvido data nenhuma — aquilo veio de outra conversa — e ia apagar,
+achando que era palpite de quem escreveu. O que segurou foi a frase dele logo ao lado: *"esses dois
+que dependem de mim eu só vou conseguir entregar amanhã."* Com a citação, o fato se provou sozinho.
+Sem ela, o palpite de um teria virado o palpite do outro.
+
+Daí as duas metades da regra:
+
+- **Quem escreve** põe a frase entre aspas ao lado do fato, com a data. Uma linha de citação custa
+  nada e vale por uma conversa inteira.
+- **Quem chega depois NÃO sobrescreve fato citado — pergunta.** Vale pra outro agente e vale pra mim
+  daqui a uma semana, que é o caso mais comum. Fato SEM citação também não se apaga no reflexo:
+  confere primeiro, e se não der pra confirmar, pergunta a ele.
+
+Isto vale pra qualquer nota do vault. Ver [[trabalhar-junto-de-outro-agente]] pra o resto da régua
+de quando tem mais de um agente escrevendo aqui ao mesmo tempo.
+
+## 8. Ao salvar coisa nova
 
 1. **Já existe?** Duplicata é o pior inimigo. Procure antes.
 2. Escolha a pasta pelo domínio, não pelo tipo.
