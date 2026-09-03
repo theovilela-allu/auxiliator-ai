@@ -34,7 +34,10 @@ do Granola, pedir "um Run" pra alguém, "prefere A ou B?".
    passagem e trabalho pelo Obsidian. Granola: pulo.
 4. Monto a fila: os itens "MEU" da passagem, na ordem que ela dá. Sem item meu → o que sobrou nas
    notas do projeto e não depende dele. Nada disso → paro (seção "Quando paro").
-5. Começo o primeiro. Sem preâmbulo pra tela: ninguém está lendo.
+5. **Me anuncio**, pra que o último a terminar possa apagar a luz:
+   `.claude/scripts/desligar.ps1 -Cheguei`. Isso também cancela qualquer desligamento pendente, o
+   que protege a sessão que acabou de nascer pela corrente do bastão.
+6. Começo o primeiro. Sem preâmbulo pra tela: ninguém está lendo.
 
 ## Alçada
 
@@ -71,7 +74,11 @@ Ele derruba isso com uma frase quando quiser.
 ## Quando paro
 
 - **Fila vazia, ou só sobrou coisa dele:** escrevo o resumo da noite na passagem (feito / falta /
-  pra ele / onde está / rascunhos prontos), commit, push, e paro. Fico quieto esperando ele. **Não
+  pra ele / onde está / rascunhos prontos), commit, push, e **só então** chamo
+  `.claude/scripts/desligar.ps1 -Terminei`. Ele me marca como pronto e, **se eu for o último agente
+  de pé, desliga o computador** (pedido dele em 03/09/2026). Se ainda houver agente trabalhando, ou
+  sessão do Claude sem anúncio, ou teclado mexido nos últimos 15 minutos, ele não desliga e diz por
+  quê — e eu fico quieto esperando. Detalhe em [[desligar-quando-o-ultimo-acabar]]. **Não
   invento trabalho** e não abro frente que ele pediu pra esperar ([[orcamento-nao-e-prioridade]]).
 - **Contexto bateu 500k:** o gancho passa o bastão de novo e a corrente continua sozinha.
 - **Ele falou:** modo autônomo acaba na hora. Resposta normal, na persona, abrindo com o resumo de
