@@ -59,36 +59,39 @@ laranja vibrante: acento `#FF6B1A`, linha `#E85D04`, forte `#C74407`.
    escurece cor clara demais pro fundo. Num fundo marfim, laranja vibrante virava **marrom**.
    `terminal.integrated.minimumContrastRatio: 1` desliga e as cores saem como o tema manda.
 
-### A BARRA DE PROGRESSO DA STATUSLINE (03/09/2026, e custou 5 tentativas)
+### A BARRA DE PROGRESSO DA STATUSLINE (03/09/2026, e custou 6 tentativas)
 
 Ele pediu: *"uma barra só, um contorno, e conforme ela for enchendo, ela vai ocupando espaço que
 estava vazio, transparente, mas dentro do contorno. O contorno pode ser bem fininho."*
 
-O desenho que ficou é **sem lateral nenhuma**: cheio `█` desde a primeira célula, vazio `▔`, e um
-`ESC[4m` (underline) por cima da pista inteira. O `▔` faz a linha de cima, o underline faz a de
-baixo, as duas finas, e o vazio entre elas é o fundo do terminal.
+**O que ficou (ele escolheu vendo na tela):** uma barra só, sem lateral nenhuma, cheio `█` em
+laranja `#FF6B1A` desde a **primeira** célula e vazio `█` em laranja lavado `#F7D3B8`. O contorno
+virou o corpo claro da barra, e o cheio toma esse espaço conforme sobe.
 
-Isso foi **medido**, não deduzido: pus um desfile de 7 candidatos na própria statusline, tirei print
-da tela e amostrei com PIL. O que o pixel disse:
+**O contorno fechado que ele pediu NÃO EXISTE numa linha de terminal, e isso é limite, não preguiça:**
+a linha de baixo só dá pra fazer com sublinhado (SGR 4), que o terminal desenha **abaixo** da célula;
+a de cima só dá pra fazer com glifo (`▔`), que nasce **dentro** dela. As duas nunca alcançam a altura
+do bloco cheio, e sai um quadrado solto numa caixa torta — foi exatamente o que ele viu e reprovou.
+Overline (SGR 53), que resolveria, **o Claude Code não desenha**.
 
 | Tentativa | Por que morreu |
 |---|---|
 | `▰▱` | largura ambígua, desalinha quando a fonte muda |
 | `━─` | ele chamou de "um fio" |
 | `█░` | vira **duas** barras coladas, não uma |
-| moldura por `ESC[53m` (overline) | **o Claude Code não desenha overline.** A barra saiu sem linha em cima |
-| laterais `▏` e `▕` | desenham o traço na borda da célula e deixam os outros **7/8 vazios**: o preenchimento nascia uma célula depois da borda, e o traço ficava mais alto que a moldura |
+| moldura por `ESC[53m` (overline) | o Claude Code não desenha overline: barra sem linha em cima |
+| laterais `▏` e `▕` | desenham o traço na borda da célula e deixam os outros **7/8 vazios**: o cheio nascia uma célula depois da borda, e o traço ficava mais alto que a moldura |
 | `═` no lugar do vazio | vira dois fios colados no **meio** da célula, não um contorno |
+| `▔` em cima + sublinhado embaixo | as três alturas (topo do glifo, base do sublinhado, altura do bloco) não se encontram. **"Ficou péssimo"** |
 
-**As duas regras que sobram:** a linha de baixo pode ser atributo do terminal (underline, SGR 4,
-funciona); a de cima **tem que ser glifo** (`▔`, oitavo de bloco superior, que encosta no topo da
-célula e ladrilha sem emenda). E lateral de barra em terminal custa uma célula inteira: ou a barra
-fica aberta nas pontas, ou o preenchimento não começa no começo.
+**A ferramenta que resolveu, e não pode se perder:** parar de descrever e **trocar a statusline por um
+desfile de candidatos numerados**, tirar print da tela inteira com `System.Drawing.CopyFromScreen`,
+achar a faixa da barra pela linha com a maior corrida contígua de laranja, recortar e ampliar só ela.
+Ele olhou os cinco e disse "gostei da 5" em uma linha. Julgar no olho, sem print, custou três rodadas
+antes disso.
 
-**A ferramenta que resolveu, e não pode se perder:** trocar a statusline por um desfile de
-candidatos, tirar print da tela inteira com `System.Drawing.CopyFromScreen`, achar a faixa da barra
-pela linha com a maior corrida contígua de laranja e recortar só ela. Julgar no olho já custou três
-rodadas neste mesmo assunto.
+**A régua que fica:** em coisa de aparência, desenho não se descreve, se mostra. Duas rodadas erradas
+já pagam o desfile.
 
 ### Régua pra próxima vez
 
