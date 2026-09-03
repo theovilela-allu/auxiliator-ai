@@ -125,15 +125,18 @@ CLI. Na sequência ele pediu *"muda tudo pra azul bebê, tudo que tá laranja"*.
 **Azul bebê puro em texto sobre papel some**, então o laranja não virou uma cor só: virou a mesma
 escada, em azul.
 
-| Era | Papel | Virou |
-|---|---|---|
-| `#FF6B1A` | acento vibrante, letra do CLI | `#3FA7E0` |
-| `#E85D04` | linha | `#2E92CE` |
-| `#C74407` | forte | `#1E6FA6` |
-| `#A8551F` | apagado | `#1F5B7C` |
-| — | faixa dos prompts dele e borda da caixa | `#7FC1E8` (`terminal.ansiWhite`) |
+Ele deu o tom a mão (`#78AEE4`) e depois afinou: *"coloca o azul do prompt mais claro, e o resto
+mais escuro"*. Onde parou, no tema **1.8.0**:
 
-94 trocas no tema, 13 no `settings.json`, mais a statusline (`#3FA7E0`, vazio da barra `#CDE7F7`).
+| Era laranja | Papel | Agora |
+|---|---|---|
+| `#FF6B1A` | acento vibrante, letra do CLI | `#4A87CC` |
+| `#E85D04` | linha | `#3A6FB0` |
+| `#C74407` | forte | `#2A5388` |
+| `#A8551F` | apagado | `#1E3A55` |
+| — | faixa dos prompts dele e borda da caixa | `#A9CFEF` (`terminal.ansiWhite`) |
+
+94 trocas no tema, 13 no `settings.json`, mais a statusline (`#4A87CC`, vazio da barra `#BED7F0`).
 **A escada de aviso da barra fica QUENTE de propósito** (500k e 800k): azul não grita.
 
 **O mapa que custou medição, e vale guardar:**
@@ -141,7 +144,7 @@ escada, em azul.
 - **`terminal.ansiWhite` pinta DUAS coisas ao mesmo tempo**: a faixa dos prompts já enviados **e** a
   borda da caixa onde ele digita. São o mesmo slot, então não dá pra ter uma azul e a outra laranja
   — ele notou sozinho (*"isso mudou a cor que fica em volta de onde eu mando o prompt junto"*).
-  Por isso `#7FC1E8` e não um bebê mais claro: claro demais some como linha sobre o papel.
+  É a razão de a faixa e a borda andarem sempre juntas, e de a faixa não poder ser clara demais: clara demais, a borda some como linha sobre o papel.
 - **A faixa é desenhada com a letra ESCURA** (`#2D2D2A`), não clara. Medido linha a linha. É o que
   libera usar um azul claro na faixa sem perder leitura.
 - **O azul que ele chamou de "o que tava antes" era `#0052AC`**, a cor que a paleta interna do
