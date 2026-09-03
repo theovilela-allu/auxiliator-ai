@@ -340,6 +340,14 @@ Registre em `.claude/settings.json`:
 > **árvore inteira** (`taskkill /F /T`), senão um navegador aberto pelo agente fica vivo segurando a
 > trava do perfil.
 
+> [!IMPORTANT]
+> **O gancho não interrompe o agente — mas nada garantia que ele tinha salvado.** O gancho `Stop` só
+> devolve a lista; quem encerra a sessão é o próprio agente, no passo 5. Só que "salve antes de
+> morrer" era **instrução, não garantia**: bastava o agente pular o passo 2 pra o trabalho sumir.
+> Por isso o script **confere antes de morrer** e recusa se a passagem não foi reescrita nos últimos
+> 15 minutos ou se há arquivo rastreado sem commit. `--forcado` escapa, pra quando não há mesmo o
+> que salvar.
+
 ```javascript
 #!/usr/bin/env node
 // Grava a mensagem de abertura no sinal deste terminal e derruba esta sessao (arvore inteira).
@@ -381,6 +389,26 @@ if (!sinal) {
   console.log('Sem BASTAO_SINAL: esta sessao nao foi aberta pela funcao claude, entao nao ha laco pra relancar.');
   console.log('Abra um terminal novo, rode claude e cole:\n' + MENSAGEM);
   process.exit(0);
+}
+
+// TRAVA DE ESTADO SALVO: sem estado fresco e arvore limpa, este script recusa morrer.
+const MINUTOS = 15;
+const forcado = process.argv.includes('--forcado');
+const raiz = process.env.CLAUDE_PROJECT_DIR || process.cwd();
+const passagem = require('path').join(raiz, 'memory', '00-guia', 'passagem-de-bastao.md');
+const recusas = [];
+if (fs.existsSync(passagem)) {
+  const idade = (Date.now() - fs.statSync(passagem).mtimeMs) / 60000;
+  if (idade > MINUTOS) recusas.push(`a passagem nao e reescrita ha ${Math.round(idade)} min (passo 2)`);
+}
+let sujo = '';
+try { sujo = execFileSync('git', ['status','--porcelain','--untracked-files=no'], { cwd: raiz, encoding: 'utf8', stdio: ['ignore','pipe','ignore'] }).trim(); } catch (_) {}
+if (sujo) recusas.push(`${sujo.split('
+').length} arquivo(s) alterado(s) sem commit (passo 3)`);
+if (recusas.length && !forcado) {
+  console.log('NAO PASSEI O BASTAO, porque o estado ainda nao esta salvo: ' + recusas.join('; ') + '.');
+  console.log('Reescreva a secao Estado da passagem, commit e push, e rode de novo. Ou use --forcado.');
+  process.exit(1);
 }
 
 const matador = `powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -Command "Start-Sleep -Seconds 2; taskkill /F /T /PID ${alvo} | Out-Null"`;

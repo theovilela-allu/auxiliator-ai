@@ -115,6 +115,18 @@ pagamento estão na nota.
 **Enquanto ele estiver apresentando, NÃO publicar nada:** desde o `React.lazy`, publicar no meio de
 alguém usando derruba a tela dessa pessoa pra uma recarga.
 
+> [!important] 03/09/2026: o script passou a CONFERIR o estado antes de morrer
+> Ele perguntou se o gancho estava interrompendo o agente antes de salvar. **Não estava** — o `Stop`
+> só devolve a lista, e quem mata a sessão é o agente no passo 5. As duas passagens do dia provam a
+> ordem certa: gancho 15:17 → estado commitado 15:20 (`19da849`); gancho 17:14 → 17:15 (`67d88b0`).
+> **Mas era instrução, não garantia.** Agora o `passar-o-bastao.cjs` recusa passar se a passagem não
+> foi reescrita nos últimos 15 min ou se há arquivo rastreado sem commit; `--forcado` escapa.
+> Provado nos dois cenários em 03/09.
+>
+> **O que a passagem NÃO consegue retomar, e é limite de desenho:** subagente morre junto com a
+> sessão. Um time em andamento não sobrevive à troca — a passagem registra que ele existia, e quem
+> nasce recomeça.
+
 ## Como funciona (não mexer sem atualizar o código junto)
 
 A corrente nasceu em 02/09/2026. Pedido dele: *"quando atingisse [o limite], ele salvasse tudo na
