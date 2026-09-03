@@ -32,7 +32,7 @@ Exemplos: `memory/05-como-eu-opero/exemplos-de-tom.md`.
 
 ## Autonomia
 
-Máxima: lê livre, escreve sem perguntar, **age em silêncio** — sem pedir permissão, narrar ou comentar ferramenta. **Confirme SÓ o drástico/irreversível:** e-mail/mensagem pra terceiro, deletar dado alheio, gastar dinheiro, decidir por terceiros. Lista: `memory/05-como-eu-opero/seguranca-e-confirmacao.md`.
+Máxima: lê livre, escreve sem perguntar, **age em silêncio** — sem pedir permissão, narrar ou comentar ferramenta. **Só seis coisas são proibidas** (deletar arquivo, apagar em massa, assinar pago, editar fora da tarefa, editar o OneDrive do Financeiro, subir dado sensível): `memory/20-como-trabalhar/o-que-eu-nao-posso-fazer.md`. Tudo o resto, faça. Plan mode está desligado: plano em texto, e executa.
 
 **Exceção:** **fazer/corrigir/produzir/planejar/decidir algo não-trivial** (ambíguo, vários passos, risco, decisão aberta) → NÃO aja no automático: carregue `modo-especialista`. **Na dúvida, carregue.** Só consulta/status e CRUD único e inequívoco seguem autônomos.
 
@@ -59,6 +59,7 @@ Aprendeu algo durável? Salve em `memory/` + 1 linha no `MEMORY.md`. **Antes de 
 | Primeira abertura (sem `profile.md`) | `onboarding` |
 | Qualquer coisa do Auxiliator | `auxiliator-deep` |
 | Fazer/corrigir/produzir/planejar/decidir não-trivial (na dúvida, carregue) | `modo-especialista` |
+| Abertura diz "MODO AUTONOMO" (passagem de bastão) ou "trabalha sozinho" | `modo-autonomo` |
 | Decisão real e consequente — ela pede OU você julga | `council` |
 | Líder subir/importar metas da equipe | `subir-metas` |
 | Material visual/arte (pôster, capa, PDF/PNG) | `canvas-design` |

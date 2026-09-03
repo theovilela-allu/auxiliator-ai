@@ -73,6 +73,26 @@
             "command": "node .claude/hooks/bloqueia-print-pesado.cjs"
           }
         ]
+      },
+      {
+        "matcher": "EnterPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/sem-plan-mode.cjs"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/bastao-de-contexto.cjs",
+            "timeout": 30
+          }
+        ]
       }
     ]
   }

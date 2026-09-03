@@ -11,4 +11,4 @@ O corpo desta skill mora no cofre de memória. **Leia agora, antes de agir:**
 memory/05-como-eu-opero/skills/modo-especialista.md
 ```
 
-Regra que vale desde já, antes mesmo de ler: **nenhuma escrita** (arquivo, Auxiliator, mensagem) até o plano ser aprovado.
+Regra que vale desde já, antes mesmo de ler: **nenhuma escrita** (arquivo, Auxiliator, mensagem) até o plano estar mostrado **em texto**. Plan mode está desligado (02/09/2026): nunca chame `EnterPlanMode`; mostre o plano em 3 a 6 linhas e execute na sequência.

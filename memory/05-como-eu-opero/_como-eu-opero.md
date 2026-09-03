@@ -2,7 +2,7 @@
 name: _como-eu-opero
 type: painel
 description: PORTA DE ENTRADA do meu modo de operar — o manual e o corpo das skills, que saíram do repo em 05/08/2026 e passaram a morar aqui
-atualizado: 2026-08-05
+atualizado: 2026-09-02
 ---
 
 > [!tip] O que é esta pasta
@@ -43,7 +43,8 @@ Fora desta pasta, mas do mesmo naipe: [[api-do-auxiliator]] (em `70-auxiliator/`
 | Skill | Corpo | Partes |
 |---|---|---|
 | auxiliator-deep | [[auxiliator-deep]] | [[auxiliator-deep-operar]] · [[auxiliator-deep-login]] · [[auxiliator-deep-atualizacao]] |
-| modo-especialista | [[modo-especialista]] | — |
+| modo-especialista | [[modo-especialista]] | plan mode desligado desde 02/09: plano em texto, executa na sequência |
+| modo-autonomo | [[modo-autonomo]] | a sessão que nasce da [[passagem-de-bastao]]: fila do que ficou, zero pergunta, zero trava, relato no Obsidian |
 | council | [[council]] | — |
 | onboarding | [[onboarding]] | o gabarito do `profile.md` está no fim do arquivo |
 | subir-metas | [[subir-metas]] | — |

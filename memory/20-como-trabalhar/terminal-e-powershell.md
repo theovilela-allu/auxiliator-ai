@@ -58,6 +58,10 @@ Como ficou:
   no terminal do VSCode) tem uma função `claude` que chama
   `C:\Users\Allu\.local\bin\claude.exe --dangerously-skip-permissions @args`.
 - Saída de emergência: digitar `claude.exe`, com extensão, pula a função e roda o binário cru.
+- **Desde a noite de 02/09 a função é um LAÇO:** exporta `BASTAO_SINAL` e, quando o `claude.exe` morre
+  deixando o sinal preenchido, relança no mesmo terminal com a mesma flag e a mensagem do sinal. É a
+  [[passagem-de-bastao]]. Terminal aberto ANTES dessa mudança ainda roda a função velha: a passagem
+  ali não relança, só devolve a frase pra colar na mão.
 - Não alcança a extensão do VSCode, que chama o binário direto sem passar por shell.
 
 Duas peças eu **não** consegui executar: editar o `settings.json` global e rodar o

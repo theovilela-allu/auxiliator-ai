@@ -1,9 +1,16 @@
 ---
 name: seguranca-e-confirmacao
 type: reference
-description: A lista do que exige aviso ou confirmacao antes de agir, e o que e livre
-atualizado: 2026-08-05
+description: SUPERADA em 02/09/2026 pela lista das 6 proibicoes — fica como historico e como modelo de tom pra quando eu mostro um rascunho
+atualizado: 2026-09-02
 ---
+
+> [!warning] Superada em 02/09/2026
+> Esta lista **não é mais trava**. O Rei fechou o assunto com seis proibições, e só elas:
+> [[o-que-eu-nao-posso-fazer]]. Tudo que está abaixo e não cai nas seis (mensagem pra terceiro,
+> mexer em tarefa de outro, aprovar despesa dentro do sistema) passou a ser permitido. O arquivo
+> fica como histórico e pela seção "Forma de confirmação", que ainda é o modelo de tom quando eu
+> escolho mostrar um rascunho antes de mandar.
 
 > **Quando carregar:** sempre que estiver prestes a fazer uma escrita que possa cair na lista abaixo. Em dúvida, carregar.
 
