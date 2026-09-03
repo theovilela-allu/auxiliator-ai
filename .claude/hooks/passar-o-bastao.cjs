@@ -2,7 +2,9 @@
 // Passa o bastao: grava a mensagem de abertura no sinal deste terminal e derruba esta sessao
 // (arvore inteira: claude.exe, ajudantes e o navegador, que senao segura a trava do perfil).
 // O laco da funcao claude no profile.ps1 ve o sinal e relanca no mesmo terminal, com a flag.
-// Uso: node .claude/hooks/passar-o-bastao.cjs [--seco]   (--seco so mostra o que faria)
+// Uso: node .claude/hooks/passar-o-bastao.cjs [--seco] [--forcado]
+//   --seco     so mostra o que faria
+//   --forcado  passa o bastao mesmo com estado por salvar (ver TRAVA DE ESTADO SALVO)
 // Desenho: memory/00-guia/passagem-de-bastao.md
 //
 // Por que o matador nasce via WMI e nao como filho meu: a ferramenta que roda este script derruba
@@ -12,6 +14,7 @@
 // sobrevive ao fim da ferramenta.
 const fs = require('fs');
 const { execFileSync } = require('child_process');
+const path = require('path');
 
 const MENSAGEM = 'bom dia, da uma lida pra pegar contexto. MODO AUTONOMO: voce nao esta aqui, entao le a passagem de bastao, entende onde a gente parou e segue trabalhando sozinho no que ficou pra fazer.';
 const seco = process.argv.includes('--seco');
@@ -54,6 +57,41 @@ if (!sinal) {
   console.log('Sem BASTAO_SINAL: esta sessao nao foi aberta pela funcao claude do PowerShell, entao nao ha laco pra relancar. Nada foi encerrado.');
   console.log('Abra um terminal novo, rode claude e cole:\n' + MENSAGEM);
   process.exit(0);
+}
+
+// ---------------------------------------------------------------------------
+// TRAVA DE ESTADO SALVO (03/09/2026). Ele perguntou se o gancho estava
+// interrompendo o agente ANTES de ele salvar o que estava fazendo. Nao estava: o
+// gancho Stop so devolve a lista de fechamento, e quem mata a sessao e o proprio
+// agente, aqui, no passo 5. Mas nada VERIFICAVA que os passos 2 e 3 (reescrever
+// a secao Estado e commitar) tinham acontecido — era instrucao, nao garantia.
+// Agora e garantia: sem estado fresco e arvore limpa, este script recusa morrer.
+const MINUTOS = 15;
+const forcado = process.argv.includes('--forcado');
+const raiz = process.env.CLAUDE_PROJECT_DIR || process.cwd();
+const passagem = path.join(raiz, 'memory', '00-guia', 'passagem-de-bastao.md');
+const recusas = [];
+
+if (fs.existsSync(passagem)) {
+  const idade = (Date.now() - fs.statSync(passagem).mtimeMs) / 60000;
+  if (idade > MINUTOS) recusas.push(`a passagem nao e reescrita ha ${Math.round(idade)} min (passo 2)`);
+} else {
+  console.log(`Aviso: nao existe ${passagem}; sigo sem conferir o estado salvo.`);
+}
+// so o que o git ja rastreia: rascunho solto na pasta nao e estado perdido
+let sujo = '';
+try {
+  sujo = execFileSync('git', ['status', '--porcelain', '--untracked-files=no'], {
+    cwd: raiz, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'],
+  }).trim();
+} catch (_) {}
+if (sujo) recusas.push(`${sujo.split('\n').length} arquivo(s) alterado(s) sem commit (passo 3)`);
+
+if (recusas.length && !forcado) {
+  console.log('NAO PASSEI O BASTAO, porque o estado ainda nao esta salvo: ' + recusas.join('; ') + '.');
+  console.log('Faca os passos 2 e 3 primeiro: reescreva a secao Estado da passagem com onde voce parou, depois commit e push.');
+  console.log('Feito isso, rode este script de novo. Se voce tem certeza de que nao ha o que salvar, rode com --forcado.');
+  process.exit(1);
 }
 
 // o matador: espera 2s e derruba a arvore do claude.exe. Nasce pelo WMI, fora da minha arvore.
