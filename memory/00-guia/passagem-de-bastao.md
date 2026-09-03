@@ -80,10 +80,14 @@ assessor commitado com esta passagem.
 - As 14 contas de custo de operação, o recado pro time sobre a virada, os valores da alçada, e a
   limpeza dos segredos.
 
-**Faxina que sobrou:** o perfil do Chrome que nasceu DENTRO do repo do assessor
-(`UsersAlluAppDataLocalms-playwright-mcpmcp-chrome-3c24d0c/`, 38 MB, com a sessão Google dele).
-**Nunca foi commitado** e está no `.gitignore`. Esta sessão não abriu navegador; mover pra fora
-quando nenhuma janela estiver segurando a trava.
+**Faxina que sobrou:** ~~o perfil do Chrome que nasceu DENTRO do repo do assessor~~ **RESOLVIDA**:
+conferi que nenhum Chrome estava usando ele (nenhum processo com o caminho do repo na linha de
+comando; os 8 vivos estão no perfil normal do MCP) e **movei os 39 MB pra fora do repo**, pra
+`%LOCALAPPDATA%\ms-playwright-mcp\_orfao-do-repo-do-assessor-3c24d0c`. Nome fora do padrão
+`mcp-chrome-*` de propósito, pra ferramenta nenhuma escolher ele por engano, e o perfil vivo (388 MB)
+ficou intacto. **Por que valia a pena:** ele guarda uma sessão Google dele DENTRO de um repositório
+público, e o que separava os dois era uma linha de `.gitignore`. **Apagar é decisão dele** (eu não
+deleto arquivo), e agora é uma pasta comum fora do repo, sem pressa.
 
 **Ferramentas que não podem se perder:** as duas de [[ler-o-banco-em-producao]] (SQL em produção
 pela API de gerenciamento; Chrome por CDP na porta 9222) e a **nova desta sessão**: provar RPC em
