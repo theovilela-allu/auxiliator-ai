@@ -12,35 +12,38 @@ aliases:
 ## Estado (reescrito a cada passagem)
 
 > [!important] Se você está lendo isto numa sessão que abriu SOZINHA com "MODO AUTONOMO", a morte funcionou.
-> Esta é a primeira passagem de verdade, o teste ao vivo que o Rei pediu pra fazer em 02/09/2026 à
-> noite (*"salva que fez isso na memória pra eu testar a morte"*). Primeira coisa a fazer: registrar
-> aqui embaixo, na seção "Como funciona", que a morte real foi provada (data, hora, e se o terminal
-> ficou limpo: sem lixo de tela, cursor visível). Depois seguir a fila. **Ele provavelmente está
-> olhando**: se ele falar, o modo autônomo acaba e você responde normal.
+> Esta é a primeira passagem de verdade: o teste ao vivo que o Rei pediu em 02/09/2026 à noite. Ele abriu
+> um terminal novo com `$env:BASTAO_LIMITE = 1000` e `claude`, disse "boa noite", e a sessão de origem
+> passou o bastão às ~22h25 de 02/09 logo depois da primeira resposta, **com o navegador do Auxiliator
+> aberto** (pra provar que o matador derruba a árvore inteira). Primeira coisa a fazer: registrar aqui
+> embaixo, na seção "Como funciona", que a morte real foi provada: data, hora, se o terminal ficou limpo
+> (sem lixo de tela, cursor visível) e se o navegador abriu de novo no boot sem erro de trava de perfil.
+> Depois seguir a fila. **Ele está olhando**: se ele falar, o modo autônomo acaba e você responde normal.
 
-**Estávamos fazendo:** construindo a própria corrente da passagem de bastão e o modo autônomo, na
-noite de 02/09/2026, na sessão em que o Rei estava presente.
+**Estávamos fazendo:** o teste ao vivo da morte da sessão, com a corrente da passagem de bastão
+construída em 02/09/2026 (`d69944b`). A sessão de origem fez o boot normal (Auxiliator logado, panorama,
+versão conferida, Granola sem reunião na semana), deu o briefing e passou o bastão.
 
-**Ficou pronto:** tudo, commitado e no GitHub em `d69944b` (master do assessor): o laço no
-`profile.ps1`, o gancho Stop `bastao-de-contexto.cjs`, o script `passar-o-bastao.cjs`, o gancho
-`sem-plan-mode.cjs` (plan mode desligado), a skill `modo-autonomo`, o `modo-especialista` sem plan
-mode, a lista das seis proibições ([[o-que-eu-nao-posso-fazer]]), a barra de status em 500k/800k.
-Provado: o vigia dispara em 520k e cala em 300k; o laço relança num shell de mentira com a flag e a
-mensagem certas.
+**Ficou pronto:** a corrente inteira, commitada e no GitHub (`d69944b`, `eab18bd` e o commit desta
+passagem). Provado antes, num shell de mentira: o vigia dispara em 520k e cala em 300k; o laço relança
+no mesmo terminal com a flag e a mensagem. Provado nesta passagem, do lado da sessão de origem: o gancho
+Stop disparou na primeira resposta com a régua em 1k, devolveu a lista, e o script rodou com o
+`BASTAO_SINAL` apontando pro sinal deste terminal (`bastao-36596.sinal`).
 
 **Falta (em ordem):**
-1. **A morte de verdade** (esta passagem): claude.exe real morrendo com o navegador junto e
-   renascendo no mesmo terminal. Se você existe, passou. Registre.
+1. **Registrar a prova da morte** na seção "Como funciona" (se você existe, o `claude.exe` morreu e
+   renasceu). Conferir também se o navegador abre limpo no boot: erro de trava de perfil significa que a
+   árvore não morreu inteira, e isso precisa ficar anotado.
 2. O trabalho do Sistema de Pagamentos que ficou de 02/09, fila em
    [[onde-retomar-depois-da-virada]], seção "O que sobrou, MEU": (a) smoke de escrita no sistema novo
    em produção (criar, aprovar e pagar um pedido baixo com "TESTE DO SISTEMA, pode ignorar", e
    cancelar no fim, nunca apagar); (b) terminar a [[caixa-de-observacao]] (front inteiro falta,
    banco pronto); (c) alinhar o master do compras com `virada-de-setembro` @ `715f617`.
 
-**Onde está:** repo do assessor em `C:UsersAlluDesktopauxiliator-ai` (master `d69944b`). Sistema
-de Pagamentos na worktree `C:UsersAlludevcompras-allu-virada`, branch `virada-de-setembro` @
-`715f617`. **Havia outra sessão minha aberta em outro terminal nesta noite**: antes de mexer no
-compras, releia [[combinado-entre-agentes]] e confira `git status` nas worktrees.
+**Onde está:** repo do assessor em `C:\Users\Allu\Desktop\auxiliator-ai` (master, no commit desta
+passagem). Sistema de Pagamentos na worktree `C:\Users\Allu\dev\compras-allu-virada`, branch
+`virada-de-setembro` @ `715f617`. **Ontem havia outra sessão minha aberta em outro terminal**: antes de
+mexer no compras, releia [[combinado-entre-agentes]] e confira `git status` nas worktrees.
 
 **Próximo passo concreto:** registrar a prova da morte aqui; depois abrir
 [[onde-retomar-depois-da-virada]] e começar o smoke de escrita.
@@ -50,8 +53,11 @@ operação, a limpeza dos segredos (fica pro fim), os valores da alçada. Nada d
 
 **Rascunhos prontos:** nenhum ainda.
 
-**Auxiliator:** a sessão caiu às 21h27 de 02/09 e o login ficou esperando o "Sim" no app do YouTube do
-iPhone dele. Se continuar deslogado, não espere: anote e trabalhe pelo Obsidian.
+**Auxiliator:** voltou a logar sozinho às 22h20 de 02/09 (o "Sim" do iPhone entrou). Panorama do dia,
+pra não puxar de novo: 3 vencidas dele (piloto de lançamentos reais e de-para conta contábil, ambas de
+21/08; decidir onde o contrato barra o pagamento, de 01/09), nada pra hoje, ninguém esperando ele, as
+2 do Thoreos seguem bloqueadas de propósito. Versão v0.2.20, igual à anunciada. Nenhuma reunião na
+semana no Granola.
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
