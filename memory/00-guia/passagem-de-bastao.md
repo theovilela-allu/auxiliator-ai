@@ -11,99 +11,96 @@ aliases:
 
 ## Estado (reescrito a cada passagem)
 
-> [!success] Sessão AUTÔNOMA da tarde de 03/09/2026 ("boa tarde, autonomo"). Ele não estava.
-> O item 1 da fila **saiu inteiro e está no ar**, o item 2 foi respondido lendo produção, e a
-> conferência que esperava wifi **foi feita**. Nada meio feito.
+> [!info] Sessão de 03/09/2026 que começou AUTÔNOMA à tarde e virou conversa quando ele chegou.
+> Duas frentes fecharam (a demanda de contrato e o levantamento do de-para) e a terceira, o
+> **tema do editor**, ficou com UM pedido especificado e não aplicado. Nada meio feito no código.
 
-**O que esta sessão entregou** (commit `0c46c0c`, em `master` e `virada-de-setembro`, empurrado):
+**O que fechou nesta sessão** (detalhe em [[onde-o-contrato-barra-o-pagamento]] e
+[[validacao-do-depara-de-conta]], as duas no cofre local):
 
-1. **A aprovação abre a demanda de contrato** — as três partes do desenho de ontem:
-   carimbo `pedidos.contrato_demandado_em` + contadores, por gatilho **BEFORE** (não AFTER: o
-   carimbo entra na mesma versão da linha, sem segundo `update` batendo no guard); **ramo novo no
-   robô `cobrar`** cobrando quem pediu, sem teto, com régua testada em
-   `_shared/demanda-de-contrato.ts`; e a **frase consertada nas duas pontas**, dizendo quem
-   destrava conforme o estado do contrato. Detalhe inteiro em
-   [[onde-o-contrato-barra-o-pagamento]] (última seção).
-2. **Provas em produção, com rollback:** a aprovação carimbou (`16:56:38`) pelo caminho de verdade
-   (`aux_criar_pedido_v3` + `aux_decidir_pedido_escada`, sessão simulada por
-   `request.jwt.claims` — receita nova, vale guardar), e o nascimento aprovado carimbou
-   (`16:57:43`). Nenhum pedido de mentira ficou lá. Front conferido pelo CONTEÚDO do bundle,
-   função `cobrar` republicada e respondendo.
-3. **O item 2 respondido:** conferi em produção por qual porta o Jurídico entra na régua de
-   permissão. Entra por duas das três, sem precisar de ajuste nenhum — a tela dele já funciona.
-   Qual e por quê está no cofre local, em [[onde-o-contrato-barra-o-pagamento]].
+1. **A aprovação abre a demanda de contrato** e o robô cobra quem gera. No ar, provado em produção
+   com rollback. Commit `0c46c0c`.
+2. **Levantamento do de-para de conta contábil.** Não é defeito de código; a base ensina duas contas
+   pro mesmo texto em 8 casos, 5 cruzando custo com despesa. **Falta a decisão dele nos 8**, com a
+   minha recomendação escrita caso a caso. A tarefa vencida no Auxiliator foi registrada pela outra
+   sessão, deixada em andamento e sem mexer na data, o que está certo.
+3. **A nota `DEC` da decisão do contrato** foi pro cofre da equipe (commit `b0e03b1` lá).
+4. **O perfil de Chrome saiu de dentro do repo** do assessor (39 MB com sessão Google dele).
 
-**A espera pelo wifi acabou:** as portas 5432/6543 voltaram nesta rede. `migration list --linked`
-bate local com remoto em **todas as 106**, incluindo as três de ontem que entraram pela API de
-gerenciamento, e a `20260903150000` subiu por `db push` normal.
+**O TEMA DO EDITOR — o que ficou pendente, com a régua já extraída**
 
-**Onde está:** Compras na worktree `C:\Users\Allu\dev\compras-allu-virada`; `master` e
-`virada-de-setembro` os dois em **`0c46c0c`**; produção do banco em `20260903150000`. Repo do
-assessor commitado com esta passagem.
+O "Tema do Rei" está no ar e ele aprovou ("assim ficou top"): fundo marfim, escada de beige, laranja
+vibrante nos acentos e **bordas do VS Code em preto**, a pedido dele. Mecânica inteira, com as duas
+armadilhas que custaram a rodada, em [[vscode-terminal-e-atalhos]].
 
-**Falta (em ordem):**
-1. ~~**Virar nota `DEC` no cofre FP&A** a decisão do contrato~~ **FEITA nesta sessão** (commit
-   `b0e03b1` no cofre da equipe, empurrado): `DEC 2026-09-03 Contrato Assinado Barra o Pagamento`,
-   com fundamento, alternativas descartadas e o que muda por papel. Pendurada no
-   `_Painel de Reunioes`, e o cluster de Compras saiu de `a-desenvolver` pra `ativo` porque agora
-   tem nota de trabalho própria. `validar-frontmatter` limpo. O espelho pro OneDrive é a tarefa
-   agendada, aos :07 — não é pendência.
-2. ~~**A validação do de-para de conta contábil**~~ **LEVANTAMENTO FEITO nesta sessão**, lendo
-   produção: [[validacao-do-depara-de-conta]]. O de-para **não tem defeito de código** (zero conta
-   órfã, chave certa no par fornecedor+descrição), mas **a base ensina duas contas pro mesmo texto
-   em 8 casos, e 5 cruzam custo com despesa** (mexe em margem bruta). A causa é **texto genérico
-   classificado em ilha**, sem nenhuma travessia que compare o mesmo texto entre fornecedores.
-   (Eu anunciei "fornecedor duplicado" antes de abrir os CNPJs e estava errado: são filiais, e
-   dentro de cada raiz a classificação é consistente. Está corrigido na nota, com o erro escrito.) **O que falta é decisão do
-   FP&A**, caso a caso, com a minha recomendação já escrita em cada linha da tabela. A tarefa
-   vencida no Auxiliator não foi tocada por mim: quem estava com o navegador na mão era a outra
-   sessão (`auxiliator-ai-ab`), e pedi pra ela registrar.
-3. **O piloto de lançamentos reais com uma área** (a outra vencida): depende de gente, não de código.
+**O pedido aberto**, que ele deu marcando cinco círculos num print (li da esquerda pra direita e
+amostrei cada um com PIL, então não precisa adivinhar):
+
+| Círculo | O que é | Cor hoje | Cor que ele quer |
+|---|---|---|---|
+| 1 | a faixa larga em volta da linha de digitar | `#EED4B7` | `#F0F0F0` (a do círculo 5) |
+| 2 e 3 | as linhas da caixa do prompt | `#999999` | `#FF6B1A` (a do círculo 4) |
+| 4 | a barra de status do CLI | `#FF6B1A` | (é a referência) |
+| 5 | a banda atrás dos prompts dele no painel da extensão | `#F0F0F0` | (é a referência) |
+
+**O BLOQUEIO, e é de uma linha:** os três elementos (1, 2 e 3) são desenhados pelo **Claude Code**,
+não pelo VS Code. No tema `light` ele usa a paleta própria e ignora o terminal, daí o `#999999` que
+não obedece nada que eu pinte. O print dele mostra literalmente *"Theme set to light"*. **Só no tema
+com ANSI no nome** ("Light mode (ANSI colors only)") ele passa a desenhar com os 16 slots do
+terminal, e aí eu mando na cor. Avisei duas vezes e ele seguiu no `light`; o `~/.claude/settings.json`
+já está em `light-ansi`, mas **editar o arquivo não vale pra sessão aberta** — quem aplica é o `/theme`.
+
+**Próximo passo concreto quando ele trocar:** `terminal.ansiBrightBlack` já está em `#E85D04`; subir
+pra `#FF6B1A` (o do círculo 4) e descobrir qual slot pinta a faixa da linha de digitar pra levar ela
+pra `#F0F0F0`. Se em ANSI a faixa simplesmente não existir, dizer isso a ele em vez de inventar.
+
+**Onde está tudo:**
+- Tema: `~/.vscode/extensions/tema-do-rei/` (versão **1.5.0** — subir a versão nos DOIS lugares,
+  `package.json` e `extensions.json`, é o que quebra o cache; sem isso o VS Code serve o tema velho).
+- Um bloco `workbench.colorCustomizations` **temporário** no `settings.json` dele, escopado no tema,
+  que é o que faz a cor valer na hora. **Combinado: apagar esse bloco quando ele parar de mexer**,
+  depois de um reload que carregue o tema 1.5.0, porque hoje são duas fontes da mesma cor.
+- Compras: worktree `C:/Users/Allu/dev/compras-allu-virada`; `master` e `virada-de-setembro` os dois
+  em **`1cb517c`** (a outra sessão subiu a tela de quem pede em três áreas); produção do banco em
+  `20260903150000`.
+- Duas fontes baixadas e **não instaladas** em `scratchpad/fontes/` (JetBrains Mono, IBM Plex Mono).
+  Ele não gostou da Cascadia e voltamos pra Consolas, que é o que a extensão usa (o CSS dela segue
+  `--vscode-editor-font-family`, ou seja, sempre a fonte do editor).
+
+**Falta, em ordem:**
+1. **A cor dos cinco círculos**, assim que ele trocar o tema do CLI pro ANSI (tabela acima).
+2. **Os 8 casos do de-para** esperam decisão dele; quando vier, aplicar pela `aux_carregar_classificacao`,
+   que aplica retroativo no par, e conferir no banco.
+3. Apagar o bloco temporário do `settings.json` depois do reload.
+4. O piloto de lançamentos reais com uma área: depende de gente, não de código.
 
 **Depende do Rei:**
-- **A tela de Aprovações nunca foi clicada no ar:** ele pediu pra NÃO fazer ainda (03/09).
-- **Dois achados desta sessão, os dois decisão dele, escritos com nome e número no cofre local**
-  ([[onde-o-contrato-barra-o-pagamento]] e [[politica-de-aprovacao]]): (a) um papel de teste de
-  25/08 que ficou no banco e hoje deixa a mesma pessoa executar e autorizar a exceção — furo de
-  segregação de função, tirar ou manter é dele, eu deixei; (b) **a faixa livre da alçada não está
-  valendo na prática**, porque a régua de estouro de orçamento escala todo pedido de centro de
-  custo sem orçamento carregado, e quase nenhum tem. Ou carrega orçamento, ou a faixa livre segue
-  decorativa.
-- **ESTE REPO É PÚBLICO, e a seção Estado carrega detalhe operacional da Allu.** Eu tirei daqui
-  hoje o que era nome, código de centro de custo e o desenho de um furo de controle, e deixei
-  ponteiro pro cofre local (que é `.gitignore`ada de propósito). Mas passagens dos dias anteriores
-  já subiram com esse tipo de detalhe, e isso não é meu pra desfazer: **decisão dele** é se a
-  passagem passa a ser só a mecânica (com o estado num arquivo local), se o repo vira privado, ou
-  se reescreve o histórico. Enquanto ele não disser, eu escrevo aqui como se fosse público.
-- **A planilha da base do DP**, que destrava a frente 2 e a escada da frente 5. Estava prometida
-  pra 03/09 e ele disse que ainda não tem.
-- As 14 contas de custo de operação, o recado pro time sobre a virada, os valores da alçada, e a
-  limpeza dos segredos.
+- Escolher no `/theme` a opção com ANSI no nome (é o que destrava os três círculos).
+- Os 8 casos de conta contábil.
+- Dois achados desta sessão, os dois escritos no cofre local: um papel de teste que ficou no banco e
+  deixa a mesma pessoa executar e autorizar exceção, e a faixa livre da alçada que não vale na
+  prática porque a régua de estouro escala todo centro de custo sem orçamento carregado.
+- **ESTE REPO É PÚBLICO, e a seção Estado carrega detalhe operacional.** Eu tirei daqui nome, código
+  de centro de custo e o desenho de um furo de controle, e deixei ponteiro pro cofre local. Passagens
+  de dias anteriores já subiram com esse tipo de detalhe, e desfazer isso não é meu: decisão dele é
+  passagem só com a mecânica, repo privado, ou reescrever o histórico.
+- A tela de Aprovações nunca foi clicada no ar: ele pediu pra NÃO fazer ainda.
+- A planilha da base do DP, as 14 contas de custo de operação, o recado pro time e a limpeza dos
+  segredos.
 
-**Faxina que sobrou:** ~~o perfil do Chrome que nasceu DENTRO do repo do assessor~~ **RESOLVIDA**:
-conferi que nenhum Chrome estava usando ele (nenhum processo com o caminho do repo na linha de
-comando; os 8 vivos estão no perfil normal do MCP) e **movei os 39 MB pra fora do repo**, pra
-`%LOCALAPPDATA%\ms-playwright-mcp\_orfao-do-repo-do-assessor-3c24d0c`. Nome fora do padrão
-`mcp-chrome-*` de propósito, pra ferramenta nenhuma escolher ele por engano, e o perfil vivo (388 MB)
-ficou intacto. **Por que valia a pena:** ele guarda uma sessão Google dele DENTRO de um repositório
-público, e o que separava os dois era uma linha de `.gitignore`. **Apagar é decisão dele** (eu não
-deleto arquivo), e agora é uma pasta comum fora do repo, sem pressa.
+**Ferramentas que não podem se perder:** as duas de [[ler-o-banco-em-producao]] (SQL em produção pela
+API de gerenciamento; Chrome por CDP na 9222), a **desta sessão** (provar RPC em produção como se
+fosse ele, com `set_config('request.jwt.claims', ...)` dentro de um `do` que termina em `raise`: o
+relatório volta na mensagem de erro e tudo rola pra trás), e a de hoje pra cor: **amostrar print com
+PIL** em vez de julgar no olho, inclusive achando os círculos vermelhos por cluster.
 
-**Ferramentas que não podem se perder:** as duas de [[ler-o-banco-em-producao]] (SQL em produção
-pela API de gerenciamento; Chrome por CDP na porta 9222) e a **nova desta sessão**: provar RPC em
-produção **como se fosse ele**, com `set_config('request.jwt.claims', ...)` dentro de um `do` que
-termina em `raise` — o relatório volta na mensagem de erro e **tudo rola pra trás**, então dá pra
-testar o caminho de verdade sem deixar pedido de teste no banco.
+**A LIÇÃO da sessão** ([[testar-antes-de-dizer-pronto]]): eu afirmei três causas antes de abrir o
+dado (o desenho do gatilho, a causa da divergência do de-para e o slot da borda do prompt) e as três
+caíram. A régua nova está escrita lá: causa anunciada é promessa, porque a pessoa e o outro agente
+agem em cima dela.
 
-**A LIÇÃO desta sessão** ([[testar-antes-de-dizer-pronto]]): ontem o desenho óbvio na nota foi
-recusado pelo código; hoje a prova em produção mostrou que **o caminho que o desenho supunha
-comum (pedido que nasce aprovado) não acontece hoje** — e só apareceu porque o teste rodou pelo
-caminho de verdade, não por um insert de mentira. Ler o corpo vivo é metade; a outra é rodar o
-fluxo inteiro uma vez.
-
-**Auxiliator:** não conectei nesta sessão (fila de código cheia e nenhum pedido dele). Panorama de
-03/09, v0.2.20: 2 vencidas, as duas de FP&A (piloto de lançamentos reais e de-para conta
-contábil), zero bloqueada.
+**Auxiliator:** a outra sessão conferiu no boot — logado, v0.2.20, 2 vencidas (as duas de FP&A),
+nada pra hoje, nada bloqueado, zero reunião na semana.
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
