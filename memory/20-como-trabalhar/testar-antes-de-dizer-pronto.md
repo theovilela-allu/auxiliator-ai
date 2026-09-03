@@ -2,7 +2,7 @@
 name: testar-antes-de-dizer-pronto
 type: feedback
 description: 11/08 — nunca dizer que algo esta pronto sem ter clicado nele; provar mostrando, nao afirmando
-atualizado: 2026-08-11
+atualizado: 2026-09-03
 ---
 
 O Theo pediu em 11/08/2026, cansado de ouvir "está pronto" e depois não conseguir
@@ -33,3 +33,24 @@ coisa funciona pra quem usa; só o clique prova. Ver
 
 Ligações: [[conferir-o-pacote-no-ar]], [[bug-fiscal-nao-gerava-contrato]],
 [[autonomia-total]], [[pedir-o-insumo-que-falta]].
+
+## 03/09/2026: migração que passa não é feature que funciona
+
+O caso mais duro até agora, e ele custou um defeito em produção. Em 02/09 eu registrei a caixa de
+observação como "banco pronto e provado": a migração aplicava, e a prova da cadeia passava sobre
+banco com dado. Estava tudo verdade, e ainda assim havia **dois defeitos**, um deles fatal pra quem
+pede.
+
+O que os achou foi **um clique**. O primeiro pedido de verdade criado pela tela, em produção, com
+uma observação escrita, num valor abaixo do piso da alçada. O gatilho da imutabilidade barrava a
+própria escrita que cria a observação, e o formulário voltava com erro depois de a pessoa preencher
+tudo. Detalhe em [[caixa-de-observacao]].
+
+**A régua que sai daqui:** prova de migração cobre a **migração subir**. Ela não cobre o **caminho
+da pessoa**. Enquanto ninguém percorre o caminho inteiro (tela → porta → banco → tela de volta), a
+frente não está provada, só construída. E o caminho tem que incluir o caso mais comum, não o mais
+fácil de montar: aqui, o pedido barato, que nasce aprovado na hora e por isso passa por um estado
+que o caro nunca vê.
+
+Corolário: quando não dá pra clicar (navegador fora, rede bloqueada), a frente fica **"construída,
+não provada"** na passagem de bastão, com essas palavras. Não "pronta".

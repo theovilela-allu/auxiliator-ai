@@ -35,10 +35,22 @@ aliases:
 > - **Provas:** 1337 testes (eram 1304), 16 novos; `tsc -b` limpo, lint sem aviso novo, `vite build`
 >   verde.
 >
-> **O que NÃO deu pra fazer, e é o único furo:** o navegador não subiu nesta sessão (o serviço do
-> Playwright não respondeu), então **nada foi clicado no ar**. Falta o smoke de tela: abrir um pedido
-> de verdade com observação, ver o texto voltar na fila de Aprovações e no Controle. O código está
-> provado em teste e o banco está provado por dentro, mas o clique não aconteceu.
+> **O SMOKE DE TELA FOI FEITO, e achou dois defeitos de verdade** (03/09, de manha, com ele
+> presente). Detalhe inteiro em [[caixa-de-observacao]]. Em uma linha cada:
+> 1. **O gatilho barrava a propria escrita que cria a observacao** quando o pedido nasce ja
+>    aprovado (abaixo do piso). Isso CHEGOU EM PRODUCAO e quem pedia recebia erro com o
+>    formulario cheio. Conserto na `20260903120000`.
+> 2. **`btrim` de um argumento apara so espaco**, nao quebra de linha, e a caixa e um textarea.
+>    Achado pela prova nova. Conserto na `20260903130000`.
+>
+> **Prova nova que faltava:** `supabase/testes/prova-observacao-do-pedido.mjs`, 31 OK. Ela cobre
+> exatamente o vao que deixou o defeito passar: nenhuma prova criava pedido COM observacao pela
+> `v3`, porque o front nao existia.
+>
+> **A LICAO, que vale alem desta frente:** [[testar-antes-de-dizer-pronto]] ganhou um caso duro.
+> Ontem eu disse "banco pronto e provado" com a migracao aplicada e a prova de cadeia passando. Os
+> dois defeitos estavam la, e o que os achou foi UM clique de verdade. Migracao que passa nao e
+> feature que funciona: prova de migracao cobre a migracao SUBIR, nao o caminho da pessoa.
 >
 > **Auxiliator e Granola:** fora nesta sessão, pelo mesmo motivo. Sem briefing novo; o panorama de
 > 02/09 é o que vale.

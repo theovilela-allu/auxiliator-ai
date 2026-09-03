@@ -72,3 +72,10 @@ Thumbs.db
 .idea/
 .vercel
 .env*
+
+# Perfil de navegador criado por engano na raiz do repo (03/09/2026): um script
+# meu perdeu as barras invertidas do caminho do Windows e o Chrome criou o perfil
+# aqui, RELATIVO ao repo, com a sessao Google dele dentro. Nunca foi commitado (o
+# arquivo Cookies estava travado e o `git add` falhou), e daqui pra frente nao
+# entra nem por acidente. Caminho certo: %LOCALAPPDATA%\ms-playwright-mcp\.
+UsersAllu*/
