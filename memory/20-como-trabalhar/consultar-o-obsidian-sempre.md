@@ -19,3 +19,18 @@ Pedido do Rei em 2026-08-05, em duas etapas: primeiro "não olhou no obsidian?" 
 6. Aprendeu algo durável na conversa? Grava na hora, seguindo [[_convencoes]].
 
 Ligações: [[_convencoes]], [[_como-eu-opero]], [[autonomia-total]], [[estilo-de-escrita]].
+
+## 03/09/2026: o cofre sabia, e eu respondi sem ele
+
+Ele perguntou qual era o repositório do sistema de compras. Eu olhei o `git remote -v`, vi dois
+endereços, e respondi que eram **dois repositórios, um oficial e um espelho pessoal**. Errado: são o
+**mesmo** repositório (id `1288594370` nos dois), porque ele foi transferido pra organização e o
+GitHub redireciona o endereço antigo.
+
+**O cofre já dizia isso desde 20/07**, com todas as letras, em [[commitar-todo-update]]. Eu não abri.
+Pior: baseado no meu erro, ele perguntou se podia deletar "o outro" — e deletar teria apagado o
+único que existe.
+
+**A régua, reforçada:** pergunta sobre um assunto que tem nota é pergunta pra abrir a nota, mesmo
+quando o comando parece responder sozinho. `git remote -v` mostra o que está configurado, não o que
+aquilo significa. **Estado bruto não substitui o que já foi aprendido.**

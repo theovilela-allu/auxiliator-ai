@@ -35,6 +35,9 @@ só o fio da meada.
   mexem em margem). Detalhe e recomendação caso a caso em [[validacao-do-depara-de-conta]].
 - **A tomada.** Os tempos de suspensão estão zerados em caráter permanente, então bateria crítica em
   2% é o único caminho de parada que sobrou — e é de propósito.
+- **Deixar um remoto só no compras.** `git remote remove origin` na worktree principal: os dois
+  endereços são o MESMO repositório (id `1288594370`), o `origin` é só o nome antigo redirecionando.
+  Esperando a outra sessão soltar o repo. Detalhe em [[commitar-todo-update]].
 - Se ele parou de mexer em cor: **juntar as cores num lugar só.** Hoje elas vivem no tema **e** num
   bloco de ajuste rápido no `settings.json`, que era proposital enquanto ele afinava.
 
