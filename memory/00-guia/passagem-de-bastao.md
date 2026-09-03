@@ -29,8 +29,9 @@ aliases:
    `request.jwt.claims` — receita nova, vale guardar), e o nascimento aprovado carimbou
    (`16:57:43`). Nenhum pedido de mentira ficou lá. Front conferido pelo CONTEÚDO do bundle,
    função `cobrar` republicada e respondendo.
-3. **O item 2 respondido:** o Rodrigo entra em `aux_is_juridico()` por **duas** portas (lotado no
-   CC 103130 e responsável do próprio CC). A tela do Jurídico já aparece pra ele — pode avisar.
+3. **O item 2 respondido:** conferi em produção por qual porta o Jurídico entra na régua de
+   permissão. Entra por duas das três, sem precisar de ajuste nenhum — a tela dele já funciona.
+   Qual e por quê está no cofre local, em [[onde-o-contrato-barra-o-pagamento]].
 
 **A espera pelo wifi acabou:** as portas 5432/6543 voltaram nesta rede. `migration list --linked`
 bate local com remoto em **todas as 106**, incluindo as três de ontem que entraram pela API de
@@ -50,15 +51,19 @@ assessor commitado com esta passagem.
 
 **Depende do Rei:**
 - **A tela de Aprovações nunca foi clicada no ar:** ele pediu pra NÃO fazer ainda (03/09).
-- **Dois achados desta sessão, os dois decisão dele:**
-  (a) a tabela `papeis` tem o **theo.vilela** com papel `juridico`, do teste de 25/08 — enquanto
-  estiver lá, ele mesmo pode autorizar exceção de pagamento sem contrato, o que é furo de
-  segregação de função (tirar ou manter é dele; deixei);
-  (b) **a faixa livre da alçada não está valendo na prática:** um pedido de R$ 300 (abaixo do piso
-  de R$ 500, conferido em `politica_faixas`) nasceu `aguardando` com o Gustavo como aprovador,
-  porque o CC dele (103112) **não tem linha em `orcamento`** e a régua de estouro escala tudo.
-  Hoje só 26 linhas de orçamento existem, nenhuma do CC dele. Ou carrega orçamento, ou a faixa
-  livre segue decorativa.
+- **Dois achados desta sessão, os dois decisão dele, escritos com nome e número no cofre local**
+  ([[onde-o-contrato-barra-o-pagamento]] e [[politica-de-aprovacao]]): (a) um papel de teste de
+  25/08 que ficou no banco e hoje deixa a mesma pessoa executar e autorizar a exceção — furo de
+  segregação de função, tirar ou manter é dele, eu deixei; (b) **a faixa livre da alçada não está
+  valendo na prática**, porque a régua de estouro de orçamento escala todo pedido de centro de
+  custo sem orçamento carregado, e quase nenhum tem. Ou carrega orçamento, ou a faixa livre segue
+  decorativa.
+- **ESTE REPO É PÚBLICO, e a seção Estado carrega detalhe operacional da Allu.** Eu tirei daqui
+  hoje o que era nome, código de centro de custo e o desenho de um furo de controle, e deixei
+  ponteiro pro cofre local (que é `.gitignore`ada de propósito). Mas passagens dos dias anteriores
+  já subiram com esse tipo de detalhe, e isso não é meu pra desfazer: **decisão dele** é se a
+  passagem passa a ser só a mecânica (com o estado num arquivo local), se o repo vira privado, ou
+  se reescreve o histórico. Enquanto ele não disser, eu escrevo aqui como se fosse público.
 - **A planilha da base do DP**, que destrava a frente 2 e a escada da frente 5. Estava prometida
   pra 03/09 e ele disse que ainda não tem.
 - As 14 contas de custo de operação, o recado pro time sobre a virada, os valores da alçada, e a
