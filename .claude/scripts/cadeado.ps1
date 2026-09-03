@@ -1,60 +1,77 @@
 <#
   cadeado.ps1 - trancar a maquina e me deixar rodando (03/09/2026)
 
-  Pedido dele: "quero bloquear meu computador e voce continuar rodando. Esse
-  bloqueio deve ser desbloqueavel somente por senha."
+  Pedido dele: "quero que voce crie algum mecanismo para eu bloquear meu
+  computador e voce continuar rodando. Esse bloqueio deve ser desbloqueavel
+  somente por senha." E logo depois: "tem como tirar esse standby? Quero que
+  quando eu bloquear ele, o sistema continue rodando PRA SEMPRE."
 
   POR QUE NAO BASTA O Win+L. Travar a estacao NAO mata processo nenhum: eu
-  continuo rodando normalmente. O risco nesta maquina e outro, e e por isso
-  que este script existe:
+  continuo rodando normalmente. O risco nesta maquina e outro:
 
     - E um NOTEBOOK com Modern Standby (S0 Ocioso com Baixo Consumo). Depois de
-      ocioso, o Windows desce pro estado de baixa energia e estrangula o que
+      ocioso o Windows desce pro estado de baixa energia e estrangula o que
       esta rodando em segundo plano.
+    - Numa maquina TRANCADA quem manda e o "tempo limite de suspensao nao
+      assistida", que e uma configuracao escondida e curta. E o pega de verdade.
     - Fechar a tampa manda dormir, e power request nenhum segura isso.
 
-  ENTAO O CADEADO TEM TRES PECAS, nesta ordem:
+  ENTAO O CADEADO TEM QUATRO PECAS:
 
-    1. VIGIA: um processo destacado que segura SetThreadExecutionState com
+    1. VIGIA: processo destacado que segura SetThreadExecutionState com
        ES_CONTINUOUS | ES_SYSTEM_REQUIRED. Enquanto ele viver, o Windows nao
-       desce pro estado ocioso. Ele NAO segura a tela (ES_DISPLAY_REQUIRED fica
-       de fora de proposito): a tela apaga, que e o que se quer numa maquina
-       trancada. O vigia solta sozinho quando o claude.exe some por mais de 3
-       minutos (a folga existe porque a corrente da passagem de bastao relanca o
-       CLI em segundos), ou no teto de horas, o que vier primeiro.
-    2. TAMPA: acao de fechar a tampa vira "nao fazer nada", nos dois modos
-       (tomada e bateria). O valor antigo e guardado e devolvido no -Soltar.
-    3. CADEADO: LockWorkStation. Volta so com a credencial da conta.
+       desce pro estado ocioso. ES_DISPLAY_REQUIRED fica de fora de proposito:
+       numa maquina trancada a tela deve apagar mesmo.
+    2. TEMPOS: suspensao ociosa, hibernacao e suspensao NAO ASSISTIDA vao a
+       zero (= nunca), nos dois modos. Os valores de antes ficam guardados.
+    3. TAMPA: fechar a tampa vira "nao fazer nada", nos dois modos.
+    4. CADEADO: LockWorkStation. Volta so com a credencial da conta.
 
-  AVISO HONESTO SOBRE "SOMENTE POR SENHA": quem manda no desbloqueio e o
-  Windows. Se houver PIN ou reconhecimento facial cadastrados, eles tambem
-  abrem. Pra ser senha e mais nada, e preciso tirar o Windows Hello em
-  Configuracoes > Contas > Opcoes de entrada. Isso e escolha dele, nao minha.
+  PRA SEMPRE, E ELE SABE O PRECO. Por padrao o vigia NAO solta sozinho: fica de
+  pe ate o -Soltar. Isso e o que ele pediu. O preco e que a maquina nunca dorme
+  enquanto isso, entao na bateria ela vai ate acabar. -TetoHoras N poe um teto
+  em horas pra quem quiser rede de seguranca.
 
-  O QUE EU PERCO COM A TELA TRANCADA: captura de tela sai preta, entao qualquer
-  conferencia de COR ou de layout por print para de valer enquanto o cadeado
-  estiver de pe. O arquivo de sinal existe pra eu saber disso sozinho.
+  "SOMENTE POR SENHA" QUEM DECIDE E O WINDOWS. A conta dele tem senha, entao o
+  cadeado vale. Mas se houver PIN ou reconhecimento facial cadastrados, eles
+  tambem abrem. Pra ser senha e mais nada: Configuracoes > Contas > Opcoes de
+  entrada, tirar o Windows Hello. O script RECUSA trancar se a conta nunca teve
+  senha, porque ai seria falsa sensacao de seguranca.
+
+  O QUE EU PERCO COM A TELA TRANCADA: captura de tela sai preta, entao conferir
+  cor e layout por imagem para de valer. O arquivo de sinal existe pra eu saber
+  disso sozinho, sem tentar e falhar.
 
   USO:
-    cadeado.ps1              tranca (arma o vigia, prende a tampa, tranca a tela)
-    cadeado.ps1 -Armar       so arma o vigia e a tampa, sem trancar (pra provar)
-    cadeado.ps1 -Soltar      desarma o vigia e devolve a tampa
-    cadeado.ps1 -Estado      diz se esta armado, desde quando e o que segura
+    cadeado.ps1              tranca e segura a maquina acordada ate o -Soltar
+    cadeado.ps1 -Armar       so segura, sem trancar (e assim que se prova)
+    cadeado.ps1 -Soltar      desarma e devolve TUDO ao que era
+    cadeado.ps1 -Estado      diz o que esta armado e o que esta segurando
+    cadeado.ps1 -TetoHoras 8 igual, mas solta sozinho depois de 8 horas
 #>
 [CmdletBinding()]
 param(
   [switch]$Armar,
   [switch]$Soltar,
   [switch]$Estado,
-  [int]$TetoHoras = 12
+  [int]$TetoHoras = 0
 )
 
 $ErrorActionPreference = 'Stop'
-$Base    = Join-Path $env:USERPROFILE '.claude'
-$Sinal   = Join-Path $Base 'cadeado.sinal'
-$Log     = Join-Path $Base 'cadeado.log'
-$LIDGUID = '5ca83367-6e45-459f-a27b-476b1d01c936'
-$SUBBTN  = '4f971e89-eebd-4455-a8de-9e59040e7347'
+$Base  = Join-Path $env:USERPROFILE '.claude'
+$Sinal = Join-Path $Base 'cadeado.sinal'
+$Log   = Join-Path $Base 'cadeado.log'
+
+# subgrupo -> configuracao. Os tres primeiros sao o que faz a maquina dormir;
+# o quarto e a tampa.
+$SUB_SLEEP   = '238c9fa8-0aad-41ed-83f4-97be242c8f20'
+$SUB_BUTTONS = '4f971e89-eebd-4455-a8de-9e59040e7347'
+$ALVOS = [ordered]@{
+  'suspender'   = @($SUB_SLEEP,   '29f6c1db-86da-48c5-9fdb-f2b67b1f44da')
+  'hibernar'    = @($SUB_SLEEP,   '9d7815a6-7ee4-497e-8888-515a05f02364')
+  'naoassistida'= @($SUB_SLEEP,   '7bc4a2f9-d8fc-4469-b07b-33eb785aaca0')
+  'tampa'       = @($SUB_BUTTONS, '5ca83367-6e45-459f-a27b-476b1d01c936')
+}
 
 function Anota($txt) {
   $linha = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss') + '  ' + $txt
@@ -68,40 +85,33 @@ function EsquemaAtivo {
   throw 'nao consegui descobrir o esquema de energia ativo'
 }
 
-# Le a acao da tampa direto do registro: independe do idioma do powercfg, que e
-# o que quebra parse de saida traduzida.
-#
-# ARMADILHA QUE CUSTOU UMA RODADA EM 03/09: a acao da tampa e uma configuracao
-# ESCONDIDA nesta maquina (Attributes = 1), entao ela nao aparece no
-# `powercfg /query` e, enquanto ninguem mexer, NAO EXISTE chave de override no
-# registro. O `powercfg -setacvalueindex` grava mesmo assim, mas apagar a chave
-# depois exige administrador (Remove-Item da "Acesso ao Registro nao permitido").
-# Ou seja: se eu ler so o override, eu leio nada, escrevo por cima e nao consigo
-# desfazer. Por isso a leitura cai no PADRAO DE FABRICA
-# (DefaultPowerSchemeValues) quando nao ha override, e o -Soltar devolve esse
-# valor escrevendo, nao apagando.
-function TampaAtual {
+# ARMADILHA QUE CUSTOU UMA RODADA EM 03/09: varias destas configuracoes sao
+# ESCONDIDAS (Attributes = 1). Elas nao aparecem no `powercfg /query` e,
+# enquanto ninguem mexer, NAO EXISTE chave de override no registro. O
+# `powercfg -setacvalueindex` grava mesmo assim, mas apagar a chave depois exige
+# administrador (Remove-Item da "Acesso ao Registro nao permitido"). Ou seja:
+# quem le so o override le nada, escreve por cima e nao consegue desfazer.
+# Por isso a leitura cai no PADRAO DE FABRICA quando nao ha override, e o
+# -Soltar devolve ESCREVENDO o valor, nunca apagando a chave.
+function ValorAtual($sub, $set) {
   $g = EsquemaAtivo
-  $over = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\$g\$SUBBTN\$LIDGUID"
-  $fab  = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\$SUBBTN\$LIDGUID\DefaultPowerSchemeValues\$g"
+  $over = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\$g\$sub\$set"
+  $fab  = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\$sub\$set\DefaultPowerSchemeValues\$g"
   $ac = $null; $dc = $null
-  if (Test-Path $fab) {
-    $p = Get-ItemProperty $fab
-    $ac = $p.ACSettingIndex; $dc = $p.DCSettingIndex
-  }
+  if (Test-Path $fab) { $p = Get-ItemProperty $fab; $ac = $p.ACSettingIndex; $dc = $p.DCSettingIndex }
   if (Test-Path $over) {
     $p = Get-ItemProperty $over
     if ($null -ne $p.ACSettingIndex) { $ac = $p.ACSettingIndex }
     if ($null -ne $p.DCSettingIndex) { $dc = $p.DCSettingIndex }
   }
   if ($null -eq $ac -and $null -eq $dc) { return $null }
-  [pscustomobject]@{ Esquema = $g; AC = [int]$ac; DC = [int]$dc }
+  [pscustomobject]@{ AC = [int]$ac; DC = [int]$dc }
 }
 
-function DefineTampa($ac, $dc) {
+function DefineValor($sub, $set, $ac, $dc) {
   $g = EsquemaAtivo
-  powercfg -setacvalueindex $g $SUBBTN $LIDGUID $ac | Out-Null
-  powercfg -setdcvalueindex $g $SUBBTN $LIDGUID $dc | Out-Null
+  powercfg -setacvalueindex $g $sub $set $ac | Out-Null
+  powercfg -setdcvalueindex $g $sub $set $dc | Out-Null
   powercfg -setactive $g | Out-Null
 }
 
@@ -115,13 +125,19 @@ if ($Estado) {
   if (SinalCheio) {
     $d = Get-Content $Sinal -Raw | ConvertFrom-Json
     $vivo = Get-Process -Id $d.VigiaPid -ErrorAction SilentlyContinue
-    $situacao = if ($vivo) { 'VIVO' } else { 'MORTO (rode -Soltar e arme de novo)' }
-    Anota ("ARMADO desde {0} | vigia pid {1} {2} | tampa antes: AC={3} DC={4}" -f $d.Desde, $d.VigiaPid, $situacao, $d.TampaAC, $d.TampaDC)
+    $sit = if ($vivo) { 'VIVO' } else { 'MORTO (rode -Soltar e arme de novo)' }
+    $teto = if ($d.Teto -gt 0) { "$($d.Teto)h" } else { 'sem teto (ate o -Soltar)' }
+    Anota ("ARMADO desde {0} | vigia pid {1} {2} | teto: {3}" -f $d.Desde, $d.VigiaPid, $sit, $teto)
+    foreach ($n in $d.Antes.PSObject.Properties.Name) {
+      Anota ("  guardado {0}: AC={1} DC={2}" -f $n, $d.Antes.$n.AC, $d.Antes.$n.DC)
+    }
   } else {
     Anota 'SOLTO - nada segurando a maquina acordada'
   }
-  $t = TampaAtual
-  if ($t) { Anota ("tampa agora: AC={0} DC={1}  (0=nao faz nada, 1=suspender, 2=hibernar, 3=desligar)" -f $t.AC, $t.DC) }
+  foreach ($n in $ALVOS.Keys) {
+    $v = ValorAtual $ALVOS[$n][0] $ALVOS[$n][1]
+    if ($v) { Anota ("  agora {0}: AC={1} DC={2}" -f $n, $v.AC, $v.DC) }
+  }
   return
 }
 
@@ -130,9 +146,14 @@ if ($Soltar) {
   if (SinalCheio) {
     $d = Get-Content $Sinal -Raw | ConvertFrom-Json
     Get-Process -Id $d.VigiaPid -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
-    DefineTampa $d.TampaAC $d.TampaDC
+    foreach ($n in $d.Antes.PSObject.Properties.Name) {
+      if ($ALVOS.Contains($n)) {
+        DefineValor $ALVOS[$n][0] $ALVOS[$n][1] $d.Antes.$n.AC $d.Antes.$n.DC
+        Anota ("  {0} devolvido pra AC={1} DC={2}" -f $n, $d.Antes.$n.AC, $d.Antes.$n.DC)
+      }
+    }
     Set-Content -Path $Sinal -Value '' -Encoding utf8
-    Anota ("SOLTO: vigia {0} encerrado e tampa devolvida pra AC={1} DC={2}" -f $d.VigiaPid, $d.TampaAC, $d.TampaDC)
+    Anota ("SOLTO: vigia {0} encerrado e energia devolvida" -f $d.VigiaPid)
   } else {
     Anota 'ja estava solto'
   }
@@ -150,7 +171,6 @@ if (SinalCheio) {
   Anota 'havia sinal antigo com vigia morto; rearmando'
 }
 
-# A conta precisa ter senha, senao o cadeado e falsa sensacao de seguranca.
 $conta = Get-LocalUser -Name $env:USERNAME -ErrorAction SilentlyContinue
 if ($conta -and -not $conta.PasswordLastSet) {
   Anota 'RECUSADO: esta conta nunca teve senha definida. Trancar agora abriria com um Enter.'
@@ -158,8 +178,13 @@ if ($conta -and -not $conta.PasswordLastSet) {
   return
 }
 
-$tampa = TampaAtual
-if (-not $tampa) { throw 'nao achei a configuracao da tampa no registro' }
+# guarda o que era, ANTES de mexer em qualquer coisa
+$antes = [ordered]@{}
+foreach ($n in $ALVOS.Keys) {
+  $v = ValorAtual $ALVOS[$n][0] $ALVOS[$n][1]
+  if ($v) { $antes[$n] = @{ AC = $v.AC; DC = $v.DC } }
+}
+if ($antes.Count -eq 0) { throw 'nao consegui ler nenhuma configuracao de energia; nao vou mexer as cegas' }
 
 # O vigia nasce pelo WMI (Win32_Process.Create) de proposito: assim ele nao e
 # filho desta sessao e nao morre junto com quem o disparou. Mesma licao que a
@@ -177,19 +202,15 @@ $anterior = [Nativo.Energia]::SetThreadExecutionState($ES_CONTINUOUS -bor $ES_SY
 $log = Join-Path $env:USERPROFILE ".claude\cadeado.log"
 function Diz($t) { Add-Content $log ((Get-Date -Format "yyyy-MM-dd HH:mm:ss") + "  " + $t) -Encoding utf8 }
 Diz "vigia $PID de pe; SetThreadExecutionState devolveu $anterior (0 = FALHOU)"
-$limite = (Get-Date).AddHours(__TETO__)
-$sumiuDesde = $null
+$teto = __TETO__
+$limite = if ($teto -gt 0) { (Get-Date).AddHours($teto) } else { $null }
 while ($true) {
-  Start-Sleep -Seconds 30
-  if ((Get-Date) -gt $limite) { Diz "vigia $PID saindo: teto de __TETO__ horas"; break }
-  $claude = @(Get-Process -Name claude -ErrorAction SilentlyContinue)
-  if ($claude.Count -gt 0) { $sumiuDesde = $null; continue }
-  if (-not $sumiuDesde) { $sumiuDesde = Get-Date; continue }
-  if (((Get-Date) - $sumiuDesde).TotalMinutes -ge 3) { Diz "vigia $PID saindo: nenhum claude.exe ha 3 min"; break }
+  Start-Sleep -Seconds 60
+  # reafirma o pedido: se alguma politica derrubar, ele volta a valer
+  [Nativo.Energia]::SetThreadExecutionState($ES_CONTINUOUS -bor $ES_SYSTEM_REQUIRED) | Out-Null
+  if ($limite -and (Get-Date) -gt $limite) { Diz "vigia $PID saindo: teto de $teto horas"; break }
 }
 [Nativo.Energia]::SetThreadExecutionState($ES_CONTINUOUS) | Out-Null
-$sinal = Join-Path $env:USERPROFILE ".claude\cadeado.sinal"
-try { Set-Content -Path $sinal -Value "" -Encoding utf8 } catch {}
 '@
 $corpo = $corpo.Replace('__TETO__', "$TetoHoras")
 
@@ -201,17 +222,18 @@ $r = Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{ 
 if ($r.ReturnValue -ne 0) { throw "nao consegui subir o vigia (Win32_Process.Create devolveu $($r.ReturnValue))" }
 $pidVigia = [int]$r.ProcessId
 
-DefineTampa 0 0
+foreach ($n in $antes.Keys) { DefineValor $ALVOS[$n][0] $ALVOS[$n][1] 0 0 }
 
 $dados = [ordered]@{
   Desde    = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
   VigiaPid = $pidVigia
-  TampaAC  = $tampa.AC
-  TampaDC  = $tampa.DC
   Teto     = $TetoHoras
+  Antes    = $antes
 }
-Set-Content -Path $Sinal -Value ($dados | ConvertTo-Json -Compress) -Encoding utf8
-Anota ("ARMADO: vigia {0}; tampa presa (era AC={1} DC={2}); teto {3}h" -f $pidVigia, $tampa.AC, $tampa.DC, $TetoHoras)
+Set-Content -Path $Sinal -Value ($dados | ConvertTo-Json -Depth 5 -Compress) -Encoding utf8
+$tetoTxt = if ($TetoHoras -gt 0) { "teto $TetoHoras h" } else { 'SEM TETO: so o -Soltar derruba' }
+Anota ("ARMADO: vigia {0}; {1} configuracoes zeradas; {2}" -f $pidVigia, $antes.Count, $tetoTxt)
+foreach ($n in $antes.Keys) { Anota ("  {0} era AC={1} DC={2}, agora 0/0" -f $n, $antes[$n].AC, $antes[$n].DC) }
 
 if (-not $Armar) {
   Anota 'trancando a tela'

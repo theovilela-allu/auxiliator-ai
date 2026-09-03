@@ -44,7 +44,8 @@ Quem recebe (o Claude Code, ou o PSReadLine num shell puro) não distingue.
 | Tecla | Manda | Vira |
 |---|---|---|
 | `ctrl+v` | `v` | o mesmo que Alt+V — cola texto **e** imagem |
-| `ctrl+enter` | `` | o mesmo que Alt+Enter — pula linha sem enviar |
+| `ctrl+enter` | `
+` | o mesmo que Alt+Enter — pula linha sem enviar |
 
 As duas com `when: terminalFocus`, então o editor não muda. O `workbench.action.terminal.paste` do
 conserto de 11/08 não sumiu: desceu pro `ctrl+shift+v`, que é a cola de texto pura pra shell comum
@@ -115,6 +116,36 @@ antes disso.
 
 **A régua que fica:** em coisa de aparência, desenho não se descreve, se mostra. Duas rodadas erradas
 já pagam o desfile.
+
+### O TEMA VIROU AZUL BEBE (03/09/2026, fim da tarde) e o mapa dos slots ANSI
+
+Ele trocou o `/theme` pro **"Light mode (ANSI colors only)"** e aí eu passei a mandar nas cores do
+CLI. Na sequência ele pediu *"muda tudo pra azul bebê, tudo que tá laranja"*. Tema na **1.6.0**.
+
+**Azul bebê puro em texto sobre papel some**, então o laranja não virou uma cor só: virou a mesma
+escada, em azul.
+
+| Era | Papel | Virou |
+|---|---|---|
+| `#FF6B1A` | acento vibrante, letra do CLI | `#3FA7E0` |
+| `#E85D04` | linha | `#2E92CE` |
+| `#C74407` | forte | `#1E6FA6` |
+| `#A8551F` | apagado | `#1F5B7C` |
+| — | faixa dos prompts dele e borda da caixa | `#7FC1E8` (`terminal.ansiWhite`) |
+
+94 trocas no tema, 13 no `settings.json`, mais a statusline (`#3FA7E0`, vazio da barra `#CDE7F7`).
+**A escada de aviso da barra fica QUENTE de propósito** (500k e 800k): azul não grita.
+
+**O mapa que custou medição, e vale guardar:**
+
+- **`terminal.ansiWhite` pinta DUAS coisas ao mesmo tempo**: a faixa dos prompts já enviados **e** a
+  borda da caixa onde ele digita. São o mesmo slot, então não dá pra ter uma azul e a outra laranja
+  — ele notou sozinho (*"isso mudou a cor que fica em volta de onde eu mando o prompt junto"*).
+  Por isso `#7FC1E8` e não um bebê mais claro: claro demais some como linha sobre o papel.
+- **A faixa é desenhada com a letra ESCURA** (`#2D2D2A`), não clara. Medido linha a linha. É o que
+  libera usar um azul claro na faixa sem perder leitura.
+- **O azul que ele chamou de "o que tava antes" era `#0052AC`**, a cor que a paleta interna do
+  Claude Code usava no tema `light`. Peguei do print anterior à troca, em vez de escolher um azul.
 
 ### A BORDA CINZA DO PROMPT: provado no pixel em 03/09/2026
 
