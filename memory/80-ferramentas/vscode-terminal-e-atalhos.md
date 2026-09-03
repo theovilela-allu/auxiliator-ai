@@ -93,6 +93,24 @@ antes disso.
 **A régua que fica:** em coisa de aparência, desenho não se descreve, se mostra. Duas rodadas erradas
 já pagam o desfile.
 
+### A BORDA CINZA DO PROMPT: provado no pixel em 03/09/2026
+
+A caixa onde ele digita tem borda `#999999`, e **isso não vem do tema do VS Code**: vem da paleta
+interna do Claude Code. Com `theme: "light"` ou `"dark"` ele ignora o terminal inteiro.
+
+**Provado, não deduzido:** gravei `light-ansi` no `~\.claude\settings.json` com a sessão aberta,
+tirei print e amostrei. As quatro bordas continuaram `(153,153,153)`, as mesmas corridas de 875 px.
+**A sessão viva não relê o tema do arquivo.** E ela grava o valor dela de volta ao morrer, que é por
+que o arquivo tinha voltado pra `light` sozinho: a sessão anterior editou, achou que resolveu, e a
+sessão aberta desfez.
+
+**O único caminho: `/theme` → "Light mode (ANSI colors only)", digitado por ele na sessão viva.** Só
+aí o Claude Code passa a desenhar com os 16 slots ANSI do terminal e as cores do tema valem.
+
+**E o slot ainda NÃO está descoberto.** A sessão de 03/09 chutou `terminal.ansiBrightBlack` e o chute
+caiu junto com outros dois daquele dia. Quando ele trocar, descobrir por print e PIL, não por
+tentativa.
+
 ### Régua pra próxima vez
 
 Cor que o Claude Code desenha (borda do prompt, texto apagado) **não é do tema do VS Code**: ela sai
