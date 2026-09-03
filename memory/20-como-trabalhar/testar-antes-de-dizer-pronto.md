@@ -54,3 +54,19 @@ que o caro nunca vê.
 
 Corolário: quando não dá pra clicar (navegador fora, rede bloqueada), a frente fica **"construída,
 não provada"** na passagem de bastão, com essas palavras. Não "pronta".
+
+## 03/09/2026: a mesma régua vale pro DIAGNÓSTICO, não só pra entrega
+
+No mesmo dia eu tropecei duas vezes no mesmo lugar, e nenhuma das duas foi na hora de entregar:
+
+1. **De manhã:** um desenho que parecia óbvio na nota foi **recusado pelo código vivo** quando fui
+   construir. O que salvou foi ler o corpo da função antes de escrever a migração.
+2. **De tarde:** anunciei a **causa** de um problema (e o conserto que vinha dela) olhando só a
+   forma do dado, sem abrir o dado. Fui conferir depois e a hipótese caiu inteira — e o conserto
+   que ela sugeria era **destrutivo**, não só inútil.
+
+**A régua:** "provar antes de dizer pronto" também vale pra **afirmar por que** algo acontece.
+Causa anunciada é promessa: quem ouve age em cima dela, inclusive outro agente e a pessoa. Então
+diagnóstico segue a mesma ordem da entrega — abrir o dado (ou o corpo vivo) primeiro, afirmar
+depois. E quando a hipótese cai, **o erro fica escrito** na nota, não apagado: é ele que impede a
+próxima pessoa de tentar o mesmo conserto.
