@@ -19,8 +19,7 @@ const sinal = process.env.BASTAO_SINAL;
 
 // roda um script PowerShell sem briga de aspas: vai codificado em base64 (UTF-16LE)
 function ps(script) {
-  const enc = Buffer.from('$ProgressPreference = \x27SilentlyContinue\x27
-' + script, 'utf16le').toString('base64');
+  const enc = Buffer.from("$ProgressPreference = 'SilentlyContinue'\n" + script, 'utf16le').toString('base64');
   return execFileSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-EncodedCommand', enc], {
     encoding: 'utf8', windowsHide: true, stdio: ['ignore', 'pipe', 'ignore'],
   }).trim();
