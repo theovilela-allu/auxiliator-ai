@@ -83,11 +83,34 @@ if ($SeNecessario) {
 # claude fica aberto e parado em vez de fechar, e uma trava ingenua faria o reinicio
 # das 5h nao acontecer, que e justamente a hora que ele mais quer. Entao o crivo e
 # CPU: mede duas vezes com 15s de intervalo e so respeita quem consumiu processador.
-$jaRodando = @(Get-CimInstance Win32_Process -Filter "Name='claude.exe'" -ErrorAction SilentlyContinue |
-    Where-Object { $_.CommandLine -and $_.CommandLine -like '*review-de-fechamento*' })
+# Duas fontes, porque uma so nao basta:
+#   (a) claude.exe aberto POR ESTE script (a mensagem de abertura aparece na linha
+#       de comando dele);
+#   (b) qualquer agente ANUNCIADO como "trabalhando" com o PID vivo. Esta e a que
+#       pega a sessao que ELE mesmo abriu na mao: o modo autonomo se anuncia no
+#       comeco (desligar.ps1 -Cheguei), entao ela aparece aqui mesmo sem ter
+#       nascido deste script. Sem isto, as 23:45 nasceria uma segunda sessao em
+#       cima da dele.
+$pids = @()
 
-if ($jaRodando.Count -gt 0) {
-    $pids = $jaRodando | ForEach-Object { $_.ProcessId }
+$pids += @(Get-CimInstance Win32_Process -Filter "Name='claude.exe'" -ErrorAction SilentlyContinue |
+    Where-Object { $_.CommandLine -and $_.CommandLine -like '*review-de-fechamento*' } |
+    ForEach-Object { [int]$_.ProcessId })
+
+$casaDosAgentes = Join-Path $env:USERPROFILE '.claude\agentes'
+if (Test-Path $casaDosAgentes) {
+    $pids += @(Get-ChildItem $casaDosAgentes -Filter '*.json' -ErrorAction SilentlyContinue | ForEach-Object {
+        try { $d = Get-Content $_.FullName -Raw -Encoding UTF8 | ConvertFrom-Json } catch { return }
+        if ($d.Estado -eq 'trabalhando' -and (Get-Process -Id $d.Pid -ErrorAction SilentlyContinue)) {
+            [int]$d.Pid
+        }
+    })
+}
+
+# Eu nao conto contra mim mesmo, nem conto duas vezes.
+$pids = @($pids | Where-Object { $_ -and $_ -ne $PID } | Sort-Object -Unique)
+
+if ($pids.Count -gt 0) {
     Registra "achei $($pids.Count) sessao(oes) deste review (PID $($pids -join ', ')). Medindo se estao trabalhando..."
 
     function TempoDeCpu($listaPids) {
