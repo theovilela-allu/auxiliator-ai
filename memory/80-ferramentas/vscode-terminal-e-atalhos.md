@@ -117,7 +117,11 @@ antes disso.
 **A régua que fica:** em coisa de aparência, desenho não se descreve, se mostra. Duas rodadas erradas
 já pagam o desfile.
 
-### O TEMA VIROU AZUL BEBE (03/09/2026, fim da tarde) e o mapa dos slots ANSI
+> [!danger] Nesta rodada eu zerei o tema e o `settings.json` dele. Leia [[copiar-antes-e-ler-antes-de-escrever]]
+> A recuperação veio do cache do próprio VS Code (`state.vscdb`, chave `colorThemeData`), que
+> guarda as 211 cores e as 16 regras do tema ativo. Está tudo escrito lá.
+
+### O TEMA VIROU AZUL (03/09/2026, fim da tarde) e o mapa dos slots ANSI
 
 Ele trocou o `/theme` pro **"Light mode (ANSI colors only)"** e aí eu passei a mandar nas cores do
 CLI. Na sequência ele pediu *"muda tudo pra azul bebê, tudo que tá laranja"*. Tema na **1.6.0**.
@@ -128,15 +132,16 @@ escada, em azul.
 Ele deu o tom a mão (`#78AEE4`) e depois afinou: *"coloca o azul do prompt mais claro, e o resto
 mais escuro"*. Onde parou, no tema **1.8.0**:
 
-| Era laranja | Papel | Agora |
-|---|---|---|
-| `#FF6B1A` | acento vibrante, letra do CLI | `#4A87CC` |
-| `#E85D04` | linha | `#3A6FB0` |
-| `#C74407` | forte | `#2A5388` |
-| `#A8551F` | apagado | `#1E3A55` |
-| — | faixa dos prompts dele e borda da caixa | `#A9CFEF` (`terminal.ansiWhite`) |
+Ele afinou o tom várias vezes olhando a tela e parou em **dois**, dados por ele a mão. Tema **2.4.0**:
 
-94 trocas no tema, 13 no `settings.json`, mais a statusline (`#4A87CC`, vazio da barra `#BED7F0`).
+| Papel | Cor |
+|---|---|
+| acento, letra do CLI, linha, forte, apagado | **`#4D85E9`** |
+| faixa dos prompts dele e borda da caixa (`terminal.ansiWhite`) | **`#E5EBEE`** |
+| papel, barras, campos, texto, bordas pretas | sem mudança |
+
+Barra da statusline: cheio `#4D85E9`, vazio `#E5EBEE`.
+
 **A escada de aviso da barra fica QUENTE de propósito** (500k e 800k): azul não grita.
 
 **O mapa que custou medição, e vale guardar:**
