@@ -42,8 +42,12 @@ gerenciamento, e a `20260903150000` subiu por `db push` normal.
 assessor commitado com esta passagem.
 
 **Falta (em ordem):**
-1. **Virar nota `DEC` no cofre FP&A** a decisão do contrato ([[onde-salvar-nota-de-trabalho]]): ela
-   só existe no cofre do assessor. É a última coisa da frente do contrato.
+1. ~~**Virar nota `DEC` no cofre FP&A** a decisão do contrato~~ **FEITA nesta sessão** (commit
+   `b0e03b1` no cofre da equipe, empurrado): `DEC 2026-09-03 Contrato Assinado Barra o Pagamento`,
+   com fundamento, alternativas descartadas e o que muda por papel. Pendurada no
+   `_Painel de Reunioes`, e o cluster de Compras saiu de `a-desenvolver` pra `ativo` porque agora
+   tem nota de trabalho própria. `validar-frontmatter` limpo. O espelho pro OneDrive é a tarefa
+   agendada, aos :07 — não é pendência.
 2. **A validação do de-para de conta contábil** (tarefa vencida, prioridade alta): no ar desde
    15/07, falta testar com fornecedores ambíguos. Dá pra fazer sozinho, lendo a base de produção e
    listando fornecedor cujo nome cai em mais de uma conta ou em nenhuma.
