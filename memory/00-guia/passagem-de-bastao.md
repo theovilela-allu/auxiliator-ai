@@ -78,8 +78,9 @@ pra `#F0F0F0`. Se em ANSI a faixa simplesmente não existir, dizer isso a ele em
 - Escolher no `/theme` a opção com ANSI no nome (é o que destrava os três círculos).
 - Os 8 casos de conta contábil.
 - Dois achados desta sessão, os dois escritos no cofre local: um papel de teste que ficou no banco e
-  deixa a mesma pessoa executar e autorizar exceção, e a faixa livre da alçada que não vale na
-  prática porque a régua de estouro escala todo centro de custo sem orçamento carregado.
+  deixa a mesma pessoa executar e autorizar exceção. **A segunda alegação ("a faixa livre não vale
+  na prática") era FALSA e foi derrubada lendo produção em 03/09 à noite** — detalhe em
+  [[politica-de-aprovacao]], seção do fim.
 - **ESTE REPO É PÚBLICO, e a seção Estado carrega detalhe operacional.** Eu tirei daqui nome, código
   de centro de custo e o desenho de um furo de controle, e deixei ponteiro pro cofre local. Passagens
   de dias anteriores já subiram com esse tipo de detalhe, e desfazer isso não é meu: decisão dele é
