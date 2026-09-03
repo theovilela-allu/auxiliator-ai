@@ -15,6 +15,16 @@ aliases:
 > A de baixo é o **site de pagamentos** (time de front, cabeçalho de vidro). Esta é a
 > **infraestrutura do próprio assessor**, com ele presente a tarde inteira. Não se misturam.
 
+> [!tip] PRIMEIRO PASSO DA PROXIMA SESSAO
+> Ele encerrou esta conversa de propósito pra zerar contexto, com tudo salvo e empurrado
+> (`68176df`, árvore limpa). **Não há nada meio feito.**
+>
+> A frente viva e mais consequente é **[[rename-do-endereco-e-review-do-leo]]**: o Samuca só
+> renomeia o endereço depois que o Leo revisar o código. O movimento que vale é **fechar os itens
+> que a revisão vai achar antes de ela acontecer** — os três que não dependem de terceiro: o papel
+> de teste de 25/08 (segregação de função), a limpeza dos segredos e o acesso do Stuart.
+> Perguntar a ele antes de mexer no papel de teste: é banco de produção.
+
 ### INFRAESTRUTURA DO ASSESSOR — 03/09/2026, tarde e noite (ele presente)
 
 Nada aqui toca o sistema de compras. Tudo já está no ar, commitado e com nota própria; esta seção é
