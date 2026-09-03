@@ -22,22 +22,34 @@ de [[onde-retomar-depois-da-virada]], em modo autônomo desde as 22h35 de 02/09.
 (detalhe e prova na seção "Como funciona"). A prova da morte está registrada e commitada.
 
 **Falta (em ordem):**
-1. **(a) Smoke de escrita em produção**: criar, aprovar e pagar um pedido baixo com descrição
-   "TESTE DO SISTEMA, pode ignorar", e cancelar no fim, nunca apagar. Ninguém escreveu no sistema novo
-   desde a virada; é o teste que diz se o time trabalha de manhã.
+1. ~~(a) Smoke de escrita~~ **FEITO às 23h20 de 02/09**: criar, aprovar sozinho e cancelar
+   provados no banco (pedidos #1 e #2, os dois cancelados). Pagar ficou provado só até a trava:
+   quem pediu não registra o próprio Pago (403 de propósito). Detalhe e o que sobrou em
+   [[onde-retomar-depois-da-virada]].
 2. **(b) Terminar a [[caixa-de-observacao]]**: banco pronto na `20260902140000`, front inteiro
    faltando (7 itens listados na nota), depois `db push` e deploy.
 3. **(c) Alinhar o `master` do compras** com `virada-de-setembro` (hoje 2 commits atrás: o revoke na
    fila e a migração da observação). Fica por último de propósito: assim o master recebe a caixa inteira.
+
+**Entre 23h e 23h30 o Rei apareceu** e o modo autônomo acabou: ele pediu uma tarefa fora do
+Sistema de Pagamentos (não registrada aqui, a pedido dele), que foi entregue. Depois voltei ao
+smoke e fechei o item 1.
 
 **Onde está:** repo do assessor em `C:\Users\Allu\Desktop\auxiliator-ai` (master, no commit desta
 passagem). Sistema de Pagamentos na worktree `C:\Users\Allu\dev\compras-allu-virada`, branch
 `virada-de-setembro` @ `715f617`. **Ontem havia outra sessão minha aberta em outro terminal**: antes de
 mexer no compras, releia [[combinado-entre-agentes]] e confira `git status` nas worktrees.
 
-**Próximo passo concreto:** o smoke de escrita. Ver se o site de pagamentos está logado no navegador
-do assessor; logado → criar, aprovar, pagar e cancelar o pedido de teste, conferindo no banco; deslogado
-→ anotar aqui (não espero login) e seguir pra caixa de observação.
+**Próximo passo concreto:** a caixa de observação (item 2). Abrir [[caixa-de-observacao]], fazer os
+7 itens de front na worktree `compras-allu-virada`, testes, `db push` da `20260902140000` (o CLI
+roda pelo cache do npx: `~\AppData\Local\npm-cache\_npx\aa8e5c70f9d8d161\node_modules\.bin\supabase`,
+com a senha e o token de `C:\Users\Allu\segredos-virada.txt`, linhas 1 e 2, sem imprimir), push e
+conferir o bundle no ar.
+
+**Como ler o banco de produção sem CLI:** na aba do site logado, `fetch` no PostgREST
+(`https://ansknvxgjqollsamunvf.supabase.co/rest/v1/...`) com a chave anônima extraída do bundle e o
+token da sessão do Theo em `localStorage` (`sb-ansknvxgjqollsamunvf-auth-token`). É leitura com o
+RLS dele, e foi assim que o smoke conferiu status, aprovador e cancelamento.
 
 **Depende do Rei:** dizer se o terminal ficou limpo depois da morte (só ele vê a tela); o recado pro
 time sobre a virada (rascunho a oferecer); as 14 contas de custo de operação; a limpeza dos segredos
