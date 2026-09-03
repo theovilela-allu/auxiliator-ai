@@ -11,6 +11,49 @@ aliases:
 
 ## Estado (reescrito a cada passagem)
 
+> [!note] Duas sessões escreveram aqui em 03/09/2026, e são frentes DIFERENTES
+> A de baixo é o **site de pagamentos** (time de front, cabeçalho de vidro). Esta é a
+> **infraestrutura do próprio assessor**, com ele presente a tarde inteira. Não se misturam.
+
+### INFRAESTRUTURA DO ASSESSOR — 03/09/2026, tarde e noite (ele presente)
+
+Nada aqui toca o sistema de compras. Tudo já está no ar, commitado e com nota própria; esta seção é
+só o fio da meada.
+
+| O que entrou | Onde está escrito |
+|---|---|
+| Barra de progresso da statusline: virou **uma barra só**, cheio + vazio em dois tons | [[vscode-terminal-e-atalhos]] |
+| Tema do editor e do CLI: **saiu o laranja, entrou o azul dele** (`#4D85E9` escuro, `#E5EBEE` claro) | [[vscode-terminal-e-atalhos]] |
+| `Ctrl+V` e `Ctrl+Enter` passaram a fazer o que o `Alt` fazia | [[vscode-terminal-e-atalhos]] |
+| A máquina **não dorme mais sozinha** — e o culpado escondido era a suspensão não assistida em 120 s | [[cadeado-trancar-a-maquina]] |
+| **O último agente autônomo desliga o computador**, com cinco travas | [[desligar-quando-o-ultimo-acabar]] |
+| O arranjo inteiro virou **pacote pros colegas instalarem** (`ONBOARDING.md` + link) | [[pacote-pra-instalar-no-colega]] |
+| A passagem de bastão **confere o estado antes de morrer** (ver o aviso mais abaixo) | aqui mesmo |
+
+**Depende dele, e é curto:**
+- **Os 8 casos do de-para de conta contábil** seguem esperando decisão (5 cruzam custo com despesa,
+  mexem em margem). Detalhe e recomendação caso a caso em [[validacao-do-depara-de-conta]].
+- **A tomada.** Os tempos de suspensão estão zerados em caráter permanente, então bateria crítica em
+  2% é o único caminho de parada que sobrou — e é de propósito.
+- Se ele parou de mexer em cor: **juntar as cores num lugar só.** Hoje elas vivem no tema **e** num
+  bloco de ajuste rápido no `settings.json`, que era proposital enquanto ele afinava.
+
+**A LIÇÃO da sessão, e ela custou caro:** eu **zerei o tema do VS Code e o `settings.json` dele** de
+uma vez, escrevendo o arquivo na mesma linha em que o lia (`open(p,"w").write(troca(open(p).read()))`
+trunca antes de ler). Recuperei os dois — o `settings.json` de um backup meu, e o tema do cache do
+próprio VS Code (`state.vscdb`, chave `colorThemeData`, 211 cores). Régua nova em
+[[copiar-antes-e-ler-antes-de-escrever]]: **copiar antes de mexer, e nunca ler e escrever na mesma
+expressão.**
+
+**A ferramenta que resolveu o dia todo de cor:** parar de descrever desenho e **mostrar** — trocar a
+statusline por um desfile de candidatos numerados, tirar print da tela com
+`System.Drawing.CopyFromScreen` e amostrar com PIL. Ele escolheu em uma palavra depois de eu ter
+gasto três rodadas adivinhando.
+
+---
+
+### SITE DE PAGAMENTOS — a outra sessão de 03/09
+
 > [!warning] Sessão da TARDE/NOITE de 03/09/2026, com ele PRESENTE o tempo todo.
 > O trabalho do dia está no ar. **O que NÃO está fechado é o cabeçalho de vidro:** ele foi
 > publicado, o Rei viu, reclamou do lugar do e-mail e pediu especialistas pra conferir. Duas
