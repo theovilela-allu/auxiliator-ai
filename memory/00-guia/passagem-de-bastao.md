@@ -11,136 +11,86 @@ aliases:
 
 ## Estado (reescrito a cada passagem)
 
-> [!success] SESSÃO AUTÔNOMA DE 03/09/2026 (aberta com *"bom dia AUTONOMO"*), ENCERRADA por ele
-> às 09h com *"tinha travado a internet, ve se foi agora"*. A fila da noite acabou: a
-> [[caixa-de-observacao]] está NO AR, inteira, e o `master` do compras voltou a ser a verdade.
->
-> **O que ficou pronto:**
-> - **Front inteiro da caixa de observação**, os 7 itens da nota mais dois que ela não previa: a
->   observação aparece pra QUEM APROVA (fila de Aprovações) e pra QUEM PAGA (cartão "a pagar" do
->   Controle). Motivo: o banco a congela porque *"ela faz parte do que foi aprovado"*, e congelar
->   texto que ninguém enxerga não protege nada. O pedido do racional novo não tem justificativa, então
->   essa é a única fala de quem pediu que chega até lá.
-> - Também entrou no rascunho (texto corrido é o campo mais caro de reescrever) e no cartão do
->   próprio pedido.
-> - **Fechamento:** coluna "Observação do pedido" no FIM de `COLUNAS_FISCAIS`. Os itens 5 e 6 da nota
->   eram um só: a grade e o Excel saem da mesma lista.
-> - **Migração `20260902140000` APLICADA EM PRODUÇÃO** (`db push`, 03/09 ~09h). O `migration list`
->   confirma remoto = local, e o bloco de conferência fail-closed da própria migração passou (coluna,
->   teto de 4000, guarda, gatilho e a `v3` gravando). Produção agora está em `20260902140000`.
-> - **`master` alinhado**, e os 3 commits que faltavam entraram por fast-forward. `master` e
->   `virada-de-setembro` estão os dois em `5909377`, empurrados.
-> - **Deploy conferido no ar:** bundle `index-Dk3JIB7I.js` em `compras-allu-site.vercel.app` contém
->   `ped-observacao` e "Observação do pedido". Não é o log, é o arquivo servido.
-> - **Provas:** 1337 testes (eram 1304), 16 novos; `tsc -b` limpo, lint sem aviso novo, `vite build`
->   verde.
->
-> **O SMOKE DE TELA FOI FEITO, e achou dois defeitos de verdade** (03/09, de manha, com ele
-> presente). Detalhe inteiro em [[caixa-de-observacao]]. Em uma linha cada:
-> 1. **O gatilho barrava a propria escrita que cria a observacao** quando o pedido nasce ja
->    aprovado (abaixo do piso). Isso CHEGOU EM PRODUCAO e quem pedia recebia erro com o
->    formulario cheio. Conserto na `20260903120000`.
-> 2. **`btrim` de um argumento apara so espaco**, nao quebra de linha, e a caixa e um textarea.
->    Achado pela prova nova. Conserto na `20260903130000`.
->
-> **Prova nova que faltava:** `supabase/testes/prova-observacao-do-pedido.mjs`, 31 OK. Ela cobre
-> exatamente o vao que deixou o defeito passar: nenhuma prova criava pedido COM observacao pela
-> `v3`, porque o front nao existia.
->
-> **A LICAO, que vale alem desta frente:** [[testar-antes-de-dizer-pronto]] ganhou um caso duro.
-> Ontem eu disse "banco pronto e provado" com a migracao aplicada e a prova de cadeia passando. Os
-> dois defeitos estavam la, e o que os achou foi UM clique de verdade. Migracao que passa nao e
-> feature que funciona: prova de migracao cobre a migracao SUBIR, nao o caminho da pessoa.
->
-> **ESPERANDO O WIFI (nao a 3g: ele testou e nao presta):** rodar `supabase db push` e
-> `migration list --linked` so pra CONFERIR. As portas 5432/6543 estao fechadas na rede dele, entao
-> as duas migracoes de 03/09 foram aplicadas pela API de gerenciamento (HTTPS) e as linhas de
-> `schema_migrations` inseridas a mao. **Producao esta correta e conferida no corpo vivo das
-> funcoes** (`pg_get_functiondef`), e o historico marca `20260903130000` como ultima. O CLI e cinto
-> de seguranca, nao conserto: se ele disser "up to date", nada a fazer.
->
-> **Sobrou uma faxina:** um script meu perdeu as barras invertidas do caminho do Windows num
-> heredoc, e o Chrome criou um perfil DENTRO do repo
-> (`UsersAlluAppDataLocalms-playwright-mcpmcp-chrome-3c24d0c/`, 38 MB, com a sessao Google dele).
-> **Nunca foi commitado** (o `Cookies` estava travado e o `git add` falhou) e agora esta no
-> `.gitignore`. Mover pra fora do repo quando ele fechar a janela do navegador.
->
-> **O navegador desta sessao nao e o do Playwright:** o servico do MCP nao subiu (a internet estava
-> travada na abertura), entao eu subi o Chrome eu mesmo, com o perfil dele e a porta de depuracao
-> 9222, e conectei por CDP. Isso salvou a sessao inteira: sem essa saida, nada de clique no ar.
->
-> **Auxiliator, panorama de 03/09** (ele logou a mao nas duas telas: as sessoes tinham expirado).
-> Versao v0.2.20, igual a anunciada, nada a contar. 3 vencidas, todas FP&A: piloto de lancamentos
-> reais e de-para conta contabil (as duas de 21/08), e **decidir onde o contrato barra o pagamento**
-> (01/09) - essa e sobre o sistema que a gente acabou de mexer, e hoje vale uma escolha PROVISORIA
-> minha ("contrato resolvido" = assinado, e pendente nunca barra o pagamento). Nada pra hoje,
-> ninguem esperando ele. **As 2 do Thoreos foram APAGADAS a pedido dele** (ver
-> [[thoreos-em-espera]]): zero bloqueada agora. Granola nao conectado nesta sessao.
->
-> **Três decisões que eu tomei sozinho** (todas reversíveis, ele derruba com uma frase): rótulo
-> "Observação" com a explicação de que ela congela na aprovação, logo abaixo do campo; teto de 4000
-> igual ao do banco, espelhado no `maxLength` e no espelho local (`OBSERVACAO_MAX`); e a coluna do
-> fechamento no FIM do arquivo, pra não mover fórmula de quem já usa a planilha.
+> [!success] Dia longo e produtivo, 03/09/2026. Abriu em [[modo-autonomo]] (*"bom dia AUTONOMO"*),
+> ele apareceu por volta das 9h e ficou. **Nada ficou meio feito:** tudo commitado, empurrado e no ar.
 
-> [!success] Dia encerrado por ele às 23h40 de 02/09/2026: *"salva tudo na memória, vou continuar amanhã."*
-> A sessão nasceu sozinha às 22h29 (a passagem funcionou, prova na seção "Como funciona"), trabalhou em
-> [[modo-autonomo]] até ele aparecer por volta das 23h, e encerrou com tudo salvo e empurrado. Nada
-> ficou meio feito.
+**Estávamos fazendo:** a decisão do contrato (a tarefa vencida de 01/09) — decidida com o Rodrigo,
+construída e provada no ar no mesmo dia. Antes dela, a [[caixa-de-observacao]].
 
-**Estávamos fazendo:** a fila que sobrou de 02/09 no Sistema de Pagamentos, seção "O que sobrou, MEU"
-de [[onde-retomar-depois-da-virada]].
+**Ficou pronto, em ordem:**
+1. **A caixa de observação**, front inteiro, NO AR. O primeiro clique de verdade achou **dois
+   defeitos**, um deles já em produção (o gatilho barrava a escrita que cria a observação, em pedido
+   que nasce aprovado). Consertos nas migrações `20260903120000` e `20260903130000`, e nasceu a
+   prova que faltava (`prova-observacao-do-pedido.mjs`, 31 OK).
+2. **O contrato barrando o pagamento**, decidido por ele com o Rodrigo e construído inteiro:
+   migração `20260903140000`, front (Controle + a seção nova do Jurídico) e três colunas no
+   fechamento. `prova-contrato-barra-pagamento.mjs` com 39 OK. Racional e o "como ficou" em
+   [[onde-o-contrato-barra-o-pagamento]]. **A tarefa do Auxiliator foi concluída.**
+3. **As 2 tarefas do Thoreos foram APAGADAS** a pedido dele ([[thoreos-em-espera]]): zero bloqueada.
 
-**Ficou pronto:** (a) a corrente da passagem de bastão, provada ao vivo, com a prova registrada e o
-terminal limpo confirmado por ele; (b) o **smoke de escrita em produção**, que era o item mais
-importante da fila; (c) os ganchos passaram a usar caminho absoluto (`$CLAUDE_PROJECT_DIR`), senão
-eles não rodam quando a sessão abre de outra pasta.
+**Onde está:** compras na worktree `C:\Users\Allu\dev\compras-allu-virada`, e **`master` e
+`virada-de-setembro` os dois em `bce712d`**, empurrados. Repo do assessor em `c0db959` (as notas de
+projeto e o `MEMORY.md` são gitignored de propósito: ficam só na máquina dele). Produção do banco em
+**`20260903140000`**.
 
 **Falta (em ordem):**
-1. ~~(a) Smoke de escrita~~ **FEITO às 23h20 de 02/09**: criar, aprovar sozinho e cancelar
-   provados no banco (pedidos #1 e #2, os dois cancelados). Pagar ficou provado só até a trava:
-   quem pediu não registra o próprio Pago (403 de propósito). Detalhe e o que sobrou em
-   [[onde-retomar-depois-da-virada]].
-2. **(b) Terminar a [[caixa-de-observacao]]**: banco pronto na `20260902140000`, front inteiro
-   faltando (7 itens listados na nota), depois `db push` e deploy.
-3. **(c) Alinhar o `master` do compras** com `virada-de-setembro` (hoje 2 commits atrás: o revoke na
-   fila e a migração da observação). Fica por último de propósito: assim o master recebe a caixa inteira.
+1. **A aprovação abrir a demanda de contrato sozinha.** É a peça que fecha o ovo e a galinha: hoje a
+   trava produz pedido aprovado esperando contrato que ninguém pediu. O formulário já coleta os dados
+   (`complementoContrato`); aprovou pedido que exige contrato → nasce o contrato em
+   `aguardando_juridico`. Sugestão de desenho: **gatilho em `pedidos`** na virada pra `aprovado`,
+   porque pedido abaixo do piso nasce aprovado direto do núcleo e um só lugar cobre os dois caminhos.
+2. **Conferir por qual das três portas o Rodrigo entra em `aux_is_juridico()`** (CC 103130, quem
+   responde pelo 103130 no catálogo, ou papel avulso na tabela `papeis`) antes de avisar que a tela
+   está pronta pra ele. **Essa é a pergunta que ficou pendente na tela quando a conversa acabou.**
+3. **A validação do de-para de conta contábil** (tarefa vencida, prioridade alta): o de-para está no
+   ar desde 15/07, e falta testar com fornecedores ambíguos. Dá pra fazer sozinho, lendo a base de
+   produção e listando fornecedor cujo nome cai em mais de uma conta ou em nenhuma.
+4. **O piloto de lançamentos reais com uma área** (a outra vencida): depende de gente, não de código.
+5. **Virar nota `DEC` no cofre FP&A** a decisão do contrato: decisão é conhecimento da equipe
+   ([[onde-salvar-nota-de-trabalho]]), e ela só existe no cofre do assessor.
 
-**Por volta das 23h ele apareceu** e o modo autônomo acabou. Houve um trabalho fora do Sistema de
-Pagamentos entre 23h e 23h35, entregue e **de propósito não registrado aqui** (pedido explícito
-dele). Se um dia faltar contexto de um intervalo desta noite, é esse, e quem pergunta é ele.
+**Próximo passo concreto:** o item 1. Nova migração `20260903150000`, gatilho `after update on
+pedidos` (e o caminho do nascimento) que chama a criação do contrato quando
+`aux_exige_contrato(...)` e `contrato_id is null`. Reaproveitar `aux_criar_contrato(null, pedido_id,
+complemento, null)` em vez de escrever insert novo. Prova nova no mesmo desenho da
+`prova-contrato-barra-pagamento.mjs`.
 
-**Onde está:** repo do assessor em `C:\Users\Allu\Desktop\auxiliator-ai` (master, no commit desta
-passagem). Sistema de Pagamentos na worktree `C:\Users\Allu\dev\compras-allu-virada`, branch
-`virada-de-setembro` @ `715f617`. **Ontem havia outra sessão minha aberta em outro terminal**: antes de
-mexer no compras, releia [[combinado-entre-agentes]] e confira `git status` nas worktrees.
+**Depende do Rei:**
+- Por qual porta o Rodrigo entra no Jurídico (item 2 acima) — só ele sabe.
+- **A tela de Aprovações nunca foi clicada no ar:** pedido acima do piso cai na fila do Gustavo e o
+  robô avisa ele. Ele pediu pra NÃO fazer ainda (03/09).
+- **A planilha da base do DP**, que destrava a frente 2 e a escada da frente 5. Estava prometida pra
+  03/09 e ele disse que ainda não tem.
+- As 14 contas de custo de operação, o recado pro time sobre a virada, os valores da alçada, e a
+  limpeza dos segredos.
 
-**PARADO A PEDIDO DELE às 23h40 de 02/09** (*"para o que você tiver fazendo, vai acabar meus
-tokens"*). A caixa de observação tinha acabado de começar e foi interrompida: **nada ficou meio
-feito**, a worktree está limpa em `715f617` (conferido no `git status`). Não retomar sozinho: ele
-decide quando voltar.
+**ESPERANDO O WIFI (não a 3g: ele testou e não presta):** `supabase db push` e
+`migration list --linked`, só pra CONFERIR. As portas 5432/6543 estão fechadas na rede dele, então as
+**três** migrações de 03/09 foram aplicadas pela API de gerenciamento (HTTPS) e as linhas de
+`schema_migrations` inseridas a mão. Produção está correta e conferida no corpo vivo das funções; o
+CLI é cinto de segurança, não conserto. Receita em [[ler-o-banco-em-producao]].
 
-**Próximo passo concreto:** a caixa de observação (item 2). Abrir [[caixa-de-observacao]], fazer os
-7 itens de front na worktree `compras-allu-virada`, testes, `db push` da `20260902140000` (o CLI
-roda pelo cache do npx: `~\AppData\Local\npm-cache\_npx\aa8e5c70f9d8d161\node_modules\.bin\supabase`,
-com a senha e o token de `C:\Users\Allu\segredos-virada.txt`, linhas 1 e 2, sem imprimir), push e
-conferir o bundle no ar.
+**Ferramentas desta sessão que não podem se perder** (as duas em [[ler-o-banco-em-producao]]): rodar
+SQL em produção pela **API de gerenciamento** quando as portas do banco fecham (lembrando que por
+esse caminho a linha de `schema_migrations` vai a mão), e **subir o Chrome por conta própria com
+`--remote-debugging-port=9222`** quando o serviço do Playwright perde a janela de conexão na
+abertura. A segunda salvou a sessão inteira: sem ela, nada de clique no ar.
 
-**Ferramenta que nasceu hoje e não pode se perder:** [[ler-o-banco-em-producao]], como eu confiro
-produção sem CLI (PostgREST pela sessão do Theo no navegador) e onde o CLI do Supabase vive.
+**Faxina que sobrou:** um script meu perdeu as barras invertidas de um caminho do Windows num
+heredoc, e o Chrome criou um perfil DENTRO do repo do assessor
+(`UsersAlluAppDataLocalms-playwright-mcpmcp-chrome-3c24d0c/`, 38 MB, com a sessão Google dele).
+**Nunca foi commitado** (o `Cookies` travado fez o `git add` falhar) e está no `.gitignore`. Mover
+pra fora quando ele fechar a janela do navegador — que **segue aberta**, com sessão viva no Sistema
+de Pagamentos e no Auxiliator, e com o Chrome escutando na 9222.
 
-**Depende do Rei:** dizer se o terminal ficou limpo depois da morte (só ele vê a tela); o recado pro
-time sobre a virada (rascunho a oferecer); as 14 contas de custo de operação; a limpeza dos segredos
-(fica pro fim); os valores da alçada. Nada disso eu decido.
+**A LIÇÃO do dia, que vale além destas frentes** ([[testar-antes-de-dizer-pronto]]): migração que
+passa não é feature que funciona. Ontem eu registrei a caixa de observação como "banco pronto e
+provado"; dois defeitos estavam lá, e o que os achou foi UM clique. Prova de migração cobre a
+migração subir, não o caminho da pessoa.
 
-**Rascunhos prontos:** a mensagem pedindo a alguém da Tesouraria pra registrar o Pago de um pedido
-de teste (fecha a última perna do smoke). Está em [[onde-retomar-depois-da-virada]], "DELE", item 4.
-Não disparei: mensagem em nome dele, de madrugada, não sai sem ele ver.
-
-**Auxiliator:** voltou a logar sozinho às 22h20 de 02/09 (o "Sim" do iPhone entrou). Panorama do dia,
-pra não puxar de novo: 3 vencidas dele (piloto de lançamentos reais e de-para conta contábil, ambas de
-21/08; decidir onde o contrato barra o pagamento, de 01/09), nada pra hoje, ninguém esperando ele, as
-2 do Thoreos seguem bloqueadas de propósito. Versão v0.2.20, igual à anunciada. Nenhuma reunião na
-semana no Granola.
+**Auxiliator:** panorama de 03/09, versão v0.2.20 (igual à anunciada, nada a contar). Sobraram **2
+vencidas**, as duas de 21/08 e as duas de FP&A: piloto de lançamentos reais e de-para conta contábil.
+Nada pra hoje, ninguém esperando ele, zero bloqueada. Granola não conectado nesta sessão.
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
