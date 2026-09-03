@@ -31,6 +31,29 @@ Conserto aplicado, dois arquivos:
 
 Os dois são lidos ao vivo, sem reiniciar. **Saída de emergência se um dia falhar de novo: `Shift+Insert` também cola no terminal**, é atalho padrão do VS Code.
 
+## O ALT VIROU CTRL nos dois atalhos que o incomodavam (03/09/2026)
+
+Ele: *"quero que o control funcione como control... pra colar coisas no terminal tenho que usar
+alt v, pra pular pra linha de baixo, alt enter. Quero que nesses dois casos o alt vire o control."*
+
+**A ideia que resolve sem inventar comando:** no terminal, `Alt+tecla` é literalmente a tecla
+precedida de ESC (``). Então o atalho novo não precisa de um comando equivalente: ele manda
+pro terminal **a mesma sequência que o Alt mandava**, com `workbench.action.terminal.sendSequence`.
+Quem recebe (o Claude Code, ou o PSReadLine num shell puro) não distingue.
+
+| Tecla | Manda | Vira |
+|---|---|---|
+| `ctrl+v` | `v` | o mesmo que Alt+V — cola texto **e** imagem |
+| `ctrl+enter` | `` | o mesmo que Alt+Enter — pula linha sem enviar |
+
+As duas com `when: terminalFocus`, então o editor não muda. O `workbench.action.terminal.paste` do
+conserto de 11/08 não sumiu: desceu pro `ctrl+shift+v`, que é a cola de texto pura pra shell comum
+(e `Shift+Insert` segue valendo). VS Code lê o `keybindings.json` ao vivo, sem reiniciar.
+
+**Por que não usar o `~\.claude\keybindings.json`:** ele existe e resolveria o pulo de linha
+(`chat:newline`, padrão `ctrl+j`), mas o VS Code intercepta a tecla **antes** do Claude Code, então
+a regra do lado do VS Code é a que manda. Uma fonte só, e ela pega os dois casos.
+
 ## O TEMA DELE: "Tema do Rei" (03/09/2026)
 
 Ele pediu tema próprio: fundo de papel, laranja vibrante em tudo que é barra e linha. Vive como
