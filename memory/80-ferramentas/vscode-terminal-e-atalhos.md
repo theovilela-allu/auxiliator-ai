@@ -114,6 +114,11 @@ achar a faixa da barra pela linha com a maior corrida contígua de laranja, reco
 Ele olhou os cinco e disse "gostei da 5" em uma linha. Julgar no olho, sem print, custou três rodadas
 antes disso.
 
+**Glifo bonito que a fonte não tem é ruído, não enfeite.** O `⟳` que precedia o horário de reset
+saiu em 03/09: a Consolas não desenha esse caractere e ele aparecia colado no horário parecendo um
+`0` (*"tem algum símbolo antes do horário"*). Antes de pôr símbolo na barra, conferir se a Consolas
+tem — ela é a fonte do editor, e a extensão segue `--vscode-editor-font-family`.
+
 **A régua que fica:** em coisa de aparência, desenho não se descreve, se mostra. Duas rodadas erradas
 já pagam o desfile.
 
