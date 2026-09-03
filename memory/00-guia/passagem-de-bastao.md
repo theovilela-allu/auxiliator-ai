@@ -28,7 +28,10 @@ versão conferida, Granola sem reunião na semana), deu o briefing e passou o ba
 passagem). Provado antes, num shell de mentira: o vigia dispara em 520k e cala em 300k; o laço relança
 no mesmo terminal com a flag e a mensagem. Provado nesta passagem, do lado da sessão de origem: o gancho
 Stop disparou na primeira resposta com a régua em 1k, devolveu a lista, e o script rodou com o
-`BASTAO_SINAL` apontando pro sinal deste terminal (`bastao-36596.sinal`).
+`BASTAO_SINAL` apontando pro sinal deste terminal (`bastao-36596.sinal`). **A primeira tentativa de
+matar falhou** (22h25): o matador nascia como filho da minha ferramenta e morria junto com ela antes dos
+2s. Consertado às 22h30 (o matador passou a nascer pelo WMI, fora da minha árvore) e a passagem foi
+refeita em seguida, com o Rei olhando.
 
 **Falta (em ordem):**
 1. **Registrar a prova da morte** na seção "Como funciona" (se você existe, o `claude.exe` morreu e
@@ -69,7 +72,7 @@ mandar a seguinte mensagem: bom dia, da uma lida pra pegar contexto."* Limite: *
 |---|---|---|
 | Laço do `claude` | `C:\Users\Allu\Documents\WindowsPowerShell\profile.ps1` | A função `claude` exporta `BASTAO_SINAL` (um arquivo por terminal, `~\.claude\bastao-<PID>.sinal`) e roda o `claude.exe --dangerously-skip-permissions` em laço. Morreu com sinal preenchido → limpa o console e relança **no mesmo terminal, com a mesma flag**, com a mensagem do sinal como primeiro prompt. Sinal vazio → sai normal |
 | Gancho `Stop` | `.claude/hooks/bastao-de-contexto.cjs` | No fim de cada resposta minha, soma o `usage` mais recente do transcript. Acima de 500k, grava a marca `<transcript>.bastao` e devolve (código 2) a lista: consistência, reescrever a seção Estado daqui, commit/push, uma linha pro Rei, rodar o script. Uma vez por sessão; ignora `stop_hook_active` |
-| Script | `.claude/hooks/passar-o-bastao.cjs` | Grava a mensagem de abertura no sinal e dispara um matador destacado que, 2s depois, derruba a **árvore inteira** do `claude.exe` (senão o navegador do Playwright fica vivo segurando a trava do perfil). `--seco` só mostra o que faria. Sem `BASTAO_SINAL` (sessão aberta pela extensão do VSCode) não mata nada e devolve a frase pra colar na mão |
+| Script | `.claude/hooks/passar-o-bastao.cjs` | Grava a mensagem de abertura no sinal e dispara, **pelo WMI** (`Win32_Process.Create`, que nasce fora da minha árvore; filho destacado morre junto com a ferramenta que o disparou), um matador que 2s depois derruba a **árvore inteira** do `claude.exe` (senão o navegador do Playwright fica vivo segurando a trava do perfil). `--seco` só mostra o que faria. Sem `BASTAO_SINAL` (sessão aberta pela extensão do VSCode) não mata nada e devolve a frase pra colar na mão |
 | Barra de status | `C:\Users\Allu\.claude\statusline.cjs` | Laranja aos 500k ("passagem a caminho"), vermelho aos 800k ("a passagem falhou, olha isso") |
 | A sessão nova | [[modo-autonomo]] | A mensagem de abertura diz "MODO AUTONOMO": ela lê este arquivo, o `MEMORY.md` e o painel do projeto, e trabalha sozinha na fila, sem pergunta e sem trava |
 
@@ -89,7 +92,11 @@ por isso o vermelho da barra existe).
 resposta já passa o bastão. O laço zera esse limite antes de relançar, então a sessão que nasce volta
 ao 500k de sempre (senão a corrente viraria laço infinito). **Provado em 02/09/2026** num shell de
 mentira: relançou no mesmo terminal, com a flag, com a mensagem; sinal esvaziado; laço fecha com
-sinal vazio.
+sinal vazio. **A primeira passagem REAL** (02/09/2026 22h25, régua em 1k, terminal do VS Code) **falhou**:
+o matador destacado morreu junto com a ferramenta que o disparou. Prova: um filho destacado que devia
+gravar um arquivo em 4s não gravou; o mesmo filho criado pelo WMI gravou. Não tinha nada a ver com o
+VS Code, a árvore estava certa (`Code.exe` → `powershell.exe` do laço → `claude.exe`). Corrigido no
+mesmo minuto e refeito.
 
 Ligações: [[travar-em-60-de-contexto]] · [[modo-autonomo]] · [[o-que-eu-nao-posso-fazer]] ·
 [[terminal-e-powershell]]

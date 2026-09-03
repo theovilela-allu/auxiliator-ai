@@ -4,19 +4,31 @@
 // O laco da funcao claude no profile.ps1 ve o sinal e relanca no mesmo terminal, com a flag.
 // Uso: node .claude/hooks/passar-o-bastao.cjs [--seco]   (--seco so mostra o que faria)
 // Desenho: memory/00-guia/passagem-de-bastao.md
+//
+// Por que o matador nasce via WMI e nao como filho meu: a ferramenta que roda este script derruba
+// a propria arvore de processos quando termina, entao um filho "destacado" (spawn detached) morre
+// antes de acordar. Provado em 02/09/2026: a primeira passagem real falhou exatamente por isso.
+// Win32_Process.Create cria o processo debaixo do servico do WMI, fora da minha arvore, e ele
+// sobrevive ao fim da ferramenta.
 const fs = require('fs');
-const { execFileSync, spawn } = require('child_process');
+const { execFileSync } = require('child_process');
 
 const MENSAGEM = 'bom dia, da uma lida pra pegar contexto. MODO AUTONOMO: voce nao esta aqui, entao le a passagem de bastao, entende onde a gente parou e segue trabalhando sozinho no que ficou pra fazer.';
 const seco = process.argv.includes('--seco');
 const sinal = process.env.BASTAO_SINAL;
 
+// roda um script PowerShell sem briga de aspas: vai codificado em base64 (UTF-16LE)
+function ps(script) {
+  const enc = Buffer.from('$ProgressPreference = \x27SilentlyContinue\x27
+' + script, 'utf16le').toString('base64');
+  return execFileSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-EncodedCommand', enc], {
+    encoding: 'utf8', windowsHide: true, stdio: ['ignore', 'pipe', 'ignore'],
+  }).trim();
+}
+
 // nome e pai de um processo, via WMI
 function info(pid) {
-  const out = execFileSync('powershell.exe', [
-    '-NoProfile', '-NonInteractive', '-Command',
-    `$p = Get-CimInstance Win32_Process -Filter "ProcessId=${pid}" | Select-Object -First 1; if ($p) { "$($p.ParentProcessId) $($p.Name)" }`,
-  ], { encoding: 'utf8', windowsHide: true }).trim();
+  const out = ps(`$p = Get-CimInstance Win32_Process -Filter "ProcessId=${pid}" | Select-Object -First 1; if ($p) { "$($p.ParentProcessId) $($p.Name)" }`);
   const m = out.match(/^(\d+)\s+(.+)$/);
   return m ? { ppid: Number(m[1]), name: m[2] } : null;
 }
@@ -44,21 +56,31 @@ if (!sinal) {
   console.log('Abra um terminal novo, rode claude e cole:\n' + MENSAGEM);
   process.exit(0);
 }
+
+// o matador: espera 2s e derruba a arvore do claude.exe. Nasce pelo WMI, fora da minha arvore.
+const matador = `powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -Command "Start-Sleep -Seconds 2; taskkill /F /T /PID ${alvo} | Out-Null"`;
+const criar = [
+  `$r = Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{ CommandLine = '${matador.replace(/'/g, "''")}' }`,
+  `"$($r.ReturnValue) $($r.ProcessId)"`,
+].join('\n');
+
 if (seco) {
   console.log(`[seco] alvo=${alvo} cadeia=${cadeia.join(' <- ')} sinal=${sinal}`);
   console.log(`[seco] mensagem=${MENSAGEM}`);
+  console.log(`[seco] matador=${matador}`);
   process.exit(0);
 }
 
 fs.writeFileSync(sinal, MENSAGEM + '\n', 'utf8');
 
-// matador destacado: espera 2s e derruba a arvore do claude.exe. Quando ele acorda, quem o disparou
-// (este node e o shell da ferramenta) ja morreu, entao ele nao esta na arvore e sobrevive ao golpe.
-const ps = `Start-Sleep -Seconds 2; taskkill /F /T /PID ${alvo} | Out-Null`;
-const child = spawn('powershell.exe', ['-NoProfile', '-NonInteractive', '-WindowStyle', 'Hidden', '-Command', ps], {
-  detached: true, stdio: 'ignore', windowsHide: true,
-});
-child.unref();
+let ret = '';
+try { ret = ps(criar); } catch (e) { ret = 'erro ' + (e.message || e); }
+const m = ret.match(/^(\d+)\s+(\d*)$/);
+if (!m || m[1] !== '0') {
+  console.log(`Nao consegui disparar o matador pelo WMI (retorno: ${ret}). Sinal ja gravado em ${sinal}.`);
+  console.log(`Passe o bastao na mao: encerre esta sessao (o laco relanca sozinho) ou rode: taskkill /F /T /PID ${alvo}`);
+  process.exit(0);
+}
 
-console.log(`Bastao passado: sinal gravado em ${sinal}. Esta sessao (claude.exe ${alvo}) encerra em 2 segundos e a proxima nasce neste terminal com a mensagem de abertura.`);
+console.log(`Bastao passado: sinal gravado em ${sinal}. Matador nasceu pelo WMI (pid ${m[2]}); esta sessao (claude.exe ${alvo}) encerra em 2 segundos e a proxima nasce neste terminal com a mensagem de abertura.`);
 process.exit(0);
