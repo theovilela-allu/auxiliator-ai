@@ -11,97 +11,109 @@ aliases:
 
 ## Estado (reescrito a cada passagem)
 
-> [!info] Sessão de 03/09/2026 que começou AUTÔNOMA à tarde e virou conversa quando ele chegou.
-> Duas frentes fecharam (a demanda de contrato e o levantamento do de-para) e a terceira, o
-> **tema do editor**, ficou com UM pedido especificado e não aplicado. Nada meio feito no código.
+> [!warning] Sessão da TARDE/NOITE de 03/09/2026, com ele PRESENTE o tempo todo.
+> O trabalho do dia está no ar. **O que NÃO está fechado é o cabeçalho de vidro:** ele foi
+> publicado, o Rei viu, reclamou do lugar do e-mail e pediu especialistas pra conferir. Duas
+> frentes de revisão estavam rodando quando a passagem disparou e **os achados delas se perderam**.
+> Recomeçar por aí.
 
-**O que fechou nesta sessão** (detalhe em [[onde-o-contrato-barra-o-pagamento]] e
-[[validacao-do-depara-de-conta]], as duas no cofre local):
+**O que esta sessão entregou, em quatro subidas, todas provadas pelo CONTEÚDO do bundle no ar:**
 
-1. **A aprovação abre a demanda de contrato** e o robô cobra quem gera. No ar, provado em produção
-   com rollback. Commit `0c46c0c`.
-2. **Levantamento do de-para de conta contábil.** Não é defeito de código; a base ensina duas contas
-   pro mesmo texto em 8 casos, 5 cruzando custo com despesa. **Falta a decisão dele nos 8**, com a
-   minha recomendação escrita caso a caso. A tarefa vencida no Auxiliator foi registrada pela outra
-   sessão, deixada em andamento e sem mexer na data, o que está certo.
-3. **A nota `DEC` da decisão do contrato** foi pro cofre da equipe (commit `b0e03b1` lá).
-4. **O perfil de Chrome saiu de dentro do repo** do assessor (39 MB com sessão Google dele).
+1. **As duas dívidas do smoke da virada** (`72d9798`): a tela subia o comprovante pro cofre ANTES
+   de chamar a RPC, então a recusa de segregação de função deixava PDF órfão que ninguém apaga;
+   e o erro chegava na tela com o prefixo técnico do banco na frente. Detalhe em
+   [[onde-retomar-depois-da-virada]].
+2. **As três áreas da tela de quem pede** (`1cb517c`): em processamento, pagos e encerrados, com
+   quem registrou o pagamento e o comprovante a um clique. Pedido dele.
+3. **A rodada do time de front** (`adc5e5d` + `df72e64`): cinco frentes auditaram, acharam 25
+   defeitos com prova, cinco frentes consertaram, uma integrou e uma abriu o sistema no ar pra
+   olhar. Os dois maiores ganhos: no Fiscal, cada ação linha-a-linha zerava a tela inteira (quem
+   validava nota na página 5 com filtro voltava pra página 1 a cada clique); e o app baixava
+   788 KB antes de mostrar qualquer coisa, agora baixa 340.
+4. **Espaçamento entre blocos + o conserto do deploy + o cabeçalho de vidro** (`d7e6b21`,
+   `2a6e422`, `bd8ea2c`).
 
-**O TEMA DO EDITOR — o que ficou pendente, com a régua já extraída**
+**Onde está:** `master` em **`bd8ea2c`**, repo `allugator/compras-allu-site`, worktree principal
+`C:\Users\Allu\dev\compras-allu`. Banco intocado hoje à noite: produção segue em `20260903150000`,
+números de migração de 03/09 livres a partir de `160000`. 1395 testes verdes, `tsc`, lint e build
+limpos.
 
-O "Tema do Rei" está no ar e ele aprovou ("assim ficou top"): fundo marfim, escada de beige, laranja
-vibrante nos acentos e **bordas do VS Code em preto**, a pedido dele. Mecânica inteira, com as duas
-armadilhas que custaram a rodada, em [[vscode-terminal-e-atalhos]].
+**O PRÓXIMO PASSO CONCRETO, e é o único aberto:**
 
-**O pedido aberto**, que ele deu marcando cinco círculos num print (li da esquerda pra direita e
-amostrei cada um com PIL, então não precisa adivinhar):
+> [!important] PEDIDO DELE, chegado nos últimos minutos da sessão. Faça ISTO primeiro.
+> *"o posicionamento dos tópicos (lançar pedido, Orçamento,...) também está muito alto dentro do
+> cabeçalho, preciso que eles fiquem mais centralizados. Deixa eles com uma letra mais grossa pra
+> ficar mais fácil de ler também, e deixa o vidro distorcendo um pouco mais o que passa atrás dele,
+> assim como está no da apple. Cria um sub agente e fala pra ele que ele é a pessoa da Apple que
+> fez esse sistema para eles, e que é pra ele replicar o que ele já fez lá pra eles aqui no nosso
+> site."* E logo depois, precisando o efeito: *"quero que distorça, não que tire o foco."*
+>
+> Traduzindo pro que muda no CSS: **menos `blur`, mais `feDisplacementMap`.** Hoje está
+> `blur(18px)` com `scale="16"` no filtro; o pedido é ir na direção de menos desfoque e mais
+> deslocamento. E as abas: centralizar verticalmente dentro da barra (hoje sobem demais) e subir o
+> peso da fonte (`.aba` está em 600).
+>
+> **Ele pediu explicitamente um subagente com a persona de quem fez o Liquid Glass na Apple.**
+> Monte com os 5 blocos do [[loop]] e deixe claro no bloco 3 que é essa a cabeça que ele quer.
 
-| Círculo | O que é | Cor hoje | Cor que ele quer |
-|---|---|---|---|
-| 1 | a faixa larga em volta da linha de digitar | `#EED4B7` | `#F0F0F0` (a do círculo 5) |
-| 2 e 3 | as linhas da caixa do prompt | `#999999` | `#FF6B1A` (a do círculo 4) |
-| 4 | a barra de status do CLI | `#FF6B1A` | (é a referência) |
-| 5 | a banda atrás dos prompts dele no painel da extensão | `#F0F0F0` | (é a referência) |
+**Duas frentes de revisão do cabeçalho MORRERAM com a passagem** e precisam ser refeitas:
 
-**O BLOQUEIO, e é de uma linha:** os três elementos (1, 2 e 3) são desenhados pelo **Claude Code**,
-não pelo VS Code. No tema `light` ele usa a paleta própria e ignora o terminal, daí o `#999999` que
-não obedece nada que eu pinte. O print dele mostra literalmente *"Theme set to light"*. **Só no tema
-com ANSI no nome** ("Light mode (ANSI colors only)") ele passa a desenhar com os 16 slots do
-terminal, e aí eu mando na cor. Avisei duas vezes e ele seguiu no `light`; o `~/.claude/settings.json`
-já está em `light-ansi`, mas **editar o arquivo não vale pra sessão aberta** — quem aplica é o `/theme`.
+1. **O LUGAR DO E-MAIL é queixa dele** (*"o lugar que o email ficou ta estranho também"*). O e-mail
+   e o botão Sair vivem em `.usuario` dentro de `.topo-direita`, colados nas abas. Medir as
+   distâncias reais e propor conserto (separar navegação de conta, ou recolher num menu).
+2. Regra órfã da mudança: o flex saiu do `.topo` e foi pro `.topo-dentro`, e o `display: contents`
+   do telefone depende de qual é o pai. E `backdrop-filter` cria contexto de empilhamento, então
+   pop-up e modal podem passar por baixo do cabeçalho ou ser recortados: conferir.
 
-**Próximo passo concreto quando ele trocar:** `terminal.ansiBrightBlack` já está em `#E85D04`; subir
-pra `#FF6B1A` (o do círculo 4) e descobrir qual slot pinta a faixa da linha de digitar pra levar ela
-pra `#F0F0F0`. Se em ANSI a faixa simplesmente não existir, dizer isso a ele em vez de inventar.
+**O que o olho de design já devolveu sobre o cabeçalho, e vale ouvir:**
 
-**Onde está tudo:**
-- Tema: `~/.vscode/extensions/tema-do-rei/` (versão **1.5.0** — subir a versão nos DOIS lugares,
-  `package.json` e `extensions.json`, é o que quebra o cache; sem isso o VS Code serve o tema velho).
-- Um bloco `workbench.colorCustomizations` **temporário** no `settings.json` dele, escopado no tema,
-  que é o que faz a cor valer na hora. **Combinado: apagar esse bloco quando ele parar de mexer**,
-  depois de um reload que carregue o tema 1.5.0, porque hoje são duas fontes da mesma cor.
-- Compras: worktree `C:/Users/Allu/dev/compras-allu-virada`; `master` e `virada-de-setembro` os dois
-  em **`1cb517c`** (a outra sessão subiu a tela de quem pede em três áreas); produção do banco em
-  `20260903150000`.
-- Duas fontes baixadas e **não instaladas** em `scratchpad/fontes/` (JetBrains Mono, IBM Plex Mono).
-  Ele não gostou da Cascadia e voltamos pra Consolas, que é o que a extensão usa (o CSS dela segue
-  `--vscode-editor-font-family`, ou seja, sempre a fonte do editor).
+- **A barra não se separa do conteúdo**: sem linha nem sombra visível na base, ela se funde com a
+  página logo abaixo. Sugestão dele: sombra ou borda na base com 8-10% de opacidade escura.
+- **Testar o vidro com um cartão COLORIDO passando por baixo, não branco.** Cartão quase branco
+  sobre barra quase branca não prova desfoque nenhum, mesmo com o CSS certo — foi o que atrapalhou
+  as duas primeiras avaliações.
+- A pastilha da aba escolhida lê como mancha de cor, não como pastilha de vidro: falta aro visível.
 
-**Falta, em ordem:**
-1. **A cor dos cinco círculos**, assim que ele trocar o tema do CLI pro ANSI (tabela acima).
-2. **Os 8 casos do de-para** esperam decisão dele; quando vier, aplicar pela `aux_carregar_classificacao`,
-   que aplica retroativo no par, e conferir no banco.
-3. Apagar o bloco temporário do `settings.json` depois do reload.
-4. O piloto de lançamentos reais com uma área: depende de gente, não de código.
+**Três defeitos REAIS que esta sessão achou olhando a tela, e que teste nenhum pegaria:**
+
+- **O `React.lazy` fez o deploy quebrar aba aberta.** Cada rota virou arquivo com hash; quem estava
+  com a aba aberta desde antes de uma publicação pedia um arquivo que não existe mais, tomava 404 e
+  **a tela ficava branca**. Consertado: recarrega uma vez sozinha. Detalhe e a régua que fica em
+  [[conferir-o-pacote-no-ar]].
+- **O vidro nunca rodou.** Eu escrevia `backdrop-filter` e `-webkit-backdrop-filter` juntos, o
+  minificador guardava **só a forma `-webkit-`**, e o Chrome de hoje não aceita mais
+  (`CSS.supports('-webkit-backdrop-filter', ...)` responde `false`). A barra estava sem desfoque
+  nenhum e lia como faixa lisa. Conserto: tirar as linhas `-webkit-` do fonte e deixar o build
+  gerar as duas. **Regra que fica: prefixo escrito à mão pode APAGAR a propriedade padrão.**
+- **O hash do build local nunca bate com o da Vercel.** Conferir deploy por nome de arquivo não
+  prova nada; conferir pela frase nova, contando ocorrências antes e depois.
+
+**Uma afirmação minha que estava ERRADA e foi desmentida lendo produção:** eu disse a ele que a
+faixa livre da alçada não valia na prática. É falso, e o desmentido com a prova está em
+[[politica-de-aprovacao]] (última seção). Pedido pequeno **nasce aprovado na hora**. Não há orçamento
+a carregar por causa disso.
+
+**A APRESENTAÇÃO DO MVP** ([[roteiro-do-demo]]): vai ser ele **clicando no sistema ao vivo**, sem
+slides (a formal fica pra depois). Decisões dele que fecham assunto: **não vai ter mensagem pro
+time, nem agora nem depois, e não é ele quem escreve** — some da nossa lista de vez; e **não planta
+dado de demonstração**, quer mostrar realista. Roteiro, estado real das telas e a parede do
+pagamento estão na nota.
 
 **Depende do Rei:**
-- Escolher no `/theme` a opção com ANSI no nome (é o que destrava os três círculos).
-- Os 8 casos de conta contábil.
-- Dois achados desta sessão, os dois escritos no cofre local: um papel de teste que ficou no banco e
-  deixa a mesma pessoa executar e autorizar exceção. **A segunda alegação ("a faixa livre não vale
-  na prática") era FALSA e foi derrubada lendo produção em 03/09 à noite** — detalhe em
-  [[politica-de-aprovacao]], seção do fim.
-- **ESTE REPO É PÚBLICO, e a seção Estado carrega detalhe operacional.** Eu tirei daqui nome, código
-  de centro de custo e o desenho de um furo de controle, e deixei ponteiro pro cofre local. Passagens
-  de dias anteriores já subiram com esse tipo de detalhe, e desfazer isso não é meu: decisão dele é
-  passagem só com a mecânica, repo privado, ou reescrever o histórico.
-- A tela de Aprovações nunca foi clicada no ar: ele pediu pra NÃO fazer ainda.
-- A planilha da base do DP, as 14 contas de custo de operação, o recado pro time e a limpeza dos
-  segredos.
+- **Aprovar o cabeçalho**, ou mandar mudar. Está no ar e não foi aprovado.
+- **Aprovar e pagar nunca aconteceram em produção, por ninguém.** Os dois últimos passos do demo
+  vão acontecer pela primeira vez na frente da plateia. Ofereci ensaiar só esses dois cliques antes,
+  com a segunda pessoa; ele não respondeu.
+- O furo de segregação de função (papel de teste que ficou no banco em 25/08) e os 8 casos do
+  de-para de conta contábil: os dois no cofre local, [[validacao-do-depara-de-conta]].
+- As quatro decisões de front que a rodada levantou e eu NÃO executei: confirmação no botão
+  Aprovar, aviso de estouro de orçamento no card de quem aprova, a busca que traz todos os pedidos
+  da história sem filtro, e validação de nota em lote.
+- **ESTE REPO É PÚBLICO.** Escrevo aqui como se fosse, e o detalhe operacional fica no cofre local.
+  O histórico antigo continua sendo decisão dele.
 
-**Ferramentas que não podem se perder:** as duas de [[ler-o-banco-em-producao]] (SQL em produção pela
-API de gerenciamento; Chrome por CDP na 9222), a **desta sessão** (provar RPC em produção como se
-fosse ele, com `set_config('request.jwt.claims', ...)` dentro de um `do` que termina em `raise`: o
-relatório volta na mensagem de erro e tudo rola pra trás), e a de hoje pra cor: **amostrar print com
-PIL** em vez de julgar no olho, inclusive achando os círculos vermelhos por cluster.
-
-**A LIÇÃO da sessão** ([[testar-antes-de-dizer-pronto]]): eu afirmei três causas antes de abrir o
-dado (o desenho do gatilho, a causa da divergência do de-para e o slot da borda do prompt) e as três
-caíram. A régua nova está escrita lá: causa anunciada é promessa, porque a pessoa e o outro agente
-agem em cima dela.
-
-**Auxiliator:** a outra sessão conferiu no boot — logado, v0.2.20, 2 vencidas (as duas de FP&A),
-nada pra hoje, nada bloqueado, zero reunião na semana.
+**Enquanto ele estiver apresentando, NÃO publicar nada:** desde o `React.lazy`, publicar no meio de
+alguém usando derruba a tela dessa pessoa pra uma recarga.
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
