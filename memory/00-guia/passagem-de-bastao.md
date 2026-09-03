@@ -17,6 +17,46 @@ aliases:
 > frentes de revisão estavam rodando quando a passagem disparou e **os achados delas se perderam**.
 > Recomeçar por aí.
 
+> [!important] 03/09/2026, SESSÃO AUTÔNOMA: um time de OITO frentes está rodando AGORA
+> O CEO alargou o escopo em duas mensagens, com ele fora: *"quero que o time se inspire no frontend
+> da Apple"* e, logo depois, *"quero que o time se inspire no frontend e no **customer experience**
+> da Apple **para o site todo**. Continue trabalhando com eles usando o loop e o autonomo."*
+> Então a bateria deixou de ser só o cabeçalho e virou o site inteiro, na régua da Apple.
+>
+> **Se você nasceu de uma passagem, esses oito subagentes MORRERAM.** O que sobrevive é isto:
+>
+> **Onda 1 — o cabeçalho (3 frentes que CONSERTAM, cada uma na sua worktree, base `bd8ea2c`):**
+> 1. `vidro-material` (`C:\Users\Allu\dev\compras-allu-vidro-material`) — persona "quem fez o Liquid
+>    Glass na Apple", pedida ao pé da letra pelo CEO. Dona de: `.topo` (fundo/`backdrop-filter`/
+>    borda/sombra), os `@supports` do topo, `.aba.ativa`, `.aba:hover`, e o `FiltroDeVidro` no
+>    `App.tsx`. Missão: menos `blur`, mais deslocamento; base da barra que se separa do conteúdo;
+>    aro de vidro na pastilha. **É a única frente com direito ao navegador** (Playwright é um só).
+> 2. `topo-layout` (`...-topo-layout`) — persona "quem desenha as barras de navegação da Apple".
+>    Dona de: `.topo-dentro`, `.marca*`, `.topo-direita`, `.abas`, `.aba` (padding/peso/alinhamento),
+>    `.usuario*`, `.botao-sair`, `.perfil-select`, o `@media 760px` e o JSX do `Topo`. Missão: as
+>    abas centradas na altura da barra, letra mais grossa, e o **lugar do e-mail**.
+> 3. `topo-compat` (`...-topo-compat`) — sênior de CSS/compatibilidade. Audita e só conserta o
+>    pequeno: contexto de empilhamento do `backdrop-filter` (modal/pop-up por baixo do topo),
+>    `display: contents` órfão no telefone, os `@supports`, o `<svg>` do filtro.
+>
+> **Onda 2 — o site todo, CINCO auditorias em `master`, SÓ LEITURA, sem navegador.** Cada uma é uma
+> pessoa sênior da Apple na dimensão dela, entrega lista priorizada com arquivo:linha e o conserto
+> concreto: **tipografia** (inventário de tamanho/peso/entrelinha, `tabular-nums` no dinheiro) ·
+> **cor e material** (cor solta fora do `:root`, hierarquia de superfície, sombra, raio, contraste
+> calculado) · **movimento e estado** (a tabela tela → carregando → erro → vazio, e a lista de
+> botões clicáveis DUAS VEZES, que é risco de dinheiro) · **jornada e CX** (o mapa ponta a ponta do
+> pagamento, jargão vazando pra tela, as mensagens de erro reescritas prontas pra colar, e lupa em
+> Aprovar/Pagar, que nunca rodaram em produção) · **formulário e acessibilidade** (rótulo, foco,
+> `inputMode` no dinheiro, alvo de 44px, `div onClick`).
+>
+> **A onda 3 é o conserto, e ela tem uma armadilha de integração:** tipografia, cor, sombra e raio
+> moram todos no mesmo `:root`. Se várias frentes editarem tokens em paralelo, o merge vira briga.
+> **O jeito certo: eu fecho o contrato de tokens primeiro** (os nomes e valores, decididos a partir
+> das cinco listas), uma frente só implanta o `:root` e a base global, e as demais aplicam por tela
+> usando os tokens já acordados. Nunca duas frentes no `:root`.
+
+
+
 **O que esta sessão entregou, em quatro subidas, todas provadas pelo CONTEÚDO do bundle no ar:**
 
 1. **As duas dívidas do smoke da virada** (`72d9798`): a tela subia o comprovante pro cofre ANTES
