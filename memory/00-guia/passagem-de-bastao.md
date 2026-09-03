@@ -11,15 +11,18 @@ aliases:
 
 ## Estado (reescrito a cada passagem)
 
-> [!success] A passagem FUNCIONOU: a sessão nova nasceu sozinha às 22h29 de 02/09/2026 (prova na seção "Como funciona").
-> Esta sessão está em [[modo-autonomo]], trabalhando sozinha a fila do Sistema de Pagamentos. Se ele
-> falar, o modo acaba na hora e a resposta é normal, abrindo com o resumo do que foi feito sem ele.
+> [!success] Dia encerrado por ele às 23h40 de 02/09/2026: *"salva tudo na memória, vou continuar amanhã."*
+> A sessão nasceu sozinha às 22h29 (a passagem funcionou, prova na seção "Como funciona"), trabalhou em
+> [[modo-autonomo]] até ele aparecer por volta das 23h, e encerrou com tudo salvo e empurrado. Nada
+> ficou meio feito.
 
 **Estávamos fazendo:** a fila que sobrou de 02/09 no Sistema de Pagamentos, seção "O que sobrou, MEU"
-de [[onde-retomar-depois-da-virada]], em modo autônomo desde as 22h35 de 02/09.
+de [[onde-retomar-depois-da-virada]].
 
-**Ficou pronto:** a corrente inteira da passagem de bastão, construída e provada ao vivo em 02/09
-(detalhe e prova na seção "Como funciona"). A prova da morte está registrada e commitada.
+**Ficou pronto:** (a) a corrente da passagem de bastão, provada ao vivo, com a prova registrada e o
+terminal limpo confirmado por ele; (b) o **smoke de escrita em produção**, que era o item mais
+importante da fila; (c) os ganchos passaram a usar caminho absoluto (`$CLAUDE_PROJECT_DIR`), senão
+eles não rodam quando a sessão abre de outra pasta.
 
 **Falta (em ordem):**
 1. ~~(a) Smoke de escrita~~ **FEITO às 23h20 de 02/09**: criar, aprovar sozinho e cancelar
@@ -31,9 +34,9 @@ de [[onde-retomar-depois-da-virada]], em modo autônomo desde as 22h35 de 02/09.
 3. **(c) Alinhar o `master` do compras** com `virada-de-setembro` (hoje 2 commits atrás: o revoke na
    fila e a migração da observação). Fica por último de propósito: assim o master recebe a caixa inteira.
 
-**Entre 23h e 23h30 o Rei apareceu** e o modo autônomo acabou: ele pediu uma tarefa fora do
-Sistema de Pagamentos (não registrada aqui, a pedido dele), que foi entregue. Depois voltei ao
-smoke e fechei o item 1.
+**Por volta das 23h ele apareceu** e o modo autônomo acabou. Houve um trabalho fora do Sistema de
+Pagamentos entre 23h e 23h35, entregue e **de propósito não registrado aqui** (pedido explícito
+dele). Se um dia faltar contexto de um intervalo desta noite, é esse, e quem pergunta é ele.
 
 **Onde está:** repo do assessor em `C:\Users\Allu\Desktop\auxiliator-ai` (master, no commit desta
 passagem). Sistema de Pagamentos na worktree `C:\Users\Allu\dev\compras-allu-virada`, branch
@@ -51,16 +54,16 @@ roda pelo cache do npx: `~\AppData\Local\npm-cache\_npx\aa8e5c70f9d8d161\node_mo
 com a senha e o token de `C:\Users\Allu\segredos-virada.txt`, linhas 1 e 2, sem imprimir), push e
 conferir o bundle no ar.
 
-**Como ler o banco de produção sem CLI:** na aba do site logado, `fetch` no PostgREST
-(`https://ansknvxgjqollsamunvf.supabase.co/rest/v1/...`) com a chave anônima extraída do bundle e o
-token da sessão do Theo em `localStorage` (`sb-ansknvxgjqollsamunvf-auth-token`). É leitura com o
-RLS dele, e foi assim que o smoke conferiu status, aprovador e cancelamento.
+**Ferramenta que nasceu hoje e não pode se perder:** [[ler-o-banco-em-producao]], como eu confiro
+produção sem CLI (PostgREST pela sessão do Theo no navegador) e onde o CLI do Supabase vive.
 
 **Depende do Rei:** dizer se o terminal ficou limpo depois da morte (só ele vê a tela); o recado pro
 time sobre a virada (rascunho a oferecer); as 14 contas de custo de operação; a limpeza dos segredos
 (fica pro fim); os valores da alçada. Nada disso eu decido.
 
-**Rascunhos prontos:** nenhum ainda.
+**Rascunhos prontos:** a mensagem pedindo a alguém da Tesouraria pra registrar o Pago de um pedido
+de teste (fecha a última perna do smoke). Está em [[onde-retomar-depois-da-virada]], "DELE", item 4.
+Não disparei: mensagem em nome dele, de madrugada, não sai sem ele ver.
 
 **Auxiliator:** voltou a logar sozinho às 22h20 de 02/09 (o "Sim" do iPhone entrou). Panorama do dia,
 pra não puxar de novo: 3 vencidas dele (piloto de lançamentos reais e de-para conta contábil, ambas de
@@ -96,7 +99,14 @@ por isso o vermelho da barra existe).
 
 **Testar sem esperar 500k:** num terminal NOVO, `$env:BASTAO_LIMITE = 1000` e depois `claude`. A primeira
 resposta já passa o bastão. O laço zera esse limite antes de relançar, então a sessão que nasce volta
-ao 500k de sempre (senão a corrente viraria laço infinito). **Provado em 02/09/2026** num shell de
+ao 500k de sempre (senão a corrente viraria laço infinito).
+
+> [!warning] A régua de teste fica no TERMINAL, não no projeto, e pega qualquer pasta
+> `BASTAO_LIMITE` é variável de ambiente do terminal e **só é zerada quando uma passagem acontece
+> naquele terminal**. Em 02/09 ele abriu outro projeto no mesmo terminal do teste e a sessão passou o
+> bastão na primeira resposta, o que pareceu bug e não era. Conserto: `Remove-Item Env:BASTAO_LIMITE`,
+> ou abrir terminal novo. **E os ganchos precisam de caminho absoluto** (`node "$CLAUDE_PROJECT_DIR"/.claude/hooks/...`):
+> com caminho relativo eles não rodam quando o Claude abre de outra pasta. **Provado em 02/09/2026** num shell de
 mentira: relançou no mesmo terminal, com a flag, com a mensagem; sinal esvaziado; laço fecha com
 sinal vazio. **A primeira passagem REAL** (02/09/2026 22h25, régua em 1k, terminal do VS Code) **falhou**:
 o matador destacado morreu junto com a ferramenta que o disparou. Prova: um filho destacado que devia
