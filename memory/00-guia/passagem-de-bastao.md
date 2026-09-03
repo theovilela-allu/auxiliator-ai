@@ -11,54 +11,57 @@ aliases:
 
 ## Estado (reescrito a cada passagem)
 
-> [!success] Dia longo e produtivo, 03/09/2026. Abriu em [[modo-autonomo]] (*"bom dia AUTONOMO"*),
-> ele apareceu por volta das 9h e ficou. **Nada ficou meio feito:** tudo commitado, empurrado e no ar.
+> [!info] Sessão CURTA de 03/09/2026, à noite, aberta em [[modo-autonomo]] pela corrente do bastão.
+> Ele apareceu depois de uns minutos com *"salva o que fizemos, vou precisar desligar"*.
+> **Não construí nada** — esta sessão foi leitura e diagnóstico, e o diagnóstico derrubou o desenho
+> que a passagem anterior tinha sugerido. Está tudo salvo; nada meio feito.
 
-**Estávamos fazendo:** a decisão do contrato (a tarefa vencida de 01/09) — decidida com o Rodrigo,
-construída e provada no ar no mesmo dia. Antes dela, a [[caixa-de-observacao]].
+**Estávamos fazendo:** o item 1 da fila (a aprovação abrir a demanda de contrato sozinha). Fui ler o
+código pra construir e **descobri que o desenho sugerido não funciona.**
 
-**Ficou pronto, em ordem:**
-1. **A caixa de observação**, front inteiro, NO AR. O primeiro clique de verdade achou **dois
-   defeitos**, um deles já em produção (o gatilho barrava a escrita que cria a observação, em pedido
-   que nasce aprovado). Consertos nas migrações `20260903120000` e `20260903130000`, e nasceu a
-   prova que faltava (`prova-observacao-do-pedido.mjs`, 31 OK).
-2. **O contrato barrando o pagamento**, decidido por ele com o Rodrigo e construído inteiro:
-   migração `20260903140000`, front (Controle + a seção nova do Jurídico) e três colunas no
-   fechamento. `prova-contrato-barra-pagamento.mjs` com 39 OK. Racional e o "como ficou" em
-   [[onde-o-contrato-barra-o-pagamento]]. **A tarefa do Auxiliator foi concluída.**
-3. **As 2 tarefas do Thoreos foram APAGADAS** a pedido dele ([[thoreos-em-espera]]): zero bloqueada.
+**O que esta sessão entregou, e é conhecimento, não código:**
 
-**Onde está:** compras na worktree `C:\Users\Allu\dev\compras-allu-virada`, e **`master` e
-`virada-de-setembro` os dois em `bce712d`**, empurrados. Repo do assessor em `c0db959` (as notas de
-projeto e o `MEMORY.md` são gitignored de propósito: ficam só na máquina dele). Produção do banco em
-**`20260903140000`**.
+1. **O gatilho NÃO pode criar o contrato.** `aux_criar_contrato(null, pedido_id, complemento, null)`,
+   que a passagem mandava reaproveitar, **estoura** com *"o PDF do contrato é obrigatório"* — e antes
+   disso exige a vigência no complemento. O PDF é feito **no navegador** (`src/contrato/gerar.ts`), e
+   a policy do cofre `contratos` só aceita upload na pasta de um pedido de **quem está logado**: quem
+   gera é o **dono do pedido**, na aba Contratos, *"nunca o aprovador, que o banco recusaria"* (está
+   escrito no topo de `src/contrato/automatico.ts`). Inserir linha sem PDF é possível e é PIOR:
+   demanda falsa na fila do Rodrigo, e o resumo diário do robô cobrando ele por um contrato sem
+   documento.
+2. **O desenho que funciona**, em três partes, todo escrito em [[onde-o-contrato-barra-o-pagamento]]
+   (seção nova no fim): carimbo `pedidos.contrato_demandado_em` + gatilho na virada pra `aprovado`
+   (um lugar cobre os dois nascimentos); **ramo novo no robô `cobrar`** cobrando QUEM PEDIU, no rito
+   de sempre (`planejarCobranca`/`marcarSeEntregue`), líder do 2º degrau em diante — essa é a parte
+   que entrega a feature, sem ela o carimbo é timestamp que ninguém lê; e o conserto da frase.
+3. **UM DEFEITO NO QUE SUBIU HOJE.** As duas pontas dizem *"o Jurídico emite e o fornecedor
+   assina"* (banco em `aux_pedido_contrato_pendente`, front em `motivoNaoPagavel`). **Errado:** quem
+   emite é quem pediu, o Jurídico dá o **parecer**. A frase manda o Financeiro esperar uma ação que o
+   Rodrigo não vai fazer, e não avisa a única pessoa que pode desatravancar o pedido. Não é urgente
+   (nenhum pedido real está preso hoje), mas é conserto de uma linha em cada ponta e entra junto da
+   parte 3.
 
-**Falta (em ordem):**
-1. **A aprovação abrir a demanda de contrato sozinha.** É a peça que fecha o ovo e a galinha: hoje a
-   trava produz pedido aprovado esperando contrato que ninguém pediu. O formulário já coleta os dados
-   (`complementoContrato`); aprovou pedido que exige contrato → nasce o contrato em
-   `aguardando_juridico`. Sugestão de desenho: **gatilho em `pedidos`** na virada pra `aprovado`,
-   porque pedido abaixo do piso nasce aprovado direto do núcleo e um só lugar cobre os dois caminhos.
+**Onde está:** nada de código mudou. Compras na worktree `C:\Users\Allu\dev\compras-allu-virada`, e
+**`master` e `virada-de-setembro` os dois em `bce712d`** (conferido nesta sessão, bate com a passagem
+anterior), produção do banco em `20260903140000`. Repo do assessor commitado com esta passagem.
+
+**Falta (em ordem, e o item 1 agora tem desenho pronto):**
+1. **A aprovação abrir a demanda de contrato.** Desenho fechado nas três partes acima — é sentar e
+   escrever: migração `20260903150000`, ramo do robô, frase. **Começa por aqui.**
 2. **Conferir por qual das três portas o Rodrigo entra em `aux_is_juridico()`** (CC 103130, quem
-   responde pelo 103130 no catálogo, ou papel avulso na tabela `papeis`) antes de avisar que a tela
-   está pronta pra ele. **Essa é a pergunta que ficou pendente na tela quando a conversa acabou.**
-3. **A validação do de-para de conta contábil** (tarefa vencida, prioridade alta): o de-para está no
-   ar desde 15/07, e falta testar com fornecedores ambíguos. Dá pra fazer sozinho, lendo a base de
-   produção e listando fornecedor cujo nome cai em mais de uma conta ou em nenhuma.
+   responde pelo 103130 no catálogo, ou papel avulso em `papeis`) antes de avisar que a tela está
+   pronta pra ele. Dá pra conferir lendo produção; o que só ele sabe é o que fazer se não cair em
+   nenhuma.
+3. **A validação do de-para de conta contábil** (tarefa vencida, prioridade alta): no ar desde 15/07,
+   falta testar com fornecedores ambíguos. Dá pra fazer sozinho, lendo a base de produção e listando
+   fornecedor cujo nome cai em mais de uma conta ou em nenhuma.
 4. **O piloto de lançamentos reais com uma área** (a outra vencida): depende de gente, não de código.
-5. **Virar nota `DEC` no cofre FP&A** a decisão do contrato: decisão é conhecimento da equipe
-   ([[onde-salvar-nota-de-trabalho]]), e ela só existe no cofre do assessor.
-
-**Próximo passo concreto:** o item 1. Nova migração `20260903150000`, gatilho `after update on
-pedidos` (e o caminho do nascimento) que chama a criação do contrato quando
-`aux_exige_contrato(...)` e `contrato_id is null`. Reaproveitar `aux_criar_contrato(null, pedido_id,
-complemento, null)` em vez de escrever insert novo. Prova nova no mesmo desenho da
-`prova-contrato-barra-pagamento.mjs`.
+5. **Virar nota `DEC` no cofre FP&A** a decisão do contrato ([[onde-salvar-nota-de-trabalho]]): ela só
+   existe no cofre do assessor.
 
 **Depende do Rei:**
-- Por qual porta o Rodrigo entra no Jurídico (item 2 acima) — só ele sabe.
-- **A tela de Aprovações nunca foi clicada no ar:** pedido acima do piso cai na fila do Gustavo e o
-  robô avisa ele. Ele pediu pra NÃO fazer ainda (03/09).
+- Por qual porta o Rodrigo entra no Jurídico, se ele não cair em nenhuma das três.
+- **A tela de Aprovações nunca foi clicada no ar:** ele pediu pra NÃO fazer ainda (03/09).
 - **A planilha da base do DP**, que destrava a frente 2 e a escada da frente 5. Estava prometida pra
   03/09 e ele disse que ainda não tem.
 - As 14 contas de custo de operação, o recado pro time sobre a virada, os valores da alçada, e a
@@ -70,27 +73,23 @@ complemento, null)` em vez de escrever insert novo. Prova nova no mesmo desenho 
 `schema_migrations` inseridas a mão. Produção está correta e conferida no corpo vivo das funções; o
 CLI é cinto de segurança, não conserto. Receita em [[ler-o-banco-em-producao]].
 
-**Ferramentas desta sessão que não podem se perder** (as duas em [[ler-o-banco-em-producao]]): rodar
-SQL em produção pela **API de gerenciamento** quando as portas do banco fecham (lembrando que por
-esse caminho a linha de `schema_migrations` vai a mão), e **subir o Chrome por conta própria com
-`--remote-debugging-port=9222`** quando o serviço do Playwright perde a janela de conexão na
-abertura. A segunda salvou a sessão inteira: sem ela, nada de clique no ar.
+**Ferramentas que não podem se perder** (as duas em [[ler-o-banco-em-producao]]): rodar SQL em
+produção pela **API de gerenciamento** quando as portas do banco fecham (por esse caminho a linha de
+`schema_migrations` vai a mão), e **subir o Chrome por conta própria com `--remote-debugging-port=9222`**
+quando o serviço do Playwright perde a janela de conexão na abertura.
 
-**Faxina que sobrou:** um script meu perdeu as barras invertidas de um caminho do Windows num
-heredoc, e o Chrome criou um perfil DENTRO do repo do assessor
+**Faxina que sobrou:** o Chrome criou um perfil DENTRO do repo do assessor
 (`UsersAlluAppDataLocalms-playwright-mcpmcp-chrome-3c24d0c/`, 38 MB, com a sessão Google dele).
-**Nunca foi commitado** (o `Cookies` travado fez o `git add` falhar) e está no `.gitignore`. Mover
-pra fora quando ele fechar a janela do navegador — que **segue aberta**, com sessão viva no Sistema
-de Pagamentos e no Auxiliator, e com o Chrome escutando na 9222.
+**Nunca foi commitado** e está no `.gitignore`. Mover pra fora quando ele fechar a janela do navegador.
 
-**A LIÇÃO do dia, que vale além destas frentes** ([[testar-antes-de-dizer-pronto]]): migração que
-passa não é feature que funciona. Ontem eu registrei a caixa de observação como "banco pronto e
-provado"; dois defeitos estavam lá, e o que os achou foi UM clique. Prova de migração cobre a
-migração subir, não o caminho da pessoa.
+**A LIÇÃO que se repetiu, agora do outro lado** ([[testar-antes-de-dizer-pronto]]): ontem foi migração
+que passa e não é feature que funciona. Hoje foi **desenho que parece óbvio na nota e o código
+recusa**. As duas têm o mesmo conserto: ler o corpo vivo antes de prometer o caminho. O que salvou
+esta sessão foi ir ler `aux_criar_contrato` antes de escrever a migração 150000.
 
-**Auxiliator:** panorama de 03/09, versão v0.2.20 (igual à anunciada, nada a contar). Sobraram **2
-vencidas**, as duas de 21/08 e as duas de FP&A: piloto de lançamentos reais e de-para conta contábil.
-Nada pra hoje, ninguém esperando ele, zero bloqueada. Granola não conectado nesta sessão.
+**Auxiliator:** não conectei nesta sessão (a conversa foi curta e o Rei chegou). Panorama de 03/09,
+v0.2.20: 2 vencidas, as duas de FP&A (piloto de lançamentos reais e de-para conta contábil), zero
+bloqueada.
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
