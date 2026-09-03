@@ -2,7 +2,7 @@
 name: loop
 type: reference
 description: SKILL loop — eu viro GESTOR de uma equipe de subagentes seniores no assunto pedido; como briefar, qual o ESCOPO da bateria (proporcional ao que mudou, nunca o projeto inteiro), quando trocar (tamanho absoluto), quando encerrar (UMA rodada no dia a dia, repetir ate limpar so na entrega final) e por que a invasão só roda em marco de projeto
-atualizado: 2026-08-31
+atualizado: 2026-09-03
 ---
 
 # Skill: Loop — eu gerencio, a equipe executa
@@ -304,6 +304,43 @@ levo relatório parcial, lista de achado nem prévia: eu recebo, avalio, corrijo
 entregou torto, mando consertar e sigo tocando as baterias. Ele ouve de mim **uma vez**, com
 o resultado fechado. Se ele perguntar no meio, respondo em que pé está — sem entregar o
 conteúdo antes da hora.
+
+
+## Três coisas que a bateria de 03/09/2026 ensinou (onze frentes num dia)
+
+**1. Dono por REGRA, não por arquivo.** Sete frentes encostaram no mesmo `index.css` de 3129 linhas
+no mesmo dia e a integração fechou **sem um conflito**. O que fez isso funcionar: cada briefing levava
+a **lista nominal dos seletores que eram daquela frente** e a lista do que era das outras, com o aviso
+de que qualquer linha fora da lista viraria conflito. Quando o arquivo é grande e indivisível, o
+recorte não é o arquivo: é a regra, a função, o bloco. **E ele vai escrito no bloco 4, nominal.**
+
+Corolário que também se provou: quando o alvo é uma folha de estilo com tokens (`:root`), **duas
+frentes não podem trabalhar lá**. Eu fecho o contrato de tokens primeiro, uma frente só implanta, e as
+demais recebem os nomes prontos pra usar.
+
+**2. Worktree é de UMA frente só, e o navegador também.** Eu pus duas frentes na mesma worktree e
+elas se atrapalharam de verdade: uma tomou o navegador da outra no meio de uma medição, e a outra viu
+arquivos mudando debaixo dela e teve que reportar isso como anomalia em vez de trabalhar. A regra de
+27/08 já dizia worktree por frente; **agora vale também pro Playwright, que é um só na máquina.**
+Trabalho de tela é serializado, e eu digo no briefing quem está com o navegador e quem não está.
+
+**3. Medição NEGATIVA só vale com o controle nulo do próprio teste.** Uma frente mediu um vídeo e
+concluiu que um efeito não existia, com correlação `|r| ≤ 0,17`. Uma segunda frente aplicou **o mesmo
+teste num lugar onde o fenômeno não podia existir** e ele devolveu `r` de 0,83 a 0,999 — o teste não
+tinha poder nenhum, e o número não significava nada, nem a favor nem contra. **"Não achei" sem o
+controle nulo não é achado, é ruído.** Sempre que um sub me trouxer uma ausência que vai virar decisão
+cara, eu mando um segundo tentar derrubar, e o briefing dele pede o controle explicitamente.
+
+## Mostrar pro CEO: cópia congelada, nunca a bancada
+
+Ele pediu pra ver o trabalho rodando e eu apontei pro servidor da worktree que uma frente estava
+editando **com recarga quente**. Ele passou a ver cada estado intermediário, inclusive um erro de
+compilação transitório, que ele descreveu como *"um monte de linha de código"*. Depois se perdeu entre
+os seis servidores velhos que as frentes do dia tinham deixado abertos: *"eu tava no local host errado"*.
+
+**O certo: `npm run build`, copiar o `dist` pra fora da worktree e servir estático numa porta só
+dele.** Não muda debaixo dele, não quebra no meio, e a equipe continua trabalhando. E no fim da
+bateria **eu fecho os servidores que abri** — porta aberta esquecida vira confusão dele, não minha.
 
 Ligações: [[_como-eu-opero]], [[seguranca-e-confirmacao]], [[testar-antes-de-dizer-pronto]],
 [[comando-barrado-para-e-pergunta]].
