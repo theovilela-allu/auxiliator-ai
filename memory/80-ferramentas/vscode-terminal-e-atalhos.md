@@ -143,6 +143,7 @@ Ele afinou o tom várias vezes olhando a tela e parou em **dois**, dados por ele
 |---|---|
 | acento, letra do CLI, linha, forte, apagado | **`#4D85E9`** |
 | faixa dos prompts dele e borda da caixa (`terminal.ansiWhite`) | **`#E5EBEE`** |
+| **seleção de texto** (editor, terminal, listas, menus) | **`#A4CFE4`**, alfa 80% na principal |
 | papel, barras, campos, texto, bordas pretas | sem mudança |
 
 Barra da statusline: cheio `#4D85E9`, vazio `#E5EBEE`.
@@ -159,6 +160,16 @@ Barra da statusline: cheio `#4D85E9`, vazio `#E5EBEE`.
   libera usar um azul claro na faixa sem perder leitura.
 - **O azul que ele chamou de "o que tava antes" era `#0052AC`**, a cor que a paleta interna do
   Claude Code usava no tema `light`. Peguei do print anterior à troca, em vez de escolher um azul.
+
+**A seleção precisou de decisão, não de substituição.** Ele pediu *"muda a cor de sublinhar para um
+azul bebê também"*. As chaves de seleção estavam todas no azul escuro com alfa baixa (`3d`, `26`,
+`1f`) — alfa calibrada pra cor forte. Trocar só o tom deixaria a seleção **invisível** sobre o papel
+creme. Então: cor `#A4CFE4` **e alfas subidas** (`cc` na seleção principal, `80`/`66` nos ecos), mais
+letra escura por cima (`list.activeSelectionForeground`). Usei `#A4CFE4` e não `#E5EBEE` porque este
+último, sobre creme, é quase o próprio fundo — as duas são baby blue dele, mas só uma dá contraste.
+
+**As cores de link e de resultado de busca ficaram no azul escuro de propósito:** elas são semântica
+diferente de seleção, e igualar as duas apaga a diferença.
 
 ### A BORDA CINZA DO PROMPT: provado no pixel em 03/09/2026
 
