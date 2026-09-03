@@ -40,7 +40,7 @@ Ele pediu tema próprio: fundo de papel, laranja vibrante em tudo que é barra e
 |---|---|
 | `~\.vscode\extensions\tema-do-rei\` | `package.json` + `themes/tema-do-rei-color-theme.json` (211 chaves de cor, com comentário no topo dizendo qual cor manda em quê) |
 | `settings.json` do usuário | `workbench.colorTheme: "Tema do Rei"`, `terminal.integrated.minimumContrastRatio: 1`, e um bloco `workbench.colorCustomizations` **temporário** |
-| `~\.claude\settings.json` | `theme: "light-ansi"` — é o que faz o Claude Code usar a paleta do terminal em vez da dele |
+| `~\.claude\settings.json` | `theme` — só com `-ansi` no nome o Claude Code usa a paleta do terminal em vez da dele. **Em 03/09 voltou sozinho pra `light`**: a sessão que estava aberta reescreveu o arquivo ao morrer, então editar por fora não adianta nunca |
 | `~\.claude\statusline.cjs` | as barras de contexto e limite; era arco-íris ciclando, virou laranja com a escada de aviso preservada (backup em `.antes-do-laranja`) |
 
 A paleta saiu de um print que ele mandou, **lido pixel a pixel com PIL** em vez de no olho: papel
@@ -58,6 +58,37 @@ laranja vibrante: acento `#FF6B1A`, linha `#E85D04`, forte `#C74407`.
 2. **O terminal do VS Code "corrige" contraste sozinho** (`minimumContrastRatio`, padrão 4.5) e
    escurece cor clara demais pro fundo. Num fundo marfim, laranja vibrante virava **marrom**.
    `terminal.integrated.minimumContrastRatio: 1` desliga e as cores saem como o tema manda.
+
+### A BARRA DE PROGRESSO DA STATUSLINE (03/09/2026, e custou 5 tentativas)
+
+Ele pediu: *"uma barra só, um contorno, e conforme ela for enchendo, ela vai ocupando espaço que
+estava vazio, transparente, mas dentro do contorno. O contorno pode ser bem fininho."*
+
+O desenho que ficou é **sem lateral nenhuma**: cheio `█` desde a primeira célula, vazio `▔`, e um
+`ESC[4m` (underline) por cima da pista inteira. O `▔` faz a linha de cima, o underline faz a de
+baixo, as duas finas, e o vazio entre elas é o fundo do terminal.
+
+Isso foi **medido**, não deduzido: pus um desfile de 7 candidatos na própria statusline, tirei print
+da tela e amostrei com PIL. O que o pixel disse:
+
+| Tentativa | Por que morreu |
+|---|---|
+| `▰▱` | largura ambígua, desalinha quando a fonte muda |
+| `━─` | ele chamou de "um fio" |
+| `█░` | vira **duas** barras coladas, não uma |
+| moldura por `ESC[53m` (overline) | **o Claude Code não desenha overline.** A barra saiu sem linha em cima |
+| laterais `▏` e `▕` | desenham o traço na borda da célula e deixam os outros **7/8 vazios**: o preenchimento nascia uma célula depois da borda, e o traço ficava mais alto que a moldura |
+| `═` no lugar do vazio | vira dois fios colados no **meio** da célula, não um contorno |
+
+**As duas regras que sobram:** a linha de baixo pode ser atributo do terminal (underline, SGR 4,
+funciona); a de cima **tem que ser glifo** (`▔`, oitavo de bloco superior, que encosta no topo da
+célula e ladrilha sem emenda). E lateral de barra em terminal custa uma célula inteira: ou a barra
+fica aberta nas pontas, ou o preenchimento não começa no começo.
+
+**A ferramenta que resolveu, e não pode se perder:** trocar a statusline por um desfile de
+candidatos, tirar print da tela inteira com `System.Drawing.CopyFromScreen`, achar a faixa da barra
+pela linha com a maior corrida contígua de laranja e recortar só ela. Julgar no olho já custou três
+rodadas neste mesmo assunto.
 
 ### Régua pra próxima vez
 
