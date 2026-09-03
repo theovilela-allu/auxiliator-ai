@@ -35,6 +35,11 @@ só o fio da meada.
   mexem em margem). Detalhe e recomendação caso a caso em [[validacao-do-depara-de-conta]].
 - **A tomada.** Os tempos de suspensão estão zerados em caráter permanente, então bateria crítica em
   2% é o único caminho de parada que sobrou — e é de propósito.
+- **FRENTE NOVA, e é a mais consequente: o rename do endereço virou portão de segurança.** O
+  Samuca só troca o nome depois de o **Leo** revisar o código, porque teme exposição. O rename em si
+  não muda exposição nenhuma (o endereço já é público), mas a revisão é real e vai achar o furo de
+  segregação de função que está aberto desde 25/08. Postura de segurança, armadilhas do Vercel e o
+  que preparar: [[rename-do-endereco-e-review-do-leo]].
 - **Deixar um remoto só no compras.** `git remote remove origin` na worktree principal: os dois
   endereços são o MESMO repositório (id `1288594370`), o `origin` é só o nome antigo redirecionando.
   Esperando a outra sessão soltar o repo. Detalhe em [[commitar-todo-update]].
