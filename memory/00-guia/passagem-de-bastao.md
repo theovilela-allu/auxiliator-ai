@@ -11,222 +11,83 @@ aliases:
 
 ## Estado (reescrito a cada passagem)
 
-> [!note] Duas sessões escreveram aqui em 03/09/2026, e são frentes DIFERENTES
-> A de baixo é o **site de pagamentos** (time de front, cabeçalho de vidro). Esta é a
-> **infraestrutura do próprio assessor**, com ele presente a tarde inteira. Não se misturam.
+> [!warning] Sessão de 03/09/2026, tarde e noite. Ele entrou e saiu várias vezes; terminou pedindo modo autônomo e desligamento.
+> **O maior pacote de front do projeto FOI PRO AR às ~20h25**, e a publicação foi confirmada pelo
+> conteúdo do pacote que a Vercel serve, não pelo nome do arquivo. `master` em **`4077d3d`**.
+> Detalhe inteiro, com os números e as lições, em [[bateria-apple-front]].
 
-> [!tip] PRIMEIRO PASSO DA PROXIMA SESSAO
-> Ele encerrou esta conversa de propósito pra zerar contexto, com tudo salvo e empurrado
-> (`68176df`, árvore limpa). **Não há nada meio feito.**
->
-> A frente viva e mais consequente é **[[rename-do-endereco-e-review-do-leo]]**: o Samuca só
-> renomeia o endereço depois que o Leo revisar o código. O movimento que vale é **fechar os itens
-> que a revisão vai achar antes de ela acontecer** — os três que não dependem de terceiro: o papel
-> de teste de 25/08 (segregação de função), a limpeza dos segredos e o acesso do Stuart.
-> Perguntar a ele antes de mexer no papel de teste: é banco de produção.
+**O que ele pediu, em seis mensagens que foram alargando o escopo:** começou com um subagente com a
+persona de quem fez o Liquid Glass na Apple, virou *"que o time se inspire no frontend da Apple"*,
+depois *"no frontend e no customer experience da apple **para o site todo**"*, depois mandou um vídeo
+da referência pra equipe **estudar e replicar**, e no fim pediu o espelho também na quina de cima e
+os menus mais legíveis.
 
-### INFRAESTRUTURA DO ASSESSOR — 03/09/2026, tarde e noite (ele presente)
+**Onze frentes rodaram.** O resumo em uma linha cada, e os números estão na nota:
+o cabeçalho de vidro com a dobra nas duas quinas · o sistema visual do site inteiro (106 tamanhos de
+letra escritos à mão viraram 8, 33 cores soltas viraram 2) · o texto e o fluxo (o botão Aprovar diz
+quanto está aprovando, os erros do banco viraram português de gente) · estado e acessibilidade (as
+telas pararam de dizer "não tem nada" enquanto carregavam, os cliques duplos morreram, Enter funciona
+no formulário) · e duas frentes de medição do vídeo dele. **1432 testes verdes.**
 
-Nada aqui toca o sistema de compras. Tudo já está no ar, commitado e com nota própria; esta seção é
-só o fio da meada.
+**A descoberta técnica que mais vale, e que resolveu o pedido dele de leitura:** o material da Apple
+não clareia o fundo, ele **achata** — `dentro = 0,55 × fora + 103`, medido com 70.760 pixels pareados
+dos dois lados do vidro. Isso comprime a faixa inteira de 0-255 pra 103-243, e é por isso que o texto
+das barras deles nunca briga com o que passa atrás. Implantar isso levou o contraste do menu de
+**3,07 para 6,50**, e custou **1%** na dobra.
 
-| O que entrou | Onde está escrito |
-|---|---|
-| Barra de progresso da statusline: virou **uma barra só**, cheio + vazio em dois tons | [[vscode-terminal-e-atalhos]] |
-| Tema do editor e do CLI: **saiu o laranja, entrou o azul dele** (`#4D85E9` escuro, `#E5EBEE` claro) | [[vscode-terminal-e-atalhos]] |
-| `Ctrl+V` e `Ctrl+Enter` passaram a fazer o que o `Alt` fazia | [[vscode-terminal-e-atalhos]] |
-| A máquina **não dorme mais sozinha** — e o culpado escondido era a suspensão não assistida em 120 s | [[cadeado-trancar-a-maquina]] |
-| **O último agente autônomo desliga o computador**, com cinco travas | [[desligar-quando-o-ultimo-acabar]] |
-| O arranjo inteiro virou **pacote pros colegas instalarem** (`ONBOARDING.md` + link) | [[pacote-pra-instalar-no-colega]] |
-| A passagem de bastão **confere o estado antes de morrer** (ver o aviso mais abaixo) | aqui mesmo |
+**O que ele decidiu e fecha assunto:**
+- **O espelho fica**, mesmo depois de eu levar a ele que na nossa barra sai reflexo reconhecível e
+  **não** texto legível de cabeça pra baixo (é aritmética: comprimir 2× numa barra de 64,67px deixa a
+  faixa com 10px, e letra de 14px vira 6,6px contra 5px de desfoque; a barra deles tem 178px).
+- **Nas duas quinas**, não só embaixo.
+- **Leitura na frente da fidelidade**, depois de reclamar duas vezes que o menu estava difícil.
+- **Uma escolha minha que reportei:** a frente foi até o piso exato da régua de contraste (4,50) e
+  avisou que ali é piso, não folga, porque a métrica é a mediana. **Voltei um degrau, pra 4,84.**
 
-**Depende dele, e é curto:**
-- **Os 8 casos do de-para de conta contábil** seguem esperando decisão (5 cruzam custo com despesa,
-  mexem em margem). Detalhe e recomendação caso a caso em [[validacao-do-depara-de-conta]].
-- **A tomada.** Os tempos de suspensão estão zerados em caráter permanente, então bateria crítica em
-  2% é o único caminho de parada que sobrou — e é de propósito.
-- **FRENTE NOVA, e é a mais consequente: o rename do endereço virou portão de segurança.** O
-  Samuca só troca o nome depois de o **Leo** revisar o código, porque teme exposição. O rename em si
-  não muda exposição nenhuma (o endereço já é público), mas a revisão é real e vai achar o furo de
-  segregação de função que está aberto desde 25/08. Postura de segurança, armadilhas do Vercel e o
-  que preparar: [[rename-do-endereco-e-review-do-leo]].
-- **Deixar um remoto só no compras.** `git remote remove origin` na worktree principal: os dois
-  endereços são o MESMO repositório (id `1288594370`), o `origin` é só o nome antigo redirecionando.
-  Esperando a outra sessão soltar o repo. Detalhe em [[commitar-todo-update]].
-- Se ele parou de mexer em cor: **juntar as cores num lugar só.** Hoje elas vivem no tema **e** num
-  bloco de ajuste rápido no `settings.json`, que era proposital enquanto ele afinava.
+**O PRÓXIMO PASSO CONCRETO, e é onde a sessão parou:**
 
-**A LIÇÃO da sessão, e ela custou caro:** eu **zerei o tema do VS Code e o `settings.json` dele** de
-uma vez, escrevendo o arquivo na mesma linha em que o lia (`open(p,"w").write(troca(open(p).read()))`
-trunca antes de ler). Recuperei os dois — o `settings.json` de um backup meu, e o tema do cache do
-próprio VS Code (`state.vscdb`, chave `colorThemeData`, 211 cores). Régua nova em
-[[copiar-antes-e-ler-antes-de-escrever]]: **copiar antes de mexer, e nunca ler e escrever na mesma
-expressão.**
+> [!important] Rodando quando a passagem disparou: **verificação em produção, logado, no navegador.**
+> É a primeira vez que alguém abre **Fiscal, Aprovações, Controle e Cartões com dado de verdade** —
+> toda a verificação do dia foi em máquina local **sem banco**, e essas quatro telas têm porteiro de
+> perfil. O portão de qualidade anterior mediu elas numa página de sonda: geometria certa, realidade
+> desconhecida. A frente tem ordem expressa de **não clicar em nada que grave, aprove, pague ou
+> dispare e-mail**, e de trazer o relato do caminho do demo.
+> **Se você nasceu de uma passagem, essa frente morreu. Refaça:** o achado dela é o que decide se
+> sobrou defeito no ar.
 
-**A ferramenta que resolveu o dia todo de cor:** parar de descrever desenho e **mostrar** — trocar a
-statusline por um desfile de candidatos numerados, tirar print da tela com
-`System.Drawing.CopyFromScreen` e amostrar com PIL. Ele escolheu em uma palavra depois de eu ter
-gasto três rodadas adivinhando.
+**Depende do Rei, e eu segurei de propósito:**
+- **Ensaiar os dois cliques do demo.** Aprovar e pagar **nunca aconteceram em produção, por ninguém**,
+  e vão acontecer pela primeira vez na frente da plateia. Ofereci ensaiar com uma segunda pessoa duas
+  vezes hoje e nas duas ele mudou de assunto. **É o maior risco do dia da apresentação.**
+- **Renomear as abas** (`Controle` → `Pagamentos`, `Lançar pedido` → `Meus pedidos`,
+  `Fiscal` → `Notas fiscais`), com ordem nova por frequência de uso. É reversível, mas muda o roteiro
+  do demo e muda como a empresa fala.
+- **As três perguntas contábeis seguidas** no formulário (produto/serviço, pontual/recorrente,
+  antecipado/depois). Quem só quer pagar uma licença atravessa as três. Dá pra deduzir parte, mas
+  mexe em regra de negócio.
+- O furo de segregação de função (papel de teste que ficou no banco em 25/08) e os 8 casos do de-para
+  de conta contábil, os dois em [[validacao-do-depara-de-conta]].
 
----
+**Coisas operacionais que ficaram na máquina:**
+- **Meia dúzia de servidores de desenvolvimento velhos** nas portas 5173-5178, 5199 e 5210, sobra das
+  frentes do dia. Ele se confundiu com isso (*"eu tava no local host errado"*). **Fechar.**
+- Uma cópia congelada do sistema em `scratchpad/vitrine`, servida na porta 5220 pra ele olhar.
+- Copiei `.env` e `.env.local` pra worktree `estado-acesso` pra o local ter banco.
+- **Worktrees novas do dia:** `vidro-material`, `topo-layout`, `topo-compat`, `cx-texto`,
+  `sistema-visual`, `estado-acesso`, `apple-integra`, `acabamento`, `teste-merge`.
+  A linha de integração foi `estado-acesso`.
 
-### SITE DE PAGAMENTOS — a outra sessão de 03/09
+**Duas armadilhas que eu paguei pra aprender hoje e que valem pra qualquer bateria:**
+1. **Worktree é de uma frente só, e o navegador também.** Pus duas no mesmo lugar e elas se
+   atrapalharam: uma tomou o navegador da outra no meio de uma medição.
+2. **Pra ele olhar, serve `dist` congelado num servidor estático**, nunca o `vite` da worktree em
+   edição. Apontei ele pra bancada e ele ficou vendo cada estado intermediário, inclusive um erro de
+   compilação que ele descreveu como *"um monte de linha de código"*.
 
-> [!warning] Sessão da TARDE/NOITE de 03/09/2026, com ele PRESENTE o tempo todo.
-> O trabalho do dia está no ar. **O que NÃO está fechado é o cabeçalho de vidro:** ele foi
-> publicado, o Rei viu, reclamou do lugar do e-mail e pediu especialistas pra conferir. Duas
-> frentes de revisão estavam rodando quando a passagem disparou e **os achados delas se perderam**.
-> Recomeçar por aí.
-
-> [!important] 03/09/2026, SESSÃO AUTÔNOMA: um time de OITO frentes está rodando AGORA
-> O CEO alargou o escopo em duas mensagens, com ele fora: *"quero que o time se inspire no frontend
-> da Apple"* e, logo depois, *"quero que o time se inspire no frontend e no **customer experience**
-> da Apple **para o site todo**. Continue trabalhando com eles usando o loop e o autonomo."*
-> Então a bateria deixou de ser só o cabeçalho e virou o site inteiro, na régua da Apple.
->
-> **Se você nasceu de uma passagem, esses oito subagentes MORRERAM.** O que sobrevive é isto:
->
-> **Onda 1 — o cabeçalho (3 frentes que CONSERTAM, cada uma na sua worktree, base `bd8ea2c`):**
-> 1. `vidro-material` (`C:\Users\Allu\dev\compras-allu-vidro-material`) — persona "quem fez o Liquid
->    Glass na Apple", pedida ao pé da letra pelo CEO. Dona de: `.topo` (fundo/`backdrop-filter`/
->    borda/sombra), os `@supports` do topo, `.aba.ativa`, `.aba:hover`, e o `FiltroDeVidro` no
->    `App.tsx`. Missão: menos `blur`, mais deslocamento; base da barra que se separa do conteúdo;
->    aro de vidro na pastilha. **É a única frente com direito ao navegador** (Playwright é um só).
-> 2. `topo-layout` (`...-topo-layout`) — persona "quem desenha as barras de navegação da Apple".
->    Dona de: `.topo-dentro`, `.marca*`, `.topo-direita`, `.abas`, `.aba` (padding/peso/alinhamento),
->    `.usuario*`, `.botao-sair`, `.perfil-select`, o `@media 760px` e o JSX do `Topo`. Missão: as
->    abas centradas na altura da barra, letra mais grossa, e o **lugar do e-mail**.
-> 3. `topo-compat` (`...-topo-compat`) — sênior de CSS/compatibilidade. Audita e só conserta o
->    pequeno: contexto de empilhamento do `backdrop-filter` (modal/pop-up por baixo do topo),
->    `display: contents` órfão no telefone, os `@supports`, o `<svg>` do filtro.
->
-> **Onda 2 — o site todo, CINCO auditorias em `master`, SÓ LEITURA, sem navegador.** Cada uma é uma
-> pessoa sênior da Apple na dimensão dela, entrega lista priorizada com arquivo:linha e o conserto
-> concreto: **tipografia** (inventário de tamanho/peso/entrelinha, `tabular-nums` no dinheiro) ·
-> **cor e material** (cor solta fora do `:root`, hierarquia de superfície, sombra, raio, contraste
-> calculado) · **movimento e estado** (a tabela tela → carregando → erro → vazio, e a lista de
-> botões clicáveis DUAS VEZES, que é risco de dinheiro) · **jornada e CX** (o mapa ponta a ponta do
-> pagamento, jargão vazando pra tela, as mensagens de erro reescritas prontas pra colar, e lupa em
-> Aprovar/Pagar, que nunca rodaram em produção) · **formulário e acessibilidade** (rótulo, foco,
-> `inputMode` no dinheiro, alvo de 44px, `div onClick`).
->
-> **A onda 3 é o conserto, e ela tem uma armadilha de integração:** tipografia, cor, sombra e raio
-> moram todos no mesmo `:root`. Se várias frentes editarem tokens em paralelo, o merge vira briga.
-> **O jeito certo: eu fecho o contrato de tokens primeiro** (os nomes e valores, decididos a partir
-> das cinco listas), uma frente só implanta o `:root` e a base global, e as demais aplicam por tela
-> usando os tokens já acordados. Nunca duas frentes no `:root`.
-
-
-
-**O que esta sessão entregou, em quatro subidas, todas provadas pelo CONTEÚDO do bundle no ar:**
-
-1. **As duas dívidas do smoke da virada** (`72d9798`): a tela subia o comprovante pro cofre ANTES
-   de chamar a RPC, então a recusa de segregação de função deixava PDF órfão que ninguém apaga;
-   e o erro chegava na tela com o prefixo técnico do banco na frente. Detalhe em
-   [[onde-retomar-depois-da-virada]].
-2. **As três áreas da tela de quem pede** (`1cb517c`): em processamento, pagos e encerrados, com
-   quem registrou o pagamento e o comprovante a um clique. Pedido dele.
-3. **A rodada do time de front** (`adc5e5d` + `df72e64`): cinco frentes auditaram, acharam 25
-   defeitos com prova, cinco frentes consertaram, uma integrou e uma abriu o sistema no ar pra
-   olhar. Os dois maiores ganhos: no Fiscal, cada ação linha-a-linha zerava a tela inteira (quem
-   validava nota na página 5 com filtro voltava pra página 1 a cada clique); e o app baixava
-   788 KB antes de mostrar qualquer coisa, agora baixa 340.
-4. **Espaçamento entre blocos + o conserto do deploy + o cabeçalho de vidro** (`d7e6b21`,
-   `2a6e422`, `bd8ea2c`).
-
-**Onde está:** `master` em **`bd8ea2c`**, repo `allugator/compras-allu-site`, worktree principal
-`C:\Users\Allu\dev\compras-allu`. Banco intocado hoje à noite: produção segue em `20260903150000`,
-números de migração de 03/09 livres a partir de `160000`. 1395 testes verdes, `tsc`, lint e build
-limpos.
-
-**O PRÓXIMO PASSO CONCRETO, e é o único aberto:**
-
-> [!important] PEDIDO DELE, chegado nos últimos minutos da sessão. Faça ISTO primeiro.
-> *"o posicionamento dos tópicos (lançar pedido, Orçamento,...) também está muito alto dentro do
-> cabeçalho, preciso que eles fiquem mais centralizados. Deixa eles com uma letra mais grossa pra
-> ficar mais fácil de ler também, e deixa o vidro distorcendo um pouco mais o que passa atrás dele,
-> assim como está no da apple. Cria um sub agente e fala pra ele que ele é a pessoa da Apple que
-> fez esse sistema para eles, e que é pra ele replicar o que ele já fez lá pra eles aqui no nosso
-> site."* E logo depois, precisando o efeito: *"quero que distorça, não que tire o foco."*
->
-> Traduzindo pro que muda no CSS: **menos `blur`, mais `feDisplacementMap`.** Hoje está
-> `blur(18px)` com `scale="16"` no filtro; o pedido é ir na direção de menos desfoque e mais
-> deslocamento. E as abas: centralizar verticalmente dentro da barra (hoje sobem demais) e subir o
-> peso da fonte (`.aba` está em 600).
->
-> **Ele pediu explicitamente um subagente com a persona de quem fez o Liquid Glass na Apple.**
-> Monte com os 5 blocos do [[loop]] e deixe claro no bloco 3 que é essa a cabeça que ele quer.
-
-**Duas frentes de revisão do cabeçalho MORRERAM com a passagem** e precisam ser refeitas:
-
-1. **O LUGAR DO E-MAIL é queixa dele** (*"o lugar que o email ficou ta estranho também"*). O e-mail
-   e o botão Sair vivem em `.usuario` dentro de `.topo-direita`, colados nas abas. Medir as
-   distâncias reais e propor conserto (separar navegação de conta, ou recolher num menu).
-2. Regra órfã da mudança: o flex saiu do `.topo` e foi pro `.topo-dentro`, e o `display: contents`
-   do telefone depende de qual é o pai. E `backdrop-filter` cria contexto de empilhamento, então
-   pop-up e modal podem passar por baixo do cabeçalho ou ser recortados: conferir.
-
-**O que o olho de design já devolveu sobre o cabeçalho, e vale ouvir:**
-
-- **A barra não se separa do conteúdo**: sem linha nem sombra visível na base, ela se funde com a
-  página logo abaixo. Sugestão dele: sombra ou borda na base com 8-10% de opacidade escura.
-- **Testar o vidro com um cartão COLORIDO passando por baixo, não branco.** Cartão quase branco
-  sobre barra quase branca não prova desfoque nenhum, mesmo com o CSS certo — foi o que atrapalhou
-  as duas primeiras avaliações.
-- A pastilha da aba escolhida lê como mancha de cor, não como pastilha de vidro: falta aro visível.
-
-**Três defeitos REAIS que esta sessão achou olhando a tela, e que teste nenhum pegaria:**
-
-- **O `React.lazy` fez o deploy quebrar aba aberta.** Cada rota virou arquivo com hash; quem estava
-  com a aba aberta desde antes de uma publicação pedia um arquivo que não existe mais, tomava 404 e
-  **a tela ficava branca**. Consertado: recarrega uma vez sozinha. Detalhe e a régua que fica em
-  [[conferir-o-pacote-no-ar]].
-- **O vidro nunca rodou.** Eu escrevia `backdrop-filter` e `-webkit-backdrop-filter` juntos, o
-  minificador guardava **só a forma `-webkit-`**, e o Chrome de hoje não aceita mais
-  (`CSS.supports('-webkit-backdrop-filter', ...)` responde `false`). A barra estava sem desfoque
-  nenhum e lia como faixa lisa. Conserto: tirar as linhas `-webkit-` do fonte e deixar o build
-  gerar as duas. **Regra que fica: prefixo escrito à mão pode APAGAR a propriedade padrão.**
-- **O hash do build local nunca bate com o da Vercel.** Conferir deploy por nome de arquivo não
-  prova nada; conferir pela frase nova, contando ocorrências antes e depois.
-
-**Uma afirmação minha que estava ERRADA e foi desmentida lendo produção:** eu disse a ele que a
-faixa livre da alçada não valia na prática. É falso, e o desmentido com a prova está em
-[[politica-de-aprovacao]] (última seção). Pedido pequeno **nasce aprovado na hora**. Não há orçamento
-a carregar por causa disso.
-
-**A APRESENTAÇÃO DO MVP** ([[roteiro-do-demo]]): vai ser ele **clicando no sistema ao vivo**, sem
-slides (a formal fica pra depois). Decisões dele que fecham assunto: **não vai ter mensagem pro
-time, nem agora nem depois, e não é ele quem escreve** — some da nossa lista de vez; e **não planta
-dado de demonstração**, quer mostrar realista. Roteiro, estado real das telas e a parede do
-pagamento estão na nota.
-
-**Depende do Rei:**
-- **Aprovar o cabeçalho**, ou mandar mudar. Está no ar e não foi aprovado.
-- **Aprovar e pagar nunca aconteceram em produção, por ninguém.** Os dois últimos passos do demo
-  vão acontecer pela primeira vez na frente da plateia. Ofereci ensaiar só esses dois cliques antes,
-  com a segunda pessoa; ele não respondeu.
-- O furo de segregação de função (papel de teste que ficou no banco em 25/08) e os 8 casos do
-  de-para de conta contábil: os dois no cofre local, [[validacao-do-depara-de-conta]].
-- As quatro decisões de front que a rodada levantou e eu NÃO executei: confirmação no botão
-  Aprovar, aviso de estouro de orçamento no card de quem aprova, a busca que traz todos os pedidos
-  da história sem filtro, e validação de nota em lote.
-- **ESTE REPO É PÚBLICO.** Escrevo aqui como se fosse, e o detalhe operacional fica no cofre local.
-  O histórico antigo continua sendo decisão dele.
-
-**Enquanto ele estiver apresentando, NÃO publicar nada:** desde o `React.lazy`, publicar no meio de
-alguém usando derruba a tela dessa pessoa pra uma recarga.
-
-> [!important] 03/09/2026: o script passou a CONFERIR o estado antes de morrer
-> Ele perguntou se o gancho estava interrompendo o agente antes de salvar. **Não estava** — o `Stop`
-> só devolve a lista, e quem mata a sessão é o agente no passo 5. As duas passagens do dia provam a
-> ordem certa: gancho 15:17 → estado commitado 15:20 (`19da849`); gancho 17:14 → 17:15 (`67d88b0`).
-> **Mas era instrução, não garantia.** Agora o `passar-o-bastao.cjs` recusa passar se a passagem não
-> foi reescrita nos últimos 15 min ou se há arquivo rastreado sem commit; `--forcado` escapa.
-> Provado nos dois cenários em 03/09.
->
-> **O que a passagem NÃO consegue retomar, e é limite de desenho:** subagente morre junto com a
-> sessão. Um time em andamento não sobrevive à troca — a passagem registra que ele existia, e quem
-> nasce recomeça.
+**E uma que já estava escrita e se confirmou:** [[nao-julgar-sub-vivo-pelo-arquivo-de-saida]] — três
+subs morreram de uma vez por limite de sessão da plataforma, e um deles tinha **367 linhas em 8
+arquivos** esperando no worktree, sem commit, com build limpo. A última frase da devolutiva dele
+("Now B2") disse com precisão onde ele parou.
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
