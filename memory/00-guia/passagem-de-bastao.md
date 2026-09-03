@@ -40,6 +40,11 @@ passagem). Sistema de Pagamentos na worktree `C:\Users\Allu\dev\compras-allu-vir
 `virada-de-setembro` @ `715f617`. **Ontem havia outra sessão minha aberta em outro terminal**: antes de
 mexer no compras, releia [[combinado-entre-agentes]] e confira `git status` nas worktrees.
 
+**PARADO A PEDIDO DELE às 23h40 de 02/09** (*"para o que você tiver fazendo, vai acabar meus
+tokens"*). A caixa de observação tinha acabado de começar e foi interrompida: **nada ficou meio
+feito**, a worktree está limpa em `715f617` (conferido no `git status`). Não retomar sozinho: ele
+decide quando voltar.
+
 **Próximo passo concreto:** a caixa de observação (item 2). Abrir [[caixa-de-observacao]], fazer os
 7 itens de front na worktree `compras-allu-virada`, testes, `db push` da `20260902140000` (o CLI
 roda pelo cache do npx: `~\AppData\Local\npm-cache\_npx\aa8e5c70f9d8d161\node_modules\.bin\supabase`,
