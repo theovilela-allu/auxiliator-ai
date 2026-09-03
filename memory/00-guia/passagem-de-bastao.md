@@ -51,8 +51,10 @@ assessor commitado com esta passagem.
 2. ~~**A validação do de-para de conta contábil**~~ **LEVANTAMENTO FEITO nesta sessão**, lendo
    produção: [[validacao-do-depara-de-conta]]. O de-para **não tem defeito de código** (zero conta
    órfã, chave certa no par fornecedor+descrição), mas **a base ensina duas contas pro mesmo texto
-   em 8 casos, e 5 cruzam custo com despesa** (mexe em margem bruta). A causa mecânica é **8 nomes
-   de fornecedor duplicados**, que partem o histórico do par em dois. **O que falta é decisão do
+   em 8 casos, e 5 cruzam custo com despesa** (mexe em margem bruta). A causa é **texto genérico
+   classificado em ilha**, sem nenhuma travessia que compare o mesmo texto entre fornecedores.
+   (Eu anunciei "fornecedor duplicado" antes de abrir os CNPJs e estava errado: são filiais, e
+   dentro de cada raiz a classificação é consistente. Está corrigido na nota, com o erro escrito.) **O que falta é decisão do
    FP&A**, caso a caso, com a minha recomendação já escrita em cada linha da tabela. A tarefa
    vencida no Auxiliator não foi tocada por mim: quem estava com o navegador na mão era a outra
    sessão (`auxiliator-ai-ab`), e pedi pra ela registrar.
