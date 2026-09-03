@@ -52,8 +52,30 @@ aliases:
 > dois defeitos estavam la, e o que os achou foi UM clique de verdade. Migracao que passa nao e
 > feature que funciona: prova de migracao cobre a migracao SUBIR, nao o caminho da pessoa.
 >
-> **Auxiliator e Granola:** fora nesta sessão, pelo mesmo motivo. Sem briefing novo; o panorama de
-> 02/09 é o que vale.
+> **ESPERANDO O WIFI (nao a 3g: ele testou e nao presta):** rodar `supabase db push` e
+> `migration list --linked` so pra CONFERIR. As portas 5432/6543 estao fechadas na rede dele, entao
+> as duas migracoes de 03/09 foram aplicadas pela API de gerenciamento (HTTPS) e as linhas de
+> `schema_migrations` inseridas a mao. **Producao esta correta e conferida no corpo vivo das
+> funcoes** (`pg_get_functiondef`), e o historico marca `20260903130000` como ultima. O CLI e cinto
+> de seguranca, nao conserto: se ele disser "up to date", nada a fazer.
+>
+> **Sobrou uma faxina:** um script meu perdeu as barras invertidas do caminho do Windows num
+> heredoc, e o Chrome criou um perfil DENTRO do repo
+> (`UsersAlluAppDataLocalms-playwright-mcpmcp-chrome-3c24d0c/`, 38 MB, com a sessao Google dele).
+> **Nunca foi commitado** (o `Cookies` estava travado e o `git add` falhou) e agora esta no
+> `.gitignore`. Mover pra fora do repo quando ele fechar a janela do navegador.
+>
+> **O navegador desta sessao nao e o do Playwright:** o servico do MCP nao subiu (a internet estava
+> travada na abertura), entao eu subi o Chrome eu mesmo, com o perfil dele e a porta de depuracao
+> 9222, e conectei por CDP. Isso salvou a sessao inteira: sem essa saida, nada de clique no ar.
+>
+> **Auxiliator, panorama de 03/09** (ele logou a mao nas duas telas: as sessoes tinham expirado).
+> Versao v0.2.20, igual a anunciada, nada a contar. 3 vencidas, todas FP&A: piloto de lancamentos
+> reais e de-para conta contabil (as duas de 21/08), e **decidir onde o contrato barra o pagamento**
+> (01/09) - essa e sobre o sistema que a gente acabou de mexer, e hoje vale uma escolha PROVISORIA
+> minha ("contrato resolvido" = assinado, e pendente nunca barra o pagamento). Nada pra hoje,
+> ninguem esperando ele. **As 2 do Thoreos foram APAGADAS a pedido dele** (ver
+> [[thoreos-em-espera]]): zero bloqueada agora. Granola nao conectado nesta sessao.
 >
 > **Três decisões que eu tomei sozinho** (todas reversíveis, ele derruba com uma frase): rótulo
 > "Observação" com a explicação de que ela congela na aprovação, logo abaixo do campo; teto de 4000
