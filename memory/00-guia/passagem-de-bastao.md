@@ -11,19 +11,47 @@ aliases:
 
 ## Estado (reescrito a cada passagem)
 
-> [!note] Ainda não houve passagem de bastão.
-> Este bloco é reescrito pela sessão que morre. Enquanto estiver assim, o ponto de retomada do
-> trabalho é o de sempre: [[onde-retomar-depois-da-virada]] (Sistema de Pagamentos) e o
-> [[_sistema-de-compras]].
+> [!important] Se você está lendo isto numa sessão que abriu SOZINHA com "MODO AUTONOMO", a morte funcionou.
+> Esta é a primeira passagem de verdade, o teste ao vivo que o Rei pediu pra fazer em 02/09/2026 à
+> noite (*"salva que fez isso na memória pra eu testar a morte"*). Primeira coisa a fazer: registrar
+> aqui embaixo, na seção "Como funciona", que a morte real foi provada (data, hora, e se o terminal
+> ficou limpo: sem lixo de tela, cursor visível). Depois seguir a fila. **Ele provavelmente está
+> olhando**: se ele falar, o modo autônomo acaba e você responde normal.
 
-**Estávamos fazendo:** —
-**Ficou pronto:** —
-**Falta (em ordem):** —
-**Onde está:** —
-**Próximo passo concreto:** —
-**Depende do Rei:** —
-**Rascunhos prontos:** —
-**Auxiliator:** —
+**Estávamos fazendo:** construindo a própria corrente da passagem de bastão e o modo autônomo, na
+noite de 02/09/2026, na sessão em que o Rei estava presente.
+
+**Ficou pronto:** tudo, commitado e no GitHub em `d69944b` (master do assessor): o laço no
+`profile.ps1`, o gancho Stop `bastao-de-contexto.cjs`, o script `passar-o-bastao.cjs`, o gancho
+`sem-plan-mode.cjs` (plan mode desligado), a skill `modo-autonomo`, o `modo-especialista` sem plan
+mode, a lista das seis proibições ([[o-que-eu-nao-posso-fazer]]), a barra de status em 500k/800k.
+Provado: o vigia dispara em 520k e cala em 300k; o laço relança num shell de mentira com a flag e a
+mensagem certas.
+
+**Falta (em ordem):**
+1. **A morte de verdade** (esta passagem): claude.exe real morrendo com o navegador junto e
+   renascendo no mesmo terminal. Se você existe, passou. Registre.
+2. O trabalho do Sistema de Pagamentos que ficou de 02/09, fila em
+   [[onde-retomar-depois-da-virada]], seção "O que sobrou, MEU": (a) smoke de escrita no sistema novo
+   em produção (criar, aprovar e pagar um pedido baixo com "TESTE DO SISTEMA, pode ignorar", e
+   cancelar no fim, nunca apagar); (b) terminar a [[caixa-de-observacao]] (front inteiro falta,
+   banco pronto); (c) alinhar o master do compras com `virada-de-setembro` @ `715f617`.
+
+**Onde está:** repo do assessor em `C:UsersAlluDesktopauxiliator-ai` (master `d69944b`). Sistema
+de Pagamentos na worktree `C:UsersAlludevcompras-allu-virada`, branch `virada-de-setembro` @
+`715f617`. **Havia outra sessão minha aberta em outro terminal nesta noite**: antes de mexer no
+compras, releia [[combinado-entre-agentes]] e confira `git status` nas worktrees.
+
+**Próximo passo concreto:** registrar a prova da morte aqui; depois abrir
+[[onde-retomar-depois-da-virada]] e começar o smoke de escrita.
+
+**Depende do Rei:** o recado pro time sobre a virada (rascunho a oferecer), as 14 contas de custo de
+operação, a limpeza dos segredos (fica pro fim), os valores da alçada. Nada disso eu decido.
+
+**Rascunhos prontos:** nenhum ainda.
+
+**Auxiliator:** a sessão caiu às 21h27 de 02/09 e o login ficou esperando o "Sim" no app do YouTube do
+iPhone dele. Se continuar deslogado, não espere: anote e trabalhe pelo Obsidian.
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
