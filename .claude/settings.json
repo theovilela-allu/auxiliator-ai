@@ -70,7 +70,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/bloqueia-print-pesado.cjs"
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/bloqueia-print-pesado.cjs"
           }
         ]
       },
@@ -79,7 +79,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/sem-plan-mode.cjs"
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/sem-plan-mode.cjs"
           }
         ]
       }
@@ -89,7 +89,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/bastao-de-contexto.cjs",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/bastao-de-contexto.cjs",
             "timeout": 30
           }
         ]

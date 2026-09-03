@@ -110,8 +110,8 @@ escreve isto é a sessão que nasceu dela. O que a sessão nova conferiu de dent
   `mcp-chrome-3c24d0c` (gravado até 22h22). Não sobrou processo nenhum dele, e o boot da sessão nova
   abriu **o mesmo perfil** às 22h32 sem erro de trava e já logado. A outra sessão minha, no terminal
   das 21h06 (`claude.exe` 49532, perfil `28c730e`), ficou intacta, como devia.
-- **Não dá pra conferir de dentro:** se o terminal ficou limpo (sem lixo de tela, cursor visível).
-  Isso só quem olha a tela vê. Fica pra ele dizer.
+- **O terminal ficou limpo.** Isso não dá pra conferir de dentro; ele confirmou às 23h30 de
+  02/09/2026 (*"sim"*, à pergunta se o terminal ficou limpo depois da morte).
 
 Ligações: [[travar-em-60-de-contexto]] · [[modo-autonomo]] · [[o-que-eu-nao-posso-fazer]] ·
 [[terminal-e-powershell]]
