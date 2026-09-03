@@ -48,9 +48,14 @@ assessor commitado com esta passagem.
    `_Painel de Reunioes`, e o cluster de Compras saiu de `a-desenvolver` pra `ativo` porque agora
    tem nota de trabalho própria. `validar-frontmatter` limpo. O espelho pro OneDrive é a tarefa
    agendada, aos :07 — não é pendência.
-2. **A validação do de-para de conta contábil** (tarefa vencida, prioridade alta): no ar desde
-   15/07, falta testar com fornecedores ambíguos. Dá pra fazer sozinho, lendo a base de produção e
-   listando fornecedor cujo nome cai em mais de uma conta ou em nenhuma.
+2. ~~**A validação do de-para de conta contábil**~~ **LEVANTAMENTO FEITO nesta sessão**, lendo
+   produção: [[validacao-do-depara-de-conta]]. O de-para **não tem defeito de código** (zero conta
+   órfã, chave certa no par fornecedor+descrição), mas **a base ensina duas contas pro mesmo texto
+   em 8 casos, e 5 cruzam custo com despesa** (mexe em margem bruta). A causa mecânica é **8 nomes
+   de fornecedor duplicados**, que partem o histórico do par em dois. **O que falta é decisão do
+   FP&A**, caso a caso, com a minha recomendação já escrita em cada linha da tabela. A tarefa
+   vencida no Auxiliator não foi tocada por mim: quem estava com o navegador na mão era a outra
+   sessão (`auxiliator-ai-ab`), e pedi pra ela registrar.
 3. **O piloto de lançamentos reais com uma área** (a outra vencida): depende de gente, não de código.
 
 **Depende do Rei:**
