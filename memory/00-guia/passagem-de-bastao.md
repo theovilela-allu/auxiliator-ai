@@ -58,16 +58,20 @@ tres achados que so aparecem quando se **roda** em vez de ler, e que estao no co
 **tres** branches esperando merge, uma linha de comando cada. O motivo esta escrito no cofre — publicar
 dispara deploy, e e vespera de apresentacao dele.
 
-### O QUE FALTA — uma coisa so
+### A BATERIA ENCERROU as 00h24, e nao falta nada dela
 
-**Rodar o Codex**, cuja cota reabre 00:10. Como roda nesta maquina: [[codex-nesta-maquina]]. **Nao
-comprar credito.** O escopo MUDOU e o prompt novo ja esta salvo no cofre local
-(`memory/30-compras/prompt-revisao-do-front.md`): o lado do banco foi varrido inteiro, entao mandar
-ele la de novo e pagar caro por trabalho feito. O alvo agora e o **TypeScript**, que ninguem revisou.
+A ultima frente rodou e fechou. A ferramenta externa **estourou a cota pela segunda vez na mesma
+noite, sem entregar relatorio** — e a licao virou regra em [[codex-nesta-maquina]]: aquele limite nao
+aguenta varredura de repositorio, o alvo tem que ser um arquivo e uma pergunta. **Nao foi comprado
+credito.**
 
-Depois disso, o fechamento, e ele tem ordem: carimbar `status: concluido` no caderno de andamento
-local (**e esse carimbo que faz o reinicio das 5h desligar em vez de acordar mais gente**), fechar o
-diario com a ultima linha da noite, commitar, e **so entao** `.claude\scripts\desligar.ps1 -Terminei`.
+Mesmo assim a frente rendeu, e o metodo vale: **quando ela morrer no meio, leia a ultima coisa que
+ela escreveu antes do erro.** Era uma hipotese boa, e confirmar custou tres minutos — deu o ultimo
+achado da noite, que esta na nota local.
+
+O caderno da bateria esta carimbado como concluido (**e esse carimbo que faz o reinicio das 5h
+desligar em vez de acordar mais gente**), o diario esta fechado, e a producao esta como ele deixou:
+conferi contagem por contagem no fim, e nenhuma isca das provas sobreviveu.
 
 ### AS LICOES, que sao o que vale publicar
 
