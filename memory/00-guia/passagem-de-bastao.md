@@ -88,6 +88,29 @@ subs morreram de uma vez por limite de sessão da plataforma, e um deles tinha *
 arquivos** esperando no worktree, sem commit, com build limpo. A última frase da devolutiva dele
 ("Now B2") disse com precisão onde ele parou.
 
+
+> [!important] NA MESMA NOITE, EM PARALELO, outra sessão minha mexeu no BANCO
+> Esta passagem conta a bateria do FRONT. **Não foi a única coisa que aconteceu em 03/09.** Uma
+> segunda sessão (`auxiliator-ai-3f`) rodou uma bateria de **autorização no banco** ao mesmo tempo:
+> **22 defeitos confirmados, 5 migrações no ar, mais de 20 funções mexidas em produção e o acesso de
+> 8 funções revogado.** O `master` em `7459da8` tem **as duas coisas integradas** — ela puxou o meu
+> `b0c3908` pra dentro antes de subir, e eu conferi que está contido.
+>
+> **O pior defeito dela:** qualquer funcionário conseguia marcar contrato alheio como assinado, o que
+> **destrava o pagamento**. Metade dos achados é uma classe só, e ela documentou em
+> [[guarda-que-falha-aberta]]: **guarda que compara com coluna anulável falha ABERTA**, porque o `if`
+> não entra quando a condição vira nulo. **Leitura obrigatória antes de mexer em função de banco.**
+>
+> **O que eu passei pra ela, e vale pra qualquer um que for conferir aquelas revogações:** as quatro
+> telas com porteiro de perfil estão **vazias em produção**, então **um 403 de revogação renderiza
+> idêntico a "não tem dado"**. Julgar pelo visual passa a bateria inteira achando que está tudo bem.
+> O caminho certo é **sondar as 8 funções direto pela sessão dele via PostgREST** (determinístico, não
+> depende de existir dado) e só depois navegar julgando pela **rede**, caçando `403` em `/rpc/` e
+> `PGRST` no corpo. A régua de como falar com o banco está em [[ler-o-banco-em-producao]].
+>
+> **A luz:** eu me marquei como pronto no `desligar.ps1` às 21h04 e ele não desligou porque ela está
+> de pé. Ela ainda tinha essa passada e o Codex (que volta 00:10). **Quem apaga é ela.**
+
 ## Como funciona (não mexer sem atualizar o código junto)
 
 A corrente nasceu em 02/09/2026. Pedido dele: *"quando atingisse [o limite], ele salvasse tudo na
