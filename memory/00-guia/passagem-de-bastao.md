@@ -11,105 +11,108 @@ aliases:
 
 ## Estado (reescrito a cada passagem)
 
-> [!warning] Sessão de 03/09/2026, tarde e noite. Ele entrou e saiu várias vezes; terminou pedindo modo autônomo e desligamento.
-> **O maior pacote de front do projeto FOI PRO AR às ~20h25**, e a publicação foi confirmada pelo
-> conteúdo do pacote que a Vercel serve, não pelo nome do arquivo. `master` em **`4077d3d`**.
-> Detalhe inteiro, com os números e as lições, em [[bateria-apple-front]].
+> [!danger] ESTE ARQUIVO SOBE PRO GITHUB PUBLICO. O DETALHE FICA NO COFRE LOCAL.
+> `memory/00-guia/**` e versionado, e o repo do assessor e **publico**. Entao aqui vai **o jeito de
+> trabalhar e o ponto de retomada**; nome de funcao, caminho de exploracao, numero de negocio e
+> detalhe de sistema da empresa **ficam nas notas locais** (`memory/30-compras/`, que o `.gitignore`
+> cobre). Regra: [[o-que-vai-pro-github]]. Passagens antigas vazaram detalhe demais; nao repita.
 
-**O que ele pediu, em seis mensagens que foram alargando o escopo:** começou com um subagente com a
-persona de quem fez o Liquid Glass na Apple, virou *"que o time se inspire no frontend da Apple"*,
-depois *"no frontend e no customer experience da apple **para o site todo**"*, depois mandou um vídeo
-da referência pra equipe **estudar e replicar**, e no fim pediu o espelho também na quina de cima e
-os menus mais legíveis.
-
-**Onze frentes rodaram.** O resumo em uma linha cada, e os números estão na nota:
-o cabeçalho de vidro com a dobra nas duas quinas · o sistema visual do site inteiro (106 tamanhos de
-letra escritos à mão viraram 8, 33 cores soltas viraram 2) · o texto e o fluxo (o botão Aprovar diz
-quanto está aprovando, os erros do banco viraram português de gente) · estado e acessibilidade (as
-telas pararam de dizer "não tem nada" enquanto carregavam, os cliques duplos morreram, Enter funciona
-no formulário) · e duas frentes de medição do vídeo dele. **1432 testes verdes.**
-
-**A descoberta técnica que mais vale, e que resolveu o pedido dele de leitura:** o material da Apple
-não clareia o fundo, ele **achata** — `dentro = 0,55 × fora + 103`, medido com 70.760 pixels pareados
-dos dois lados do vidro. Isso comprime a faixa inteira de 0-255 pra 103-243, e é por isso que o texto
-das barras deles nunca briga com o que passa atrás. Implantar isso levou o contraste do menu de
-**3,07 para 6,50**, e custou **1%** na dobra.
-
-**O que ele decidiu e fecha assunto:**
-- **O espelho fica**, mesmo depois de eu levar a ele que na nossa barra sai reflexo reconhecível e
-  **não** texto legível de cabeça pra baixo (é aritmética: comprimir 2× numa barra de 64,67px deixa a
-  faixa com 10px, e letra de 14px vira 6,6px contra 5px de desfoque; a barra deles tem 178px).
-- **Nas duas quinas**, não só embaixo.
-- **Leitura na frente da fidelidade**, depois de reclamar duas vezes que o menu estava difícil.
-- **Uma escolha minha que reportei:** a frente foi até o piso exato da régua de contraste (4,50) e
-  avisou que ali é piso, não folga, porque a métrica é a mediana. **Voltei um degrau, pra 4,84.**
-
-**O PRÓXIMO PASSO CONCRETO, e é onde a sessão parou:**
-
-> [!important] Rodando quando a passagem disparou: **verificação em produção, logado, no navegador.**
-> É a primeira vez que alguém abre **Fiscal, Aprovações, Controle e Cartões com dado de verdade** —
-> toda a verificação do dia foi em máquina local **sem banco**, e essas quatro telas têm porteiro de
-> perfil. O portão de qualidade anterior mediu elas numa página de sonda: geometria certa, realidade
-> desconhecida. A frente tem ordem expressa de **não clicar em nada que grave, aprove, pague ou
-> dispare e-mail**, e de trazer o relato do caminho do demo.
-> **ELA TERMINOU e o veredito foi: o que está no ar está de pé, nada de layout precisa de conserto.** O que ela achou virou uma SEGUNDA subida (`b0c3908`, 1468 testes): o atalho da natureza, o alinhamento de um cabeçalho de dinheiro e o `vercel.json` que tirou o 404 do link fundo. **A fila acabou.** O que sobrou está em Depende do Rei, e o achado mais sério do dia está em [[bateria-apple-front]]: uma pergunta do formulário que não pode ser feita (`fornecedorPF` sem setter), com teste verde cobrindo código morto.
-
-**Depende do Rei, e eu segurei de propósito:**
-- **Ensaiar os dois cliques do demo.** Aprovar e pagar **nunca aconteceram em produção, por ninguém**,
-  e vão acontecer pela primeira vez na frente da plateia. Ofereci ensaiar com uma segunda pessoa duas
-  vezes hoje e nas duas ele mudou de assunto. **É o maior risco do dia da apresentação.**
-- **Renomear as abas** (`Controle` → `Pagamentos`, `Lançar pedido` → `Meus pedidos`,
-  `Fiscal` → `Notas fiscais`), com ordem nova por frequência de uso. É reversível, mas muda o roteiro
-  do demo e muda como a empresa fala.
-- **As três perguntas contábeis seguidas** no formulário (produto/serviço, pontual/recorrente,
-  antecipado/depois). Quem só quer pagar uma licença atravessa as três. Dá pra deduzir parte, mas
-  mexe em regra de negócio.
-- O furo de segregação de função (papel de teste que ficou no banco em 25/08) e os 8 casos do de-para
-  de conta contábil, os dois em [[validacao-do-depara-de-conta]].
-
-**Coisas operacionais que ficaram na máquina:**
-- **Meia dúzia de servidores de desenvolvimento velhos** nas portas 5173-5178, 5199 e 5210, sobra das
-  frentes do dia. Ele se confundiu com isso (*"eu tava no local host errado"*). **Fechar.**
-- Uma cópia congelada do sistema em `scratchpad/vitrine`, servida na porta 5220 pra ele olhar.
-- Copiei `.env` e `.env.local` pra worktree `estado-acesso` pra o local ter banco.
-- **Worktrees novas do dia:** `vidro-material`, `topo-layout`, `topo-compat`, `cx-texto`,
-  `sistema-visual`, `estado-acesso`, `apple-integra`, `acabamento`, `teste-merge`.
-  A linha de integração foi `estado-acesso`.
-
-**Duas armadilhas que eu paguei pra aprender hoje e que valem pra qualquer bateria:**
-1. **Worktree é de uma frente só, e o navegador também.** Pus duas no mesmo lugar e elas se
-   atrapalharam: uma tomou o navegador da outra no meio de uma medição.
-2. **Pra ele olhar, serve `dist` congelado num servidor estático**, nunca o `vite` da worktree em
-   edição. Apontei ele pra bancada e ele ficou vendo cada estado intermediário, inclusive um erro de
-   compilação que ele descreveu como *"um monte de linha de código"*.
-
-**E uma que já estava escrita e se confirmou:** [[nao-julgar-sub-vivo-pelo-arquivo-de-saida]] — três
-subs morreram de uma vez por limite de sessão da plataforma, e um deles tinha **367 linhas em 8
-arquivos** esperando no worktree, sem commit, com build limpo. A última frase da devolutiva dele
-("Now B2") disse com precisão onde ele parou.
-
-
-> [!important] NA MESMA NOITE, EM PARALELO, outra sessão minha mexeu no BANCO
-> Esta passagem conta a bateria do FRONT. **Não foi a única coisa que aconteceu em 03/09.** Uma
-> segunda sessão (`auxiliator-ai-3f`) rodou uma bateria de **autorização no banco** ao mesmo tempo:
-> **22 defeitos confirmados, 5 migrações no ar, mais de 20 funções mexidas em produção e o acesso de
-> 8 funções revogado.** O `master` em `7459da8` tem **as duas coisas integradas** — ela puxou o meu
-> `b0c3908` pra dentro antes de subir, e eu conferi que está contido.
+> [!important] PRIMEIRO PASSO DA PROXIMA SESSAO
+> Leia, nesta ordem, **as tres notas locais** que contam tudo:
+> **`memory/30-compras/bateria-de-fechamento-03-09.md`** (o resultado),
+> **`memory/30-compras/review-de-fechamento-andamento.md`** (o que **nao** refazer, e a lista das
+> frentes com o estado de cada uma) e **`memory/30-compras/diario-do-review-de-fechamento.md`** (a
+> noite hora a hora, que e o que ele le as 13h15). O briefing operacional completo, com o que cada
+> frente tem que fazer, esta em **`memory/30-compras/briefing-review-de-fechamento.md`**.
 >
-> **O pior defeito dela:** qualquer funcionário conseguia marcar contrato alheio como assinado, o que
-> **destrava o pagamento**. Metade dos achados é uma classe só, e ela documentou em
-> [[guarda-que-falha-aberta]]: **guarda que compara com coluna anulável falha ABERTA**, porque o `if`
-> não entra quando a condição vira nulo. **Leitura obrigatória antes de mexer em função de banco.**
+> **Duas frentes morreram com esta passagem e precisam ser refeitas.** Elas estao nomeadas, com o
+> desenho de teste inteiro, no briefing e no caderno de andamento.
+
+### O QUE ACONTECEU — 03/09/2026, noite (ele saiu as 20h20)
+
+Ele pediu um **code review de fechamento** antes de uma revisao externa de codigo, e saiu:
+*"pode comecar o review, to quase indo embora"*. Eu assumi como **gestor** ([[loop]]) e a equipe
+executou, em modo autonomo.
+
+**O saldo, sem detalhe:** a equipe auditou a superficie de autorizacao inteira do sistema de estagio
+dele e achou **22 defeitos confirmados**, todos provados lendo o banco de producao em vez de deduzir
+do codigo. **Cinco migracoes foram aplicadas e integradas** na mesma noite, com a suite verde, build
+e tipos limpos, e o repositorio daquele projeto voltou a descrever exatamente o que roda em producao.
+**O que cada defeito era, e onde, esta so no cofre local.**
+
+**O que falta, em uma linha cada** (o detalhe operacional esta no briefing local):
+1. **Refazer a passada de verificacao no sistema no ar** — morreu no meio desta passagem, e e a
+   ultima frente. O desenho do teste esta escrito no briefing, e ele **nao e obvio**: nao se julga
+   pelo visual.
+2. **Rodar o Codex a partir das 00:10**, quando a cota dele reabre. Como roda nesta maquina:
+   [[codex-nesta-maquina]]. **Nao comprar credito.**
+3. **Fechar a bateria:** carimbar `status: concluido` no caderno de andamento local (**e esse carimbo
+   que faz o reinicio das 5h desligar em vez de acordar mais gente**), fechar o diario, commitar, e
+   **so entao** `.claude\scripts\desligar.ps1 -Terminei`. A outra sessao ja se marcou como pronta.
+
+### O AGENDAMENTO — pedido dele nesta noite, e a receita fica
+
+Ele pediu trabalho agendado que **retoma sozinho** quando a cota acaba, e a maquina **desligada**
+quando ele chegar (13:15). Duas tarefas do Windows: uma as **23:45** que abre sessao pra retomar, e
+uma as **05:00** que **decide sozinha** entre retomar e apagar a luz.
+
+**Receita completa e reutilizavel: [[agendar-trabalho-de-madrugada]].** As pecas: briefing no cofre,
+caderno de andamento (o bastao da tarefa), **diario do lider** (pedido dele: *"quero que o lider
+escreva um breve diario contando o que foi acontecendo e os horarios"*),
+`.claude/scripts/review-de-fechamento.ps1` e as tarefas.
+
+**Tres coisas medidas, nao deduzidas:** com a maquina **trancada** a tarefa dispara e o terminal filho
+enxerga a funcao `claude`; **"processo vivo" nao e "sessao trabalhando"** (quando a cota acaba o
+`claude` fica aberto e parado, entao a trava mede **CPU**); e `CronCreate` **nao serve**, porque vive
+so na sessao.
+
+### AS LICOES, que sao o que vale publicar
+
+> [!tip] Guarda de autorizacao pode falhar ABERTA, e passa em revisao
+> Em linguagem com tres valores (nulo), `if not (<condicao>) then recusa` **nao entra no ramo** quando
+> a condicao vira nulo — entao a guarda que devia barrar deixa passar, e continua parecendo certa na
+> leitura. A forma invertida (`if <condicao> then segue else recusa`) falha fechada. **Metade dos 22
+> achados era essa classe.**
 >
-> **O que eu passei pra ela, e vale pra qualquer um que for conferir aquelas revogações:** as quatro
-> telas com porteiro de perfil estão **vazias em produção**, então **um 403 de revogação renderiza
-> idêntico a "não tem dado"**. Julgar pelo visual passa a bateria inteira achando que está tudo bem.
-> O caminho certo é **sondar as 8 funções direto pela sessão dele via PostgREST** (determinístico, não
-> depende de existir dado) e só depois navegar julgando pela **rede**, caçando `403` em `/rpc/` e
-> `PGRST` no corpo. A régua de como falar com o banco está em [[ler-o-banco-em-producao]].
->
-> **A luz:** eu me marquei como pronto no `desligar.ps1` às 21h04 e ele não desligou porque ela está
-> de pé. Ela ainda tinha essa passada e o Codex (que volta 00:10). **Quem apaga é ela.**
+> Ela **passou por quatro auditorias** antes de aparecer, porque elas procuravam crivo **ausente**, e
+> aqui o crivo existe: ele so aponta pro lado errado. So apareceu quando um sub avisou no handoff que
+> aquilo cheirava a **padrao**, e uma varredura dedicada leu todas as funcoes atras do formato.
+> Detalhe e o metodo de varredura: `memory/30-compras/guarda-que-falha-aberta.md` (local).
+
+**Familia pela metade e a assinatura do defeito.** De quatro funcoes irmas, uma ja estava consertada,
+**com comentario no codigo explicando o buraco** — alguem achou, entendeu, consertou aquela e nao
+olhou as outras tres. **Achou um defeito? Procure os irmaos dele no mesmo minuto.**
+
+**Briefing que nao autoriza discordar produz erro obediente.** Os subs me corrigiram **cinco vezes** e
+nas cinco tinham razao. Um quase derrubou uma tela inteira seguindo ordem minha, e so nao derrubou
+porque **testou antes** com objetos descartaveis numa transacao revertida. Outro mostrou que uma
+recusa que eu mandei implantar recusaria **100%** dos casos, nao um canto deles.
+
+**Duas buscas independentes concordando nao e prova de ausencia — e a mesma cegueira duas vezes.**
+Medicao negativa so vale com o controle nulo do proprio teste.
+
+**Reler o chao ANTES de despachar, nao depois.** Briefei uma frente com um estado que ja era passado,
+porque tinha lido no meio do trabalho de outra sessao.
+
+**Duas tecnicas de banco que ficam** (escritas em `memory/30-compras/ler-o-banco-em-producao.md`,
+local): reescrever funcao por substituicao sobre o corpo vivo, com ancora conferida, em vez de
+redigitar; e provar em execucao dentro de um bloco que termina em erro, pra o rollback ser do motor e
+nao da disciplina de quem testa.
+
+### A OUTRA SESSAO — terminou e se marcou como pronta as 21h03
+
+Rodou em paralelo a noite toda, no front, e **publicou o maior pacote de front do projeto**. Detalhe
+no cofre local (`memory/30-compras/bateria-apple-front.md`). O `master` daquele projeto tem **as duas
+noites dentro**, integradas sem conflito.
+
+**O aviso dela que salvou a minha ultima frente, e vale como regua:** quando a tela ja aparece vazia
+por falta de dado, **um erro de permissao renderiza identico** — entao teste que julga pelo visual
+aprova tudo. **Julgue pela rede.**
+
+**Duas sessoes no mesmo projeto funcionaram bem**, e o que fez funcionar foi: canal pelo cofre e por
+mensagem direta, cada uma na sua worktree, **uma so integra**, e pedir o recurso compartilhado (o
+navegador) em vez de matar o processo da outra.
+
 
 ## Como funciona (não mexer sem atualizar o código junto)
 

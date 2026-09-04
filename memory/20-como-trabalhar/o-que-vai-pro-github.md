@@ -37,3 +37,19 @@ versionado. Eu recomendei; ele preferiu manter público e filtrar. Se ele falar 
 máquina ou perder trabalho, é a hora de reabrir o assunto.
 
 Ligações: [[memoria-e-o-obsidian-e-so-ele]], [[_convencoes]], [[commitar-todo-update]].
+
+
+## A passagem de bastao tambem sobe, e e o ponto cego
+
+`memory/00-guia/**` e versionado, entao **a [[passagem-de-bastao]] vai pro GitHub publico a cada
+troca de sessao**. Como ela e escrita as pressas, no fim do contexto, com o gancho apitando, e o
+lugar mais facil de vazar sem perceber: nome de funcao interna, caminho de exploracao de um defeito,
+numero de negocio, estrutura de sistema de cliente.
+
+**A regua, entao:** na passagem vai **o ponto de retomada e o jeito de trabalhar**; o detalhe vive nas
+notas locais (`memory/30-compras/` e as outras pastas ignoradas) e a passagem **aponta pra elas pelo
+caminho do arquivo**. A sessao nova le as duas coisas, entao nada se perde — o que muda e so o que o
+mundo ve.
+
+**Antes de commitar a passagem, dois greps:** nome de funcao do projeto e cifra/numero de negocio. Se
+achar, o texto esta errado, nao o grep.
