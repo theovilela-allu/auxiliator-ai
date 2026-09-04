@@ -52,8 +52,7 @@ das barras deles nunca briga com o que passa atrás. Implantar isso levou o cont
 > perfil. O portão de qualidade anterior mediu elas numa página de sonda: geometria certa, realidade
 > desconhecida. A frente tem ordem expressa de **não clicar em nada que grave, aprove, pague ou
 > dispare e-mail**, e de trazer o relato do caminho do demo.
-> **Se você nasceu de uma passagem, essa frente morreu. Refaça:** o achado dela é o que decide se
-> sobrou defeito no ar.
+> **ELA TERMINOU e o veredito foi: o que está no ar está de pé, nada de layout precisa de conserto.** O que ela achou virou uma SEGUNDA subida (`b0c3908`, 1468 testes): o atalho da natureza, o alinhamento de um cabeçalho de dinheiro e o `vercel.json` que tirou o 404 do link fundo. **A fila acabou.** O que sobrou está em Depende do Rei, e o achado mais sério do dia está em [[bateria-apple-front]]: uma pergunta do formulário que não pode ser feita (`fornecedorPF` sem setter), com teste verde cobrindo código morto.
 
 **Depende do Rei, e eu segurei de propósito:**
 - **Ensaiar os dois cliques do demo.** Aprovar e pagar **nunca aconteceram em produção, por ninguém**,
