@@ -14,71 +14,53 @@ aliases:
 > [!danger] ESTE ARQUIVO SOBE PRO GITHUB PUBLICO. O DETALHE FICA NO COFRE LOCAL.
 > `memory/00-guia/**` e versionado, e o repo do assessor e **publico**. Entao aqui vai **o jeito de
 > trabalhar e o ponto de retomada**; nome de funcao, caminho de exploracao, numero de negocio e
-> detalhe de sistema da empresa **ficam nas notas locais** (`memory/30-compras/`, que o `.gitignore`
-> cobre). Regra: [[o-que-vai-pro-github]]. Passagens antigas vazaram detalhe demais; nao repita.
+> detalhe de sistema da empresa **ficam nas notas locais**, que o `.gitignore` cobre.
+> Regra: [[o-que-vai-pro-github]]. Passagens antigas vazaram detalhe demais; nao repita.
 
-### CHAT NOVO ABERTO POR ELE em 04/09/2026, ~16h. Nao foi contexto cheio: ele pediu pra resetar.
+### PASSAGEM POR CONTEXTO CHEIO em 04/09/2026, ~20h. Ele esta presente e satisfeito.
 
-Ele estava presente e satisfeito quando encerrou. **Nao ha frente pela metade e nao ha nada travado.**
-Se ele nao puxar assunto, a abertura e o briefing normal do dia.
+Nao ha nada travado nem pela metade. A conversa inteira foi **uma frente so**, do zero ate
+funcionando, e ela nao e o projeto de estagio: e uma frente nova de produto visual.
 
 > [!important] PRIMEIRO PASSO
-> Leia as notas locais nesta ordem: `memory/30-compras/bateria-de-fechamento-03-09.md` (o resultado
-> consolidado, ja com as correcoes do dia 04), `diario-do-review-de-fechamento.md` (a narrativa hora
-> a hora dos dias 03 e 04) e `bateria-apple-front.md` (a frente de arte).
+> Leia `memory/60-visual/site-de-apresentacoes.md`. Esta tudo la: onde os arquivos estao, as sete
+> decisoes de arquitetura ja fechadas, a estetica que ele cravou, as licoes tecnicas e a lista do
+> que falta. Depois `memory/60-visual/liquid-glass-como-fazer.md` e
+> `memory/60-visual/modelo-de-apresentacao-allu.md`, que continuam valendo.
 
-### O QUE O DIA 04 FOI, em cinco linhas
+### O QUE ESTA CONVERSA FOI
 
-Comecou com ele perguntando como tinha sido a noite anterior e terminou em frente de arte. Cinco
-coisas foram pro ar, todas conferidas **pelo conteudo do pacote servido, nunca pelo nome do
-arquivo**, e producao conferida **no banco, nunca no log**:
+Ele abriu querendo trocar o PowerPoint por um site. Virou brainstorm e, no mesmo folego, protótipo
+funcionando: tres slides, material de vidro, fundo animado que se transforma na virada, cards em
+orbita, e um aparelho em 3D girando. **Ele foi subindo a regua o tempo todo** e cada versao foi
+implementada, medida e descartada ate a seguinte. Isso e entrega, nao desperdicio.
 
-1. A pergunta *"o sistema ta no ar com as mudancas?"* virou auditoria. Estava, e provei com sonda e
-   controle positivo em vez de responder pela nota.
-2. Duas pecas de configuracao que faltavam em producao foram recriadas. **A licao virou regra:**
-   [[recriar-na-versao-atual]].
-3. **A bateria da noite anterior tinha quebrado uma funcionalidade inteira, em silencio, e so o
-   CLIQUE achou.** Licao em [[fail-closed-em-dado-que-vem-depois]] — e ela e das mais valiosas do mes.
-4. A frente de arte do cabecalho: menos fosco, sem sombra de projecao, e ele autorizou descolar do
-   topo. Aprovou olhando.
-5. Depois de ele sair (modo autonomo, ~17 minutos), a navegacao no telefone passou a avisar que ha
-   mais opcao, e uma ponta solta da frente de arte foi fechada.
+O ritmo dele nesta conversa foi de mensagem curta em cima de mensagem curta, muitas vezes no meio
+do meu trabalho. **Nao pare pra responder cada uma:** junte, execute, e reporte de uma vez.
 
-### O QUE FICOU ESPERANDO A PALAVRA DELE
+### O QUE ELE ELOGIOU, e vale manter
 
-Nada disso e falta de permissao; e decisao dele, e eu **nao devo tocar sem ele pedir**.
+*"ta ficando insano"*, *"ta mandando muito bem"*, *"deu pra ver que voce ta pegando o como eu
+quero"*. O que funcionou: **conferir olhando**, quadro a quadro, em vez de responder pela
+intencao do codigo. Quase todo defeito desta conversa so apareceu no print, nunca na leitura.
 
-- **Duas branches de arte**, as duas provadas e nenhuma integrada: uma pra aprovar, outra que eu
-  **implementei, medi e recomendo descartar** — e a medicao esta na nota, com o motivo fisico.
-- **Dois arquivos de prova meus** ficaram num armazenamento de producao, num registro de teste ja
-  cancelado. Perguntei se podia tirar, ele nao respondeu. **Eu nao apago arquivo**
-  ([[o-que-eu-nao-posso-fazer]], item 1).
-- **Uma branch de dependencias** fora da principal, que eu seguraria ate depois da apresentacao dele.
-- **Tres decisoes de produto**, nomeadas na nota local.
-- **Um slide de teste** com dois jeitos de fazer vidro em apresentacao, oferecido e ainda nao pedido.
+### O PROXIMO ASSUNTO, ja combinado
 
-> [!warning] O painel de indicadores dele esta FORA DO AR DE PROPOSITO
-> O login trava depois do Google porque o projeto de backend nao existe mais — conferido pelo DNS
-> publico e com controle positivo ao lado. Vale tambem pro app publicado. **NAO REATIVAR:** decisao
-> dele, *"ele ta com prazo de duracao pra pode sair do ar"*. Detalhe em [[dashboard-big-numbers]].
-> Se uma sessao futura abrir aquilo e achar que quebrou: nao quebrou.
+**Graficos.** Ele perguntou *"como vamos fazer na hora que formos mostrar algum grafico?"* e ele
+mesmo pediu pra deixar pra depois. E o proximo item, e ele espera que eu lembre.
 
-### O QUE ESTE DIA DEIXOU DE DURAVEL, e vale mais que as entregas
+### O QUE DEPENDE DELE
 
-- [[fail-closed-em-dado-que-vem-depois]] — fechar uma guarda que le dado que OUTRO servico escreve
-  DEPOIS derruba 100% do caminho legitimo, e **nenhuma prova de bancada pega**, porque a bancada
-  planta o dado ja pronto. Quem pegou foi o clique.
-- [[recriar-na-versao-atual]] — recriar objeto perdido pelo recorte da versao ORIGINAL reverte tudo
-  que veio depois.
-- [[liquid-glass-como-fazer]] — a receita medida do vidro, reaproveitavel fora deste projeto.
-- E a que atravessa as tres: **implementar, medir e DESCARTAR e entrega, nao desperdicio.** Duas
-  vezes no mesmo dia a medicao derrubou uma coisa que parecia obviamente certa.
+- O tema dos outros slides, pra eu desenhar o fundo de cada um a partir do que ele defende
+- Aprovar (ou trocar) o modelo 3D que veio com licenca que **exige credito no deck**
 
-### O CHAO, pra quem retomar
+### O QUE ESTE DIA DEIXOU DE DURAVEL
 
-Ramo principal limpo, com tudo do dia dentro. Nenhuma isca de teste sobreviveu alem dos dois arquivos
-citados acima. Servidores locais de previa e o painel dele estao de pe **so enquanto esta maquina e
-esta sessao viverem** — nao conte com eles amanha, e regere se precisar.
+- Um catalogo de armadilhas de animacao no navegador que vale fora deste projeto (camada por
+  movimento, o custo de escalar borrado, animacao que continua valendo depois de acabar)
+- **Luz forte e texto nao dividem o mesmo pedaco.** O conserto e mover a luz e dar coluna ao
+  texto, nunca escurecer a arte
+- **Escanear antes de abrir** virou rotina com script proprio, e ele pediu isso espontaneamente
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
