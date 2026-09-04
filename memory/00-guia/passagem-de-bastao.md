@@ -55,23 +55,48 @@ vidro), passou a valer **dos dois lados** (quem rolava nao tinha aviso do que fi
 ganhou **uma seta tocavel no telefone**, que tambem leva. Provado rolando de verdade e conferido em
 producao pelo CONTEUDO do pacote servido.
 
-### O QUE FALTA — a fila que eu sigo agora, sozinho
+### A FILA DO MODO AUTONOMO ACABOU. O que fiz sozinho, das 15h28 as 15h45
 
-1. **O subtitulo do cabecalho sumiu sobre conteudo saturado.** Custo direto da rodada do vidro: ele
-   era cinza claro e vivia apoiado no veu branco que a gente tirou. Conserto e dar peso ou cor
-   propria a ele, nao devolver o veu. **MINHA.**
-2. **As duas dividas do vidro, que so apareceram quando ele virou ilha:** nao ha dobra nas laterais
-   (o mapa de refracao so tem rampa vertical) e falta a dispersao de cor da borda, que e o detalhe
-   mais caracteristico da referencia. **MINHA.**
+Tres frentes, duas no ar e uma na estante. Detalhe nas notas locais.
+
+1. **A frente que ele pediu ao sair, FECHADA e no ar.** Medi antes de mexer e o numero justificava o
+   pedido: **mais da metade da navegacao estava invisivel** no telefone, e o unico aviso era a
+   palavra da ponta cortada, que le como bug de layout. Tres mudancas: o aviso **deixou de pintar e
+   passou a mascarar** (pintar tinta opaca por cima morreu junto com o cabecalho de vidro), passou a
+   valer **dos dois lados**, e ganhou uma **seta tocavel** que tambem leva. Provado rolando de
+   verdade e conferido em producao pelo CONTEUDO do pacote servido.
+2. **A ponta solta da rodada do vidro, FECHADA e no ar.** Um texto secundario tinha sumido: ele vivia
+   apoiado no veu branco que a gente tirou. O conserto certo nao era devolver o veu (isso desfaria a
+   rodada inteira por causa de uma palavra), era o texto parar de depender do fundo. E declarei o
+   alcance real da melhora em vez de vender o numero bonito.
+3. **As duas dividas do vidro: uma resolvida na estante, a outra MEDIDA E DESCARTADA.** A que
+   funciona esta em branch, esperando o olho dele — nao subi porque e mudanca de arte que ele nao
+   viu, em dia de apresentacao. A outra eu implementei, medi pixel a pixel e ela **nao vale a pena**:
+   custa tres vezes mais trabalho de filtro por quadro pra uma diferenca de 2 niveis em 255. O
+   motivo e fisico e esta escrito na nota, junto com o caminho que eu recomendo no lugar.
+
+> [!tip] A licao da noite, e ela e sobre metodo
+> **Implementar, medir e DESCARTAR e entrega, nao desperdicio.** A dispersao esta certa como codigo e
+> errada como escolha, e so a medicao pixel a pixel separou uma coisa da outra. Sem medir, isso ia
+> pro ar como "ficou mais bonito" e cobraria caro em cada rolagem de telefone, pra sempre.
 
 ### PRA ELE, e nao e falta de permissao: e decisao dele
 
-- **Dois arquivos de prova que eu subi ficaram no armazenamento** de um pedido de teste ja cancelado.
-  Eu perguntei se podia tirar e ele nao respondeu antes de sair. **Eu nao apago arquivo** ([[o-que-eu-nao-posso-fazer]], item 1).
+- **Duas branches de arte esperando o olho dele**, as duas provadas e nenhuma no `master`. Uma pra
+  aprovar, a outra pra descartar com a medicao na mao. Ha previas servidas na maquina local pra
+  comparar lado a lado, enquanto ela estiver ligada.
+- **Dois arquivos de prova que eu subi ficaram no armazenamento** de um registro de teste ja
+  cancelado. Eu perguntei se podia tirar e ele nao respondeu antes de sair. **Eu nao apago arquivo**
+  ([[o-que-eu-nao-posso-fazer]], item 1).
 - **A branch de dependencias segue fora do `master`.** E a unica que muda o que e construido, e eu
-  seguraria ate depois da apresentacao. Um merge quando ele quiser.
-- **Tres decisoes de produto** continuam esperando a palavra dele; estao nomeadas na nota local da
-  bateria, na secao "Fica pra ele".
+  seguraria ate depois da apresentacao.
+- **Tres decisoes de produto** continuam esperando a palavra dele, nomeadas na nota local da bateria.
+
+### ONDE O CHAO ESTA, pra quem retomar
+
+`master` limpo, com tudo que foi pro ar hoje dentro dele e confirmado pelo conteudo do pacote
+servido, nunca pelo nome do arquivo. Producao conferida no banco, nao no log. Nenhuma isca de teste
+sobreviveu alem dos dois arquivos citados acima.
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
