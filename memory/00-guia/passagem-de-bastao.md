@@ -17,86 +17,68 @@ aliases:
 > detalhe de sistema da empresa **ficam nas notas locais** (`memory/30-compras/`, que o `.gitignore`
 > cobre). Regra: [[o-que-vai-pro-github]]. Passagens antigas vazaram detalhe demais; nao repita.
 
-> [!important] PRIMEIRO PASSO DA PROXIMA SESSAO
-> Leia as notas locais, nesta ordem: `memory/30-compras/bateria-de-fechamento-03-09.md` (o resultado
-> consolidado, ja com as correcoes de 04/09), `diario-do-review-de-fechamento.md` (a narrativa hora a
-> hora, incluindo o dia 04) e `bateria-apple-front.md` (o vidro).
+### CHAT NOVO ABERTO POR ELE em 04/09/2026, ~16h. Nao foi contexto cheio: ele pediu pra resetar.
 
-### ONDE ESTAMOS — 04/09/2026, tarde. Ele saiu as 15h28 e me pos em MODO AUTONOMO.
+Ele estava presente e satisfeito quando encerrou. **Nao ha frente pela metade e nao ha nada travado.**
+Se ele nao puxar assunto, a abertura e o briefing normal do dia.
 
-O dia foi todo no projeto do estagio, e ele acompanhou ate sair. Quatro frentes fechadas e no ar,
-nessa ordem:
+> [!important] PRIMEIRO PASSO
+> Leia as notas locais nesta ordem: `memory/30-compras/bateria-de-fechamento-03-09.md` (o resultado
+> consolidado, ja com as correcoes do dia 04), `diario-do-review-de-fechamento.md` (a narrativa hora
+> a hora dos dias 03 e 04) e `bateria-apple-front.md` (a frente de arte).
 
-1. **A pergunta dele que virou auditoria: "o sistema ta no ar com as mudancas?"** Nao respondi pela
-   nota, fui ao banco. As correcoes da noite anterior estao vivas, conferidas por sonda com controle
-   positivo junto.
-2. **Duas pecas de configuracao que faltavam em producao foram recriadas**, com uma correcao
-   deliberada de tipo que o recorte original nao tinha. **E a licao virou regra:**
-   [[recriar-na-versao-atual]] — recriar objeto perdido pelo recorte da migracao ORIGINAL reverte
-   tudo que veio depois. Quem pegou foi a bancada de provas, dez minutos depois de ela voltar pro
-   `master`: caiu de 114/0 pra 99/15.
-3. **A bateria da noite anterior tinha quebrado uma funcionalidade inteira em producao, em silencio**,
-   e so o CLIQUE achou. Detalhe e licao em [[fail-closed-em-dado-que-vem-depois]]: fechar uma guarda
-   que le dado que OUTRO servico escreve DEPOIS derruba 100% do caminho legitimo, e nenhuma prova de
-   bancada pega, porque a bancada planta o dado ja pronto. Consertado, provado clicando, no ar.
-4. **O vidro do cabecalho** (frente de arte dele): estava fosco demais. Medi de onde vinha o fosco,
-   cortei, e a leitura MELHOROU no caminho — quem segurava o texto nunca foi o branco pintado.
-   O cabecalho virou ilha flutuante com cantos redondos, autorizado por ele. Numeros em
-   `bateria-apple-front.md`. Ele aprovou olhando: *"ficou doido demais"*.
+### O QUE O DIA 04 FOI, em cinco linhas
 
-### A FRENTE QUE ELE PEDIU AO SAIR, e ela ja esta FECHADA e no ar
+Comecou com ele perguntando como tinha sido a noite anterior e terminou em frente de arte. Cinco
+coisas foram pro ar, todas conferidas **pelo conteudo do pacote servido, nunca pelo nome do
+arquivo**, e producao conferida **no banco, nunca no log**:
 
-*"quando a pessoa estiver no mobile, o sistema mostre que tem mais opcoes no cabecalho."*
+1. A pergunta *"o sistema ta no ar com as mudancas?"* virou auditoria. Estava, e provei com sonda e
+   controle positivo em vez de responder pela nota.
+2. Duas pecas de configuracao que faltavam em producao foram recriadas. **A licao virou regra:**
+   [[recriar-na-versao-atual]].
+3. **A bateria da noite anterior tinha quebrado uma funcionalidade inteira, em silencio, e so o
+   CLIQUE achou.** Licao em [[fail-closed-em-dado-que-vem-depois]] — e ela e das mais valiosas do mes.
+4. A frente de arte do cabecalho: menos fosco, sem sombra de projecao, e ele autorizou descolar do
+   topo. Aprovou olhando.
+5. Depois de ele sair (modo autonomo, ~17 minutos), a navegacao no telefone passou a avisar que ha
+   mais opcao, e uma ponta solta da frente de arte foi fechada.
 
-Medi antes de mexer: num telefone de 390px, **mais da metade da navegacao estava escondida**, e o
-unico aviso era a palavra da ponta cortada, que le como bug de layout. Tres coisas mudaram: o aviso
-**deixou de pintar e passou a mascarar** (pintar tinta opaca por cima morreu junto com o cabecalho de
-vidro), passou a valer **dos dois lados** (quem rolava nao tinha aviso do que ficou pra tras), e
-ganhou **uma seta tocavel no telefone**, que tambem leva. Provado rolando de verdade e conferido em
-producao pelo CONTEUDO do pacote servido.
+### O QUE FICOU ESPERANDO A PALAVRA DELE
 
-### A FILA DO MODO AUTONOMO ACABOU. O que fiz sozinho, das 15h28 as 15h45
+Nada disso e falta de permissao; e decisao dele, e eu **nao devo tocar sem ele pedir**.
 
-Tres frentes, duas no ar e uma na estante. Detalhe nas notas locais.
-
-1. **A frente que ele pediu ao sair, FECHADA e no ar.** Medi antes de mexer e o numero justificava o
-   pedido: **mais da metade da navegacao estava invisivel** no telefone, e o unico aviso era a
-   palavra da ponta cortada, que le como bug de layout. Tres mudancas: o aviso **deixou de pintar e
-   passou a mascarar** (pintar tinta opaca por cima morreu junto com o cabecalho de vidro), passou a
-   valer **dos dois lados**, e ganhou uma **seta tocavel** que tambem leva. Provado rolando de
-   verdade e conferido em producao pelo CONTEUDO do pacote servido.
-2. **A ponta solta da rodada do vidro, FECHADA e no ar.** Um texto secundario tinha sumido: ele vivia
-   apoiado no veu branco que a gente tirou. O conserto certo nao era devolver o veu (isso desfaria a
-   rodada inteira por causa de uma palavra), era o texto parar de depender do fundo. E declarei o
-   alcance real da melhora em vez de vender o numero bonito.
-3. **As duas dividas do vidro: uma resolvida na estante, a outra MEDIDA E DESCARTADA.** A que
-   funciona esta em branch, esperando o olho dele — nao subi porque e mudanca de arte que ele nao
-   viu, em dia de apresentacao. A outra eu implementei, medi pixel a pixel e ela **nao vale a pena**:
-   custa tres vezes mais trabalho de filtro por quadro pra uma diferenca de 2 niveis em 255. O
-   motivo e fisico e esta escrito na nota, junto com o caminho que eu recomendo no lugar.
-
-> [!tip] A licao da noite, e ela e sobre metodo
-> **Implementar, medir e DESCARTAR e entrega, nao desperdicio.** A dispersao esta certa como codigo e
-> errada como escolha, e so a medicao pixel a pixel separou uma coisa da outra. Sem medir, isso ia
-> pro ar como "ficou mais bonito" e cobraria caro em cada rolagem de telefone, pra sempre.
-
-### PRA ELE, e nao e falta de permissao: e decisao dele
-
-- **Duas branches de arte esperando o olho dele**, as duas provadas e nenhuma no `master`. Uma pra
-  aprovar, a outra pra descartar com a medicao na mao. Ha previas servidas na maquina local pra
-  comparar lado a lado, enquanto ela estiver ligada.
-- **Dois arquivos de prova que eu subi ficaram no armazenamento** de um registro de teste ja
-  cancelado. Eu perguntei se podia tirar e ele nao respondeu antes de sair. **Eu nao apago arquivo**
+- **Duas branches de arte**, as duas provadas e nenhuma integrada: uma pra aprovar, outra que eu
+  **implementei, medi e recomendo descartar** — e a medicao esta na nota, com o motivo fisico.
+- **Dois arquivos de prova meus** ficaram num armazenamento de producao, num registro de teste ja
+  cancelado. Perguntei se podia tirar, ele nao respondeu. **Eu nao apago arquivo**
   ([[o-que-eu-nao-posso-fazer]], item 1).
-- **A branch de dependencias segue fora do `master`.** E a unica que muda o que e construido, e eu
-  seguraria ate depois da apresentacao.
-- **Tres decisoes de produto** continuam esperando a palavra dele, nomeadas na nota local da bateria.
+- **Uma branch de dependencias** fora da principal, que eu seguraria ate depois da apresentacao dele.
+- **Tres decisoes de produto**, nomeadas na nota local.
+- **Um slide de teste** com dois jeitos de fazer vidro em apresentacao, oferecido e ainda nao pedido.
 
-### ONDE O CHAO ESTA, pra quem retomar
+> [!warning] O painel de indicadores dele esta FORA DO AR DE PROPOSITO
+> O login trava depois do Google porque o projeto de backend nao existe mais — conferido pelo DNS
+> publico e com controle positivo ao lado. Vale tambem pro app publicado. **NAO REATIVAR:** decisao
+> dele, *"ele ta com prazo de duracao pra pode sair do ar"*. Detalhe em [[dashboard-big-numbers]].
+> Se uma sessao futura abrir aquilo e achar que quebrou: nao quebrou.
 
-`master` limpo, com tudo que foi pro ar hoje dentro dele e confirmado pelo conteudo do pacote
-servido, nunca pelo nome do arquivo. Producao conferida no banco, nao no log. Nenhuma isca de teste
-sobreviveu alem dos dois arquivos citados acima.
+### O QUE ESTE DIA DEIXOU DE DURAVEL, e vale mais que as entregas
+
+- [[fail-closed-em-dado-que-vem-depois]] — fechar uma guarda que le dado que OUTRO servico escreve
+  DEPOIS derruba 100% do caminho legitimo, e **nenhuma prova de bancada pega**, porque a bancada
+  planta o dado ja pronto. Quem pegou foi o clique.
+- [[recriar-na-versao-atual]] — recriar objeto perdido pelo recorte da versao ORIGINAL reverte tudo
+  que veio depois.
+- [[liquid-glass-como-fazer]] — a receita medida do vidro, reaproveitavel fora deste projeto.
+- E a que atravessa as tres: **implementar, medir e DESCARTAR e entrega, nao desperdicio.** Duas
+  vezes no mesmo dia a medicao derrubou uma coisa que parecia obviamente certa.
+
+### O CHAO, pra quem retomar
+
+Ramo principal limpo, com tudo do dia dentro. Nenhuma isca de teste sobreviveu alem dos dois arquivos
+citados acima. Servidores locais de previa e o painel dele estao de pe **so enquanto esta maquina e
+esta sessao viverem** — nao conte com eles amanha, e regere se precisar.
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
