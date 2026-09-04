@@ -18,107 +18,60 @@ aliases:
 > cobre). Regra: [[o-que-vai-pro-github]]. Passagens antigas vazaram detalhe demais; nao repita.
 
 > [!important] PRIMEIRO PASSO DA PROXIMA SESSAO
-> Leia, nesta ordem, **as tres notas locais**: `memory/30-compras/bateria-de-fechamento-03-09.md`
-> (o resultado consolidado, e a que ele le as 13h15), `review-de-fechamento-andamento.md` (o que
-> **nao** refazer) e `diario-do-review-de-fechamento.md` (a noite hora a hora). O briefing
-> operacional esta em `briefing-review-de-fechamento.md`.
->
-> **So restou UMA frente**, e ela esta na secao "O que falta" aqui embaixo.
+> Leia as notas locais, nesta ordem: `memory/30-compras/bateria-de-fechamento-03-09.md` (o resultado
+> consolidado, ja com as correcoes de 04/09), `diario-do-review-de-fechamento.md` (a narrativa hora a
+> hora, incluindo o dia 04) e `bateria-apple-front.md` (o vidro).
 
-### O QUE ACONTECEU — a virada de 03 pra 04/09/2026
+### ONDE ESTAMOS — 04/09/2026, tarde. Ele saiu as 15h28 e me pos em MODO AUTONOMO.
 
-Ele saiu as 20h20 pedindo um code review de fechamento antes de uma revisao externa. A primeira
-sessao auditou a superficie de autorizacao inteira e consertou o que achou. **Aos 500k a corrente
-passou o bastao as 21h57, e a sessao que nasceu dela fez a segunda metade da noite** — a verificacao,
-que e onde apareceu o que nenhuma leitura tinha como achar.
+O dia foi todo no projeto do estagio, e ele acompanhou ate sair. Quatro frentes fechadas e no ar,
+nessa ordem:
 
-**Saldo da noite, sem detalhe:** 22 defeitos de autorizacao confirmados e corrigidos, cinco migracoes
-no ar, e depois **a passada de verificacao no sistema no ar, que nao achou defeito novo**. Fora isso,
-tres achados que so aparecem quando se **roda** em vez de ler, e que estao no cofre local.
+1. **A pergunta dele que virou auditoria: "o sistema ta no ar com as mudancas?"** Nao respondi pela
+   nota, fui ao banco. As correcoes da noite anterior estao vivas, conferidas por sonda com controle
+   positivo junto.
+2. **Duas pecas de configuracao que faltavam em producao foram recriadas**, com uma correcao
+   deliberada de tipo que o recorte original nao tinha. **E a licao virou regra:**
+   [[recriar-na-versao-atual]] — recriar objeto perdido pelo recorte da migracao ORIGINAL reverte
+   tudo que veio depois. Quem pegou foi a bancada de provas, dez minutos depois de ela voltar pro
+   `master`: caiu de 114/0 pra 99/15.
+3. **A bateria da noite anterior tinha quebrado uma funcionalidade inteira em producao, em silencio**,
+   e so o CLIQUE achou. Detalhe e licao em [[fail-closed-em-dado-que-vem-depois]]: fechar uma guarda
+   que le dado que OUTRO servico escreve DEPOIS derruba 100% do caminho legitimo, e nenhuma prova de
+   bancada pega, porque a bancada planta o dado ja pronto. Consertado, provado clicando, no ar.
+4. **O vidro do cabecalho** (frente de arte dele): estava fosco demais. Medi de onde vinha o fosco,
+   cortei, e a leitura MELHOROU no caminho — quem segurava o texto nunca foi o branco pintado.
+   O cabecalho virou ilha flutuante com cantos redondos, autorizado por ele. Numeros em
+   `bateria-apple-front.md`. Ele aprovou olhando: *"ficou doido demais"*.
 
-**O que a segunda sessao entregou** (detalhe so nas notas locais):
+### A FRENTE QUE ELE PEDIU AO SAIR, e ela ja esta FECHADA e no ar
 
-1. **A passada no sistema no ar, fechada sem defeito novo.** Feita por sonda e pela rede, nunca pelo
-   visual — a outra sessao tinha avisado que tela vazia por falta de dado renderiza igual a erro de
-   permissao. Inclui a checagem **inversa**, que ninguem tinha feito: em vez de "o que foi revogado
-   tem chamador?", perguntar "tudo que o site chama continua aberto?".
-2. **A bancada de provas estava morta e ninguem tinha percebido.** A cadeia de migracoes nao subia
-   mais **do zero**, e com ela as 43 provas de banco. Consertada; hoje sao **44 provas verdes**.
-3. **Um pedaco da configuracao de producao nao existe**, embora o repositorio o crie e as migracoes
-   constem como aplicadas. Isso quebra uma tela inteira e um botao, hoje, em silencio. **Nao
-   consertei:** nao da pra saber de fora se foi apagado de proposito, e recriar coisa em producao na
-   vespera de uma apresentacao nao e decisao de turno de madrugada. O reparo esta escrito, idempotente
-   e **nao aplicado**.
-4. **Duas mudancas da bateria sao decisao de produto, nao de seguranca**, e uma delas **reverteu uma
-   escolha declarada** que estava escrita num comentario de teste. Estao nomeadas na nota local.
-5. Fora do escopo original, porque nao dependiam dele: as vulnerabilidades de dependencia fecharam, e
-   o **resumo de seguranca de uma pagina** que o revisor externo vai receber foi escrito.
+*"quando a pessoa estiver no mobile, o sistema mostre que tem mais opcoes no cabecalho."*
 
-**Tudo em branch, nada no ar.** O `master` daquele projeto continua onde a primeira sessao o deixou:
-**tres** branches esperando merge, uma linha de comando cada. O motivo esta escrito no cofre — publicar
-dispara deploy, e e vespera de apresentacao dele.
+Medi antes de mexer: num telefone de 390px, **mais da metade da navegacao estava escondida**, e o
+unico aviso era a palavra da ponta cortada, que le como bug de layout. Tres coisas mudaram: o aviso
+**deixou de pintar e passou a mascarar** (pintar tinta opaca por cima morreu junto com o cabecalho de
+vidro), passou a valer **dos dois lados** (quem rolava nao tinha aviso do que ficou pra tras), e
+ganhou **uma seta tocavel no telefone**, que tambem leva. Provado rolando de verdade e conferido em
+producao pelo CONTEUDO do pacote servido.
 
-### A BATERIA ENCERROU as 00h24, e nao falta nada dela
+### O QUE FALTA — a fila que eu sigo agora, sozinho
 
-A ultima frente rodou e fechou. A ferramenta externa **estourou a cota pela segunda vez na mesma
-noite, sem entregar relatorio** — e a licao virou regra em [[codex-nesta-maquina]]: aquele limite nao
-aguenta varredura de repositorio, o alvo tem que ser um arquivo e uma pergunta. **Nao foi comprado
-credito.**
+1. **O subtitulo do cabecalho sumiu sobre conteudo saturado.** Custo direto da rodada do vidro: ele
+   era cinza claro e vivia apoiado no veu branco que a gente tirou. Conserto e dar peso ou cor
+   propria a ele, nao devolver o veu. **MINHA.**
+2. **As duas dividas do vidro, que so apareceram quando ele virou ilha:** nao ha dobra nas laterais
+   (o mapa de refracao so tem rampa vertical) e falta a dispersao de cor da borda, que e o detalhe
+   mais caracteristico da referencia. **MINHA.**
 
-Mesmo assim a frente rendeu, e o metodo vale: **quando ela morrer no meio, leia a ultima coisa que
-ela escreveu antes do erro.** Era uma hipotese boa, e confirmar custou tres minutos — deu o ultimo
-achado da noite, que esta na nota local.
+### PRA ELE, e nao e falta de permissao: e decisao dele
 
-O caderno da bateria esta carimbado como concluido (**e esse carimbo que faz o reinicio das 5h
-desligar em vez de acordar mais gente**), o diario esta fechado, e a producao esta como ele deixou:
-conferi contagem por contagem no fim, e nenhuma isca das provas sobreviveu.
-
-### AS LICOES, que sao o que vale publicar
-
-> [!tip] Lista de migracao batendo NAO quer dizer que o repositorio descreve a producao
-> A lista compara **versao aplicada**, nunca **consequencia**. Uma migracao pode ter rodado, ter o
-> efeito desfeito depois por fora, e continuar verde na lista pra sempre. A noite inteira a gente
-> repetiu "o repositorio voltou a descrever a producao" com base nessa lista, e estava errado.
-> **Conferir estado, nao versao.**
-
-> [!tip] Guarda de autorizacao pode falhar ABERTA, e passa em revisao
-> Em linguagem com tres valores (nulo), `if not (<condicao>) then recusa` **nao entra no ramo** quando
-> a condicao vira nulo — entao a guarda que devia barrar deixa passar, e continua parecendo certa na
-> leitura. A forma invertida falha fechada. **Metade dos 22 achados era essa classe**, e ela passou
-> por quatro auditorias porque elas procuravam crivo **ausente**, e aqui o crivo existe: so aponta pro
-> lado errado.
-
-**Familia pela metade e a assinatura do defeito.** De quatro funcoes irmas, uma ja estava consertada
-com comentario explicando o buraco, e as outras tres nao. **Isso se repetiu tres vezes na mesma
-noite**, em coisas diferentes. Achou um defeito? Procure os irmaos dele no mesmo minuto.
-
-**Teste que falha depois de um conserto de seguranca nem sempre e regressao: as vezes ele estava
-descrevendo o buraco.** Cinco provas falharam, e uma delas tinha **32 assercoes** rotuladas como
-"legitimo" descrevendo exatamente o comportamento inseguro que a bateria fechou. Virar expectativa no
-atacado pra ficar verde e o jeito mais rapido de transformar teste de seguranca em enfeite: **caso a
-caso, e onde a mudanca tem custo, o custo fica escrito no comentario.**
-
-**Medicao negativa so vale com o controle nulo do proprio teste.** Duas vezes na noite a primeira
-medicao deu "tudo negado" — e nas duas era a **sonda** que estava quebrada, nao o sistema que estava
-seguro. Sem um caso que TEM que passar rodando ao lado, "nao achei nada" e indistinguivel de "nao
-consegui procurar".
-
-**A hora vem do relogio, nunca da cabeca.** Escrevi seis linhas de diario com hora estimada e errei
-em mais de uma hora, porque media o tempo pela quantidade de trabalho feito. Diario com hora
-inventada e pior que diario sem hora: parece medicao. Virou regra: [[a-hora-vem-do-relogio]].
-
-**Ferramenta de bancada envelhece junto com o produto.** Um ajudante de data copiado em vinte
-arquivos usava UTC, entao toda prova que amarra data quebrava sozinha depois das 21h e voltava a
-passar de manha. Ninguem tinha percebido porque ninguem roda a bancada de madrugada.
-
-### A CORRENTE FUNCIONOU, e a sessao nova conferiu de dentro
-
-A passagem das 21h57 nasceu limpa: mesmo terminal, mesma flag, mensagem de abertura no lugar, sinal
-esvaziado, arvore antiga morta inteira (o navegador do Playwright incluido, que era justamente o
-recurso disputado). A sessao nova pegou o navegador livre e o site ja logado no primeiro minuto.
-
-**O que fez as duas sessoes convivirem** (e vale como regra): canal pelo cofre, cada uma na sua
-worktree, **uma so integra**, e pedir o recurso compartilhado em vez de matar o processo da outra.
+- **Dois arquivos de prova que eu subi ficaram no armazenamento** de um pedido de teste ja cancelado.
+  Eu perguntei se podia tirar e ele nao respondeu antes de sair. **Eu nao apago arquivo** ([[o-que-eu-nao-posso-fazer]], item 1).
+- **A branch de dependencias segue fora do `master`.** E a unica que muda o que e construido, e eu
+  seguraria ate depois da apresentacao. Um merge quando ele quiser.
+- **Tres decisoes de produto** continuam esperando a palavra dele; estao nomeadas na nota local da
+  bateria, na secao "Fica pra ele".
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
