@@ -2,7 +2,7 @@
 name: passagem-de-bastao
 type: painel
 description: LEIA PRIMEIRO em sessao nova — a secao Estado diz o que a sessao anterior estava fazendo e onde parou; a secao Como funciona explica a corrente de 500k
-atualizado: 2026-09-03
+atualizado: 2026-09-04
 status: em-andamento
 aliases:
   - bastao
@@ -18,101 +18,103 @@ aliases:
 > cobre). Regra: [[o-que-vai-pro-github]]. Passagens antigas vazaram detalhe demais; nao repita.
 
 > [!important] PRIMEIRO PASSO DA PROXIMA SESSAO
-> Leia, nesta ordem, **as tres notas locais** que contam tudo:
-> **`memory/30-compras/bateria-de-fechamento-03-09.md`** (o resultado),
-> **`memory/30-compras/review-de-fechamento-andamento.md`** (o que **nao** refazer, e a lista das
-> frentes com o estado de cada uma) e **`memory/30-compras/diario-do-review-de-fechamento.md`** (a
-> noite hora a hora, que e o que ele le as 13h15). O briefing operacional completo, com o que cada
-> frente tem que fazer, esta em **`memory/30-compras/briefing-review-de-fechamento.md`**.
+> Leia, nesta ordem, **as tres notas locais**: `memory/30-compras/bateria-de-fechamento-03-09.md`
+> (o resultado consolidado, e a que ele le as 13h15), `review-de-fechamento-andamento.md` (o que
+> **nao** refazer) e `diario-do-review-de-fechamento.md` (a noite hora a hora). O briefing
+> operacional esta em `briefing-review-de-fechamento.md`.
 >
-> **Duas frentes morreram com esta passagem e precisam ser refeitas.** Elas estao nomeadas, com o
-> desenho de teste inteiro, no briefing e no caderno de andamento.
+> **So restou UMA frente**, e ela esta na secao "O que falta" aqui embaixo.
 
-### O QUE ACONTECEU — 03/09/2026, noite (ele saiu as 20h20)
+### O QUE ACONTECEU — a virada de 03 pra 04/09/2026
 
-Ele pediu um **code review de fechamento** antes de uma revisao externa de codigo, e saiu:
-*"pode comecar o review, to quase indo embora"*. Eu assumi como **gestor** ([[loop]]) e a equipe
-executou, em modo autonomo.
+Ele saiu as 20h20 pedindo um code review de fechamento antes de uma revisao externa. A primeira
+sessao auditou a superficie de autorizacao inteira e consertou o que achou. **Aos 500k a corrente
+passou o bastao as 21h57, e a sessao que nasceu dela fez a segunda metade da noite** — a verificacao,
+que e onde apareceu o que nenhuma leitura tinha como achar.
 
-**O saldo, sem detalhe:** a equipe auditou a superficie de autorizacao inteira do sistema de estagio
-dele e achou **22 defeitos confirmados**, todos provados lendo o banco de producao em vez de deduzir
-do codigo. **Cinco migracoes foram aplicadas e integradas** na mesma noite, com a suite verde, build
-e tipos limpos, e o repositorio daquele projeto voltou a descrever exatamente o que roda em producao.
-**O que cada defeito era, e onde, esta so no cofre local.**
+**Saldo da noite, sem detalhe:** 22 defeitos de autorizacao confirmados e corrigidos, cinco migracoes
+no ar, e depois **a passada de verificacao no sistema no ar, que nao achou defeito novo**. Fora isso,
+tres achados que so aparecem quando se **roda** em vez de ler, e que estao no cofre local.
 
-**O que falta, em uma linha cada** (o detalhe operacional esta no briefing local):
-1. **Refazer a passada de verificacao no sistema no ar** — morreu no meio desta passagem, e e a
-   ultima frente. O desenho do teste esta escrito no briefing, e ele **nao e obvio**: nao se julga
-   pelo visual.
-2. **Rodar o Codex a partir das 00:10**, quando a cota dele reabre. Como roda nesta maquina:
-   [[codex-nesta-maquina]]. **Nao comprar credito.**
-3. **Fechar a bateria:** carimbar `status: concluido` no caderno de andamento local (**e esse carimbo
-   que faz o reinicio das 5h desligar em vez de acordar mais gente**), fechar o diario, commitar, e
-   **so entao** `.claude\scripts\desligar.ps1 -Terminei`. A outra sessao ja se marcou como pronta.
+**O que a segunda sessao entregou** (detalhe so nas notas locais):
 
-### O AGENDAMENTO — pedido dele nesta noite, e a receita fica
+1. **A passada no sistema no ar, fechada sem defeito novo.** Feita por sonda e pela rede, nunca pelo
+   visual — a outra sessao tinha avisado que tela vazia por falta de dado renderiza igual a erro de
+   permissao. Inclui a checagem **inversa**, que ninguem tinha feito: em vez de "o que foi revogado
+   tem chamador?", perguntar "tudo que o site chama continua aberto?".
+2. **A bancada de provas estava morta e ninguem tinha percebido.** A cadeia de migracoes nao subia
+   mais **do zero**, e com ela as 43 provas de banco. Consertada; hoje sao **44 provas verdes**.
+3. **Um pedaco da configuracao de producao nao existe**, embora o repositorio o crie e as migracoes
+   constem como aplicadas. Isso quebra uma tela inteira e um botao, hoje, em silencio. **Nao
+   consertei:** nao da pra saber de fora se foi apagado de proposito, e recriar coisa em producao na
+   vespera de uma apresentacao nao e decisao de turno de madrugada. O reparo esta escrito, idempotente
+   e **nao aplicado**.
+4. **Duas mudancas da bateria sao decisao de produto, nao de seguranca**, e uma delas **reverteu uma
+   escolha declarada** que estava escrita num comentario de teste. Estao nomeadas na nota local.
+5. Fora do escopo original, porque nao dependiam dele: as vulnerabilidades de dependencia fecharam, e
+   o **resumo de seguranca de uma pagina** que o revisor externo vai receber foi escrito.
 
-Ele pediu trabalho agendado que **retoma sozinho** quando a cota acaba, e a maquina **desligada**
-quando ele chegar (13:15). Duas tarefas do Windows: uma as **23:45** que abre sessao pra retomar, e
-uma as **05:00** que **decide sozinha** entre retomar e apagar a luz.
+**Tudo em branch, nada no ar.** O `master` daquele projeto continua onde a primeira sessao o deixou:
+**tres** branches esperando merge, uma linha de comando cada. O motivo esta escrito no cofre — publicar
+dispara deploy, e e vespera de apresentacao dele.
 
-**Receita completa e reutilizavel: [[agendar-trabalho-de-madrugada]].** As pecas: briefing no cofre,
-caderno de andamento (o bastao da tarefa), **diario do lider** (pedido dele: *"quero que o lider
-escreva um breve diario contando o que foi acontecendo e os horarios"*),
-`.claude/scripts/review-de-fechamento.ps1` e as tarefas.
+### O QUE FALTA — uma coisa so
 
-**Tres coisas medidas, nao deduzidas:** com a maquina **trancada** a tarefa dispara e o terminal filho
-enxerga a funcao `claude`; **"processo vivo" nao e "sessao trabalhando"** (quando a cota acaba o
-`claude` fica aberto e parado, entao a trava mede **CPU**); e `CronCreate` **nao serve**, porque vive
-so na sessao.
+**Rodar o Codex**, cuja cota reabre 00:10. Como roda nesta maquina: [[codex-nesta-maquina]]. **Nao
+comprar credito.** O escopo MUDOU e o prompt novo ja esta salvo no cofre local
+(`memory/30-compras/prompt-revisao-do-front.md`): o lado do banco foi varrido inteiro, entao mandar
+ele la de novo e pagar caro por trabalho feito. O alvo agora e o **TypeScript**, que ninguem revisou.
+
+Depois disso, o fechamento, e ele tem ordem: carimbar `status: concluido` no caderno de andamento
+local (**e esse carimbo que faz o reinicio das 5h desligar em vez de acordar mais gente**), fechar o
+diario com a ultima linha da noite, commitar, e **so entao** `.claude\scripts\desligar.ps1 -Terminei`.
 
 ### AS LICOES, que sao o que vale publicar
+
+> [!tip] Lista de migracao batendo NAO quer dizer que o repositorio descreve a producao
+> A lista compara **versao aplicada**, nunca **consequencia**. Uma migracao pode ter rodado, ter o
+> efeito desfeito depois por fora, e continuar verde na lista pra sempre. A noite inteira a gente
+> repetiu "o repositorio voltou a descrever a producao" com base nessa lista, e estava errado.
+> **Conferir estado, nao versao.**
 
 > [!tip] Guarda de autorizacao pode falhar ABERTA, e passa em revisao
 > Em linguagem com tres valores (nulo), `if not (<condicao>) then recusa` **nao entra no ramo** quando
 > a condicao vira nulo — entao a guarda que devia barrar deixa passar, e continua parecendo certa na
-> leitura. A forma invertida (`if <condicao> then segue else recusa`) falha fechada. **Metade dos 22
-> achados era essa classe.**
->
-> Ela **passou por quatro auditorias** antes de aparecer, porque elas procuravam crivo **ausente**, e
-> aqui o crivo existe: ele so aponta pro lado errado. So apareceu quando um sub avisou no handoff que
-> aquilo cheirava a **padrao**, e uma varredura dedicada leu todas as funcoes atras do formato.
-> Detalhe e o metodo de varredura: `memory/30-compras/guarda-que-falha-aberta.md` (local).
+> leitura. A forma invertida falha fechada. **Metade dos 22 achados era essa classe**, e ela passou
+> por quatro auditorias porque elas procuravam crivo **ausente**, e aqui o crivo existe: so aponta pro
+> lado errado.
 
-**Familia pela metade e a assinatura do defeito.** De quatro funcoes irmas, uma ja estava consertada,
-**com comentario no codigo explicando o buraco** — alguem achou, entendeu, consertou aquela e nao
-olhou as outras tres. **Achou um defeito? Procure os irmaos dele no mesmo minuto.**
+**Familia pela metade e a assinatura do defeito.** De quatro funcoes irmas, uma ja estava consertada
+com comentario explicando o buraco, e as outras tres nao. **Isso se repetiu tres vezes na mesma
+noite**, em coisas diferentes. Achou um defeito? Procure os irmaos dele no mesmo minuto.
 
-**Briefing que nao autoriza discordar produz erro obediente.** Os subs me corrigiram **cinco vezes** e
-nas cinco tinham razao. Um quase derrubou uma tela inteira seguindo ordem minha, e so nao derrubou
-porque **testou antes** com objetos descartaveis numa transacao revertida. Outro mostrou que uma
-recusa que eu mandei implantar recusaria **100%** dos casos, nao um canto deles.
+**Teste que falha depois de um conserto de seguranca nem sempre e regressao: as vezes ele estava
+descrevendo o buraco.** Cinco provas falharam, e uma delas tinha **32 assercoes** rotuladas como
+"legitimo" descrevendo exatamente o comportamento inseguro que a bateria fechou. Virar expectativa no
+atacado pra ficar verde e o jeito mais rapido de transformar teste de seguranca em enfeite: **caso a
+caso, e onde a mudanca tem custo, o custo fica escrito no comentario.**
 
-**Duas buscas independentes concordando nao e prova de ausencia — e a mesma cegueira duas vezes.**
-Medicao negativa so vale com o controle nulo do proprio teste.
+**Medicao negativa so vale com o controle nulo do proprio teste.** Duas vezes na noite a primeira
+medicao deu "tudo negado" — e nas duas era a **sonda** que estava quebrada, nao o sistema que estava
+seguro. Sem um caso que TEM que passar rodando ao lado, "nao achei nada" e indistinguivel de "nao
+consegui procurar".
 
-**Reler o chao ANTES de despachar, nao depois.** Briefei uma frente com um estado que ja era passado,
-porque tinha lido no meio do trabalho de outra sessao.
+**A hora vem do relogio, nunca da cabeca.** Escrevi seis linhas de diario com hora estimada e errei
+em mais de uma hora, porque media o tempo pela quantidade de trabalho feito. Diario com hora
+inventada e pior que diario sem hora: parece medicao. Virou regra: [[a-hora-vem-do-relogio]].
 
-**Duas tecnicas de banco que ficam** (escritas em `memory/30-compras/ler-o-banco-em-producao.md`,
-local): reescrever funcao por substituicao sobre o corpo vivo, com ancora conferida, em vez de
-redigitar; e provar em execucao dentro de um bloco que termina em erro, pra o rollback ser do motor e
-nao da disciplina de quem testa.
+**Ferramenta de bancada envelhece junto com o produto.** Um ajudante de data copiado em vinte
+arquivos usava UTC, entao toda prova que amarra data quebrava sozinha depois das 21h e voltava a
+passar de manha. Ninguem tinha percebido porque ninguem roda a bancada de madrugada.
 
-### A OUTRA SESSAO — terminou e se marcou como pronta as 21h03
+### A CORRENTE FUNCIONOU, e a sessao nova conferiu de dentro
 
-Rodou em paralelo a noite toda, no front, e **publicou o maior pacote de front do projeto**. Detalhe
-no cofre local (`memory/30-compras/bateria-apple-front.md`). O `master` daquele projeto tem **as duas
-noites dentro**, integradas sem conflito.
+A passagem das 21h57 nasceu limpa: mesmo terminal, mesma flag, mensagem de abertura no lugar, sinal
+esvaziado, arvore antiga morta inteira (o navegador do Playwright incluido, que era justamente o
+recurso disputado). A sessao nova pegou o navegador livre e o site ja logado no primeiro minuto.
 
-**O aviso dela que salvou a minha ultima frente, e vale como regua:** quando a tela ja aparece vazia
-por falta de dado, **um erro de permissao renderiza identico** — entao teste que julga pelo visual
-aprova tudo. **Julgue pela rede.**
-
-**Duas sessoes no mesmo projeto funcionaram bem**, e o que fez funcionar foi: canal pelo cofre e por
-mensagem direta, cada uma na sua worktree, **uma so integra**, e pedir o recurso compartilhado (o
-navegador) em vez de matar o processo da outra.
-
+**O que fez as duas sessoes convivirem** (e vale como regra): canal pelo cofre, cada uma na sua
+worktree, **uma so integra**, e pedir o recurso compartilhado em vez de matar o processo da outra.
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
