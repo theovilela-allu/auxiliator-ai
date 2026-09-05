@@ -54,6 +54,15 @@ precisa subir pra gravar.
 6. **`shot.ps1` agora avisa que mente.** Print sem janela nao mostra o aparelho —
    antes por causa do 3D, agora por causa do video. Medido de novo hoje.
 
+### OUTRA SESSAO DE PE
+
+Tem **outro agente anunciado como trabalhando** (`35672`, de pe desde 05h45, anunciado
+05h52). Ele tocou `onde-pegar-modelo-3d.md` as 05h53 e nao mexeu em mais nada do cofre
+desde entao. Nao encostei nele: [[nao-julgar-sub-vivo-pelo-arquivo-de-saida]]. Por causa
+dele a maquina **nao desliga** quando eu termino, e esta certo assim.
+
+O servidor do deck (`servidor.py`, porta 8123) e o assador (porta 8124) ficaram de pe.
+
 ### FILA: vazia do meu lado
 
 Nao inventei trabalho. Duas frentes que eu PODERIA ter aberto e congelei de
