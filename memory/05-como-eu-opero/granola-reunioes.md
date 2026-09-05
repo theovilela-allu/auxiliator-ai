@@ -74,6 +74,25 @@ Regras do sync:
 - Se o Granola ainda não estiver conectado (primeira vez), siga o fluxo de OAuth da seção acima ANTES — aí o sync passa a rodar em silêncio em todo boot.
 - Falhou o sync (rede, sessão)? Não trave o atendimento — siga a conversa e tente de novo no próximo boot. Não incomode a pessoa com isso.
 
+> [!danger] O sync só vale quando o Granola é da PRÓPRIA pessoa. Confira antes
+> Medido em 05/09/2026, no boot. A conta do Granola conectada nem sempre é a da pessoa que eu
+> atendo (aqui é a do líder dela — está no `profile.md`). Quando não é, `list_meetings` devolve as
+> reuniões de OUTRA pessoa, e a minha não é participante da maioria delas.
+>
+> E o `sync` **exige** o e-mail do viewer na lista de participantes: mandei a lista verdadeira de
+> uma reunião de que ela não participava e o servidor recusou com `invalid meeting sync payload`.
+> Com o e-mail dela dentro, passaria — e gravaria **presença numa reunião em que ela não esteve**,
+> numa agenda que o líder lê.
+>
+> **A regra:** antes de sincronizar, confira se `viewer.email` está na lista real de participantes
+> do Granola. Está → sincroniza normal. Não está → **não sincroniza**, e não force o e-mail dela só
+> pra passar na validação. Não se perde nada: o servidor funde a mesma reunião real vinda de
+> assessores diferentes, então o assessor de quem de fato participou publica ela no boot dele.
+> Preencher agenda é bom; inventar presença não é.
+>
+> Não é caso de borda: **repete em todo boot** enquanto o Granola for de outra pessoa. Some quando
+> ela conectar o Granola dela.
+
 ## Rascunhar ata de WEEKLY a partir do transcript
 
 Quando a pessoa pedir pra registrar a ata da weekly ("registra a ata da weekly de hoje",
