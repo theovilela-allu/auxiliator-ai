@@ -35,26 +35,40 @@ deixa o navegador guardar o JavaScript velho). Abre em
 `http://127.0.0.1:8123/prototipo.html`. O assador (`python assador.py`) so
 precisa subir pra gravar.
 
-### FEITO NESTA SESSAO (07h em diante)
+### FEITO NESTA SESSAO (das 07h as 07h50)
 
 1. **A animacao do aparelho virou video, com fundo transparente.** Era o proximo
    passo combinado. O deck toca video; o 3D virou reserva; o retrato parado e a
-   reserva da reserva. O laser continua vivo por tras e nao precisou mexer nele.
-   36 a 86 ms ate o primeiro quadro, contra 289 a 329 do 3D.
-2. **A fonte do deck estava quebrada desde ontem** e ninguem tinha visto: o
-   caminho dentro do `.css` estava duplicado e as 24 declaracoes davam 404. O
-   deck rodou um dia inteiro numa fonte de sistema. Consertado e conferido.
-3. **Servidor de conferencia proprio**, que proibe cache. Nasceu de tres rodadas
-   perdidas consertando codigo que a pagina nem chegava a executar.
+   reserva da reserva. O laser continua vivo por tras e **nao precisou mexer nele**.
+   36 a 86 ms ate o primeiro quadro, contra 289 a 329 do 3D. Provado contra o 3D
+   parado no mesmo instante: erro medio 1,9/255, silhueta 0,8% diferente.
+2. **A fonte do deck estava quebrada desde ontem** e ninguem tinha visto: o caminho
+   dentro do `.css` estava duplicado e as 24 declaracoes davam 404. O deck rodou um
+   dia inteiro numa fonte de sistema. Consertado e conferido.
+3. **Servidor de conferencia proprio** (`servidor.py`), que proibe cache. Nasceu de
+   tres rodadas perdidas consertando codigo que a pagina nem chegava a executar.
+4. **O passa-bastao agora confere o alvo** antes de matar, e deixa caderno em
+   `~/.claude/bastao.log`. Detalhe no fim deste arquivo.
+5. **`LEIAME.md` na pasta do deck**: como abrir, os enderecos de conferencia e os
+   dois passos de oficina (assar e gravar). A pasta tinha 12 arquivos e nenhum guia.
+6. **`shot.ps1` agora avisa que mente.** Print sem janela nao mostra o aparelho —
+   antes por causa do 3D, agora por causa do video. Medido de novo hoje.
 
-### FILA, na ordem
+### FILA: vazia do meu lado
 
-1. Consertar o `passar-o-bastao.cjs`: ele acha o `claude.exe` por NOME e com
-   varias sessoes abertas mata uma irma. Tem que subir a cadeia de pai a partir
-   do PID do proprio node. Defeito ja descrito no fim deste arquivo.
-2. O corpo do aparelho le um pouco chapado: falta variacao de acabamento entre
-   chapa das costas, ilha da camera e trilhos laterais (hoje e um material so).
-   Mexeu no acabamento, **assa e grava de novo**, senao o deck segue com o velho.
+Nao inventei trabalho. Duas frentes que eu PODERIA ter aberto e congelei de
+proposito, com o motivo:
+
+- **Acabamento do corpo** (chapa das costas, ilha da camera e trilhos laterais sao
+  um material so hoje). E olho dele, e ele pediu com todas as letras pra eu parar de
+  afinar material no chute. Alem disso, mexer aqui obriga a **assar e gravar de
+  novo** — churn caro se ele nao gostar.
+- **Escalar o palco pra tela grande.** Medido e documentado na nota do projeto: o
+  card e 432x252 px fixos em qualquer janela, o titulo sai em 27px, e das 30 medidas
+  do CSS nenhuma e fluida. Num projetor o slide fica pequeno no meio do preto. O
+  conserto e escolher um tamanho de projeto e escalar o palco inteiro, sem mexer em
+  nenhuma decisao ja fechada — mas isso muda como TODO slide e medido daqui pra
+  frente, e escolha assim nao se faz de madrugada.
 
 ### O QUE DEPENDE DELE, e por isso eu nao toco
 
@@ -63,8 +77,8 @@ precisa subir pra gravar.
 - Olhar o **slide 10** e dizer se o desenho do grafico serve
 - Os numeros reais: os do slide 9 e do 10 sao exemplo
 - Editor e banco do deck: as decisoes estao fechadas, a implementacao nao comecou
-- **O card tem tamanho fixo em pixel.** Num projetor o slide encolhe no meio do
-  preto. Consertar e decisao de arquitetura do palco, nao conserto solto
+- **Escalar o palco** pra o deck caber em projetor e tela grande (numeros na nota
+  do projeto). Decisao de arquitetura, nao conserto solto
 
 ### O QUE ESTES DOIS DIAS ENSINARAM, e serve fora deste projeto
 
