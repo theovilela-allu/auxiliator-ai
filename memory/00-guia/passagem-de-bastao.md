@@ -17,7 +17,8 @@ aliases:
 > detalhe de sistema da empresa **ficam nas notas locais**, que o `.gitignore` cobre.
 > Regra: [[o-que-vai-pro-github]]. Passagens antigas vazaram detalhe demais; nao repita.
 
-### PASSAGEM POR CONTEXTO CHEIO em 05/09/2026, 16h30. Ele esta acordado e junto.
+### PASSAGEM POR CONTEXTO CHEIO em 05/09/2026, 13h36 (carimbo do commit `c09417f`; a
+sessao anterior escreveu "16h30" de cabeca — ver [[a-hora-vem-do-relogio]]). Ele esta acordado e junto.
 
 Frente unica o dia inteiro: **o site que substitui os slides**. Nada travado, nada
 pela metade, tudo commitado e empurrado (`master`, limpo).
