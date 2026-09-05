@@ -91,6 +91,15 @@ parado num lugar so, e isso tambem esta feito.
 >   e nao o olho, que pegou os dois erros seguidos que eu cometi nessa frente.
 > - **Ancore num ponto que voce conhece, nao numa ponta de caixa.** Caixa de peca
 >   curva nao diz qual ponta e qual.
+> - **O que grava em tempo real herda o mau humor da maquina.** Uma captura que
+>   amostra sozinha transforma um engasgo local em defeito permanente no arquivo.
+>   Resultado que precisa ser deterministico se empurra quadro a quadro.
+> - **Prova parcial da sensacao de prova.** O gravador provava uma coisa e nao a
+>   outra, e o defeito passou por anos-luz de distancia do que ele conferia.
+> - **Medida de desempenho durante o carregamento mede a rede, nao o programa.**
+>   Quase sai otimizando um numero que era artefato meu.
+> - **Pedido de "avisa que esta carregando" merece a pergunta QUANDO carrega.**
+>   Aqui a resposta era "na pior hora possivel", e so o aviso nao consertaria.
 
 ### ONDE ESTA
 
