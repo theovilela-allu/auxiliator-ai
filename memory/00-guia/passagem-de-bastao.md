@@ -17,48 +17,44 @@ aliases:
 > detalhe de sistema da empresa **ficam nas notas locais**, que o `.gitignore` cobre.
 > Regra: [[o-que-vai-pro-github]]. Passagens antigas vazaram detalhe demais; nao repita.
 
-### PASSAGEM POR CONTEXTO CHEIO em 05/09/2026, meio-dia. Ele saiu e mandou seguir.
+### MODO AUTONOMO desde 05/09/2026, 07h. Ele saiu ao meio-dia de 04/09 e mandou seguir.
 
-Frente unica o dia inteiro, e ela **nao** e o projeto de estagio: e o site que
-substitui os slides. **Nada travado, nada pela metade, tudo commitado e no ar.**
+Sessao anterior passou o bastao por contexto cheio. Frente unica: o site que
+substitui os slides, em `Desktop\deck-allu`. **Nada travado, tudo commitado.**
 
 > [!important] PRIMEIRO PASSO
-> Leia `memory/60-visual/modelo-3d-como-eu-faco.md` — o metodo inteiro, escrito
-> hoje a pedido dele. Depois `memory/60-visual/site-de-apresentacoes.md`, que diz
-> onde o projeto esta. Os dois valem mais que esta secao.
+> `memory/60-visual/site-de-apresentacoes.md` (onde o projeto esta) e
+> `memory/60-visual/modelo-3d-como-eu-faco.md` (o metodo). Os dois valem mais
+> que esta secao.
 
 ### ONDE ESTA
 
 Projeto em `Desktop\deck-allu`, **fora do repo do assessor** e sem git proprio.
-Servidor: `python -m http.server 8123 --bind 127.0.0.1` na pasta. Abre em
-`http://127.0.0.1:8123/prototipo.html`. O repo do assessor esta limpo, no commit
-`30e351b` do master, ja empurrado.
+Servidor: **`python servidor.py`** na pasta (nao o `http.server` de fabrica: ele
+deixa o navegador guardar o JavaScript velho). Abre em
+`http://127.0.0.1:8123/prototipo.html`. O assador (`python assador.py`) so
+precisa subir pra gravar.
 
-### O QUE FICOU PRONTO HOJE
+### FEITO NESTA SESSAO (07h em diante)
 
-1. **O aparelho 3D fechou.** Ele mandou duas fotos do produto real e disse "quero
-   assim"; o acabamento foi ajustado ate bater.
-2. **Modelo trocado** pelo novo (malha limpa), com separacao e pintura
-   automaticas — o arquivo vinha com dois aparelhos e sem material nenhum.
-3. **Assado**: o processamento pesado roda uma vez e vira arquivo. 13,3 MB ->
-   2,5 MB, 1867 ms -> 449 ms, ~90 -> 26 chamadas de desenho.
-4. **Sem internet**: biblioteca 3D e fonte moram no projeto agora.
-5. **Reserva propria**: a imagem de emergencia era foto de terceiro com marca
-   d'agua; virou retrato do nosso proprio modelo.
-6. **Grafico**, o assunto que estava marcado: virou tipo de card, com paleta de
-   serie medida em validador. Slide 10 do prototipo.
+1. **A animacao do aparelho virou video, com fundo transparente.** Era o proximo
+   passo combinado. O deck toca video; o 3D virou reserva; o retrato parado e a
+   reserva da reserva. O laser continua vivo por tras e nao precisou mexer nele.
+   36 a 86 ms ate o primeiro quadro, contra 289 a 329 do 3D.
+2. **A fonte do deck estava quebrada desde ontem** e ninguem tinha visto: o
+   caminho dentro do `.css` estava duplicado e as 24 declaracoes davam 404. O
+   deck rodou um dia inteiro numa fonte de sistema. Consertado e conferido.
+3. **Servidor de conferencia proprio**, que proibe cache. Nasceu de tres rodadas
+   perdidas consertando codigo que a pagina nem chegava a executar.
 
-### O PROXIMO PASSO CONCRETO
+### FILA, na ordem
 
-**Gravar a animacao do aparelho em video** — ideia dele, e a unica frente grande
-que sobrou sem depender de decisao. Nao e caso de "nao renderiza no Safari"
-(renderiza); o ganho e ficar identico em qualquer maquina e nao baixar modelo.
-O caminho ja existe meio pronto: `assador.py` na pasta do projeto ja recebe
-arquivo do navegador e grava em disco, e `?retrato=1` ja prova que da pra
-capturar quadro do 3D. Falta so gravar a sequencia em vez de um quadro so.
-**Gravar com fundo transparente**, pra o laser continuar vivo por tras. Ele
-autorizou mexer no laser se a transparencia atrapalhar, **mas pedindo aviso antes**.
-Nao tem ffmpeg na maquina: gravar direto do navegador.
+1. Consertar o `passar-o-bastao.cjs`: ele acha o `claude.exe` por NOME e com
+   varias sessoes abertas mata uma irma. Tem que subir a cadeia de pai a partir
+   do PID do proprio node. Defeito ja descrito no fim deste arquivo.
+2. O corpo do aparelho le um pouco chapado: falta variacao de acabamento entre
+   chapa das costas, ilha da camera e trilhos laterais (hoje e um material so).
+   Mexeu no acabamento, **assa e grava de novo**, senao o deck segue com o velho.
 
 ### O QUE DEPENDE DELE, e por isso eu nao toco
 
@@ -67,28 +63,29 @@ Nao tem ffmpeg na maquina: gravar direto do navegador.
 - Olhar o **slide 10** e dizer se o desenho do grafico serve
 - Os numeros reais: os do slide 9 e do 10 sao exemplo
 - Editor e banco do deck: as decisoes estao fechadas, a implementacao nao comecou
+- **O card tem tamanho fixo em pixel.** Num projetor o slide encolhe no meio do
+  preto. Consertar e decisao de arquitetura do palco, nao conserto solto
 
-### O QUE ESTE DIA ENSINOU, e serve fora deste projeto
+### O QUE ESTES DOIS DIAS ENSINARAM, e serve fora deste projeto
 
-- **Print sem placa de video mente.** Tres rodadas seguidas eu li "a tela esta
-  vazia" num print sem GPU e fui atras de defeito que nao existia.
+- **Antes de cacar o defeito, prove que voce esta olhando pro objeto certo.**
+  Print sem placa de video mente; pagina com cache roda o codigo velho; trocar so
+  a ancora do endereco nem recarrega. Marca de versao no arquivo resolve em 10s.
 - **Classifique o defeito antes de consertar.** Duas provas de 30 segundos
-  fecharam questao onde eu ja tinha gasto cinco tentativas: pintar de cor chapada
-  (some = sombreado, fica = geometria) e pintar cada peca desenhada de uma cor
-  diferente (mostra qual esta na tela).
-- **Espelho pega o pico do ambiente, fosco pega a media.** Sao dois ajustes.
-- **Otimizacao boa se mede**, senao e chute.
-- **Ferramenta de conferencia nao pode vazar pro uso normal.** O congelamento de
-  tempo parava o deck inteiro e ele achou que tinha quebrado.
+  fecharam questao onde eu ja tinha gasto cinco tentativas.
+- **Contar o que deu certo nao e conferir.** "Zero recursos de fora" deu zero e
+  era verdade; ninguem contou o pedido que FALHOU, e a fonte estava caida.
+- **Otimizacao boa se mede**, senao e chute. Espelho pega o pico do ambiente,
+  fosco pega a media.
+- **Ferramenta de conferencia nao pode vazar pro uso normal.**
 
-### O RITMO DELE, e o erro que eu cometi
+### O RITMO DELE, e o erro que a sessao passada cometeu
 
-Ele manda mensagem curta em cima de mensagem curta enquanto eu trabalho. Hoje eu
-fiquei calado tempo demais encadeando ferramenta e ele cobrou: *"me responde
-caceta"*. **Junte as mensagens, execute, mas responda em texto antes de sumir de
-novo.** Silencio longo aqui le como travado. E ele pediu, com todas as letras,
-**parar de ficar afinando material no chute**: quando algo estiver estranho,
-perguntar o que especificamente, ou medir.
+Ele manda mensagem curta em cima de mensagem curta enquanto eu trabalho. Em 04/09
+a sessao ficou calada tempo demais encadeando ferramenta e ele cobrou: *"me
+responde caceta"*. **Junte as mensagens, execute, mas responda em texto antes de
+sumir de novo.** E ele pediu, com todas as letras, **parar de afinar material no
+chute**: quando algo estiver estranho, perguntar o que especificamente, ou medir.
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
