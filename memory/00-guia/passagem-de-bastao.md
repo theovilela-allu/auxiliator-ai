@@ -35,49 +35,50 @@ deixa o navegador guardar o JavaScript velho). Abre em
 `http://127.0.0.1:8123/prototipo.html`. O assador (`python assador.py`) so
 precisa subir pra gravar.
 
-### FEITO NESTA SESSAO (das 07h as 07h50)
+### FEITO NESTA SESSAO
 
-1. **A animacao do aparelho virou video, com fundo transparente.** Era o proximo
-   passo combinado. O deck toca video; o 3D virou reserva; o retrato parado e a
-   reserva da reserva. O laser continua vivo por tras e **nao precisou mexer nele**.
-   36 a 86 ms ate o primeiro quadro, contra 289 a 329 do 3D. Provado contra o 3D
-   parado no mesmo instante: erro medio 1,9/255, silhueta 0,8% diferente.
-2. **A fonte do deck estava quebrada desde ontem** e ninguem tinha visto: o caminho
-   dentro do `.css` estava duplicado e as 24 declaracoes davam 404. O deck rodou um
-   dia inteiro numa fonte de sistema. Consertado e conferido.
-3. **Servidor de conferencia proprio** (`servidor.py`), que proibe cache. Nasceu de
-   tres rodadas perdidas consertando codigo que a pagina nem chegava a executar.
+**Primeira parte (07h-07h50), sem ele:**
+
+1. **A animacao do aparelho virou video, com fundo transparente.** O deck toca video;
+   o 3D virou reserva; o retrato parado e a reserva da reserva. 36 a 86 ms ate o
+   primeiro quadro, contra 289 a 329 do 3D.
+2. **A fonte do deck estava quebrada desde 04/09** e ninguem tinha visto: caminho
+   duplicado dentro do `.css`, 404 nas 24 declaracoes, um dia inteiro numa fonte de
+   sistema. Consertado.
+3. **Servidor de conferencia proprio** (`servidor.py`).
 4. **O passa-bastao agora confere o alvo** antes de matar, e deixa caderno em
-   `~/.claude/bastao.log`. Detalhe no fim deste arquivo.
-5. **`LEIAME.md` na pasta do deck**: como abrir, os enderecos de conferencia e os
-   dois passos de oficina (assar e gravar). A pasta tinha 12 arquivos e nenhum guia.
-6. **`shot.ps1` agora avisa que mente.** Print sem janela nao mostra o aparelho —
-   antes por causa do 3D, agora por causa do video. Medido de novo hoje.
+   `~/.claude/bastao.log`.
+5. **`LEIAME.md` na pasta do deck** e **`shot.ps1` avisando que mente**.
 
-### OUTRA SESSAO DE PE
+**Segunda parte (08h-08h30), com ele acordado, mandando ajuste e voltando a dormir:**
 
-Tem **outro agente anunciado como trabalhando** (`35672`, de pe desde 05h45, anunciado
-05h52). Ele tocou `onde-pegar-modelo-3d.md` as 05h53 e nao mexeu em mais nada do cofre
-desde entao. Nao encostei nele: [[nao-julgar-sub-vivo-pelo-arquivo-de-saida]]. Por causa
-dele a maquina **nao desliga** quando eu termino, e esta certo assim.
+6. **A lente da camera foi refeita a partir de quatro fotos que ele mandou.** As
+   medidas viraram contrato e estao na nota do projeto. O que ele apontou: aro grosso
+   demais (era 0,18 do raio, e 0,12), lente muito proxima do corpo (o colar subia
+   0,085, sao 0,25) e lente chapada de preto (nao existia interior nenhum).
+7. **O giro virou uma volta continua de 24s**, com rubato: demora nas costas, passa
+   depressa pela frente e pelos perfis. Pedido dele: "comecando junto do slide, ai faz
+   rodando devagar". Sumiu o tranco e a piscada, porque sumiu a troca entre dois videos.
+8. **O aparelho atravessa a virada sem parar de girar** (slides 09 e 10). Ele saiu de
+   dentro do card e virou um hospedeiro pendurado em cima do trilho.
+9. **O servidor passou a aceitar pedido por faixa de bytes.** Sem isso o navegador
+   marca o video como nao buscavel e o congelamento de conferencia falha em silencio.
 
-O servidor do deck (`servidor.py`, porta 8123) e o assador (porta 8124) ficaram de pe.
+### DUAS COISAS PRA ELE OLHAR QUANDO ACORDAR
 
-### FILA: vazia do meu lado
+- **A tela da frente agora aparece.** Com a volta inteira ela fica visivel metade do
+  tempo, e antes nunca aparecia. Ela estava acesa demais e brigava com o laser; baixei
+  o brilho pra tela em descanso. Se ele quiser algo nosso ali, e escolha dele.
+- **O rubato do giro** e escolha minha, nao dele: ele pediu "devagar", eu pus o giro pra
+  demorar nas costas. Dois numeros zeram isso (`RUBATO` e `RUBATO2` em `aparelho3d.js`).
 
-Nao inventei trabalho. Duas frentes que eu PODERIA ter aberto e congelei de
-proposito, com o motivo:
+### CORRECAO DE UMA COISA QUE EU ESCREVI ERRADO HOJE
 
-- **Acabamento do corpo** (chapa das costas, ilha da camera e trilhos laterais sao
-  um material so hoje). E olho dele, e ele pediu com todas as letras pra eu parar de
-  afinar material no chute. Alem disso, mexer aqui obriga a **assar e gravar de
-  novo** — churn caro se ele nao gostar.
-- **Escalar o palco pra tela grande.** Medido e documentado na nota do projeto: o
-  card e 432x252 px fixos em qualquer janela, o titulo sai em 27px, e das 30 medidas
-  do CSS nenhuma e fluida. Num projetor o slide fica pequeno no meio do preto. O
-  conserto e escolher um tamanho de projeto e escalar o palco inteiro, sem mexer em
-  nenhuma decisao ja fechada — mas isso muda como TODO slide e medido daqui pra
-  frente, e escolha assim nao se faz de madrugada.
+Eu tinha registrado que **o deck nao escala pra tela grande**, com numeros. Os numeros
+estavam certos e a conclusao estava errada: o deck escala sim, `escala()` aplica
+`scale(min(largura/1280, altura/720))` no palco inteiro. Eu li a transform numa janela
+de 1280x720, onde ela e a identidade — medi a regua no unico ponto em que ela marca
+zero. **Confirmar que algo nao existe exige olhar onde ele apareceria.**
 
 ### O QUE DEPENDE DELE, e por isso eu nao toco
 
