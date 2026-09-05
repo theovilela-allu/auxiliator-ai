@@ -97,7 +97,7 @@ mandar a seguinte mensagem: bom dia, da uma lida pra pegar contexto."* Limite: *
 |---|---|---|
 | Laço do `claude` | `C:\Users\Allu\Documents\WindowsPowerShell\profile.ps1` | A função `claude` exporta `BASTAO_SINAL` (um arquivo por terminal, `~\.claude\bastao-<PID>.sinal`) e roda o `claude.exe --dangerously-skip-permissions` em laço. Morreu com sinal preenchido → limpa o console e relança **no mesmo terminal, com a mesma flag**, com a mensagem do sinal como primeiro prompt. Sinal vazio → sai normal |
 | Gancho `Stop` | `.claude/hooks/bastao-de-contexto.cjs` | No fim de cada resposta minha, soma o `usage` mais recente do transcript. Acima de 500k, grava a marca `<transcript>.bastao` e devolve (código 2) a lista: consistência, reescrever a seção Estado daqui, commit/push, uma linha pro Rei, rodar o script. Uma vez por sessão; ignora `stop_hook_active` |
-| Script | `.claude/hooks/passar-o-bastao.cjs` | Grava a mensagem de abertura no sinal e dispara, **pelo WMI** (`Win32_Process.Create`, que nasce fora da minha árvore; filho destacado morre junto com a ferramenta que o disparou), um matador que 2s depois derruba a **árvore inteira** do `claude.exe` (senão o navegador do Playwright fica vivo segurando a trava do perfil). `--seco` só mostra o que faria. Sem `BASTAO_SINAL` (sessão aberta pela extensão do VSCode) não mata nada e devolve a frase pra colar na mão |
+| Script | `.claude/hooks/passar-o-bastao.cjs` | Grava a mensagem de abertura no sinal e dispara, **pelo WMI** (`Win32_Process.Create`, que nasce fora da minha árvore; filho destacado morre junto com a ferramenta que o disparou), um matador que 2s depois derruba a **árvore inteira** do `claude.exe` (senão o navegador do Playwright fica vivo segurando a trava do perfil). `--seco` só mostra o que faria. Confere se o alvo está mesmo debaixo do terminal dono do sinal e recusa se não estiver; anota toda tentativa em `~/.claude/bastao.log`. Sem `BASTAO_SINAL` não mata nada e devolve a frase pra colar na mão |
 | Barra de status | `C:\Users\Allu\.claude\statusline.cjs` | Laranja aos 500k ("passagem a caminho"), vermelho aos 800k ("a passagem falhou, olha isso") |
 | A sessão nova | [[modo-autonomo]] | A mensagem de abertura diz "MODO AUTONOMO": ela lê este arquivo, o `MEMORY.md` e o painel do projeto, e trabalha sozinha na fila, sem pergunta e sem trava |
 
@@ -146,3 +146,35 @@ escreve isto é a sessão que nasceu dela. O que a sessão nova conferiu de dent
 
 Ligações: [[travar-em-60-de-contexto]] · [[modo-autonomo]] · [[o-que-eu-nao-posso-fazer]] ·
 [[terminal-e-powershell]]
+
+## O ALVO DA PASSAGEM, e o susto de 04/09/2026
+
+Em 04/09, 20h, uma passagem nao matou a sessao e ficou a suspeita de que o script
+**achava o `claude.exe` por NOME** e, com varias sessoes abertas, matava uma irma. Hoje
+tem **tres `claude.exe` vivos** nesta maquina, entao a suspeita era razoavel. (A anotacao
+daquela noite tinha sido colada no fim da nota do deck, e nao aqui; voltou pro lugar em
+05/09.)
+
+**Nao era isso.** O script ja subia a cadeia de pai a partir do PID do proprio node desde
+02/09 (commit `ea4b2e6`), e conferido em 05/09 ele acerta o alvo: sobe
+`node -> bash -> bash -> bash -> claude.exe`, e esse `claude.exe` e mesmo o desta sessao.
+O que faltou em 04/09 foi **prova**: nao existia registro nenhum do que o script mirou,
+entao a investigacao virou reconstrucao. O sinal daquela noite (`bastao-17504.sinal`)
+continua cheio e o terminal dele morreu sem o laco consumir — coerente com a sessao ter
+sido fechada na mao, que foi o contorno usado.
+
+Duas coisas mudaram em 05/09 pra isso nao se repetir:
+
+1. **Conferencia cruzada.** Duas coisas independentes dizem qual sessao e a minha: a
+   cadeia de processo e o nome do arquivo de sinal (`bastao-<pid do terminal>.sinal`).
+   Agora elas tem que concordar. Se o `claude.exe` encontrado nao estiver debaixo do
+   terminal dono do sinal, o script **recusa** e diz por que, em vez de derrubar a irma
+   em silencio. Provado nos dois lados: com o sinal certo diz `CONFERE`; com o sinal de
+   outro terminal recusa, sai com erro e nao mata nada.
+2. **Caderno em `~/.claude/bastao.log`.** Uma linha por tentativa: alvo, terminal, cadeia
+   e desfecho. Custa nada e evita a proxima adivinhacao.
+
+**Se mesmo assim a passagem nao acontecer:** o sinal ja fica gravado, entao basta fechar a
+sessao na mao (`/exit` ou Ctrl+C duas vezes); o laco `while ($true)` da funcao `claude` no
+`profile.ps1` le o sinal e relanca no mesmo terminal com a mensagem de abertura. E o
+caderno agora diz o que aconteceu.
