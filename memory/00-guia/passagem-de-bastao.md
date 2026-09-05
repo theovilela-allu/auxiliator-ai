@@ -17,81 +17,51 @@ aliases:
 > detalhe de sistema da empresa **ficam nas notas locais**, que o `.gitignore` cobre.
 > Regra: [[o-que-vai-pro-github]]. Passagens antigas vazaram detalhe demais; nao repita.
 
-### MODO AUTONOMO desde 05/09/2026, 07h. Ele saiu ao meio-dia de 04/09 e mandou seguir.
+### PASSAGEM POR CONTEXTO CHEIO em 05/09/2026, 16h30. Ele esta acordado e junto.
 
-Sessao anterior passou o bastao por contexto cheio. Frente unica: o site que
-substitui os slides, em `Desktop\deck-allu`. **Nada travado, tudo commitado.**
+Frente unica o dia inteiro: **o site que substitui os slides**. Nada travado, nada
+pela metade, tudo commitado e empurrado (`master`, limpo).
 
 > [!important] PRIMEIRO PASSO
-> `memory/60-visual/site-de-apresentacoes.md` (onde o projeto esta) e
-> `memory/60-visual/modelo-3d-como-eu-faco.md` (o metodo). Os dois valem mais
-> que esta secao.
+> `memory/60-visual/site-de-apresentacoes.md` (onde o projeto esta e por que cada
+> coisa e como e) e `memory/60-visual/modelo-3d-como-eu-faco.md` (o metodo do 3D).
+> Os dois valem mais que esta secao. Na pasta do projeto tem `LEIAME.md`.
 
 ### ONDE ESTA
 
-Projeto em `Desktop\deck-allu`, **fora do repo do assessor** e sem git proprio.
-Servidor: **`python servidor.py`** na pasta (nao o `http.server` de fabrica: ele
-deixa o navegador guardar o JavaScript velho). Abre em
-`http://127.0.0.1:8123/prototipo.html`. O assador (`python assador.py`) so
-precisa subir pra gravar.
+`Desktop\deck-allu`, **fora do repo do assessor** e sem git proprio. Sobe com
+**`python servidor.py`** (nao o `http.server` de fabrica: o proprio proibe cache e
+aceita Range, e sem essas duas coisas voce depura codigo velho e o congelamento de
+conferencia falha calado). O assador (`python assador.py`) so precisa subir pra
+assar ou gravar. Os dois ficaram ligados.
 
-### FEITO NESTA SESSAO
+### O QUE FOI FEITO HOJE, em uma linha cada
 
-**Primeira parte (07h-07h50), sem ele:**
+1. **A animacao do aparelho virou video** com fundo transparente (WebM/VP9 guarda
+   alfa; MP4 nao). O 3D virou reserva, o retrato parado e a reserva da reserva.
+2. **O giro e uma volta continua de 24s** com rubato: demora nas costas, passa
+   depressa pela frente e pelos perfis. Um arquivo so, laco nativo do `<video>`.
+3. **O aparelho atravessa a virada girando**, nos slides 09 e 10: ele mora num
+   hospedeiro em cima do trilho, e a vaga dentro do slide fica vazia.
+4. **A lente da camera foi refeita pelas fotos dele**, com as medidas viradas em
+   contrato (estao na nota do projeto).
+5. **A apresentacao parou de travar**: virada de 22,5 ms por quadro pra 8,8, pior
+   quadro de 228 pra 49, e zero tarefa longa.
+6. Achados de caminho: a fonte do deck estava caida desde 04/09 (caminho duplicado
+   no `.css`), o `shot.ps1` mente e agora avisa, e o passa-bastao passou a conferir
+   se esta mirando a propria sessao.
 
-1. **A animacao do aparelho virou video, com fundo transparente.** O deck toca video;
-   o 3D virou reserva; o retrato parado e a reserva da reserva. 36 a 86 ms ate o
-   primeiro quadro, contra 289 a 329 do 3D.
-2. **A fonte do deck estava quebrada desde 04/09** e ninguem tinha visto: caminho
-   duplicado dentro do `.css`, 404 nas 24 declaracoes, um dia inteiro numa fonte de
-   sistema. Consertado.
-3. **Servidor de conferencia proprio** (`servidor.py`).
-4. **O passa-bastao agora confere o alvo** antes de matar, e deixa caderno em
-   `~/.claude/bastao.log`.
-5. **`LEIAME.md` na pasta do deck** e **`shot.ps1` avisando que mente**.
+### FILA
 
-**Segunda parte (08h-08h30), com ele acordado, mandando ajuste e voltando a dormir:**
+Vazia do meu lado. **Nao invente trabalho**: o que sobrou e dele, esta na secao
+abaixo, e a unica frente minha congelada e o acabamento do corpo do aparelho —
+congelada de proposito, porque e olho dele e ele pediu pra eu parar de afinar
+material no chute.
 
-6. **A lente da camera foi refeita a partir de quatro fotos que ele mandou.** As
-   medidas viraram contrato e estao na nota do projeto. O que ele apontou: aro grosso
-   demais (era 0,18 do raio, e 0,12), lente muito proxima do corpo (o colar subia
-   0,085, sao 0,25) e lente chapada de preto (nao existia interior nenhum).
-7. **O giro virou uma volta continua de 24s**, com rubato: demora nas costas, passa
-   depressa pela frente e pelos perfis. Pedido dele: "comecando junto do slide, ai faz
-   rodando devagar". Sumiu o tranco e a piscada, porque sumiu a troca entre dois videos.
-8. **O aparelho atravessa a virada sem parar de girar** (slides 09 e 10). Ele saiu de
-   dentro do card e virou um hospedeiro pendurado em cima do trilho.
-9. **O servidor passou a aceitar pedido por faixa de bytes.** Sem isso o navegador
-   marca o video como nao buscavel e o congelamento de conferencia falha em silencio.
-
-**Terceira parte (13h-16h30, com ele):**
-
-10. **A apresentacao estava travando, e agora nao trava.** Medido: virada de 22,5 ms
-    por quadro pra 8,8; pior quadro de 228 ms pra 49; parado, de 150 ms de pior quadro
-    pra 21,5; e sumiram as quatro tarefas longas de ~100 ms. Os culpados nao eram o que
-    parecia: eram o mapa de refracao do vidro (que agora sai durante a virada e volta no
-    repouso) e o laser (halo em meia resolucao, morph em 8 passos, nucleo sem desfoque,
-    ponto de luz em passo, regiao de filtro justa). O video do aparelho e o desfoque dos
-    cards nao tinham nada a ver.
-11. **O aparelho estava esticado no slide 10.** A vaga de la e mais estreita e o video
-    esticava pra preencher. Agora a caixa dele tem proporcao E tamanho fixos: ele
-    atravessa a virada do mesmo tamanho, so mudando de lugar.
-
-### DUAS COISAS PRA ELE OLHAR QUANDO ACORDAR
-
-- **A tela da frente agora aparece.** Com a volta inteira ela fica visivel metade do
-  tempo, e antes nunca aparecia. Ela estava acesa demais e brigava com o laser; baixei
-  o brilho pra tela em descanso. Se ele quiser algo nosso ali, e escolha dele.
-- **O rubato do giro** e escolha minha, nao dele: ele pediu "devagar", eu pus o giro pra
-  demorar nas costas. Dois numeros zeram isso (`RUBATO` e `RUBATO2` em `aparelho3d.js`).
-
-### CORRECAO DE UMA COISA QUE EU ESCREVI ERRADO HOJE
-
-Eu tinha registrado que **o deck nao escala pra tela grande**, com numeros. Os numeros
-estavam certos e a conclusao estava errada: o deck escala sim, `escala()` aplica
-`scale(min(largura/1280, altura/720))` no palco inteiro. Eu li a transform numa janela
-de 1280x720, onde ela e a identidade — medi a regua no unico ponto em que ela marca
-zero. **Confirmar que algo nao existe exige olhar onde ele apareceria.**
+> [!important] Mexeu no acabamento do aparelho? ASSA E GRAVA DE NOVO
+> `prototipo.html?assar=1&gravar=1` faz os dois numa passada, uns 40 segundos.
+> Assar sem gravar deixa a apresentacao com o aparelho velho: ela toca video, nem
+> olha pro modelo.
 
 ### O QUE DEPENDE DELE, e por isso eu nao toco
 
@@ -100,60 +70,33 @@ zero. **Confirmar que algo nao existe exige olhar onde ele apareceria.**
 - Olhar o **slide 10** e dizer se o desenho do grafico serve
 - Os numeros reais: os do slide 9 e do 10 sao exemplo
 - Editor e banco do deck: as decisoes estao fechadas, a implementacao nao comecou
-- O que a TELA do aparelho mostra, agora que a volta inteira faz ela aparecer
+- **O que a tela da frente do aparelho mostra**, agora que a volta inteira faz ela
+  aparecer. Hoje e o papel de parede laranja, com brilho baixo
+- **O rubato do giro** foi escolha minha, nao dele: dois numeros zeram
+  (`RUBATO` e `RUBATO2` em `aparelho3d.js`)
 
-### FILA
+### O QUE ESTE DIA ENSINOU, e serve fora deste projeto
 
-Vazia do meu lado. Uma frente congelada de proposito: o **acabamento do corpo**
-(chapa das costas, ilha da camera e trilhos laterais sao um material so hoje). E
-olho dele, e ele pediu com todas as letras pra eu parar de afinar material no
-chute.
+- **Antes de cacar o defeito, prove que voce esta olhando pro objeto certo.** Print
+  sem placa de video mente; pagina com cache roda o codigo velho; trocar so a ancora
+  do endereco nem recarrega. Marca de versao no arquivo resolve em 10 segundos.
+- **Tenha ferramenta de conferencia, e nao deixe ela vazar pro uso normal.** A lupa,
+  a pintura de cada peca com uma cor e esconder a camada de cima acharam em trinta
+  segundos o que quatro rodadas de afinar material nao acharam.
+- **Confirmar que algo NAO existe exige olhar onde ele apareceria.** Declarei que o
+  deck nao escalava depois de ler a escala do palco na unica janela em que ela e 1.
+- **Medida de desempenho se repete com a ordem embaralhada**, senao ela mente ao
+  contrario. E **desfoque cobra por pixel**: metade da resolucao e um quarto do custo.
+- **Comparar print de coisa que pulsa exige congelar o pulso.**
+- Em material com transmissao, **a cor base multiplica o que passa**: cor escura nao
+  faz vidro escuro, faz vidro opaco.
 
-> [!important] Mexeu no acabamento? ASSA E GRAVA DE NOVO
-> `prototipo.html?assar=1&gravar=1` faz os dois numa passada, uns 40 segundos.
-> Assar sem gravar deixa a apresentacao com o aparelho velho, porque ela nem olha
-> pro modelo — quem ela toca e o video.
+### O RITMO DELE
 
-### OUTRA SESSAO DE PE
-
-Tem outro agente anunciado como trabalhando (`35672`, de pe desde 05h45). Nao
-encostei nele. Por causa dele a maquina nao desliga quando eu termino, e esta
-certo assim. O servidor do deck (porta 8123) e o assador (8124) ficaram ligados.
-
-### O QUE ESTES DOIS DIAS ENSINARAM, e serve fora deste projeto
-
-- **Antes de cacar o defeito, prove que voce esta olhando pro objeto certo.**
-  Print sem placa de video mente; pagina com cache roda o codigo velho; trocar so
-  a ancora do endereco nem recarrega. Marca de versao no arquivo resolve em 10s.
-- **Classifique o defeito antes de consertar.** Duas provas de 30 segundos
-  fecharam questao onde eu ja tinha gasto cinco tentativas.
-- **Contar o que deu certo nao e conferir.** "Zero recursos de fora" deu zero e
-  era verdade; ninguem contou o pedido que FALHOU, e a fonte estava caida.
-- **Otimizacao boa se mede**, senao e chute. Espelho pega o pico do ambiente,
-  fosco pega a media.
-- **Ferramenta de conferencia nao pode vazar pro uso normal** — mas TER ferramenta
-  de conferencia paga na primeira vez: a lupa que chega perto da peca, a pintura de
-  cada peca com uma cor, e esconder a camada de cima. Em 05/09 eu afinei material
-  quatro vezes achando que o problema era acabamento, e a prova de cor mostrou em
-  trinta segundos que quem escondia tudo era o vidro por cima.
-- **Confirmar que algo NAO existe exige olhar onde ele apareceria.** Eu declarei que
-  o deck nao escalava depois de ler a escala do palco numa janela de 1280x720 — o
-  unico tamanho em que ela e a identidade.
-- **Medida de desempenho se repete com a ordem embaralhada.** A primeira bateria deu
-  resultado invertido (tirar trabalho "piorava") porque cada caso rodou uma vez so, em
-  ordem fixa. Tres rodadas intercaladas endireitaram tudo.
-- **Desfoque cobra por pixel.** Metade da resolucao e um quarto do custo, e em coisa
-  borrada isso nao se ve. Primeira alavanca em qualquer brilho, halo ou vidro.
-- **Comparar print de coisa que pulsa exige congelar o pulso**, senao a diferenca
-  medida e a fase da animacao e nao a mudanca que voce fez.
-
-### O RITMO DELE, e o erro que a sessao passada cometeu
-
-Ele manda mensagem curta em cima de mensagem curta enquanto eu trabalho. Em 04/09
-a sessao ficou calada tempo demais encadeando ferramenta e ele cobrou: *"me
-responde caceta"*. **Junte as mensagens, execute, mas responda em texto antes de
-sumir de novo.** E ele pediu, com todas as letras, **parar de afinar material no
-chute**: quando algo estiver estranho, perguntar o que especificamente, ou medir.
+Mensagem curta em cima de mensagem curta enquanto eu trabalho. **Junte, execute, mas
+responda em texto antes de sumir de novo** — silencio longo aqui le como travado. E
+ele pediu, com todas as letras, pra eu parar de afinar material no chute: quando algo
+estiver estranho, perguntar o que especificamente, ou medir.
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
