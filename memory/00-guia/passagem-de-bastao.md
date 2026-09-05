@@ -87,8 +87,25 @@ zero. **Confirmar que algo nao existe exige olhar onde ele apareceria.**
 - Olhar o **slide 10** e dizer se o desenho do grafico serve
 - Os numeros reais: os do slide 9 e do 10 sao exemplo
 - Editor e banco do deck: as decisoes estao fechadas, a implementacao nao comecou
-- **Escalar o palco** pra o deck caber em projetor e tela grande (numeros na nota
-  do projeto). Decisao de arquitetura, nao conserto solto
+- O que a TELA do aparelho mostra, agora que a volta inteira faz ela aparecer
+
+### FILA
+
+Vazia do meu lado. Uma frente congelada de proposito: o **acabamento do corpo**
+(chapa das costas, ilha da camera e trilhos laterais sao um material so hoje). E
+olho dele, e ele pediu com todas as letras pra eu parar de afinar material no
+chute.
+
+> [!important] Mexeu no acabamento? ASSA E GRAVA DE NOVO
+> `prototipo.html?assar=1&gravar=1` faz os dois numa passada, uns 40 segundos.
+> Assar sem gravar deixa a apresentacao com o aparelho velho, porque ela nem olha
+> pro modelo — quem ela toca e o video.
+
+### OUTRA SESSAO DE PE
+
+Tem outro agente anunciado como trabalhando (`35672`, de pe desde 05h45). Nao
+encostei nele. Por causa dele a maquina nao desliga quando eu termino, e esta
+certo assim. O servidor do deck (porta 8123) e o assador (8124) ficaram ligados.
 
 ### O QUE ESTES DOIS DIAS ENSINARAM, e serve fora deste projeto
 
@@ -101,7 +118,14 @@ zero. **Confirmar que algo nao existe exige olhar onde ele apareceria.**
   era verdade; ninguem contou o pedido que FALHOU, e a fonte estava caida.
 - **Otimizacao boa se mede**, senao e chute. Espelho pega o pico do ambiente,
   fosco pega a media.
-- **Ferramenta de conferencia nao pode vazar pro uso normal.**
+- **Ferramenta de conferencia nao pode vazar pro uso normal** — mas TER ferramenta
+  de conferencia paga na primeira vez: a lupa que chega perto da peca, a pintura de
+  cada peca com uma cor, e esconder a camada de cima. Em 05/09 eu afinei material
+  quatro vezes achando que o problema era acabamento, e a prova de cor mostrou em
+  trinta segundos que quem escondia tudo era o vidro por cima.
+- **Confirmar que algo NAO existe exige olhar onde ele apareceria.** Eu declarei que
+  o deck nao escalava depois de ler a escala do palco numa janela de 1280x720 — o
+  unico tamanho em que ela e a identidade.
 
 ### O RITMO DELE, e o erro que a sessao passada cometeu
 
