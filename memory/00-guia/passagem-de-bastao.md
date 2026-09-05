@@ -17,27 +17,33 @@ aliases:
 > detalhe de sistema da empresa **ficam nas notas locais**, que o `.gitignore` cobre.
 > Regra: [[o-que-vai-pro-github]]. Passagens antigas vazaram detalhe demais; nao repita.
 
-### ESTADO em 05/09/2026, manha. Ele esta presente e acompanhando de perto.
+### ESTADO em 05/09/2026, fim da manha. Ele saiu e mandou seguir sozinho.
 
-Frente unica, a mesma de ontem: o site que substitui os slides. Nada travado.
-Leia `memory/60-visual/site-de-apresentacoes.md` — esta tudo la, inclusive o
-diagnostico de cada defeito, que vale mais que o conserto.
+Frente unica: o site que substitui os slides. Nada travado, nada pela metade.
+Leia, nesta ordem: `memory/60-visual/modelo-3d-como-eu-faco.md` (o metodo
+inteiro, escrito hoje a pedido dele) e `memory/60-visual/site-de-apresentacoes.md`
+(onde o projeto esta).
+
+**O aparelho 3D fechou.** Ele mandou duas fotos do produto real e disse "quero
+assim"; o acabamento foi ajustado ate bater. E o carregamento foi assado: o
+trabalho pesado roda uma vez e vira arquivo pronto, com numero medido.
 
 ### O QUE ESTE DIA ENSINOU, e serve fora deste projeto
 
 - **Print sem placa de video mente.** Tres rodadas seguidas eu li "a tela esta
-  vazia" num print de navegador sem GPU e fui atras de defeito que nao existia.
-  Conferir no navegador de verdade e a regra; o print rapido serve pra comparar,
-  nao pra concluir.
-- **Classifique o defeito antes de consertar.** Duas provas de 30 segundos cada
-  fecharam questao onde eu ja tinha gasto cinco tentativas: pintar a peca de cor
-  chapada (se o defeito some, e sombreado; se fica, e geometria) e pintar cada
-  peca desenhada de uma cor diferente (mostra na hora qual delas esta na tela).
-- **Espelho pega o pico, fosco pega a media.** Um mesmo ambiente que deixa o
-  metal bonito estoura o vidro. Sao dois ajustes, nao um.
-- **Vidro nao e metal.** Refletir demais e o que faz lente virar disco branco.
+  vazia" num print sem GPU e fui atras de defeito que nao existia. Conferir no
+  navegador de verdade e a regra.
+- **Classifique o defeito antes de consertar.** Duas provas de 30 segundos
+  fecharam questao onde eu ja tinha gasto cinco tentativas: pintar de cor chapada
+  (some = sombreado, fica = geometria) e pintar cada peca desenhada de uma cor
+  diferente (mostra na hora qual esta na tela).
+- **Espelho pega o pico do ambiente, fosco pega a media.** Sao dois ajustes.
 - **Otimizar tambem e consertar.** Uma varredura minha que montava texto por
-  triangulo travava a pagina inteira por segundos — e nao achava nada.
+  triangulo travava a pagina por segundos e nao achava nada.
+- **Otimizacao boa se mede.** 13,3 MB -> 2,5 MB, 1867 ms -> 449 ms, ~90 -> 26
+  chamadas de desenho. Sem numero e chute.
+- **Ferramenta de conferencia nao pode vazar pro uso normal.** O congelamento de
+  tempo parava o deck inteiro e ele achou que tinha quebrado.
 
 ### O RITMO DELE, e o erro que eu cometi
 
@@ -49,9 +55,11 @@ novo.** Silencio longo aqui le como travado.
 ### O QUE DEPENDE DELE
 
 - O tema dos outros slides, pra eu desenhar o fundo de cada um
-- Creditar o autor do modelo 3D novo, ou trocar por um nosso antes de mostrar
-  pra fora
+- Creditar o autor do modelo 3D, ou trocar por um nosso, antes de mostrar pra fora
 - **Graficos** continua sendo o proximo assunto combinado, adiado por ele
+- **Gravar a animacao em video**: ideia dele. Nao e caso de "nao renderiza no
+  Safari"; o ganho e ficar identico em qualquer maquina. Ele autorizou mexer no
+  laser se a transparencia atrapalhar, mas pedindo aviso antes
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
