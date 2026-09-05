@@ -100,6 +100,17 @@ parado num lugar so, e isso tambem esta feito.
 >   Quase sai otimizando um numero que era artefato meu.
 > - **Pedido de "avisa que esta carregando" merece a pergunta QUANDO carrega.**
 >   Aqui a resposta era "na pior hora possivel", e so o aviso nao consertaria.
+> - **Nao entregue endereco sem ter aberto ele.** Mandei o primeiro link em
+>   negrito e so depois descobri que aquele deploy servia 404 na raiz. Deploy e
+>   imutavel: o endereco que nasceu quebrado fica quebrado pra sempre, e ele
+>   passou meia hora tentando abrir aquele enquanto eu achava que estava tudo no
+>   ar. **Um link so, o estavel, e conferido antes de sair da minha boca.**
+> - **Correcao enterrada e correcao perdida.** Os enderecos certos vieram depois,
+>   no meio de mensagem longa, e ele continuou no primeiro. Se o que eu mandei
+>   antes esta errado, a correcao vai sozinha, curta e no comeco.
+> - **Tela que cobre o produto tem que falhar ABERTO, e rapido.** Eu tinha posto
+>   45s de espera maxima: uma tela preta por 45s nao le como "carregando", le
+>   como quebrado. Passou pra 10s.
 
 ### ONDE ESTA
 
