@@ -52,11 +52,30 @@ fiquei calado tempo demais encadeando ferramenta e ele cobrou: *"me responde
 caceta"*. **Junte as mensagens, execute, mas responda em texto antes de sumir de
 novo.** Silencio longo aqui le como travado.
 
+### O QUE EU FIZ SOZINHO DEPOIS QUE ELE SAIU
+
+Quatro frentes fechadas, cada uma provada olhando:
+
+1. **O modelo foi assado.** O trabalho pesado roda uma vez e vira arquivo pronto.
+2. **O deck nao depende mais de internet.** A biblioteca 3D e a fonte moravam em
+   servidor de fora; agora moram no projeto. Wifi de sala de reuniao cai.
+3. **A reserva agora e nossa.** A imagem que entra se o 3D falhar era foto de
+   terceiro, e uma delas tinha marca d'agua de outro site. Trocada por um retrato
+   do nosso proprio modelo, na mesma pose e na mesma caixa.
+4. **Grafico**, que era o assunto marcado. Virou um TIPO DE CARD, com paleta de
+   serie medida em validador (verde e laranja reprovam como vizinhos: e o par que
+   some em daltonismo, e o azul entra no meio). Slide 10 do prototipo.
+
+Um defeito que quase passou: o candidato `.glb` caia no ramo do `.obj` no
+carregador e carregava o modelo cru achando que era o assado — o aparelho voltou
+branco e em dobro. **Achado olhando o print, nao lendo o codigo.**
+
 ### O QUE DEPENDE DELE
 
 - O tema dos outros slides, pra eu desenhar o fundo de cada um
 - Creditar o autor do modelo 3D, ou trocar por um nosso, antes de mostrar pra fora
-- **Graficos** continua sendo o proximo assunto combinado, adiado por ele
+- Olhar o **slide 10** (o grafico) e dizer se o desenho serve
+- Os numeros reais: os do slide 9 e do 10 sao exemplo
 - **Gravar a animacao em video**: ideia dele. Nao e caso de "nao renderiza no
   Safari"; o ganho e ficar identico em qualquer maquina. Ele autorizou mexer no
   laser se a transparencia atrapalhar, mas pedindo aviso antes
