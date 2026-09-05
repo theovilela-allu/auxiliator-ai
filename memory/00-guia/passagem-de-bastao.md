@@ -60,6 +60,30 @@ do que ja existia, e ela rendeu tres achados. Nada no deck foi tocado.
 > recomendacao ja foi entregue ao lider, e ela nao foi. Reabrir corrige a leitura e derruba
 > o progresso da meta; deixar como esta mantem o numero e a leitura errada. Eu nao decido isso.
 
+### ELE VOLTOU as 13h50, e o modo autonomo acabou ali
+
+Reclamacao dele, e estava certa: *"avacalhou a animacao do fio e o liquid glass"*.
+As duas coisas eram efeito colateral do conserto de desempenho da tarde. Feitas e
+provadas, detalhe na nota local do projeto. Depois disso ele pediu o aparelho
+parado num lugar so, e isso tambem esta feito.
+
+> [!important] O QUE ESTE PEDACO DO DIA ENSINOU, e vale fora daqui
+> - **Otimizacao que se paga em qualidade nao e conserto, e troca — e tem que ser
+>   escrita como troca.** Registrei "de 22,5 ms pra 8,8" como vitoria limpa; duas
+>   das quatro alavancas eram qualidade trocada por tempo, e ele viu na tela o que
+>   eu nao tinha anotado. A pergunta certa nao e "quanto ganhei", e "o que isso
+>   custou na tela".
+> - **Numero absoluto de desempenho desta maquina nao vale nada sozinho:** a mesma
+>   build deu 10,28 ms numa rodada e 17,02 na seguinte. So a comparacao alternada
+>   dentro da mesma sessao vale. Citar uma rodada isolada e o erro que fez a medida
+>   de ontem mentir ao contrario.
+> - **Quando o obvio custa caro, ataque a causa em vez de escolher entre feio e
+>   lento.** A mancha borrada nao precisava morfar geometria: virou duas copias e
+>   uma troca de opacidade. Ficou lisa E com cauda melhor que a versao feia.
+> - **Medida de celula de grade nao serve de ancora.** Ela muda quando a fonte
+>   carrega e o texto reflui (239,6 antes, 253,2 depois). Posicao que precisa ser
+>   estavel se DECLARA, nao se mede.
+
 ### ONDE ESTA
 
 `Desktop\deck-allu`, **fora do repo do assessor** e sem git proprio. Sobe com
