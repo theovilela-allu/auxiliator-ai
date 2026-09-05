@@ -16,6 +16,14 @@ const fs = require('fs');
 const { execFileSync } = require('child_process');
 const path = require('path');
 
+// O caderno. Existe porque em 04/09/2026 uma passagem falhou e nao sobrou registro
+// de NADA: nem de qual sessao ele mirou, nem se o matador chegou a nascer. A
+// investigacao virou adivinhacao. Uma linha por tentativa custa nada.
+const CADERNO = path.join(process.env.USERPROFILE || process.env.HOME || '.', '.claude', 'bastao.log');
+function anota(linha) {
+  try { fs.appendFileSync(CADERNO, `${new Date().toISOString()}  ${linha}\n`, 'utf8'); } catch (_) {}
+}
+
 const MENSAGEM = 'bom dia, da uma lida pra pegar contexto. MODO AUTONOMO: voce nao esta aqui, entao le a passagem de bastao, entende onde a gente parou e segue trabalhando sozinho no que ficou pra fazer.';
 const seco = process.argv.includes('--seco');
 const sinal = process.env.BASTAO_SINAL;
@@ -60,6 +68,37 @@ if (!sinal) {
 }
 
 // ---------------------------------------------------------------------------
+// CONFERENCIA CRUZADA (05/09/2026). Duas coisas independentes dizem quem sou eu, e
+// elas TEM que concordar:
+//   1. a cadeia de processo, que diz qual claude.exe esta acima de mim;
+//   2. o nome do arquivo de sinal, que diz qual terminal tem o laco que vai relancar.
+// Se discordarem, matar o alvo derruba uma sessao IRMA e o relanco nasce no terminal
+// errado — exatamente o que se suspeitou em 04/09/2026, com seis sessoes abertas e
+// tres claude.exe vivos. Sem esta conferencia isso falha em silencio.
+const terminal = Number((path.basename(String(sinal)).match(/bastao-(\d+)\./) || [])[1]);
+let donoOk = !terminal;                       // sinal com nome fora do padrao: nao da pra conferir
+let subida = [];
+if (terminal) {
+  let q = alvo;
+  for (let i = 0; i < 6 && q; i++) {
+    const p = info(q);
+    if (!p) break;
+    subida.push(`${p.name}(${q})`);
+    if (p.ppid === terminal) { donoOk = true; subida.push(`terminal(${terminal})`); break; }
+    if (!p.ppid || p.ppid === q) break;
+    q = p.ppid;
+  }
+}
+if (!donoOk) {
+  const aviso = `RECUSEI: o claude.exe ${alvo} nao esta debaixo do terminal ${terminal} dono do sinal. ` +
+                `Subida: ${subida.join(' <- ')}. Matar ele derrubaria outra sessao.`;
+  console.log(aviso);
+  console.log('Passe o bastao na mao: encerre esta sessao e cole na proxima:\n' + MENSAGEM);
+  anota(aviso);
+  process.exit(1);
+}
+
+// ---------------------------------------------------------------------------
 // TRAVA DE ESTADO SALVO (03/09/2026). Ele perguntou se o gancho estava
 // interrompendo o agente ANTES de ele salvar o que estava fazendo. Nao estava: o
 // gancho Stop so devolve a lista de fechamento, e quem mata a sessao e o proprio
@@ -91,6 +130,7 @@ if (recusas.length && !forcado) {
   console.log('NAO PASSEI O BASTAO, porque o estado ainda nao esta salvo: ' + recusas.join('; ') + '.');
   console.log('Faca os passos 2 e 3 primeiro: reescreva a secao Estado da passagem com onde voce parou, depois commit e push.');
   console.log('Feito isso, rode este script de novo. Se voce tem certeza de que nao ha o que salvar, rode com --forcado.');
+  anota('RECUSEI (estado por salvar): ' + recusas.join('; '));
   process.exit(1);
 }
 
@@ -103,6 +143,7 @@ const criar = [
 
 if (seco) {
   console.log(`[seco] alvo=${alvo} cadeia=${cadeia.join(' <- ')} sinal=${sinal}`);
+  console.log(`[seco] conferencia cruzada: terminal=${terminal} dono=${donoOk ? 'CONFERE' : 'NAO CONFERE'} subida=${subida.join(' <- ')}`);
   console.log(`[seco] mensagem=${MENSAGEM}`);
   console.log(`[seco] matador=${matador}`);
   process.exit(0);
@@ -114,10 +155,12 @@ let ret = '';
 try { ret = ps(criar); } catch (e) { ret = 'erro ' + (e.message || e); }
 const m = ret.match(/^(\d+)\s+(\d*)$/);
 if (!m || m[1] !== '0') {
+  anota(`FALHOU o WMI (retorno ${ret}) mirando claude.exe ${alvo}, terminal ${terminal}.`);
   console.log(`Nao consegui disparar o matador pelo WMI (retorno: ${ret}). Sinal ja gravado em ${sinal}.`);
   console.log(`Passe o bastao na mao: encerre esta sessao (o laco relanca sozinho) ou rode: taskkill /F /T /PID ${alvo}`);
   process.exit(0);
 }
 
+anota(`DISPAREI: alvo claude.exe ${alvo}, terminal ${terminal}, matador pid ${m[2]}, cadeia ${cadeia.join(' <- ')}.`);
 console.log(`Bastao passado: sinal gravado em ${sinal}. Matador nasceu pelo WMI (pid ${m[2]}); esta sessao (claude.exe ${alvo}) encerra em 2 segundos e a proxima nasce neste terminal com a mensagem de abertura.`);
 process.exit(0);
