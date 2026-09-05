@@ -28,6 +28,38 @@ pela metade, tudo commitado e empurrado (`master`, limpo).
 > coisa e como e) e `memory/60-visual/modelo-3d-como-eu-faco.md` (o metodo do 3D).
 > Os dois valem mais que esta secao. Na pasta do projeto tem `LEIAME.md`.
 
+### SESSAO AUTONOMA de 05/09, 13h37 as 13h50 (ele nao respondeu; a corrente disparou)
+
+A fila estava vazia de proposito e eu **nao inventei frente nova**. Fiz so manutencao
+do que ja existia, e ela rendeu tres achados. Nada no deck foi tocado.
+
+1. **A hora desta passagem estava errada** (dizia 16h30, o commit e das 13h36). Corrigida
+   pelo carimbo, que e a fonte. Mesmo erro de [[a-hora-vem-do-relogio]], tres dias depois:
+   ele nao foi um deslize, e um habito. Hora sai do relogio ou do commit, nunca da cabeca.
+2. **Tres coisas na nota local do deck nao batiam com o disco** — uma secao descrevendo um
+   desenho que ja tinha sido substituido no mesmo dia, um item na lista do que falta que a
+   propria nota desmente mais abaixo, e um atalho explicado de dois jeitos. Corrigidas
+   lendo o codigo, nao a nota.
+3. **A origem do modelo 3D nao estava anotada em lugar nenhum**, e a licenca exige creditar
+   o autor. Recuperei o recibo do download antes que ele sumisse (esta na nota local do
+   projeto). Falta so abrir o anuncio e ler o nome: leitura automatica e barrada la.
+4. **Achei uma incoerencia no quadro do escritorio** e registrei na tarefa certa, sem mexer
+   em status: uma tarefa esta fechada, mas o criterio de conclusao dela depende de outra que
+   nao rodou. Nao reabri sozinho porque reabrir mexe num numero que o lider dele le — e
+   decisao dele. Detalhe na descricao da tarefa.
+5. **Sincronizar reuniao virou regra nova**, e essa vale pra sempre: o sistema exige o e-mail
+   da propria pessoa na lista de participantes, entao sincronizar reuniao de que ela nao
+   participou so passa se eu inventar a presenca dela. Nao sincronizo. Escrito em
+   `granola-reunioes.md`, com o porque.
+6. **Passei os olhos no deck no navegador de verdade** (nao no print sem placa, que mente):
+   fonte carregando, video girando em laco, biblioteca 3D nem baixada como devia, zero
+   recurso vindo de fora. So um 404 de icone, cosmetico. Print em `deck-allu\conferencia\`.
+
+> [!important] O que ficou pra ele desta sessao, alem da lista de baixo
+> **Reabrir ou nao a tarefa fechada cedo demais.** O quadro hoje da a entender que uma
+> recomendacao ja foi entregue ao lider, e ela nao foi. Reabrir corrige a leitura e derruba
+> o progresso da meta; deixar como esta mantem o numero e a leitura errada. Eu nao decido isso.
+
 ### ONDE ESTA
 
 `Desktop\deck-allu`, **fora do repo do assessor** e sem git proprio. Sobe com
@@ -54,10 +86,11 @@ assar ou gravar. Os dois ficaram ligados.
 
 ### FILA
 
-Vazia do meu lado. **Nao invente trabalho**: o que sobrou e dele, esta na secao
-abaixo, e a unica frente minha congelada e o acabamento do corpo do aparelho —
-congelada de proposito, porque e olho dele e ele pediu pra eu parar de afinar
-material no chute.
+Vazia do meu lado, e continua vazia depois da sessao autonoma de 13h37 (a manutencao
+que dava pra fazer sozinho esta feita, esta listada la em cima). **Nao invente
+trabalho**: o que sobrou e dele, esta na secao abaixo, e a unica frente minha
+congelada e o acabamento do corpo do aparelho — congelada de proposito, porque e
+olho dele e ele pediu pra eu parar de afinar material no chute.
 
 > [!important] Mexeu no acabamento do aparelho? ASSA E GRAVA DE NOVO
 > `prototipo.html?assar=1&gravar=1` faz os dois numa passada, uns 40 segundos.
