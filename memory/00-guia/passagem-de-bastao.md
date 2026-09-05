@@ -17,31 +17,67 @@ aliases:
 > detalhe de sistema da empresa **ficam nas notas locais**, que o `.gitignore` cobre.
 > Regra: [[o-que-vai-pro-github]]. Passagens antigas vazaram detalhe demais; nao repita.
 
-### ESTADO em 05/09/2026, fim da manha. Ele saiu e mandou seguir sozinho.
+### PASSAGEM POR CONTEXTO CHEIO em 05/09/2026, meio-dia. Ele saiu e mandou seguir.
 
-Frente unica: o site que substitui os slides. Nada travado, nada pela metade.
-Leia, nesta ordem: `memory/60-visual/modelo-3d-como-eu-faco.md` (o metodo
-inteiro, escrito hoje a pedido dele) e `memory/60-visual/site-de-apresentacoes.md`
-(onde o projeto esta).
+Frente unica o dia inteiro, e ela **nao** e o projeto de estagio: e o site que
+substitui os slides. **Nada travado, nada pela metade, tudo commitado e no ar.**
 
-**O aparelho 3D fechou.** Ele mandou duas fotos do produto real e disse "quero
-assim"; o acabamento foi ajustado ate bater. E o carregamento foi assado: o
-trabalho pesado roda uma vez e vira arquivo pronto, com numero medido.
+> [!important] PRIMEIRO PASSO
+> Leia `memory/60-visual/modelo-3d-como-eu-faco.md` — o metodo inteiro, escrito
+> hoje a pedido dele. Depois `memory/60-visual/site-de-apresentacoes.md`, que diz
+> onde o projeto esta. Os dois valem mais que esta secao.
+
+### ONDE ESTA
+
+Projeto em `Desktop\deck-allu`, **fora do repo do assessor** e sem git proprio.
+Servidor: `python -m http.server 8123 --bind 127.0.0.1` na pasta. Abre em
+`http://127.0.0.1:8123/prototipo.html`. O repo do assessor esta limpo, no commit
+`30e351b` do master, ja empurrado.
+
+### O QUE FICOU PRONTO HOJE
+
+1. **O aparelho 3D fechou.** Ele mandou duas fotos do produto real e disse "quero
+   assim"; o acabamento foi ajustado ate bater.
+2. **Modelo trocado** pelo novo (malha limpa), com separacao e pintura
+   automaticas — o arquivo vinha com dois aparelhos e sem material nenhum.
+3. **Assado**: o processamento pesado roda uma vez e vira arquivo. 13,3 MB ->
+   2,5 MB, 1867 ms -> 449 ms, ~90 -> 26 chamadas de desenho.
+4. **Sem internet**: biblioteca 3D e fonte moram no projeto agora.
+5. **Reserva propria**: a imagem de emergencia era foto de terceiro com marca
+   d'agua; virou retrato do nosso proprio modelo.
+6. **Grafico**, o assunto que estava marcado: virou tipo de card, com paleta de
+   serie medida em validador. Slide 10 do prototipo.
+
+### O PROXIMO PASSO CONCRETO
+
+**Gravar a animacao do aparelho em video** — ideia dele, e a unica frente grande
+que sobrou sem depender de decisao. Nao e caso de "nao renderiza no Safari"
+(renderiza); o ganho e ficar identico em qualquer maquina e nao baixar modelo.
+O caminho ja existe meio pronto: `assador.py` na pasta do projeto ja recebe
+arquivo do navegador e grava em disco, e `?retrato=1` ja prova que da pra
+capturar quadro do 3D. Falta so gravar a sequencia em vez de um quadro so.
+**Gravar com fundo transparente**, pra o laser continuar vivo por tras. Ele
+autorizou mexer no laser se a transparencia atrapalhar, **mas pedindo aviso antes**.
+Nao tem ffmpeg na maquina: gravar direto do navegador.
+
+### O QUE DEPENDE DELE, e por isso eu nao toco
+
+- O tema dos outros slides, pra eu desenhar o fundo de cada um
+- Creditar o autor do modelo 3D, ou trocar por um nosso, antes de mostrar pra fora
+- Olhar o **slide 10** e dizer se o desenho do grafico serve
+- Os numeros reais: os do slide 9 e do 10 sao exemplo
+- Editor e banco do deck: as decisoes estao fechadas, a implementacao nao comecou
 
 ### O QUE ESTE DIA ENSINOU, e serve fora deste projeto
 
 - **Print sem placa de video mente.** Tres rodadas seguidas eu li "a tela esta
-  vazia" num print sem GPU e fui atras de defeito que nao existia. Conferir no
-  navegador de verdade e a regra.
+  vazia" num print sem GPU e fui atras de defeito que nao existia.
 - **Classifique o defeito antes de consertar.** Duas provas de 30 segundos
   fecharam questao onde eu ja tinha gasto cinco tentativas: pintar de cor chapada
   (some = sombreado, fica = geometria) e pintar cada peca desenhada de uma cor
-  diferente (mostra na hora qual esta na tela).
+  diferente (mostra qual esta na tela).
 - **Espelho pega o pico do ambiente, fosco pega a media.** Sao dois ajustes.
-- **Otimizar tambem e consertar.** Uma varredura minha que montava texto por
-  triangulo travava a pagina por segundos e nao achava nada.
-- **Otimizacao boa se mede.** 13,3 MB -> 2,5 MB, 1867 ms -> 449 ms, ~90 -> 26
-  chamadas de desenho. Sem numero e chute.
+- **Otimizacao boa se mede**, senao e chute.
 - **Ferramenta de conferencia nao pode vazar pro uso normal.** O congelamento de
   tempo parava o deck inteiro e ele achou que tinha quebrado.
 
@@ -50,35 +86,9 @@ trabalho pesado roda uma vez e vira arquivo pronto, com numero medido.
 Ele manda mensagem curta em cima de mensagem curta enquanto eu trabalho. Hoje eu
 fiquei calado tempo demais encadeando ferramenta e ele cobrou: *"me responde
 caceta"*. **Junte as mensagens, execute, mas responda em texto antes de sumir de
-novo.** Silencio longo aqui le como travado.
-
-### O QUE EU FIZ SOZINHO DEPOIS QUE ELE SAIU
-
-Quatro frentes fechadas, cada uma provada olhando:
-
-1. **O modelo foi assado.** O trabalho pesado roda uma vez e vira arquivo pronto.
-2. **O deck nao depende mais de internet.** A biblioteca 3D e a fonte moravam em
-   servidor de fora; agora moram no projeto. Wifi de sala de reuniao cai.
-3. **A reserva agora e nossa.** A imagem que entra se o 3D falhar era foto de
-   terceiro, e uma delas tinha marca d'agua de outro site. Trocada por um retrato
-   do nosso proprio modelo, na mesma pose e na mesma caixa.
-4. **Grafico**, que era o assunto marcado. Virou um TIPO DE CARD, com paleta de
-   serie medida em validador (verde e laranja reprovam como vizinhos: e o par que
-   some em daltonismo, e o azul entra no meio). Slide 10 do prototipo.
-
-Um defeito que quase passou: o candidato `.glb` caia no ramo do `.obj` no
-carregador e carregava o modelo cru achando que era o assado — o aparelho voltou
-branco e em dobro. **Achado olhando o print, nao lendo o codigo.**
-
-### O QUE DEPENDE DELE
-
-- O tema dos outros slides, pra eu desenhar o fundo de cada um
-- Creditar o autor do modelo 3D, ou trocar por um nosso, antes de mostrar pra fora
-- Olhar o **slide 10** (o grafico) e dizer se o desenho serve
-- Os numeros reais: os do slide 9 e do 10 sao exemplo
-- **Gravar a animacao em video**: ideia dele. Nao e caso de "nao renderiza no
-  Safari"; o ganho e ficar identico em qualquer maquina. Ele autorizou mexer no
-  laser se a transparencia atrapalhar, mas pedindo aviso antes
+novo.** Silencio longo aqui le como travado. E ele pediu, com todas as letras,
+**parar de ficar afinando material no chute**: quando algo estiver estranho,
+perguntar o que especificamente, ou medir.
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
