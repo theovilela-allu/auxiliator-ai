@@ -64,6 +64,19 @@ precisa subir pra gravar.
 9. **O servidor passou a aceitar pedido por faixa de bytes.** Sem isso o navegador
    marca o video como nao buscavel e o congelamento de conferencia falha em silencio.
 
+**Terceira parte (13h-16h30, com ele):**
+
+10. **A apresentacao estava travando, e agora nao trava.** Medido: virada de 22,5 ms
+    por quadro pra 8,8; pior quadro de 228 ms pra 49; parado, de 150 ms de pior quadro
+    pra 21,5; e sumiram as quatro tarefas longas de ~100 ms. Os culpados nao eram o que
+    parecia: eram o mapa de refracao do vidro (que agora sai durante a virada e volta no
+    repouso) e o laser (halo em meia resolucao, morph em 8 passos, nucleo sem desfoque,
+    ponto de luz em passo, regiao de filtro justa). O video do aparelho e o desfoque dos
+    cards nao tinham nada a ver.
+11. **O aparelho estava esticado no slide 10.** A vaga de la e mais estreita e o video
+    esticava pra preencher. Agora a caixa dele tem proporcao E tamanho fixos: ele
+    atravessa a virada do mesmo tamanho, so mudando de lugar.
+
 ### DUAS COISAS PRA ELE OLHAR QUANDO ACORDAR
 
 - **A tela da frente agora aparece.** Com a volta inteira ela fica visivel metade do
@@ -126,6 +139,13 @@ certo assim. O servidor do deck (porta 8123) e o assador (8124) ficaram ligados.
 - **Confirmar que algo NAO existe exige olhar onde ele apareceria.** Eu declarei que
   o deck nao escalava depois de ler a escala do palco numa janela de 1280x720 — o
   unico tamanho em que ela e a identidade.
+- **Medida de desempenho se repete com a ordem embaralhada.** A primeira bateria deu
+  resultado invertido (tirar trabalho "piorava") porque cada caso rodou uma vez so, em
+  ordem fixa. Tres rodadas intercaladas endireitaram tudo.
+- **Desfoque cobra por pixel.** Metade da resolucao e um quarto do custo, e em coisa
+  borrada isso nao se ve. Primeira alavanca em qualquer brilho, halo ou vidro.
+- **Comparar print de coisa que pulsa exige congelar o pulso**, senao a diferenca
+  medida e a fase da animacao e nao a mudanca que voce fez.
 
 ### O RITMO DELE, e o erro que a sessao passada cometeu
 
