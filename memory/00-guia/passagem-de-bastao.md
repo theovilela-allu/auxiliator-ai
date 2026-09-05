@@ -83,6 +83,14 @@ parado num lugar so, e isso tambem esta feito.
 > - **Medida de celula de grade nao serve de ancora.** Ela muda quando a fonte
 >   carrega e o texto reflui (239,6 antes, 253,2 depois). Posicao que precisa ser
 >   estavel se DECLARA, nao se mede.
+> - **Geometria se mede no espaco do OBJETO, nunca no do mundo**, quando o objeto
+>   tem transformacao propria. Medi uma peca com o modelo girando e conclui que
+>   havia desnivel entre partes que sempre estiveram no mesmo plano: rotacao em
+>   torno da vertical converte um eixo no outro.
+> - **Quando N coisas tem que dar o MESMO numero, o numero vira teste.** Foi ele,
+>   e nao o olho, que pegou os dois erros seguidos que eu cometi nessa frente.
+> - **Ancore num ponto que voce conhece, nao numa ponta de caixa.** Caixa de peca
+>   curva nao diz qual ponta e qual.
 
 ### ONDE ESTA
 
