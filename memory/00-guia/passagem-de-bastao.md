@@ -2,7 +2,7 @@
 name: passagem-de-bastao
 type: painel
 description: LEIA PRIMEIRO em sessao nova — a secao Estado diz o que a sessao anterior estava fazendo e onde parou; a secao Como funciona explica a corrente de 500k
-atualizado: 2026-09-04
+atualizado: 2026-09-05
 status: em-andamento
 aliases:
   - bastao
@@ -17,50 +17,41 @@ aliases:
 > detalhe de sistema da empresa **ficam nas notas locais**, que o `.gitignore` cobre.
 > Regra: [[o-que-vai-pro-github]]. Passagens antigas vazaram detalhe demais; nao repita.
 
-### PASSAGEM POR CONTEXTO CHEIO em 04/09/2026, ~20h. Ele esta presente e satisfeito.
+### ESTADO em 05/09/2026, manha. Ele esta presente e acompanhando de perto.
 
-Nao ha nada travado nem pela metade. A conversa inteira foi **uma frente so**, do zero ate
-funcionando, e ela nao e o projeto de estagio: e uma frente nova de produto visual.
+Frente unica, a mesma de ontem: o site que substitui os slides. Nada travado.
+Leia `memory/60-visual/site-de-apresentacoes.md` — esta tudo la, inclusive o
+diagnostico de cada defeito, que vale mais que o conserto.
 
-> [!important] PRIMEIRO PASSO
-> Leia `memory/60-visual/site-de-apresentacoes.md`. Esta tudo la: onde os arquivos estao, as sete
-> decisoes de arquitetura ja fechadas, a estetica que ele cravou, as licoes tecnicas e a lista do
-> que falta. Depois `memory/60-visual/liquid-glass-como-fazer.md` e
-> `memory/60-visual/modelo-de-apresentacao-allu.md`, que continuam valendo.
+### O QUE ESTE DIA ENSINOU, e serve fora deste projeto
 
-### O QUE ESTA CONVERSA FOI
+- **Print sem placa de video mente.** Tres rodadas seguidas eu li "a tela esta
+  vazia" num print de navegador sem GPU e fui atras de defeito que nao existia.
+  Conferir no navegador de verdade e a regra; o print rapido serve pra comparar,
+  nao pra concluir.
+- **Classifique o defeito antes de consertar.** Duas provas de 30 segundos cada
+  fecharam questao onde eu ja tinha gasto cinco tentativas: pintar a peca de cor
+  chapada (se o defeito some, e sombreado; se fica, e geometria) e pintar cada
+  peca desenhada de uma cor diferente (mostra na hora qual delas esta na tela).
+- **Espelho pega o pico, fosco pega a media.** Um mesmo ambiente que deixa o
+  metal bonito estoura o vidro. Sao dois ajustes, nao um.
+- **Vidro nao e metal.** Refletir demais e o que faz lente virar disco branco.
+- **Otimizar tambem e consertar.** Uma varredura minha que montava texto por
+  triangulo travava a pagina inteira por segundos — e nao achava nada.
 
-Ele abriu querendo trocar o PowerPoint por um site. Virou brainstorm e, no mesmo folego, protótipo
-funcionando: tres slides, material de vidro, fundo animado que se transforma na virada, cards em
-orbita, e um aparelho em 3D girando. **Ele foi subindo a regua o tempo todo** e cada versao foi
-implementada, medida e descartada ate a seguinte. Isso e entrega, nao desperdicio.
+### O RITMO DELE, e o erro que eu cometi
 
-O ritmo dele nesta conversa foi de mensagem curta em cima de mensagem curta, muitas vezes no meio
-do meu trabalho. **Nao pare pra responder cada uma:** junte, execute, e reporte de uma vez.
-
-### O QUE ELE ELOGIOU, e vale manter
-
-*"ta ficando insano"*, *"ta mandando muito bem"*, *"deu pra ver que voce ta pegando o como eu
-quero"*. O que funcionou: **conferir olhando**, quadro a quadro, em vez de responder pela
-intencao do codigo. Quase todo defeito desta conversa so apareceu no print, nunca na leitura.
-
-### O PROXIMO ASSUNTO, ja combinado
-
-**Graficos.** Ele perguntou *"como vamos fazer na hora que formos mostrar algum grafico?"* e ele
-mesmo pediu pra deixar pra depois. E o proximo item, e ele espera que eu lembre.
+Ele manda mensagem curta em cima de mensagem curta enquanto eu trabalho. Hoje eu
+fiquei calado tempo demais encadeando ferramenta e ele cobrou: *"me responde
+caceta"*. **Junte as mensagens, execute, mas responda em texto antes de sumir de
+novo.** Silencio longo aqui le como travado.
 
 ### O QUE DEPENDE DELE
 
-- O tema dos outros slides, pra eu desenhar o fundo de cada um a partir do que ele defende
-- Aprovar (ou trocar) o modelo 3D que veio com licenca que **exige credito no deck**
-
-### O QUE ESTE DIA DEIXOU DE DURAVEL
-
-- Um catalogo de armadilhas de animacao no navegador que vale fora deste projeto (camada por
-  movimento, o custo de escalar borrado, animacao que continua valendo depois de acabar)
-- **Luz forte e texto nao dividem o mesmo pedaco.** O conserto e mover a luz e dar coluna ao
-  texto, nunca escurecer a arte
-- **Escanear antes de abrir** virou rotina com script proprio, e ele pediu isso espontaneamente
+- O tema dos outros slides, pra eu desenhar o fundo de cada um
+- Creditar o autor do modelo 3D novo, ou trocar por um nosso antes de mostrar
+  pra fora
+- **Graficos** continua sendo o proximo assunto combinado, adiado por ele
 
 ## Como funciona (não mexer sem atualizar o código junto)
 
